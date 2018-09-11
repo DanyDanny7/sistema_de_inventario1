@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_3.dtd">
+
+
+<struts-config>
+    <form-beans>
+        <form-bean name="ActionFormAcceso"          type="sci.actionforms.ActionFormAcceso" />
+        <!-- // Configuracion    // -->
+        <form-bean name="ActionFormConfiguracion"   type="sci.actionforms.ActionFormConfiguracion" />
+        <!-- // Moneda    // -->
+        <form-bean name="ActionFormMoneda"          type="sci.actionforms.ActionFormMoneda" />
+        <form-bean name ="ActionFormContactos" type="sci.actionforms.ActionFormContactos"/>
+    <form-bean name="ActionFormFabricante" type="sci.actionforms.ActionFormFabricante"/>
+    <form-bean name="ActionFormProductos"  type="sci.actionforms.ActionFormProductos"/>
+    </form-beans>
+    
+    <global-exceptions>
+    
+    </global-exceptions>
+
+    <global-forwards>
+        <forward name="irIndex"              path="/index.jsp" />
+        
+        <!-- // Configuracion    // -->
+        <forward name="modificarConfig"     path="/jsp/configuracion/modificarConfiguracion.jsp"/>
+        <forward name="inicioConfig"        path="/jsp/configuracion/inicio.jsp"/>
+        <forward name="agregarConfig"       path="/jsp/configuracion/agregarConfiguracion.jsp"/>
+        <!-- // moneda    // -->
+        <forward name="irInicioMoneda"      path="/jsp/moneda/inicio.jsp"/>
+        <forward name="irAgregarMoneda"     path="/jsp/moneda/agregarMoneda.jsp"/>
+        <forward name="irModificarMoneda"   path="/jsp/moneda/modificarMoneda.jsp"/>
+        <forward name="irListaMoneda"       path="/jsp/moneda/listaMoneda.jsp"/>
+        <!--  // Acceso  y Login-->
+        <forward name="irListaAcceso"       path="/jsp/acceso/listaLogin.jsp"/>
+        <forward name="irLogin"             path="/jsp/acceso/login.jsp"/>
+        <forward name="irInicioAcceso"      path="/jsp/acceso/inicio.jsp"/>
+        <forward name="irAgregarAcceso"     path="/jsp/acceso/agregarAcceso.jsp"/>
+        <forward name="irModificarAcceso"   path="/jsp/acceso/modificarAcceso.jsp"/>
+        <forward name="irAyuda1Acceso"      path="/jsp/acceso/ayuda1.jsp"/>
+        <forward name="irAyuda2Acceso"      path="/jsp/acceso/ayuda2.jsp"/>
+        <forward name="irAyuda3Acceso"      path="/jsp/acceso/ayuda3.jsp"/>
+        
+        <!-- Contactos -->
+        <forward name="listaContactos"      path="/jsp/contactos/listaContacto.jsp"/>
+        <forward name="irModificarContactos" path="/jsp/contactos/modificarContactos.jsp"/>     
+        <forward name="irAgregarContactos"  path="/jsp/contactos/agregarContactos.jsp"/>   
+        <forward name="irInicioContactos"   path="/jsp/contactos/inicio.jsp"/>   
+        
+        <!-- Productos -->
+        <forward name="listaProducto"       path="/jsp/producto/listaProductos.jsp"/>
+        <forward name="irProducto"          path="/jsp/producto/agregarProductos.jsp"/>
+        <forward name="irModificarProducto" path="/jsp/producto/modificarProductos.jsp"/>
+        <forward name="irInicioProducto"    path="/jsp/producto/inicioP.jsp"/>
+    
+        <!-- Fabricantes -->
+        <forward name="irInicioFabricantes"  path="/jsp/fabricante/inicio.jsp"/>
+        <forward name="irAgregarFabricantes"  path="/jsp/fabricante/agregarFabricante.jsp"/>
+        <forward name="irModificarFabricantes"  path="/jsp/fabricante/modificarFabricante.jsp"/>
+        <forward name="irListaFabricantes"  path="/jsp/fabricante/listaFabricantes.jsp"/>
+        
+        
+        
+    
+    
+    <forward name="juimonos"  path="/jsp/fabricante/listaLogin.jsp"/>
+    <forward name="confirmacionErrorF"  path="/jsp/fabricante/agregarFabricante.jsp"/>
+    <forward name ="confirmacionNuevoF" path="/jsp/fabricante/listaLogin.jsp"/>
+    <forward name="validarLogin"  path="/bienvenido.jsp"/>
+    <forward name= "confirmacionNuevoF" path="/jsp/fabricante/confirmacionF.jsp"/>
+    <forward name = "eliminarFabricante" path="/jsp/fabricante/listaLogin.jsp"/>
+    <forward name="listaLogin" path="/jsp/fabricante/listaLogin.jsp"/>
+    
+    
+    </global-forwards>
+
+    <action-mappings>
+        
+        
+      <action   name = "ActionFormAcceso"         path ="/accesoMantenimiento" 
+               scope ="request"                    type="sci.action.ActionAcceso"/>
+        <!-- // Configuracion    // -->
+        <action name = "ActionFormConfiguracion" path ="/configuracionMantenimiento" 
+               scope ="request"                   type="sci.action.ActionConfiguracion"/>
+        <!-- // moneda    // -->
+        <action name = "ActionFormMoneda"        path ="/monedaMantenimiento"  
+               scope ="request"                   type="sci.action.ActionMoneda"/>
+        
+       <action name="ActionFormContactos" path="/contactosMantenimiento" scope="request" type="sci.action.ActionContactos"/>
+        <action name="ActionFormFabricante" path="/fabricanteMantenimiento" scope="request" type="sci.action.ActionFabricante"/>
+        <action name="ActionFormProductos" path="/productosMantenimiento" scope="request" type="sci.action.ActionProductos"/> 
+       
+    </action-mappings>
+    
+    <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
+
+    <message-resources parameter="com/myapp/struts/ApplicationResource"/>    
+    
+    <!-- ========================= Tiles plugin ===============================-->
+    <!--
+    This plugin initialize Tiles definition factory. This later can takes some
+    parameters explained here after. The plugin first read parameters from
+    web.xml, thenoverload them with parameters defined here. All parameters
+    are optional.
+    The plugin should be declared in each struts-config file.
+    - definitions-config: (optional)
+    Specify configuration file names. There can be several comma
+    separated file names (default: ?? )
+    - moduleAware: (optional - struts1.1)
+    Specify if the Tiles definition factory is module aware. If true
+    (default), there will be one factory for each Struts module.
+    If false, there will be one common factory for all module. In this
+    later case, it is still needed to declare one plugin per module.
+    The factory will be initialized with parameters found in the first
+    initialized plugin (generally the one associated with the default
+    module).
+    true : One factory per module. (default)
+    false : one single shared factory for all modules
+    - definitions-parser-validate: (optional)
+    Specify if xml parser should validate the Tiles configuration file.
+    true : validate. DTD should be specified in file header (default)
+    false : no validation
+
+    Paths found in Tiles definitions are relative to the main context.
+    -->
+    <plug-in className="org.apache.struts.tiles.TilesPlugin" >
+        <set-property property="definitions-config" value="/WEB-INF/tiles-defs.xml" />      
+        <set-property property="moduleAware" value="true" />
+    </plug-in>
+    
+    <!-- ========================= Validator plugin ================================= -->
+    <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+        <set-property
+            property="pathnames"
+            value="/WEB-INF/validator-rules.xml,/WEB-INF/validation.xml"/>
+    </plug-in>
+  
+</struts-config>
