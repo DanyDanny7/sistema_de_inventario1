@@ -46,6 +46,6 @@
                     <html:submit property="action" value="Consultar"/>
                     
         </html:form>
-        <html:link page="/jsp/login/index.jsp">Index</html:link>
+        <html:link page="/index.jsp">Index</html:link>
     </body>
 </html>

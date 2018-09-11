@@ -19,10 +19,7 @@
         <br>
         <label>${nombre}</label>
         <label>${nAcceso}</label>
-        
-            <br>
-            <br>
-            <br>
+      
             <br>
         <html:form action = "/accesoMantenimiento">
             <html:submit property="action" value="Consultar"/><br><br>

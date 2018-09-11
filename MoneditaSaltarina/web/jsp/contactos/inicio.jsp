@@ -19,7 +19,7 @@
         <h1 class="text-DARK font-weight-bold">SELECCIONE :</h1>
         <h4>${msg}</h4>
         &nbsp;<html:form action="/contactosMantenimiento">
-            &nbsp;&nbsp;<html:submit property="action" value="ConsultarContacto"/><br><br>
+            &nbsp;&nbsp;<html:submit property="action" value="Consultar"/><br><br>
            <!-- html:submit property="action" value="AgregarContacto"/>-->
            &nbsp;&nbsp;<a class="font-weight-bold btn btn-light btn-sm"<html:link page="/jsp/contactos/agregarContactos.jsp">Agregar</html:link>
                           <br>
@@ -33,6 +33,6 @@
             </html:select><br>
         </html:form> 
             <br>
-        &nbsp;&nbsp;&nbsp;<a class="font-weight-bold btn btn-primary"<html:link page="/jsp/login/index.jsp">Index</html:link>
+        &nbsp;&nbsp;&nbsp;<a class="font-weight-bold btn btn-primary"<html:link page="/index.jsp">Index</html:link>
     </body>
 </html>

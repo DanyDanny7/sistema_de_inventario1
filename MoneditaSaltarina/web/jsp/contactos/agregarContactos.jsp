@@ -12,9 +12,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Agregar Contactos</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" 
-              integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
+         <link href="../../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+         <script src="../../js/jquery-3.3.1.min.js" type="text/javascript"></script>
+         <script src="../../js/bootstrap.min.js" type="text/javascript"></script>
     </head>
     <body class=" p-3 mb-3 bg-success">
         <html:form action="/contactosMantenimiento">
@@ -23,27 +23,28 @@
                 <tbody>
                 <h3 class="text-dark font-weight-bold">Agregar Contactos</h3>
                          <tr>
-                            <td class="bg-dark text-white">Nombre del contacto</td>
-                            <td>&nbsp;<html:text property="nombreContacto" size="25" maxlength="20"></html:text> 
+                            <td class="font-weight-bold">Nombre del contacto</td>
+                            <td>&nbsp;<html:text property="nombreContacto"></html:text> 
                         </tr>
                         <tr>
-                            <td class="bg-dark text-white">Direccion del contacto</td>
-                            <td>&nbsp;<html:text property="direccionContacto" size="25" maxlength="35"></html:text> 
+                            <td class="font-weight-bold">Direccion del contacto</td>
+                            <td>&nbsp;<html:text property="direccionContacto"></html:text> 
                         </tr>
                         <tr>
-                            <td class="bg-dark text-white">Telefono del contacto</td>
-                            <td>&nbsp;<html:text property="telefonoContacto" size="25" maxlength="15"></html:text> 
+                            <td class="font-weight-bold">Telefono del contacto</td>
+                            <td>&nbsp;<html:text property="telefonoContacto"></html:text> 
                         </tr>
                         <tr>
-                            <td class="bg-dark text-white">Encargado</td>
-                            <td>&nbsp;<html:text property="encargadoContacto" size="25" maxlength="20"></html:text> 
+                            <td class="font-weight-bold">Encargado</td>
+                            <td>&nbsp;<html:text property="encargadoContacto"></html:text> 
                         </tr>
                         <tr>
-                            <td class="bg-dark text-white">Telefono del encargado</td>
-                            <td>&nbsp;<html:text property="telefonoEncargadoContacto" size="25" maxlength="15"></html:text> 
+                            <td class="font-weight-bold">Telefono del encargado</td>
+                       
+                            <td>&nbsp;<html:text property="telefonoEncargadoContacto"></html:text> 
                         </tr>
                         <tr>
-                            <td class="bg-dark text-white">Tipo de contacto</td>
+                            <td class="font-weight-bold">Tipo de contacto</td>
                             <td>&nbsp;<html:select property="tipoContacto" >
                                     <html:option value="Seleccionar"></html:option> 
                                     <html:option value="Cliente">Cliente</html:option> 
@@ -51,8 +52,8 @@
                 </html:select></td>
                     </tr>
                     <tr>
-                        <td class="bg-dark text-white">Email del contacto</td>
-                        <td>&nbsp;<html:text property="emailContacto" size="25" maxlength="20"></html:text> 
+                        <td class="font-weight-bold">Email del contacto</td>
+                        <td>&nbsp;<html:text property="emailContacto"></html:text> 
                     </tr>
                     <tr colspan="2">
                     <bean:write name="ActionFormContactos" property="error" filter="false"/>

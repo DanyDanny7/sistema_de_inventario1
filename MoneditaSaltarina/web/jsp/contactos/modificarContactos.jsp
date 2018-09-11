@@ -62,9 +62,9 @@
                 </tbody>  
             </table>
             <br>
-            <html:submit property="action" value="ModificarContacto"/>
+            <html:submit property="action" value="Modificar"/>
 
         </html:form><br>
-    poner inicio    &nbsp;<a class="font-weight-bold btn btn-primary " <html:link page="/jsp/login/index.jsp">Index</html:link>
+    poner inicio    &nbsp;<a class="font-weight-bold btn btn-primary " <html:link page="/index.jsp">Index</html:link>
     </body>
 </html>

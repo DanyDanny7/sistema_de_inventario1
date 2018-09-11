@@ -124,7 +124,7 @@
                     <!--html:link page="/jsp/acceso/login.jsp">Login/html:link-->
                     <html:link page="/jsp/contactos/inicio.jsp">Contactos</html:link><br><br>
                     <html:link page="/jsp/producto/inicioP.jsp">Productos</html:link><br><br>
-                    <html:link page="/jsp/producto/inicioP.jsp">Productos</html:link><br><br>
+                    <html:link page="/jsp/fabricante/inicio.jsp">Fabricantes</html:link><br><br>
 
                 </div>
                 <div class="col-1"></div>

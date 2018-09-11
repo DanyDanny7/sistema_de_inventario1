@@ -17,6 +17,7 @@ public class ActionFormContactos extends org.apache.struts.action.ActionForm {
      private String fechaRegistroContacto;
      private String error;
      private String action;
+     private String mensaje;
      private List<Contactos> listaContacto;
      
     public Integer getIdContacto() {
@@ -105,6 +106,14 @@ public class ActionFormContactos extends org.apache.struts.action.ActionForm {
 
     public void setAction(String action) {
         this.action = action;
+    }
+
+    public String getMensaje() {
+        return mensaje;
+    }
+
+    public void setMensaje(String mensaje) {
+        this.mensaje = mensaje;
     }
 
     public List<Contactos> getListaContacto() {

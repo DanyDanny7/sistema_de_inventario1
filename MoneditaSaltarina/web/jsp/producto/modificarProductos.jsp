@@ -22,28 +22,28 @@
             <tbody>           
             <tr>
                 <td class="bg-dark text-white">ID Producto</td>
-                <td>&nbsp;<html:text property="idProducto" size="10" maxlength="5"></html:text> 
+                <td>&nbsp;<html:text property="idProducto"></html:text> 
             </tr>
             <tr>
             <tr>
                 <td class="bg-dark text-white">ID Fabricante</td>
-                <td>&nbsp;<html:text property="idFabricantes" size="10" maxlength="5"></html:text> 
+                <td>&nbsp;<html:text property="idFabricantes"></html:text> 
             </tr>
             <tr>
                 <td class="bg-dark text-white">Nombre del Producto</td>
-                <td>&nbsp;<html:text property="nombreProducto" size="25" maxlength="35"></html:text> 
+                <td>&nbsp;<html:text property="nombreProducto"></html:text> 
             </tr>
             <tr>
                 <td class="bg-dark text-white">Precio del Producto</td>
-                <td>&nbsp;<html:text property="precioUnitario" size="20" maxlength="15"></html:text> 
+                <td>&nbsp;<html:text property="precioUnitario"></html:text> 
             </tr>
             <tr>
                 <td class="bg-dark text-white">Descripción del producto</td>
-                <td>&nbsp;<html:text property="descripcionProducto" size="25" maxlength="35"></html:text> 
+                <td>&nbsp;<html:text property="descripcionProducto"></html:text> 
             </tr>
             <tr>
                 <td class="bg-dark text-white">Modelo</td>
-                <td>&nbsp;<html:text property="modelo" size="25" maxlength="20"></html:text> 
+                <td>&nbsp;<html:text property="modelo"></html:text> 
             </tr>
             <tr colspan="2">
             <bean:write name="ActionFormProductos" property="error" filter="false"/>

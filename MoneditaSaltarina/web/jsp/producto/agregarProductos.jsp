@@ -34,13 +34,13 @@
             &nbsp;<html:text property="nombreProducto"></html:text> <br><br>
        
             <label class="font-weight-bold">Precio del Producto:</label><br>
-            &nbsp;<html:text property="precioUnitario" size="20" maxlength="15"></html:text> <br><br>
+            &nbsp;<html:text property="precioUnitario" ></html:text> <br><br>
       
             <label class="font-weight-bold">Descripción del producto:</label><br>
-           &nbsp;<html:text property="descripcionProducto" size="25" maxlength="35"></html:text> <br><br>
+           &nbsp;<html:text property="descripcionProducto" ></html:text> <br><br>
        
             <label class="font-weight-bold">Modelo:</label><br>
-           &nbsp;<html:text property="modelo" size="25" maxlength="20"></html:text> <br><br>
+           &nbsp;<html:text property="modelo"></html:text> <br><br>
      
         <tr colspan="2">
         <bean:write name="ActionFormProductos" property="error" filter="false"/>
@@ -53,7 +53,7 @@
 
 
 </html:form><br>
-<!--  <html:link page="/jsp/login/index.jsp">Index</html:link> -->
+<!--  <html:link page="/index.jsp">Index</html:link> -->
 &emsp; &nbsp;&nbsp; <a class="font-weight-bold btn btn-primary btn-sm" <html:link page="/jsp/producto/inicioP.jsp" >Inicio</html:link>
 
 </body>

@@ -56,8 +56,8 @@
                                                 <td ><bean:write name="ver" property="tipoContacto"/></td>
                                                 <td ><bean:write name="ver" property="emailContacto"/></td>
                                                 <td ><bean:write name="ver" property="fechaRegistroContacto"/></td>
-                                                <td ><html:submit property="action" value="EliminarContacto"/></td>
-                                                <td ><html:submit property="action" value="ConsultarIdContacto"/></td>
+                                                <td ><html:submit property="action" value="Eliminar"/></td>
+                                                <td ><html:submit property="action" value="ConsultarId"/></td>
                                                 <!-- td><!--html:submit property="action" value="ConsultarTipo"/></td -->
                                             </html:form>
                                         </tr>
@@ -66,8 +66,8 @@
                             </tbody>
                         </table>
                         <br>
-                        <a class="font-weight-bold btn btn-primary"<html:link page="/jsp/contactos/mantenimientoContactos.jsp">Mantenimiento</html:link>&emsp;
-                        <a class="font-weight-bold btn btn-primary"<html:link page="/jsp/contactos/inicioContacto.jsp">Inicio</html:link><br><br>
+                        <a class="font-weight-bold btn btn-primary"<html:link page="/jsp/contactos/agregarContactos.jsp">Mantenimiento</html:link>&emsp;
+                        <a class="font-weight-bold btn btn-primary"<html:link page="/jsp/contactos/inicio.jsp">Inicio</html:link><br><br>
                     </div>
                 </div>
             </div>

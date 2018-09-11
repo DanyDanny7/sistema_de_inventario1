@@ -105,7 +105,7 @@ public class ActionAcceso extends org.apache.struts.action.Action {
                 IR = AGREGAR;
                 request.setAttribute("nombre", Login.nombre);
                 request.setAttribute("nAcceso", Login.nAcceso);
-                request.setAttribute("nAcceso", Login.id);
+                request.setAttribute("id", Login.id);
                 return mapping.findForward(IR);
             }
             List<Acceso> listaAcceso = aman.consultarTodoAcceso();
@@ -217,9 +217,9 @@ public class ActionAcceso extends org.apache.struts.action.Action {
                 request.setAttribute("nAcceso", Login.id);
                 return mapping.findForward(IR);
             }
-            System.out.println("no 1");
+           // System.out.println("no 1");
             aman.modificarAcceso(idAcceso, idEmpresa, nombreAcceso, apellidoAcceso, usuario, fechaRegistroAcceso, contrasena, email, tipoAcceso);
-            System.out.println("no 2");
+           // System.out.println("no 2");
             List<Acceso> listaAcceso = aman.consultarTodoAcceso();
             formBean.setListaAcceso(listaAcceso);
             formBean.setError("<spam style='color:blue'>El registro se modificó correctamente" + " <br></span>");
@@ -266,7 +266,7 @@ public class ActionAcceso extends org.apache.struts.action.Action {
 
         request.setAttribute("nombre", Login.nombre);
         request.setAttribute("nAcceso", Login.nAcceso);
-        request.setAttribute("nAcceso", Login.id);
+        request.setAttribute("id", Login.id);
         return mapping.findForward(IR);
 
     }
