@@ -6,95 +6,121 @@
 
 
 <struts-config>
+<!-- ****************************************************************************************************** -->
     <form-beans>
-        <form-bean name="ActionFormAcceso"          type="sci.actionforms.ActionFormAcceso" />
-        <!-- // Configuracion    // -->
-        <form-bean name="ActionFormConfiguracion"   type="sci.actionforms.ActionFormConfiguracion" />
-        <!-- // Moneda    // -->
-        <form-bean name="ActionFormMoneda"          type="sci.actionforms.ActionFormMoneda" />
-        <form-bean name ="ActionFormContactos" type="sci.actionforms.ActionFormContactos"/>
-    <form-bean name="ActionFormFabricante" type="sci.actionforms.ActionFormFabricante"/>
-    <form-bean name="ActionFormProductos"  type="sci.actionforms.ActionFormProductos"/>
+<!-- // Acceso -->
+        <form-bean name = "ActionFormAcceso"            type = "sci.actionforms.ActionFormAcceso" />
+<!-- // Compras -->
+        <form-bean name = ""                            type = "" />
+<!-- // Configuracion -->        
+        <form-bean name = "ActionFormConfiguracion"     type = "sci.actionforms.ActionFormConfiguracion" />
+<!-- // Contactos -->        
+        <form-bean name = "ActionFormContactos"         type = "sci.actionforms.ActionFormContactos"/>
+<!-- // Empresa -->        
+        <form-bean name = ""                            type = ""/>
+<!-- // Fabricantes -->        
+        <form-bean name = "ActionFormFabricante"        type = "sci.actionforms.ActionFormFabricante"/>
+<!-- // FacturaDetalle -->        
+        <form-bean name = ""                            type = ""/>
+<!-- // FacturaEncabezado -->        
+        <form-bean name = ""                            type = ""/>
+<!-- // Inventario -->        
+        <form-bean name = ""                            type = ""/>
+<!-- // Iva -->        
+        <form-bean name = "ActionFormIva"               type = "sci.actionforms.ActionFormIva"/>
+<!-- // Moneda -->
+        <form-bean name = "ActionFormMoneda"            type = "sci.actionforms.ActionFormMoneda" />
+<!-- // Productos -->
+        <form-bean name = "ActionFormProductos"         type = "sci.actionforms.ActionFormProductos"/>
     </form-beans>
-    
+<!-- ****************************************************************************************************** -->  
     <global-exceptions>
-    
     </global-exceptions>
-
+<!-- ****************************************************************************************************** -->
     <global-forwards>
-        <forward name="irIndex"              path="/index.jsp" />
-        
-        <!-- // Configuracion    // -->
-        <forward name="modificarConfig"     path="/jsp/configuracion/modificarConfiguracion.jsp"/>
-        <forward name="inicioConfig"        path="/jsp/configuracion/inicio.jsp"/>
-        <forward name="agregarConfig"       path="/jsp/configuracion/agregarConfiguracion.jsp"/>
-        <!-- // moneda    // -->
-        <forward name="irInicioMoneda"      path="/jsp/moneda/inicio.jsp"/>
-        <forward name="irAgregarMoneda"     path="/jsp/moneda/agregarMoneda.jsp"/>
-        <forward name="irModificarMoneda"   path="/jsp/moneda/modificarMoneda.jsp"/>
-        <forward name="irListaMoneda"       path="/jsp/moneda/listaMoneda.jsp"/>
-        <!--  // Acceso  y Login-->
-        <forward name="irListaAcceso"       path="/jsp/acceso/listaLogin.jsp"/>
-        <forward name="irPortada"           path="/portada.jsp"/>
-        <forward name="irInicioAcceso"      path="/jsp/acceso/inicio.jsp"/>
-        <forward name="irAgregarAcceso"     path="/jsp/acceso/agregarAcceso.jsp"/>
-        <forward name="irModificarAcceso"   path="/jsp/acceso/modificarAcceso.jsp"/>
-        <forward name="irAyuda1Acceso"      path="/jsp/acceso/ayuda1.jsp"/>
-        <forward name="irAyuda2Acceso"      path="/jsp/acceso/ayuda2.jsp"/>
-        <forward name="irAyuda3Acceso"      path="/jsp/acceso/ayuda3.jsp"/>
-        <forward name="irPerfil"            path="/jsp/acceso/perfil.jsp"/>
-        
-        <!-- Contactos -->
-        <forward name="listaContactos"      path="/jsp/contactos/listaContacto.jsp"/>
-        <forward name="irModificarContactos" path="/jsp/contactos/modificarContactos.jsp"/>     
-        <forward name="irAgregarContactos"  path="/jsp/contactos/agregarContactos.jsp"/>   
-        <forward name="irInicioContactos"   path="/jsp/contactos/inicio.jsp"/>   
-        
-        <!-- Productos -->
-        <forward name="listaProducto"       path="/jsp/producto/listaProductos.jsp"/>
-        <forward name="irProducto"          path="/jsp/producto/agregarProductos.jsp"/>
-        <forward name="irModificarProducto" path="/jsp/producto/modificarProductos.jsp"/>
-        <forward name="irInicioProducto"    path="/jsp/producto/inicioP.jsp"/>
-    
-        <!-- Fabricantes -->
-        <forward name="irInicioFabricantes"  path="/jsp/fabricante/inicio.jsp"/>
-        <forward name="irAgregarFabricantes"  path="/jsp/fabricante/agregarFabricante.jsp"/>
-        <forward name="irModificarFabricantes"  path="/jsp/fabricante/modificarFabricante.jsp"/>
-        <forward name="irListaFabricantes"  path="/jsp/fabricante/listaFabricantes.jsp"/>
-        
-        
-        
-    
-    
-    <forward name="juimonos"  path="/jsp/fabricante/listaLogin.jsp"/>
-    <forward name="confirmacionErrorF"  path="/jsp/fabricante/agregarFabricante.jsp"/>
-    <forward name ="confirmacionNuevoF" path="/jsp/fabricante/listaLogin.jsp"/>
-    <forward name="validarLogin"  path="/bienvenido.jsp"/>
-    <forward name= "confirmacionNuevoF" path="/jsp/fabricante/confirmacionF.jsp"/>
-    <forward name = "eliminarFabricante" path="/jsp/fabricante/listaLogin.jsp"/>
-    <forward name="listaLogin" path="/jsp/fabricante/listaLogin.jsp"/>
-    
+        <forward name = "irIndex"               path = "/index.jsp" />
+        <forward name = "irPortada"             path = "/portada.jsp"/>
+<!-- // Acceso -->
+        <forward name = "irListaAcceso"         path = "/jsp/acceso/listaLogin.jsp"/>
+        <forward name = "irInicioAcceso"        path = "/jsp/acceso/inicio.jsp"/>
+        <forward name = "irAgregarAcceso"       path = "/jsp/acceso/agregarAcceso.jsp"/>
+        <forward name = "irModificarAcceso"     path = "/jsp/acceso/modificarAcceso.jsp"/>
+        <forward name = "irAyuda1Acceso"        path = "/jsp/acceso/ayuda1.jsp"/>
+        <forward name = "irAyuda2Acceso"        path = "/jsp/acceso/ayuda2.jsp"/>
+        <forward name = "irAyuda3Acceso"        path = "/jsp/acceso/ayuda3.jsp"/>
+        <forward name = "irPerfil"              path = "/jsp/acceso/perfil.jsp"/>
+<!-- // Compras -->
+<!-- // Configuracion -->
+        <forward name = "modificarConfig"       path = "/jsp/configuracion/modificarConfiguracion.jsp"/>
+        <forward name = "inicioConfig"          path = "/jsp/configuracion/inicio.jsp"/>
+        <forward name = "agregarConfig"         path = "/jsp/configuracion/agregarConfiguracion.jsp"/>
+<!-- // Contactos --> 
+        <forward name = "listaContactos"        path = "/jsp/contactos/listaContacto.jsp"/>
+        <forward name = "irModificarContactos"  path = "/jsp/contactos/modificarContactos.jsp"/>     
+        <forward name = "irAgregarContactos"    path = "/jsp/contactos/agregarContactos.jsp"/>   
+        <forward name = "irInicioContactos"     path = "/jsp/contactos/inicio.jsp"/>
+<!-- // Empresa -->        
+<!-- // Fabricantes -->
+        <forward name = "irInicioFabricantes"   path = "/jsp/fabricante/inicio.jsp"/>
+        <forward name = "irAgregarFabricantes"  path = "/jsp/fabricante/agregarFabricante.jsp"/>
+        <forward name = "irModificarFabricantes" path= "/jsp/fabricante/modificarFabricante.jsp"/>
+        <forward name = "irListaFabricantes"    path = "/jsp/fabricante/listaFabricantes.jsp"/>
+<!-- // FacturaDetalle -->        
+<!-- // FacturaEncabezado -->        
+<!-- // Inventario -->        
+<!-- // Iva -->        
+<!-- // Moneda -->
+        <forward name = "irInicioMoneda"        path = "/jsp/moneda/inicio.jsp"/>
+        <forward name = "irAgregarMoneda"       path = "/jsp/moneda/agregarMoneda.jsp"/>
+        <forward name = "irModificarMoneda"     path = "/jsp/moneda/modificarMoneda.jsp"/>
+        <forward name = "irListaMoneda"         path = "/jsp/moneda/listaMoneda.jsp"/>
+<!-- // Productos -->
+        <forward name = "listaProducto"         path = "/jsp/producto/listaProductos.jsp"/>
+        <forward name = "irProducto"            path = "/jsp/producto/agregarProductos.jsp"/>
+        <forward name = "irModificarProducto"   path = "/jsp/producto/modificarProductos.jsp"/>
+        <forward name = "irInicioProducto"      path = "/jsp/producto/inicioP.jsp"/>
     
     </global-forwards>
-
+<!-- ****************************************************************************************************** -->
     <action-mappings>
-        
-        
-      <action   name = "ActionFormAcceso"         path ="/accesoMantenimiento" 
-               scope ="request"                    type="sci.action.ActionAcceso"/>
-        <!-- // Configuracion    // -->
-        <action name = "ActionFormConfiguracion" path ="/configuracionMantenimiento" 
-               scope ="request"                   type="sci.action.ActionConfiguracion"/>
-        <!-- // moneda    // -->
-        <action name = "ActionFormMoneda"        path ="/monedaMantenimiento"  
-               scope ="request"                   type="sci.action.ActionMoneda"/>
-        
-       <action name="ActionFormContactos" path="/contactosMantenimiento" scope="request" type="sci.action.ActionContactos"/>
-        <action name="ActionFormFabricante" path="/fabricanteMantenimiento" scope="request" type="sci.action.ActionFabricante"/>
-        <action name="ActionFormProductos" path="/productosMantenimiento" scope="request" type="sci.action.ActionProductos"/> 
-       
+ <!--// Acceso -->       
+      <action   name = "ActionFormAcceso"           path = "/accesoMantenimiento" 
+               scope = "request"                    type = "sci.action.ActionAcceso"/>
+<!--// Compras -->     
+      <action   name = ""                           path = "/" 
+               scope = "request"                    type = ""/>
+ <!--// Configuracion -->      
+        <action name = "ActionFormConfiguracion"    path = "/configuracionMantenimiento" 
+               scope = "request"                    type = "sci.action.ActionConfiguracion"/>
+<!--// Contactos -->        
+       <action name = "ActionFormContactos"         path = "/contactosMantenimiento" 
+              scope = "request"                     type = "sci.action.ActionContactos"/>
+<!--// Empresa -->        
+       <action name = ""                            path = "" 
+              scope = "request"                     type = ""/>               
+ <!--// Fabricantes -->       
+        <action name = "ActionFormFabricante"       path = "/fabricanteMantenimiento" 
+               scope = "request"                    type = "sci.action.ActionFabricante"/>              
+<!--// FacturaDetalle -->       
+        <action name = ""                           path = "" 
+               scope = "request"                    type = ""/>     
+<!--// FacturaEncabezado -->       
+        <action name = ""                           path = "" 
+               scope = "request"                    type = ""/>         
+<!--// Inventario -->       
+        <action name = ""                           path = "" 
+               scope = "request"                    type = ""/>                   
+<!--// Iva -->        
+        <action name = "ActionFormIva"              path = "/ivaMantenimiento" 
+               scope = "request"                    type = "sci.action.ActionIva"/>         
+<!--// Moneda -->
+        <action name = "ActionFormMoneda"           path = "/monedaMantenimiento"  
+               scope = "request"                    type = "sci.action.ActionMoneda"/>
+<!--// Productos -->        
+        <action name = "ActionFormProductos"        path = "/productosMantenimiento" 
+               scope = "request"                    type = "sci.action.ActionProductos"/>
     </action-mappings>
-    
+<!-- ****************************************************************************************************** -->    
     <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
 
     <message-resources parameter="com/myapp/struts/ApplicationResource"/>    
