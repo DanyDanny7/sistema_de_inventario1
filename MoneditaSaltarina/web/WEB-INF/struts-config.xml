@@ -17,7 +17,7 @@
 <!-- // Contactos -->        
         <form-bean name = "ActionFormContactos"         type = "sci.actionforms.ActionFormContactos"/>
 <!-- // Empresa -->        
-        <form-bean name = ""                            type = ""/>
+        <form-bean name = "ActionFormEmpresa"           type = "sci.actionforms.ActionFormEmpresa"/>
 <!-- // Fabricantes -->        
         <form-bean name = "ActionFormFabricante"        type = "sci.actionforms.ActionFormFabricante"/>
 <!-- // FacturaDetalle -->        
@@ -59,7 +59,11 @@
         <forward name = "irModificarContactos"  path = "/jsp/contactos/modificarContactos.jsp"/>     
         <forward name = "irAgregarContactos"    path = "/jsp/contactos/agregarContactos.jsp"/>   
         <forward name = "irInicioContactos"     path = "/jsp/contactos/inicio.jsp"/>
-<!-- // Empresa -->        
+<!-- // Empresa -->
+        <forward name = "irInicio"           path = "/jsp/empresa/inicio.jsp"/>
+        <forward name = "irLista"           path = "/jsp/empresa/listaEmpresa.jsp"/>
+        <forward name = "irAgregar"           path = "/jsp/empresa/agregarEmpresa.jsp"/>
+        <forward name = "irModificar"           path = "/jsp/empresa/modificarEmpresa.jsp"/>
 <!-- // Fabricantes -->
         <forward name = "irInicioFabricantes"   path = "/jsp/fabricante/inicio.jsp"/>
         <forward name = "irAgregarFabricantes"  path = "/jsp/fabricante/agregarFabricante.jsp"/>
@@ -100,8 +104,8 @@
        <action name = "ActionFormContactos"         path = "/contactosMantenimiento" 
               scope = "request"                     type = "sci.action.ActionContactos"/>
 <!--// Empresa -->        
-       <action name = ""                            path = "" 
-              scope = "request"                     type = ""/>               
+       <action name = "ActionFormEmpresa"           path = "/empresaMantenimiento" 
+              scope = "request"                     type = "sci.action.ActionEmpresa"/>               
  <!--// Fabricantes -->       
         <action name = "ActionFormFabricante"       path = "/fabricanteMantenimiento" 
                scope = "request"                    type = "sci.action.ActionFabricante"/>              

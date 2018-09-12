@@ -31,11 +31,7 @@
                             <html:text property="idEmpresa"></html:text><br><br>
                             <label>Nombre de Moneda :</label><br>
                             <html:text property="nombreMoneda"></html:text><br><br>
-                            <logic:notEmpty name="ActionFormConfiguracion" property="listaMoneda"> 
-                                <logic:iterate id="ver" name="ActionFormConfiguracion" property="listaMoneda">
-                                    <html:option value=""></html:option>
-                                </logic:iterate>
-                            </logic:notEmpty>
+                           
                                 <label>Tasa de Iva :</label><br>
                             <html:text property="iva"></html:text><br><br>
 

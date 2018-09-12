@@ -7,12 +7,10 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import sci.persistencia.Empresa;
 
-
 public class EmpresaMantenimiento {
 
     public int guardarEmpresa(
-            int idEmpresa,
-            String nombreEmpresa,
+                        String nombreEmpresa,
             String ncr,
             String nit,
             String direccionEmpresa,
@@ -26,7 +24,7 @@ public class EmpresaMantenimiento {
 
         //Empresa emp = new Empresa();
         Empresa emp = new Empresa();
-        emp.setIdEmpresa(idEmpresa);
+        //emp.setIdEmpresa(idEmpresa);
         emp.setNcr(ncr);
         emp.setNit(nit);
         emp.setNombreEmpresa(nombreEmpresa);
@@ -140,27 +138,49 @@ public class EmpresaMantenimiento {
     }
 
     public Empresa consultarEmpresaId(int idEmpresa) {
-       // List<Empresa> listaUsuarios = null;
+        // List<Empresa> listaUsuarios = null;
         Empresa emp = new Empresa();
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.openSession();
         try {
             session.beginTransaction();
             emp = (Empresa) session.get(Empresa.class, idEmpresa);
-           // Query q = session.createQuery("from Empresa where idEmpresa = " + idEmpresa);
-          //  listaUsuarios = (List<Empresa>) q.list();
+            // Query q = session.createQuery("from Empresa where idEmpresa = " + idEmpresa);
+            //  listaUsuarios = (List<Empresa>) q.list();
             System.out.println("Consulta por id Correcta ");
             session.getTransaction().commit();
         } catch (Exception e) {
             if (session.getTransaction().isActive()) {
-              session.getTransaction().rollback();  
-            System.out.println("Error en consulta por id EmpresaMantenimiento " + e);
-            emp = null;
-}
+                session.getTransaction().rollback();
+                System.out.println("Error en consulta por id EmpresaMantenimiento " + e);
+                emp = null;
+            }
         } finally {
             session.close();
         }
         return emp;
     }
 
+    public int consultarNombre(String nombreEmpresa) {
+        Empresa emp = new Empresa();
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.openSession();
+        try {
+            session.beginTransaction();
+            // emp = (Empresa) session.get(Empresa.class, nombreEmpresa);
+            Query q = session.createQuery("from Empresa e "
+                    + "where e.nombreEmpresa=:nombreEmpresa");
+            q.setParameter("nombreEmpresa", nombreEmpresa);
+            List<Empresa> list = q.list();
+            if (list.size() > 0) {
+                return 0;
+            }
+            session.close();
+            return 1;
+
+        } catch (Exception e) {
+            session.close();
+            return 0;
+        }
+    }
 }
