@@ -22,11 +22,11 @@ public class ActionAcceso extends org.apache.struts.action.Action {
 
     private static final String INDEX = "irIndex";
     private static final String LISTA = "irListaAcceso";
-    private static final String LOGIN = "irLogin";
+    private static final String PORTADA = "irPortada";
     private static final String INICIO = "irInicioAcceso";
     private static final String AGREGAR = "irAgregarAcceso";
     private static final String MODIFICAR = "irModificarAcceso";
-    private static final String PERFIL = "irPerfilAcceso";
+    private static final String PERFIL = "irPerfil";
     private static final String AYUDA = "irAyuda2Acceso";
 
     SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
@@ -105,7 +105,7 @@ public class ActionAcceso extends org.apache.struts.action.Action {
                 IR = AGREGAR;
                 request.setAttribute("nombre", Login.nombre);
                 request.setAttribute("nAcceso", Login.nAcceso);
-                request.setAttribute("id", Login.id);
+                request.setAttribute("nAcceso", Login.id);
                 return mapping.findForward(IR);
             }
             List<Acceso> listaAcceso = aman.consultarTodoAcceso();
@@ -151,10 +151,10 @@ public class ActionAcceso extends org.apache.struts.action.Action {
                 int id = aman.loginId(usuario, contrasena);
                 Login.id = aman.consultarAccesoId(id).getIdAcceso();
                 Login.nombre = aman.consultarAccesoId(id).getNombreAcceso();
-                Login.nAcceso = validar;
+                Login.nAcceso = aman.consultarAccesoId(id).getTipoAcceso();
                 Login.user = aman.consultarAccesoId(id).getUsuario();
 
-                IR = INICIO;
+                IR = PORTADA;
 
             } else {
                 formBean.setError("<spam style='color:white'> El Usuario o la contraseña son incorrectos. ");
@@ -171,13 +171,13 @@ public class ActionAcceso extends org.apache.struts.action.Action {
 
         }
         //---------------------------------------------------------------------------
-        if (action.equals("Cerrar Sesion")) {
+        if (action.equals("Cerrar Session")) {
             Login.id = 0;
             Login.nombre = "";
-            Login.nAcceso = 0;
+            Login.nAcceso = "";
             Login.user = "";
-            IR = LOGIN;
-
+            IR = INDEX;
+            
         }
         //---------------------------------------------------------------------------
         if (action.equalsIgnoreCase("modificar")) {
@@ -217,9 +217,9 @@ public class ActionAcceso extends org.apache.struts.action.Action {
                 request.setAttribute("nAcceso", Login.id);
                 return mapping.findForward(IR);
             }
-           // System.out.println("no 1");
+            System.out.println("no 1");
             aman.modificarAcceso(idAcceso, idEmpresa, nombreAcceso, apellidoAcceso, usuario, fechaRegistroAcceso, contrasena, email, tipoAcceso);
-           // System.out.println("no 2");
+            System.out.println("no 2");
             List<Acceso> listaAcceso = aman.consultarTodoAcceso();
             formBean.setListaAcceso(listaAcceso);
             formBean.setError("<spam style='color:blue'>El registro se modificó correctamente" + " <br></span>");
@@ -262,6 +262,27 @@ public class ActionAcceso extends org.apache.struts.action.Action {
             formBean.setListaEmpresa(listaEmpresa);
             request.setAttribute("listaEmpresa", listaEmpresa);
             IR = AGREGAR;
+        }
+        //---------------------------------------------------------------------------
+        //----------------------------------------------------------------------
+        if (action.equals("Perfil")) {
+
+            Acceso acceso = (Acceso) aman.consultarAccesoId(Login.id);
+
+            formBean.setIdAcceso(acceso.getIdAcceso());
+            formBean.setIdEmpresa(acceso.getEmpresa().getIdEmpresa());
+            formBean.setNombreAcceso(acceso.getNombreAcceso());
+            formBean.setApellidoAcceso(acceso.getApellidoAcceso());
+            formBean.setUsuario(acceso.getUsuario());
+            formBean.setContrasena(acceso.getContrasena());
+            formBean.setEmail(acceso.getEmail());
+            request.setAttribute("tipoAcceso", acceso.getTipoAcceso());
+            formBean.setFechaRegistroAcceso(acceso.getFechaRegistroAcceso());
+            List<Empresa> listaEmpresa = eman.consultarTodosEmpresa();
+            formBean.setListaEmpresa(listaEmpresa);
+            request.setAttribute("listaEmpresa", listaEmpresa);
+            IR = PERFIL;
+
         }
 
         request.setAttribute("nombre", Login.nombre);

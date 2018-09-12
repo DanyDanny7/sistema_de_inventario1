@@ -56,6 +56,28 @@
 
                                 </ul>
                                 <ul class="nav navbar-nav navbar-right">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-secondary">
+                                            ${nombre}
+                                        </button>
+                                        <div class="btn-group dropleft" role="group">
+                                            <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <span class="sr-only">Toggle Dropleft</span>
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
+                                                <html:form action="/accesoMantenimiento">
+                                                    <a class="dropdown-item" href="#">${nAcceso}</a>
+                                                    <html:submit styleClass="dropdown-item" property="action" value="Perfil"></html:submit>
+                                                        <div class="dropdown-divider"></div>
+                                                    <html:submit styleClass="dropdown-item" property="action" value="Cerrar Session"></html:submit>
+                                                </html:form>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                    <%--
                                     <html:form action = "/accesoMantenimiento">
                                         <div>
                                             <span class="glyphicon glyphicon-exclamation-sign" ></span>
@@ -92,36 +114,37 @@
                                             <html:link styleClass="dropdown-item" page="/jsp/acceso/ayuda1.jsp">¿Olvidaste tu contraseña?</html:link>
                                             </div>
                                         </div>
-                                    </ul>
-                                </div>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-4"> 1</div>
-                        <div class="col-4">2
-
-                        </div>
-                        <div class="col-4"> 3</div>
+                                    --%>
+                                </ul>
+                            </div>
+                        </nav>
                     </div>
                 </div>
             </div>
-
-
-
-            <div class="container">
+            <div class="container-fluid">
                 <div class="row">
-                    <div class="col-1"></div>
-                    <div class="col-10">
-                        <h1>Portada</h1>
-                        <br>
-                        <br>
+                    <div class="col-4"> 1</div>
+                    <div class="col-4">2
+
+                    </div>
+                    <div class="col-4"> 3</div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="container">
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col-10">
+                    <h1>Portada</h1>
+                    <br>
+                    <br>
                     <html:link page="/jsp/acceso/inicio.jsp">Acceso</html:link><br><br>
                     <html:link page="/jsp/configuracion/inicio.jsp">Configuración</html:link><br><br>
                     <html:link page="/jsp/moneda/inicio.jsp">Moneda</html:link><br><br>
-                    <!--html:link page="/jsp/acceso/login.jsp">Login/html:link-->
+                        <!--html:link page="/jsp/acceso/login.jsp">Login/html:link-->
                     <html:link page="/jsp/contactos/inicio.jsp">Contactos</html:link><br><br>
                     <html:link page="/jsp/producto/inicioP.jsp">Productos</html:link><br><br>
                     <html:link page="/jsp/producto/inicioP.jsp">Productos</html:link><br><br>

@@ -35,13 +35,14 @@
         <forward name="irListaMoneda"       path="/jsp/moneda/listaMoneda.jsp"/>
         <!--  // Acceso  y Login-->
         <forward name="irListaAcceso"       path="/jsp/acceso/listaLogin.jsp"/>
-        <forward name="irLogin"             path="/jsp/acceso/login.jsp"/>
+        <forward name="irPortada"           path="/portada.jsp"/>
         <forward name="irInicioAcceso"      path="/jsp/acceso/inicio.jsp"/>
         <forward name="irAgregarAcceso"     path="/jsp/acceso/agregarAcceso.jsp"/>
         <forward name="irModificarAcceso"   path="/jsp/acceso/modificarAcceso.jsp"/>
         <forward name="irAyuda1Acceso"      path="/jsp/acceso/ayuda1.jsp"/>
         <forward name="irAyuda2Acceso"      path="/jsp/acceso/ayuda2.jsp"/>
         <forward name="irAyuda3Acceso"      path="/jsp/acceso/ayuda3.jsp"/>
+        <forward name="irPerfil"            path="/jsp/acceso/perfil.jsp"/>
         
         <!-- Contactos -->
         <forward name="listaContactos"      path="/jsp/contactos/listaContacto.jsp"/>

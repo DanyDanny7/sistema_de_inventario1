@@ -1,9 +1,3 @@
-<%-- 
-    Document   : index
-    Created on : 09-03-2018, 01:42:35 PM
-    Author     : daniel.bonillausam
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <%@taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
@@ -118,14 +112,7 @@
                         <h1>Index</h1>
                         <br>
                         <br>
-                    <html:link page="/jsp/acceso/inicio.jsp">Acceso</html:link><br><br>
-                    <html:link page="/jsp/configuracion/inicio.jsp">Configuración</html:link><br><br>
-                    <html:link page="/jsp/moneda/inicio.jsp">Moneda</html:link><br><br>
-                    <!--html:link page="/jsp/acceso/login.jsp">Login/html:link-->
-                    <html:link page="/jsp/contactos/inicio.jsp">Contactos</html:link><br><br>
-                    <html:link page="/jsp/producto/inicioP.jsp">Productos</html:link><br><br>
-                    <html:link page="/jsp/fabricante/inicio.jsp">Fabricantes</html:link><br><br>
-
+                   
                 </div>
                 <div class="col-1"></div>
             </div>
