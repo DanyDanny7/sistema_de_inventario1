@@ -68,7 +68,11 @@
 <!-- // FacturaDetalle -->        
 <!-- // FacturaEncabezado -->        
 <!-- // Inventario -->        
-<!-- // Iva -->        
+<!-- // Iva -->
+        <forward name = "irInicioIva"           path = "/jsp/iva/inicio.jsp"/>
+        <forward name = "irAgregarIva"          path = "/jsp/iva/agregarIva.jsp"/>
+        <forward name = "irModificarIva"        path = "/jsp/iva/modificarIva.jsp"/>
+        <forward name = "irListaIva"            path = "/jsp/iva/listaIva.jsp"/>
 <!-- // Moneda -->
         <forward name = "irInicioMoneda"        path = "/jsp/moneda/inicio.jsp"/>
         <forward name = "irAgregarMoneda"       path = "/jsp/moneda/agregarMoneda.jsp"/>

@@ -10,18 +10,19 @@ import sci.persistencia.Iva;
 
 public class IvaMantenimiento {
 
-    public int guardarIva(int idIva,
+    public int guardarIva(
+            double ivaTasa,
             double ivaRetenido,
             double ivaPagado,
-            double ivaTotal,
-            double ivaTasa) {
+            double ivaTotal
+            ) {
 
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.openSession();
         int flag = 0;
 
         Iva iva = new Iva();
-        iva.setIdIva(idIva);
+        
         iva.setIvaRetenido(ivaRetenido);
         iva.setIvaPagado(ivaPagado);
         iva.setIvaTotal(ivaTotal);
@@ -70,12 +71,17 @@ public class IvaMantenimiento {
         }
         return flag;
     }
+    
+    public static void main(String[] args) {
+        IvaMantenimiento iman = new IvaMantenimiento();
+        iman.modificarIva(2, 3, 4, 6, 3);
+    }
 
     public int modificarIva(int idIva,
+            double ivaTasa,
             double ivaRetenido,
             double ivaPagado,
-            double ivaTotal,
-            double ivaTasa) {
+            double ivaTotal) {
 
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.openSession();
