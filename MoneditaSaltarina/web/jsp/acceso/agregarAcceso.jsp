@@ -12,7 +12,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Mantenimiento Acceso</title>
+        <title>Agregar Acceso</title>
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
     </head>
@@ -37,7 +37,6 @@
             </html:select>
             <br>
             <br>
-            <html:text property="idEmpresa"></html:text><br><br>
                 <label>Nombre : </label><br>
             <html:text property="nombreAcceso"></html:text><br><br>
                 <label>Apellido : </label><br>
@@ -47,7 +46,7 @@
                 <label>Contraseña : </label><br>
             <html:text property="contrasena"></html:text><br><br>
                 <label>E-Mail : </label><br>
-            <html:text property="email"></html:text><br><br>
+            <input type="email" name="email" ><br><br>
                 <label>Nivel de Acceso : </label><br>
 
             <html:select property="tipoAcceso">

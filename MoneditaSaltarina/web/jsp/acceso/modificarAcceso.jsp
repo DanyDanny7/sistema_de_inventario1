@@ -42,10 +42,8 @@
             <html:text property="usuario"></html:text><br><br>
 
                 <label>E-Mail : </label><br>
-            <html:text property="email"></html:text><br><br>
+            <input type="email" name="email" ><br><br>
                 <label>Nivel de Acceso : </label><br>
-
-                           
                 
             <html:select property="tipoAcceso">
                 <html:option value="${tipoAcceso}" ></html:option>

@@ -83,6 +83,9 @@ public class ActionAcceso extends org.apache.struts.action.Action {
             }
             if (!advertencia.equals("")) {
                 formBean.setError("<spam style = 'color: red' > Por favor complete los espacios requeridos " + " <br> " + advertencia + "</spam>");
+                List<Empresa> listaEmpresa = eman.consultarTodosEmpresa();
+                formBean.setListaEmpresa(listaEmpresa);
+                request.setAttribute("listaEmpresa", listaEmpresa);
                 IR = AGREGAR;
                 request.setAttribute("nombre", Login.nombre);
                 request.setAttribute("nAcceso", Login.nAcceso);
@@ -93,6 +96,9 @@ public class ActionAcceso extends org.apache.struts.action.Action {
             //System.out.println(acceso.getEmail());
             if (valUsuario != 1) {
                 formBean.setError("<spam style='color:red'>Ya existe un registro con ese Usuario, por favor elija otro" + " <br></span>");
+                List<Empresa> listaEmpresa = eman.consultarTodosEmpresa();
+                formBean.setListaEmpresa(listaEmpresa);
+                request.setAttribute("listaEmpresa", listaEmpresa);
                 IR = AGREGAR;
                 request.setAttribute("nombre", Login.nombre);
                 request.setAttribute("nAcceso", Login.nAcceso);
@@ -102,6 +108,9 @@ public class ActionAcceso extends org.apache.struts.action.Action {
             int val = aman.guardarAcceso(idEmpresa, nombreAcceso, apellidoAcceso, usuario, fechaRegistroAcceso, contrasena, email, tipoAcceso);
             if (val != 1) {
                 formBean.setError("<spam style='color:red'>Sugio un error No se Guardó el Registro" + " <br></span>");
+                List<Empresa> listaEmpresa = eman.consultarTodosEmpresa();
+                formBean.setListaEmpresa(listaEmpresa);
+                request.setAttribute("listaEmpresa", listaEmpresa);
                 IR = AGREGAR;
                 request.setAttribute("nombre", Login.nombre);
                 request.setAttribute("nAcceso", Login.nAcceso);
@@ -177,7 +186,7 @@ public class ActionAcceso extends org.apache.struts.action.Action {
             Login.nAcceso = "";
             Login.user = "";
             IR = INDEX;
-            
+
         }
         //---------------------------------------------------------------------------
         if (action.equalsIgnoreCase("modificar")) {
@@ -217,9 +226,7 @@ public class ActionAcceso extends org.apache.struts.action.Action {
                 request.setAttribute("nAcceso", Login.id);
                 return mapping.findForward(IR);
             }
-            System.out.println("no 1");
             aman.modificarAcceso(idAcceso, idEmpresa, nombreAcceso, apellidoAcceso, usuario, fechaRegistroAcceso, contrasena, email, tipoAcceso);
-            System.out.println("no 2");
             List<Acceso> listaAcceso = aman.consultarTodoAcceso();
             formBean.setListaAcceso(listaAcceso);
             formBean.setError("<spam style='color:blue'>El registro se modificó correctamente" + " <br></span>");
