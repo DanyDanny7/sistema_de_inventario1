@@ -12,56 +12,48 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Modificar</title>
-         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" 
-              integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"> 
-        
+        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
     </head>
     <body class=" p-3 mb-3 bg-success">
-        <h2 class="text-dark font-weight-bold">MODIFICAR</h2><br>
+        <h2 class="font-weight-bold">MODIFICAR</h2><br>
+        <label>${nombre}</label>
+        <label>${nAcceso}</label>
         <html:form action="/contactosMantenimiento">
-            <table border="0">
-                <tbody>
-                    <tr>
-                        <td class="bg-dark text-white">ID Contacto</td>
-                        <td>&nbsp;<html:text property="idContacto" ></html:text></td>
-                        </tr>  
-                        <tr>
-                            <td class="bg-dark text-white">Nombre del contacto</td>
-                            <td>&nbsp;<html:text property="nombreContacto" ></html:text> 
-                        </tr>
-                        <tr>
-                            <td class="bg-dark text-white">Direccion del contacto</td>
-                            <td>&nbsp;<html:text property="direccionContacto" ></html:text> 
-                        </tr>
-                        <tr>
-                            <td class="bg-dark text-white">Telefono del contacto</td>
-                            <td>&nbsp;<html:text property="telefonoContacto" ></html:text> 
-                        </tr>
-                        <tr>
-                            <td class="bg-dark text-white">Encargado</td>
-                            <td>&nbsp;<html:text property="encargadoContacto" ></html:text> 
-                        </tr>
-                        <tr>
-                            <td class="bg-dark text-white">Telefono del encargado</td>
-                            <td>&nbsp;<html:text property="telefonoEncargadoContacto" ></html:text> 
-                        </tr>
-                        <tr>
-                            <td class="bg-dark text-white">Tipo de contacto</td>
-                            <td>&nbsp;<html:select property="tipoContacto">
+           
+                        <label class="font-weight-bold">ID Contacto:</label><br>
+                       <html:text property="idContacto" ></html:text><br><br>
+                        
+                            <label class="font-weight-bold">Nombre del contacto:</label><br>
+                            <html:text property="nombreContacto" ></html:text> <br><br>
+                        
+                            <label class="font-weight-bold">Direccion del contacto:</label><br>
+                            <html:text property="direccionContacto" ></html:text> <br><br>
+                       
+                            <label class="font-weight-bold">Telefono del contacto:</label><br>
+                            <html:text property="telefonoContacto" ></html:text> <br><br>
+                       
+                            <label class="font-weight-bold">Encargado:</label><br>
+                            <html:text property="encargadoContacto" ></html:text> <br><br>
+                       
+                            <label class="font-weight-bold">Telefono del encargado:</label><br>
+                            <html:text property="telefonoEncargadoContacto" ></html:text> <br><br>
+                       
+                            <label class="font-weight-bold">Tipo de contacto:</label><br>
+                            <html:select property="tipoContacto">
                                 <html:option value="Cliente">Cliente</html:option> 
                                 <html:option value="Proveedor">Proveedor</html:option>
-                            </html:select></td> 
-                    </tr>
-                    <tr>
-                        <td class="bg-dark text-white">Email del contacto</td>
-                        <td>&nbsp;<html:text property="emailContacto" size="25" maxlength="20"></html:text> 
-                        </tr>
+                            </html:select><br><br> 
+                   
+                        <label class="font-weight-bold">Email del contacto:</label><br>
+                        <html:text property="emailContacto" size="25" maxlength="20"></html:text> <br><br>
+                     
+                        <html:hidden property="fechaRegistroContacto"></html:hidden> 
+                        
                         <tr colspan="2">
                         <bean:write name="ActionFormContactos" property="error" filter="false"/>
-                    </tr>
-                </tbody>  
-            </table>
-            <br>
+                  
+            <br> 
             <html:submit property="action" value="Modificar"/>
 
         </html:form><br>

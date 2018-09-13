@@ -3,23 +3,22 @@ package sci.actionforms;
 import java.util.List;
 import sci.persistencia.Contactos;
 
-
 public class ActionFormContactos extends org.apache.struts.action.ActionForm {
-    
+
     private Integer idContacto;
-     private String nombreContacto;
-     private String direccionContacto;
-     private String telefonoContacto;
-     private String encargadoContacto;
-     private String telefonoEncargadoContacto;
-     private String tipoContacto;
-     private String emailContacto;
-     private String fechaRegistroContacto;
-     private String error;
-     private String action;
-     private String mensaje;
-     private List<Contactos> listaContacto;
-     
+    private String nombreContacto;
+    private String direccionContacto;
+    private String telefonoContacto;
+    private String encargadoContacto;
+    private String telefonoEncargadoContacto;
+    private String tipoContacto;
+    private String emailContacto;
+    private String fechaRegistroContacto ;
+    private String error;
+    private String action;
+    private String mensaje;
+    private List<Contactos> listaContacto;
+
     public Integer getIdContacto() {
         return idContacto;
     }
@@ -85,10 +84,13 @@ public class ActionFormContactos extends org.apache.struts.action.ActionForm {
     }
 
     public String getFechaRegistroContacto() {
+        System.out.println("get " + fechaRegistroContacto);
+        
         return fechaRegistroContacto;
     }
 
     public void setFechaRegistroContacto(String fechaRegistroContacto) {
+        System.out.println("set " + this.fechaRegistroContacto);
         this.fechaRegistroContacto = fechaRegistroContacto;
     }
 
@@ -123,7 +125,5 @@ public class ActionFormContactos extends org.apache.struts.action.ActionForm {
     public void setListaContacto(List<Contactos> listaContacto) {
         this.listaContacto = listaContacto;
     }
-     
-     
-    
+
 }

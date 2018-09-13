@@ -60,9 +60,9 @@
         <forward name = "irAgregarContactos"    path = "/jsp/contactos/agregarContactos.jsp"/>   
         <forward name = "irInicioContactos"     path = "/jsp/contactos/inicio.jsp"/>
 <!-- // Empresa -->
-        <forward name = "irInicio"           path = "/jsp/empresa/inicio.jsp"/>
-        <forward name = "irLista"           path = "/jsp/empresa/listaEmpresa.jsp"/>
-        <forward name = "irAgregar"           path = "/jsp/empresa/agregarEmpresa.jsp"/>
+        <forward name = "irInicio"              path = "/jsp/empresa/inicio.jsp"/>
+        <forward name = "irLista"               path = "/jsp/empresa/listaEmpresa.jsp"/>
+        <forward name = "irAgregar"             path = "/jsp/empresa/agregarEmpresa.jsp"/>
         <forward name = "irModificar"           path = "/jsp/empresa/modificarEmpresa.jsp"/>
 <!-- // Fabricantes -->
         <forward name = "irInicioFabricantes"   path = "/jsp/fabricante/inicio.jsp"/>
