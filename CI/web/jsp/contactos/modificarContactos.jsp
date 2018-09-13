@@ -17,8 +17,7 @@
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <div class="container">
-            <div class="container-fluid">
+        <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
                         <div> 
@@ -128,6 +127,8 @@
                 </div>
 
             </div>
+        <div class="container">
+            
 
             <div class="container">
                 <div class="row">
@@ -183,10 +184,10 @@
                                     <html:text property="telefonoEncargadoContacto" styleClass="form-control"></html:text><br>
                                     </div>
                                 </div> 
-
+                                    <label class="font-weight-bold">Tipo de contacto:</label><br>
                                 <div class="row">    
-                                    <div class="form-group col-md-3">
-                                        <label class="font-weight-bold">Tipo de contacto:</label><br>
+                                    <div class="form-group col-md-4">
+                                        
                                     <html:select property="tipoContacto" styleClass="form-control">
                                         <html:option value="Seleccionar"></html:option> 
                                         <html:option value="Cliente">Cliente</html:option> 
@@ -197,20 +198,20 @@
 
                                     <html:hidden property="fechaRegistroContacto"></html:hidden> 
 
-
-
-
                                     <bean:write name="ActionFormContactos" property="error" filter="false"/>
                                 </div>
-                            </div>
-
-                            <div class="row">  
-
-                                <div class="form-group col-md-auto">
+                                <div class="form-group col-md-1">
+                                    
+                                    <div class="form-group col-md-auto">
                                     <html:submit property="action" value="Modificar" styleClass="btn  font-weight-bold" style="background-color: #04B404;"/>
-
+                                </div>
                                 </div>
                             </div>
+
+                              
+
+                                
+                            
 
                         </html:form>
 

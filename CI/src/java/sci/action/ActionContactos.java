@@ -237,7 +237,9 @@ public class ActionContactos extends org.apache.struts.action.Action {
         if (action.equals("irAgregar")) {
             IR = AGREGAR;
         }
-
+        request.setAttribute("nombre", Login.nombre);
+        request.setAttribute("nAcceso", Login.nAcceso);
+        request.setAttribute("id", Login.id);
         return mapping.findForward(IR);
 
     }

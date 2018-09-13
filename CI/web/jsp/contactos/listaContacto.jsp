@@ -23,7 +23,7 @@
         <script src="js/bootstrap.js" type="text/javascript"></script>
     </head>
     <body> 
-        <div class="container">
+        
              <div class="container-fluid">
                 <div class="row">
                     <div class="col-xl">
@@ -197,7 +197,7 @@
                         <br>
                         <a class="font-weight-bold btn text-white"<html:link page="/jsp/contactos/agregarContactos.jsp" style="background-color: #0174DF;">Formulario</html:link>&emsp;
                        
-                    </div>
+                    
                 </div>
             </div>
         </div>
