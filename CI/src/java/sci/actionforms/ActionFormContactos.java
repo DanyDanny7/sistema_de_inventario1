@@ -84,13 +84,10 @@ public class ActionFormContactos extends org.apache.struts.action.ActionForm {
     }
 
     public String getFechaRegistroContacto() {
-        System.out.println("get " + fechaRegistroContacto);
-        
         return fechaRegistroContacto;
     }
 
     public void setFechaRegistroContacto(String fechaRegistroContacto) {
-        System.out.println("set " + this.fechaRegistroContacto);
         this.fechaRegistroContacto = fechaRegistroContacto;
     }
 

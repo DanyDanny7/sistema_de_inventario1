@@ -16,11 +16,10 @@
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
     </head>
-    <body>
-        <br>
+    <body class=" p-3 mb-3 bg-success">
         <br>
         <h1>Agregar Acceso</h1>
-<label>${nombre}</label>
+        <label>${nombre}</label>
         <label>${nAcceso}</label>
         <html:form action = "/accesoMantenimiento">
 
@@ -33,11 +32,11 @@
                         <html:option value="${ver.idEmpresa}" >${ver.nombreEmpresa}</html:option>
                     </logic:iterate>
                 </logic:notEmpty>
-                
+
             </html:select>
             <br>
             <br>
-                <label>Nombre : </label><br>
+            <label>Nombre : </label><br>
             <html:text property="nombreAcceso"></html:text><br><br>
                 <label>Apellido : </label><br>
             <html:text property="apellidoAcceso"></html:text><br><br>
@@ -46,7 +45,7 @@
                 <label>Contraseña : </label><br>
             <html:text property="contrasena"></html:text><br><br>
                 <label>E-Mail : </label><br>
-            <input type="email" name="email" ><br><br>
+                <input type="email" name="email" ><br><br>
                 <label>Nivel de Acceso : </label><br>
 
             <html:select property="tipoAcceso">
@@ -56,7 +55,7 @@
                 <html:option value="Administrador"></html:option>
                 <html:option value="Super Administrador"></html:option>
             </html:select>
-                <br>
+            <br>
 
             <bean:write name="ActionFormAcceso" property="error" filter="false"/>    
 
@@ -64,7 +63,7 @@
             <br>
             <html:submit property="action" value="Agregar"/>
             <html:submit property="action" value="Consultar"/>
-      
+
         </html:form>
         <br>
         <html:link page="/index.jsp">Index</html:link>
