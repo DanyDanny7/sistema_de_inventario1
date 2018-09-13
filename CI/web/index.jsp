@@ -10,6 +10,10 @@
         <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
         <script src="js/popper.min.js" type="text/javascript"></script>
         <script src="js/bootstrap.js" type="text/javascript"></script>
+        <script src="http://codeseven.github.com/toastr/toastr.js"></script>
+        <link href="http://codeseven.github.com/toastr/toastr.css" rel="stylesheet"/>
+        <link href="http://codeseven.github.com/toastr/toastr-responsive.css" rel="stylesheet"/>
+
     </head>
     <body>
         <div class="container-fluid">
@@ -26,13 +30,6 @@
                                 <ul class="navbar-nav mr-auto" >
                                 </ul>
                                 <ul class="nav navbar-nav navbar-right">
-                                    <html:form action = "/accesoMantenimiento">
-                                        <div>
-                                            <span class="glyphicon glyphicon-exclamation-sign" ></span>
-                                            <div><strong><bean:write name="ActionFormAcceso" property="error" filter="false"/></strong></div>
-                                        </div>
-                                    </html:form>
-
                                     <div class="btn-group dropleft">
                                         <button type="button" class="btn btn-outline-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             Iniciar Secion
@@ -88,10 +85,43 @@
                         <h1>Index</h1>
                         <br>
                         <br>
-                   
+
+                    </div>
+                    <div class="col-1"></div>
                 </div>
-                <div class="col-1"></div>
-            </div>
+
+                <p id="hola" hidden="hidden">${mensaje}</p>
         </div>
+        <script type="text/javascript">
+
+            if ($("#hola").text() != "") {
+                window.onload = function () {
+                    toastrs();
+                };
+            };
+
+            toastr.options = {
+                "debug": false,
+                "positionClass": "toast-bottom-right",
+                "onclick": null,
+                "fadeIn": 300,
+                "fadeOut": 100,
+                "timeOut": 5000,
+                "extendedTimeOut": 1000
+            };
+
+            var showToastrs = false;
+
+            function toastrs() {
+
+                if (!showToastrs) {
+                    toastr.error($("#hola").text(), 'Error');
+
+
+                } else {
+                    toastr.error('no se puede!\'t.', 'Otro error crítico');
+                }
+            }
+        </script>
     </body>
 </html>

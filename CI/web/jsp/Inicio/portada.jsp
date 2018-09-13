@@ -16,147 +16,151 @@
         <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
         <script src="js/popper.min.js" type="text/javascript"></script>
         <script src="js/bootstrap.js" type="text/javascript"></script>
-    </head>
-    <body>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-                    <div> 
-                        <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #0000FF;">
-                            <a class="navbar-brand" href="accesoMantenimiento.do?action=portada" style = 'color: white'>Inicio</a>
-                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                                <span class="navbar-toggler-icon"></span>
-                            </button>
-
-                            <div class="collapse navbar-collapse" id="navbarSupportedContent" >
-                                <ul class="navbar-nav mr-auto" >
-                                    <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" 
-                                           aria-haspopup="true" aria-expanded="false" style = 'color: white'> 
-                                            Parametros
-                                        </a>
-                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
-                                            <a class="dropdown-item" href="#">Configuración Inicial</a>
-                                        </div>
-                                    </li>
-                                    <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" 
-                                           aria-haspopup="true" aria-expanded="false" style = 'color: white'> 
-                                            Fabricantes
-                                        </a>
-                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
-                                            <a class="dropdown-item" href="fabricanteMantenimiento.do?action=irAgregar">Agregar Fabricantes</a>
-                                            <a class="dropdown-item" href="fabricanteMantenimiento.do?action=Consultar">Consultar Fabricantes</a>
-                                        </div>
-                                    </li>
-                                    <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" 
-                                           aria-haspopup="true" aria-expanded="false" style = 'color: white'> 
-                                            Contactos
-                                        </a>
-                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
-                                            <a class="dropdown-item" href="contactosMantenimiento.do?action=irAgregar">Agregar Contacto</a>
-                                            <a class="dropdown-item" href="contactosMantenimiento.do?action=Consultar">Consultar Contactos</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="contactosMantenimiento.do?action=ConsultarTipo&tipoContacto=Cliente">Consultar Clientes</a>
-                                            <a class="dropdown-item" href="contactosMantenimiento.do?action=ConsultarTipo&tipoContacto=Proveedor">Consultar Proveedores</a>
-                                        </div>
-                                    </li>
-                                    <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" 
-                                           aria-haspopup="true" aria-expanded="false" style = 'color: white'> 
-                                            Compras
-                                        </a>
-                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
-                                            <a class="dropdown-item" href="#">Agregar Compra</a>
-                                            <a class="dropdown-item" href="#">Consultar Compras</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Consultas por Documento</a>
-                                        </div>
-                                    </li>
-                                    <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" 
-                                           aria-haspopup="true" aria-expanded="false" style = 'color: white'> 
-                                            Productos
-                                        </a>
-                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
-                                            <a class="dropdown-item" href="productosMantenimiento.do?action=irAgregar">Agregar Producto</a>
-                                            <a class="dropdown-item" href="productosMantenimiento.do?action=Consultar">Consultar Productos</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Consulta de productos en Stock Bajo</a>
-                                            <a class="dropdown-item" href="#">Consulta de productos en sin Stock</a>
-                                        </div>
-                                    </li>
-                                    <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" 
-                                           aria-haspopup="true" aria-expanded="false" style = 'color: white'> 
-                                            Consultas
-                                        </a>
-                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
-                                            <a class="dropdown-item" href="#">Compras</a>
-                                            <a class="dropdown-item" href="contactosMantenimiento.do?action=Consultar">Contactos</a>
-                                            <a class="dropdown-item" href="fabricanteMantenimiento.do?action=Consultar">Fabricantes</a>
-                                            <a class="dropdown-item" href="monedaMantenimiento.do?action=Consultar">Monedas</a>
-                                            <a class="dropdown-item" href="productosMantenimiento.do?action=Consultar">Productos</a>
-                                        </div>
-                                    </li>
-                                </ul>
-                                <ul class="nav navbar-nav navbar-right">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-secondary">
-                                            ${nombre}
-                                        </button>
-                                        <div class="btn-group dropleft" role="group">
-                                            <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <span class="sr-only">Toggle Dropleft</span>
-                                            </button>
-                                            <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
-                                                <html:form action="/accesoMantenimiento">
-                                                    <a class="dropdown-item" href="#">${nAcceso}</a>
-                                                    <html:submit styleClass="dropdown-item" property="action" value="Perfil"></html:submit>
-                                                        <div class="dropdown-divider"></div>
-                                                    <html:submit styleClass="dropdown-item" property="action" value="Cerrar Session"></html:submit>
-                                                </html:form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </ul>
-                            </div>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-4"> 1</div>
-                    <div class="col-4">2
-
-                    </div>
-                    <div class="col-4"> 3</div>
-                </div>
-            </div>
+        
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-12">
+<div> 
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #0000FF;">
+        <a class="navbar-brand" href="accesoMantenimiento.do?action=portada" style = 'color: white'>Inicio</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="navbarSupportedContent" >
+    <ul class="navbar-nav mr-auto" >
+    <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" 
+    aria-haspopup="true" aria-expanded="false" style = 'color: white'> 
+Parametros
+</a>
+<div class="dropdown-menu" aria-labelledby="navbarDropdown" >
+<a class="dropdown-item" href="#">Configuración Inicial</a>
         </div>
-
-
-
-        <div class="container">
-            <div class="row">
-                <div class="col-1"></div>
-                <div class="col-10">
-                    <h1>Portada</h1>
-                    <br>
-                    <br>
-                    <html:link page="/jsp/acceso/inicio.jsp">Acceso</html:link><br><br>
-                    <html:link page="/jsp/configuracion/inicio.jsp">Configuración</html:link><br><br>
-                    <html:link page="/jsp/moneda/inicio.jsp">Moneda</html:link><br><br>
-                        <!--html:link page="/jsp/acceso/login.jsp">Login/html:link-->
-                    <html:link page="/jsp/contactos/inicio.jsp">Contactos</html:link><br><br>
-                    <html:link page="/jsp/producto/inicioP.jsp">Productos</html:link><br><br>
-                    <html:link page="/jsp/empresa/inicio.jsp">Empresa</html:link><br><br>
-
-                </div>
-                <div class="col-1"></div>
-            </div>
+        </li>
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" 
+        aria-haspopup="true" aria-expanded="false" style = 'color: white'> 
+        Fabricantes
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
+        <a class="dropdown-item" href="fabricanteMantenimiento.do?action=irAgregar">Agregar Fabricantes</a>
+    <a class="dropdown-item" href="fabricanteMantenimiento.do?action=Consultar">Consultar Fabricantes</a>
+    </div>
+    </li>
+    <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" 
+aria-haspopup="true" aria-expanded="false" style = 'color: white'> 
+Contactos
+</a>
+<div class="dropdown-menu" aria-labelledby="navbarDropdown" >
+        <a class="dropdown-item" href="contactosMantenimiento.do?action=irAgregar">Agregar Contacto</a>
+        <a class="dropdown-item" href="contactosMantenimiento.do?action=Consultar">Consultar Contactos</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="contactosMantenimiento.do?action=ConsultarTipo&tipoContacto=Cliente">Consultar Clientes</a>
+        <a class="dropdown-item" href="contactosMantenimiento.do?action=ConsultarTipo&tipoContacto=Proveedor">Consultar Proveedores</a>
+    </div>
+    </li>
+    <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" 
+aria-haspopup="true" aria-expanded="false" style = 'color: white'> 
+Compras
+</a>
+<div class="dropdown-menu" aria-labelledby="navbarDropdown" >
+        <a class="dropdown-item" href="#">Agregar Compra</a>
+        <a class="dropdown-item" href="#">Consultar Compras</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#">Consultas por Documento</a>
         </div>
-    </body>
+        </li>
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" 
+        aria-haspopup="true" aria-expanded="false" style = 'color: white'> 
+        Productos
+        </a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
+    <a class="dropdown-item" href="productosMantenimiento.do?action=irAgregar">Agregar Producto</a>
+<a class="dropdown-item" href="productosMantenimiento.do?action=Consultar">Consultar Productos</a>
+<div class="dropdown-divider"></div>
+<a class="dropdown-item" href="#">Consulta de productos en Stock Bajo</a>
+        <a class="dropdown-item" href="#">Consulta de productos en sin Stock</a>
+        </div>
+        </li>
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" 
+        aria-haspopup="true" aria-expanded="false" style = 'color: white'> 
+        Consultas
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
+        <a class="dropdown-item" href="#">Compras</a>
+    <a class="dropdown-item" href="contactosMantenimiento.do?action=Consultar">Contactos</a>
+    <a class="dropdown-item" href="fabricanteMantenimiento.do?action=Consultar">Fabricantes</a>
+<a class="dropdown-item" href="monedaMantenimiento.do?action=Consultar">Monedas</a>
+<a class="dropdown-item" href="productosMantenimiento.do?action=Consultar">Productos</a>
+        </div>
+        </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+        <div class="btn-group">
+
+        </div>
+        <div class="btn-group">
+        <button type="button" class="btn btn-secondary">
+            ${nombre}
+        </button>
+        <div class="btn-group dropleft" role="group">
+        <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <span class="sr-only">Toggle Dropleft</span>
+    </button>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
+            <html:form action="/accesoMantenimiento">
+            <a class="dropdown-item" href="#">${nAcceso}</a>
+<html:submit styleClass="dropdown-item" property="action" value="Perfil"></html:submit>
+<div class="dropdown-divider"></div>
+<html:submit styleClass="dropdown-item" property="action" value="Cerrar Session"></html:submit>
+</html:form>
+</div>
+</div>
+</div>
+</ul>
+</div>
+</nav>
+</div>
+</div>
+</div>
+<div class="container-fluid">
+        <div class="row">
+    <div            class="col-4"> 1</div>
+    <div cla            ss="col-4">2
+        
+</div>
+<div clas                s="col-4"> 3</d                iv>
+</div>
+</div>
+</div>
+
+
+
+                    <div class="con        tainer">
+          <div class="row">
+        <div class="col-1"></div>
+        <div class="col-10">
+        <h1>Portada</h1>
+        <br>
+        <br>
+<html:link page="/jsp/acceso/inicio.jsp">Acceso</html:link><br><br>
+<html:link page="/jsp/configuracion/inicio.jsp">Configuración</html:link><br><br>
+<html:link page="/jsp/moneda/inicio.jsp">Moneda</html:link><br><br>
+    <!--html:link page="/jsp/acceso/login.jsp">Login/html:link-->
+<html:link page="/jsp/contactos/inicio.jsp">Contactos</html:link><br><br>
+<html:link page="/jsp/producto/inicioP.jsp">Productos</html:link><br><br>
+<html:link page="/jsp/empresa/inicio.jsp">Empresa</html:link><br><br>
+    
+    </div>
+    <div class="col-1"></div>
+    </div>
+</div>
+</body>
 </html>

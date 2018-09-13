@@ -167,6 +167,9 @@ public class ActionAcceso extends org.apache.struts.action.Action {
 
             } else {
                 formBean.setError("<spam style='color:white'> El Usuario o la contraseña son incorrectos. ");
+                String mensaje = "Usuario o Contraseña Incorrectos";
+                
+                request.setAttribute("mensaje", mensaje);
                 IR = INDEX;
             }
         }
