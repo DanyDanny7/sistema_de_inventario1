@@ -20,6 +20,7 @@ public class ActionFormConfiguracion extends org.apache.struts.action.ActionForm
     private Integer idEmpresa;
     private String nombreMoneda;
     private byte[] logo;
+    private String logo1;
     private Double iva;
     private String zonaHoraria;
     private String error;
@@ -113,6 +114,14 @@ public class ActionFormConfiguracion extends org.apache.struts.action.ActionForm
 
     public void setListaMoneda(List<Moneda> listaMoneda) {
         this.listaMoneda = listaMoneda;
+    }
+
+    public String getLogo1() {
+        return logo1;
+    }
+
+    public void setLogo1(String logo1) {
+        this.logo1 = logo1;
     }
 
     

@@ -5,6 +5,8 @@
  */
 package sci.action;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -38,6 +40,7 @@ public class ActionConfiguracion extends org.apache.struts.action.Action {
         Integer idAcceso = formBean.getIdAcceso();
         Integer idEmpresa = formBean.getIdEmpresa();
         byte[] logo = formBean.getLogo();
+        String logo1 = formBean.getLogo1();
         String nombreMoneda = formBean.getNombreMoneda();
         Double iva = formBean.getIva();
         String zonaHoraria = "";
@@ -48,7 +51,9 @@ public class ActionConfiguracion extends org.apache.struts.action.Action {
         MonedaMantenimiento mman = new MonedaMantenimiento();
         Configuracion config = new Configuracion();
         String IR = null;
-
+//---------------------------------------------------------------------------
+       
+        
 //---------------------------------------------------------------------------
         if (action.equals("Agregar")) {
             //valida campos vacios y nulos && agrega nueva configuracion
@@ -65,9 +70,6 @@ public class ActionConfiguracion extends org.apache.struts.action.Action {
             }
             if (iva == null || iva.equals("")) {
                 advertencia += "*Tasa de Iva es requerido <br>";
-            }
-            if (zonaHoraria == null || zonaHoraria.equals("")) {
-                advertencia += "*Zona Horaria es requerida <br>";
             }
             if (!advertencia.equals("")) {
                 error = ("<spam style = 'color: red' > Por favor complete los espacios vacios " + " <br> " + advertencia + "</spam>");
@@ -101,9 +103,7 @@ public class ActionConfiguracion extends org.apache.struts.action.Action {
             IR = MODIFICAR;
         }
         if (action.equals("Modificar")) {
-            //valida campos vacios y nulos && agrega nueva configuracion
-
-            cman.modificarConfiguracion(idAcceso, idEmpresa, nombreMoneda, iva, zonaHoraria);
+            cman.modificarConfiguracion(idAcceso, idEmpresa, logo, nombreMoneda, iva, zonaHoraria);
             IR = INICIO;
         }
 //--------------------------------------------------------------------------------
@@ -113,7 +113,26 @@ public class ActionConfiguracion extends org.apache.struts.action.Action {
             request.setAttribute("listaMoneda", listaMoneda);
             IR = AGREGAR;
         }
-        return mapping.findForward(IR);
-    }
+        
+    
+    //--------------------------------------------------------------------------------------
+        if (action.equals("consultarId")) {
+            
+            Configuracion confi = (Configuracion) cman.consultarConfiguarionId(idConfiguracion);
+            System.out.println("despues de consult");
+            formBean.setIdConfiguracion(confi.getIdConfiguracion());
+            formBean.setNombreMoneda(confi.getMoneda().getNombreMoneda());
+            formBean.setIdEmpresa(confi.getEmpresa().getIdEmpresa());
+            formBean.setIdAcceso(confi.getAcceso().getIdAcceso());
+            formBean.setIva(confi.getIva());
+            System.out.println("antes de modificar");
+            IR = MODIFICAR;
+            
+        }
 
+return mapping.findForward(IR);
 }
+}
+
+    
+

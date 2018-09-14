@@ -90,16 +90,10 @@
                     <div class="col-1"></div>
                 </div>
 
-                <p id="hola" hidden="hidden">${mensaje}</p>
+                <p id="error" hidden="hidden">${mensaje}</p>
+            
         </div>
         <script type="text/javascript">
-
-            if ($("#hola").text() != "") {
-                window.onload = function () {
-                    toastrs();
-                };
-            };
-
             toastr.options = {
                 "debug": false,
                 "positionClass": "toast-bottom-right",
@@ -111,17 +105,17 @@
             };
 
             var showToastrs = false;
-
             function toastrs() {
-
                 if (!showToastrs) {
-                    toastr.error($("#hola").text(), 'Error');
-
-
-                } else {
-                    toastr.error('no se puede!\'t.', 'Otro error crítico');
-                }
+                    toastr.error($("#error").text(), 'Error!');
+                } 
             }
+            if ($("#error").text() != "") {
+                window.onload = function () {
+                    toastrs();
+                };
+            };
+
         </script>
     </body>
 </html>

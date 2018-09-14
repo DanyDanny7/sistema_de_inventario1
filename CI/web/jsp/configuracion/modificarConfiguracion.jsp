@@ -11,7 +11,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Modificar Configuracion</title>
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
     </head>
@@ -24,29 +24,22 @@
                     <html:form action="/configuracionMantenimiento">
                         <table>
                             <tr>
-                                <label>ID Configuracion :</label><br>
-                        <html:text property="idConfiguracion"></html:text><br><br>
-                                <label>ID Acceso :</label><br>
-                        <html:text property="idAcceso"></html:text><br><br>
-                        <label>ID Empresa :</label><br>
-                        <html:text property="idEmpresa"></html:text><br><br>
-                        <label>Moneda :</label><br>
-                        <html:text property="nombreMoneda"></html:text><br><br>
-                        <label>Simbolo Moneda :</label><br>
-                        <html:text property="simboloMoneda"></html:text><br><br>
-                        <label>Codigo de Moneda :</label><br>
-                        <html:text property="codigoMoneda"></html:text><br><br>
-                        <label>Tasa de Iva :</label><br>
-                        <html:text property="iva"></html:text><br><br>
-                        <label>Zona Horaria :</label><br>
-                        <html:text property="zonaHoraria"></html:text><br><br>
-                    
-                        <bean:write name="ActionFormConfiguracion" property="error" filter="false"></bean:write>
-                        </tr>
-                        <html:submit property="action" value="Modificar"/>
-                            
+                            <label>ID Acceso :</label><br>
+                            <html:text property="idAcceso"></html:text><br><br>
+                                <label>ID Empresa :</label><br>
+                            <html:text property="idEmpresa"></html:text><br><br>
+                            <label>Nombre de Moneda :</label><br>
+                            <html:text property="nombreMoneda"></html:text><br><br>
+                           
+                                <label>Tasa de Iva :</label><br>
+                            <html:text property="iva"></html:text><br><br>
+
+                            <bean:write name="ActionFormConfiguracion" property="error" filter="false"></bean:write>
+                                </tr>
+                            <html:submit property="action" value="Agregar"/>
+
                         </table>
-                        
+
                     </html:form>
                         
                         <html:link page="/jsp/configuracion/inicio.jsp">Inicio</html:link>

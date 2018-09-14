@@ -93,7 +93,7 @@ public class ConfiguracionMantenimiento {
     public int modificarConfiguracion(
             int idAcceso,
             int idEmpresa,
-            //byte[] logo,
+            byte[] logo,
             String nombreMoneda,
             double iva,
             String zonaHoraria) {
@@ -112,7 +112,7 @@ public class ConfiguracionMantenimiento {
         empresa.setIdEmpresa(idEmpresa);
         conf.setEmpresa(empresa);
         //--
-        //conf.setLogo(logo);
+        conf.setLogo(logo);
         Moneda moneda = new Moneda();
         moneda.setNombreMoneda(nombreMoneda);
         conf.setMoneda(moneda);

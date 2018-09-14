@@ -13,7 +13,7 @@
 </head>
 <body>
  
-<p>
+    <p id="msj">
   If you click on this paragraph
   you'll see it just fade away.
 </p>
@@ -26,8 +26,8 @@ $( "p" ).click(function() {
 </script> --%>
 <script>
 setTimeout(function(){
-    $("p").fadeOut("slow");
-},3000);
+    $("#msj").fadeOut("slow");
+},1000);
 </script>
  
 </body>

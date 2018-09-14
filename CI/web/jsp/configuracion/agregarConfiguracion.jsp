@@ -23,8 +23,8 @@
                 <div class="col-1"></div>
                 <div class="col-10">
                     <html:form action="/configuracionMantenimiento">
-                        <table>
-                            <tr>
+                        
+                                
                             <label>ID Acceso :</label><br>
                             <html:text property="idAcceso"></html:text><br><br>
                                 <label>ID Empresa :</label><br>
@@ -36,10 +36,11 @@
                             <html:text property="iva"></html:text><br><br>
 
                             <bean:write name="ActionFormConfiguracion" property="error" filter="false"></bean:write>
-                                </tr>
+                        
+                            <label>Logo :</label><br>
+                            <html:file property="logo1" ></html:file>
+                            <br><br>
                             <html:submit property="action" value="Agregar"/>
-
-                        </table>
 
                     </html:form>
 
