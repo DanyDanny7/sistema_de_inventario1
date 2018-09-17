@@ -5,6 +5,7 @@
  */
 package sci.action;
 
+import java.awt.Image;
 import java.io.File;
 import java.io.FileInputStream;
 import java.text.SimpleDateFormat;
@@ -39,8 +40,8 @@ public class ActionConfiguracion extends org.apache.struts.action.Action {
         Integer idConfiguracion = formBean.getIdConfiguracion();
         Integer idAcceso = formBean.getIdAcceso();
         Integer idEmpresa = formBean.getIdEmpresa();
-        byte[] logo = formBean.getLogo();
-        String logo1 = formBean.getLogo1();
+        //byte[] logo = formBean.getLogo();
+        //String logo1 = formBean.getLogo1();
         String nombreMoneda = formBean.getNombreMoneda();
         Double iva = formBean.getIva();
         String zonaHoraria = "";
@@ -51,27 +52,7 @@ public class ActionConfiguracion extends org.apache.struts.action.Action {
         MonedaMantenimiento mman = new MonedaMantenimiento();
         Configuracion config = new Configuracion();
         String IR = null;
-//---------------------------------------------------------------------------
-        System.out.println("antes 1");
-        File file = formBean.getFile();
-        System.out.println("antes 2");
-        if (action.equals("cargar")) {
-            String name = file.getName();
-            String absolute = file.getAbsolutePath();
-            byte[] img = new byte[(int) file.length()];
-            
-            
-            
-            System.out.println(" name "+ name);  //nombre img
-            System.out.println(" absolute "+ absolute); // direccion img
-            System.out.println(" img "+ img); 
-            
-            
-        }
-
-
-        
-//---------------------------------------------------------------------------
+//---------------------------------------------------------------------------  
         if (action.equals("Agregar")) {
             //valida campos vacios y nulos && agrega nueva configuracion
             String advertencia = "";
@@ -95,8 +76,21 @@ public class ActionConfiguracion extends org.apache.struts.action.Action {
             }
             // validacion de existencia
 
-            //System.out.println("Hola mundo");
-            int ver = cman.guardarConfiguracion(idAcceso, idEmpresa, nombreMoneda, iva, zonaHoraria);
+ //---------------------------------------------------------------------------
+        File fichero = formBean.getFile();
+        FileInputStream imagen = new FileInputStream("C:\\Users\\daniel.bonillausam\\Desktop\\Archivos Daniel\\GitHub\\sistema_de_inventario1\\CI\\web\\img\\logo");
+        String ruta = fichero.getAbsolutePath();
+        byte[] logo = new byte[(int) fichero.length()];
+        
+        
+        
+            
+
+        
+//---------------------------------------------------------------------------            
+            
+            
+            int ver = cman.guardarConfiguracion(idAcceso, idEmpresa, logo, imagen, nombreMoneda, iva, zonaHoraria);
             System.out.println("Hola 2 " + ver);
             IR = INICIO;
         }
@@ -113,14 +107,14 @@ public class ActionConfiguracion extends org.apache.struts.action.Action {
             formBean.setIdConfiguracion(idConfiguracion);
             formBean.setIdAcceso(idAcceso);
             formBean.setIdEmpresa(idEmpresa);
-            formBean.setLogo(logo);
+            //formBean.setLogo(logo);
             formBean.setNombreMoneda(nombreMoneda);
             formBean.setIva(iva);
             formBean.setZonaHoraria(zonaHoraria);
             IR = MODIFICAR;
         }
         if (action.equals("Modificar")) {
-            cman.modificarConfiguracion(idAcceso, idEmpresa, logo, nombreMoneda, iva, zonaHoraria);
+            //cman.modificarConfiguracion(idAcceso, idEmpresa, logo, nombreMoneda, iva, zonaHoraria);
             IR = INICIO;
         }
 //--------------------------------------------------------------------------------

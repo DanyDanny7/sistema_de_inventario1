@@ -38,7 +38,7 @@
                             <bean:write name="ActionFormConfiguracion" property="error" filter="false"></bean:write>
                         
                             <label>Logo :</label><br>
-                            <html:file property="logo1" ></html:file>
+                            <html:file property="file" ></html:file>
                             <br><br>
                             <html:submit property="action" value="cargar"/>
                             <br><br>
