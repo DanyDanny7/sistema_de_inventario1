@@ -11,7 +11,7 @@
         <many-to-one name="productos" class="sci.persistencia.Productos" fetch="select">
             <column name="id_producto" not-null="true" />
         </many-to-one>
-        <property name="existencia" type="string">
+        <property name="existencia" type="java.lang.Integer">
             <column name="existencia" length="20" />
         </property>
         <property name="estadoExistencia" type="string">

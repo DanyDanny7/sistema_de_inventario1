@@ -38,6 +38,9 @@
     </global-exceptions>
 <!-- ****************************************************************************************************** -->
     <global-forwards>
+        
+        <forward name = "irUpload"               path = "/upload.jsp" />
+        
         <forward name = "irIndex"               path = "/index.jsp" />
         <forward name = "irPortada"             path = "/jsp/Inicio/portada.jsp"/>
 <!-- // Acceso -->

@@ -13,7 +13,7 @@ public class Inventario  implements java.io.Serializable {
 
      private Integer idInventario;
      private Productos productos;
-     private String existencia;
+     private Integer existencia;
      private String estadoExistencia;
      private Integer stockMinimo;
      private String estadoFisico;
@@ -26,7 +26,7 @@ public class Inventario  implements java.io.Serializable {
     public Inventario(Productos productos) {
         this.productos = productos;
     }
-    public Inventario(Productos productos, String existencia, String estadoExistencia, Integer stockMinimo, String estadoFisico, Set comprases) {
+    public Inventario(Productos productos, Integer existencia, String estadoExistencia, Integer stockMinimo, String estadoFisico, Set comprases) {
        this.productos = productos;
        this.existencia = existencia;
        this.estadoExistencia = estadoExistencia;
@@ -49,11 +49,11 @@ public class Inventario  implements java.io.Serializable {
     public void setProductos(Productos productos) {
         this.productos = productos;
     }
-    public String getExistencia() {
+    public Integer getExistencia() {
         return this.existencia;
     }
     
-    public void setExistencia(String existencia) {
+    public void setExistencia(Integer existencia) {
         this.existencia = existencia;
     }
     public String getEstadoExistencia() {

@@ -52,7 +52,24 @@ public class ActionConfiguracion extends org.apache.struts.action.Action {
         Configuracion config = new Configuracion();
         String IR = null;
 //---------------------------------------------------------------------------
-       
+        System.out.println("antes 1");
+        File file = formBean.getFile();
+        System.out.println("antes 2");
+        if (action.equals("cargar")) {
+            String name = file.getName();
+            String absolute = file.getAbsolutePath();
+            byte[] img = new byte[(int) file.length()];
+            
+            
+            
+            System.out.println(" name "+ name);  //nombre img
+            System.out.println(" absolute "+ absolute); // direccion img
+            System.out.println(" img "+ img); 
+            
+            
+        }
+
+
         
 //---------------------------------------------------------------------------
         if (action.equals("Agregar")) {
