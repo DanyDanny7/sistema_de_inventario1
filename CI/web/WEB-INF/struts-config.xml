@@ -11,7 +11,7 @@
 <!-- // Acceso -->
         <form-bean name = "ActionFormAcceso"            type = "sci.actionforms.ActionFormAcceso" />
 <!-- // Compras -->
-        <form-bean name = ""                            type = "" />
+         <form-bean name ="ActionFormCompras"           type="sci.actionforms.ActionFormCompras"/>
 <!-- // Configuracion -->        
         <form-bean name = "ActionFormConfiguracion"     type = "sci.actionforms.ActionFormConfiguracion" />
 <!-- // Contactos -->        
@@ -25,7 +25,7 @@
 <!-- // FacturaEncabezado -->        
         <form-bean name = ""                            type = ""/>
 <!-- // Inventario -->        
-        <form-bean name = ""                            type = ""/>
+         <form-bean name ="ActionFormInventario" type="sci.actionforms.ActionFormInventario"/>
 <!-- // Iva -->        
         <form-bean name = "ActionFormIva"               type = "sci.actionforms.ActionFormIva"/>
 <!-- // Moneda -->
@@ -53,6 +53,9 @@
         <forward name = "irAyuda3Acceso"        path = "/jsp/acceso/ayuda3.jsp"/>
         <forward name = "irPerfil"              path = "/jsp/acceso/perfil.jsp"/>
 <!-- // Compras -->
+        <forward name= "confirmacionErrorF"     path="/jsp/compras/agregarCompras.jsp"/>
+        <forward name= "juimonos"               path="/jsp/compras/listaCompra.jsp"/> 
+        <forward name= "modificarF"             path="/jsp/compras/ModificarCompras.jsp"/>  
 <!-- // Configuracion -->
         <forward name = "modificarConfig"       path = "/jsp/configuracion/modificarConfiguracion.jsp"/>
         <forward name = "inicioConfig"          path = "/jsp/configuracion/inicio.jsp"/>
@@ -74,7 +77,11 @@
         <forward name = "irListaFabricantes"    path = "/jsp/fabricante/listaFabricantes.jsp"/>
 <!-- // FacturaDetalle -->        
 <!-- // FacturaEncabezado -->        
-<!-- // Inventario -->        
+<!-- // Inventario -->      
+       <forward name="confirmacionNuevoInventario"  path="/jsp/inventario/listaInventario.jsp"/>
+       <forward name="confirmacionErrorInventario"  path="/jsp/inventario/agregarInventario.jsp"/>
+       <forward name= "modificarinventario" path="/jsp/inventario/ModificarInventario.jsp"/>
+            
 <!-- // Iva -->
         <forward name = "irInicioIva"           path = "/jsp/iva/inicio.jsp"/>
         <forward name = "irAgregarIva"          path = "/jsp/iva/agregarIva.jsp"/>
@@ -98,8 +105,8 @@
       <action   name = "ActionFormAcceso"           path = "/accesoMantenimiento" 
                scope = "request"                    type = "sci.action.ActionAcceso"/>
 <!--// Compras -->     
-      <action   name = ""                           path = "/" 
-               scope = "request"                    type = ""/>
+      <action   name = "ActionFormCompras"          path = "/comprasMantenimiento" 
+               scope = "request"                    type = "sci.action.ActionCompras"/>
  <!--// Configuracion -->      
         <action name = "ActionFormConfiguracion"    path = "/configuracionMantenimiento" 
                scope = "request"                    type = "sci.action.ActionConfiguracion"/>
@@ -119,8 +126,8 @@
         <action name = ""                           path = "" 
                scope = "request"                    type = ""/>         
 <!--// Inventario -->       
-        <action name = ""                           path = "" 
-               scope = "request"                    type = ""/>                   
+        <action name = "ActionFormInventario"       path = "/inventarioMantenimiento" 
+               scope = "request"                    type = "sci.action.ActionInventario"/>                   
 <!--// Iva -->        
         <action name = "ActionFormIva"              path = "/ivaMantenimiento" 
                scope = "request"                    type = "sci.action.ActionIva"/>         
