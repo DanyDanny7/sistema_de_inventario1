@@ -19,12 +19,12 @@
         <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
         <script src="js/bootstrap.js" type="text/javascript"></script>
     </head>
-    <body>
+    <body style="background-color: #cccccc">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
                     <div> 
-                        <nav class="navbar navbar-expand-lg navbar" style="background-color: #2E9AFE;">
+                        <nav class="navbar navbar-expand-lg navbar" style="background-color: #000;">
                             <a class="navbar-brand" href="accesoMantenimiento.do?action=portada" style = 'color: white'>Inicio</a>
                             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span>
@@ -133,64 +133,76 @@
         <br>
         <div class="container">
             <div class="row">
-                <div class="col-12">
-                    <h1>Agregar Acceso</h1>
-                    
-     <%--               <ul class="nav nav-tabs"><li class="nav-item " ><a class="nav-link active" style="background-color: #2E9AFE; color: white "  href="contactosMantenimiento.do?action=Consultar">Todo</a>
-                        </li><li class="nav-item"><a class="nav-link" href="contactosMantenimiento.do?action=ConsultarTipo&tipoContacto=Cliente">
-                        Clientes</a></li><li class="nav-item"><a class="nav-link" href="contactosMantenimiento.do?action=ConsultarTipo&tipoContacto=Proveedor">"Proveedores</a></li></ul>
-                    
-     --%>           
-                    
-                    
+                <div class="col-12 text-center">
+                    <div class="card-header" style="background-color: #696969;color: white"><h2 class="font-weight-bold">AGREGAR ACCESO</h2></div>
+
                     <br>
                     <html:form action = "/accesoMantenimiento">
-                        <div class="row">
-                            <div class="form-group col-md-">
-                                <label class="font-weight-bold">Empresa : </label><br>
-                                <html:select property="idEmpresa" styleClass="form-control">
-                                    <html:option value="Seleccionar"></html:option>
-                                    <logic:notEmpty name="ActionFormAcceso" property="listaEmpresa">
-                                        <logic:iterate id="ver" name="ActionFormAcceso" property="listaEmpresa">
-                                            <html:option value="${ver.idEmpresa}" >${ver.nombreEmpresa}</html:option>
-                                        </logic:iterate>
-                                    </logic:notEmpty>
-                                </html:select>
-                            </div>
+                        <div class="card-header" style="background-color: #696969;color: white">
+
+                            <div class="row">
+                                <div class="form-group col-3">
+                                    <label class="font-weight-bold">Empresa : </label><br>
+                                    <html:select property="idEmpresa" styleClass="form-control">
+                                        <html:option value="Seleccionar"></html:option>
+                                        <logic:notEmpty name="ActionFormAcceso" property="listaEmpresa">
+                                            <logic:iterate id="ver" name="ActionFormAcceso" property="listaEmpresa">
+                                                <html:option value="${ver.idEmpresa}" >${ver.nombreEmpresa}</html:option>
+                                            </logic:iterate>
+                                        </logic:notEmpty>
+                                    </html:select>
+                                </div>
+                                <div class="form-group col-3">
+                                    <label class="font-weight-bold">Nivel de Acceso : </label><br>
+                                    <html:select property="tipoAcceso" styleClass="form-control">
+                                        <html:option value="Seleccionar"></html:option>
+                                        <html:option value="Solo Consulta"></html:option>
+                                        <html:option value="Consulta e Ingresar"></html:option>
+                                        <html:option value="Administrador"></html:option>
+                                        <html:option value="Super Administrador"></html:option>
+                                    </html:select>
+                                </div>
+                                <div class="form-group col-6">
+                                    <label class="font-weight-bold">Usuario : </label><br>
+                                    <html:text property="usuario" styleClass="form-control"></html:text><br>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-6">
+                                        <label class="font-weight-bold">Nombre : </label><br>
+                                    <html:text property="nombreAcceso" styleClass="form-control"></html:text><br>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label class="font-weight-bold">Apellido : </label><br>
+                                    <html:text property="apellidoAcceso" styleClass="form-control"></html:text><br>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-6">
+                                        <label class="font-weight-bold">E-Mail : </label><br>
+                                        <input type="email" name="email" class="form-control"><br>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label class="font-weight-bold">Contraseña : </label><br>
+                                    <html:text property="contrasena" styleClass="form-control"></html:text><br>
+                                    </div>
+                                </div>
+
+
+
+
+
+                            <bean:write name="ActionFormAcceso" property="error" filter="false"/>    
                         </div>
-                        <br>
-
-                        <label class="font-weight-bold">Nombre : </label><br>
-                        <html:text property="nombreAcceso" styleClass="form-control"></html:text><br><br>
-                            <label class="font-weight-bold">Apellido : </label><br>
-                        <html:text property="apellidoAcceso" styleClass="form-control"></html:text><br><br>
-                            <label class="font-weight-bold">Usuario : </label><br>
-                        <html:text property="usuario" styleClass="form-control"></html:text><br><br>
-                            <label class="font-weight-bold">Contraseña : </label><br>
-                        <html:text property="contrasena" styleClass="form-control"></html:text><br><br>
-                            <label class="font-weight-bold">E-Mail : </label><br>
-                            <input type="email" name="email" class="form-control"><br><br>
-
-                            <label class="font-weight-bold">Nivel de Acceso : </label><br>
-                        <html:select property="tipoAcceso" styleClass="form-control">
-                            <html:option value="Seleccionar"></html:option>
-                            <html:option value="Solo Consulta"></html:option>
-                            <html:option value="Consulta e Ingresar"></html:option>
-                            <html:option value="Administrador"></html:option>
-                            <html:option value="Super Administrador"></html:option>
-                        </html:select>
-                        <br>
-
-                        <bean:write name="ActionFormAcceso" property="error" filter="false"/>    
-
 
                         <br>
-                        <html:submit property="action" value="Agregar"/>
-                        <html:submit property="action" value="Consultar"/>
+                        <html:submit property="action" value="Agregar" styleClass="btn  font-weight-bold" style="background-color: #696969; color: white"/>
+                        <html:submit property="action" value="Consultar" styleClass="btn  font-weight-bold" style="background-color: #696969; color: white"/>
 
                     </html:form>
-                    <br>
-                    <html:link page="/index.jsp">Index</html:link>
+
                 </div>
             </div>
         </div> 

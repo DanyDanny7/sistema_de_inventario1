@@ -77,9 +77,9 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("    <body>\n");
       out.write("        <div class=\"container-fluid\">\n");
       out.write("            <div class=\"row\">\n");
-      out.write("                <div class=\"col-12\">\n");
+      out.write("                <div class=\"col-12\"> primary\n");
       out.write("                    <div>\n");
-      out.write("                        <nav class=\"navbar navbar-expand-lg navbar-light\" style=\"background-color: #0000FF;\">\n");
+      out.write("                        <nav class=\"navbar navbar-expand-lg navbar-light\" style=\"background-color: #000;\">\n");
       out.write("                            <a class=\"navbar-brand\" href=\"accesoMantenimiento.do?action=index\" style = 'color: white'>Inicio</a>\n");
       out.write("                            <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n");
       out.write("                                <span class=\"navbar-toggler-icon\"></span>\n");
@@ -112,15 +112,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                        </div>\n");
       out.write("                    </div>\n");
       out.write("                </div>\n");
-      out.write("                <div class=\"container-fluid\">\n");
-      out.write("                    <div class=\"row\">\n");
-      out.write("                        <div class=\"col-4\"> 1</div>\n");
-      out.write("                        <div class=\"col-4\">2\n");
-      out.write("\n");
-      out.write("                        </div>\n");
-      out.write("                        <div class=\"col-4\"> 3</div>\n");
-      out.write("                    </div>\n");
-      out.write("                </div>\n");
+      out.write("                \n");
       out.write("            </div>\n");
       out.write("\n");
       out.write("\n");
@@ -196,7 +188,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
     _jspx_th_html_form_0.setPageContext(_jspx_page_context);
     _jspx_th_html_form_0.setParent(null);
     _jspx_th_html_form_0.setAction("/accesoMantenimiento");
-    _jspx_th_html_form_0.setStyleClass("px-4 py-3");
+    _jspx_th_html_form_0.setStyleClass("px-4 py-3 ");
     int _jspx_eval_html_form_0 = _jspx_th_html_form_0.doStartTag();
     if (_jspx_eval_html_form_0 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
       do {
@@ -243,7 +235,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
     org.apache.struts.taglib.html.SubmitTag _jspx_th_html_submit_0 = (org.apache.struts.taglib.html.SubmitTag) _jspx_tagPool_html_submit_value_styleClass_property.get(org.apache.struts.taglib.html.SubmitTag.class);
     _jspx_th_html_submit_0.setPageContext(_jspx_page_context);
     _jspx_th_html_submit_0.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_html_form_0);
-    _jspx_th_html_submit_0.setStyleClass("btn btn-primary");
+    _jspx_th_html_submit_0.setStyleClass("btn btn-dark");
     _jspx_th_html_submit_0.setProperty("action");
     _jspx_th_html_submit_0.setValue("Login");
     int _jspx_eval_html_submit_0 = _jspx_th_html_submit_0.doStartTag();

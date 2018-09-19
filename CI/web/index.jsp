@@ -18,7 +18,7 @@
     <body>
         <div class="container-fluid">
             <div class="row">
-                <div class="col-12"> primary
+                <div class="col-12">
                     <div>
                         <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #000;">
                             <a class="navbar-brand" href="accesoMantenimiento.do?action=index" style = 'color: white'>Inicio</a>
