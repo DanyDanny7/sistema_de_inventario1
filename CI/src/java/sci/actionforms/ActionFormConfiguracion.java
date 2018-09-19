@@ -5,7 +5,10 @@
  */
 package sci.actionforms;
 
+import java.io.File;
 import java.util.List;
+import org.apache.struts.upload.FormFile;
+import org.apache.tomcat.util.http.fileupload.UploadContext;
 import sci.persistencia.Configuracion;
 import sci.persistencia.Moneda;
 
@@ -20,6 +23,9 @@ public class ActionFormConfiguracion extends org.apache.struts.action.ActionForm
     private Integer idEmpresa;
     private String nombreMoneda;
     private byte[] logo;
+    private File file;
+    private FormFile ufile;
+    
     private Double iva;
     private String zonaHoraria;
     private String error;
@@ -113,6 +119,22 @@ public class ActionFormConfiguracion extends org.apache.struts.action.ActionForm
 
     public void setListaMoneda(List<Moneda> listaMoneda) {
         this.listaMoneda = listaMoneda;
+    }
+
+    public File getFile() {
+        return file;
+    }
+
+    public void setFile(File file) {
+        this.file = file;
+    }
+
+    public FormFile getUfile() {
+        return ufile;
+    }
+
+    public void setUfile(FormFile ufile) {
+        this.ufile = ufile;
     }
 
     

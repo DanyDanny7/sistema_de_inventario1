@@ -90,7 +90,7 @@ public class ActionCompras extends org.apache.struts.action.Action {
             InventarioMantenimiento inventario = new InventarioMantenimiento();
             Inventario  inv=   inventario.consultarInventarioId(idInventario);
             
-            Double a = ( inv.getExistencia()+totalCompra);
+            //Double a = ( inv.getExistencia()+totalCompra);
             
            
    comprasMantenimiento.guardarcompras(idCompra, idContacto, idInventario, idIva, idProducto, fechaCompra, totalCompra);

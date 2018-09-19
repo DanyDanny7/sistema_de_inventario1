@@ -34,6 +34,8 @@
                            
                                 <label>Tasa de Iva :</label><br>
                             <html:text property="iva"></html:text><br><br>
+                            
+                            <html:file property="file"></html:file><br><br>
 
                             <bean:write name="ActionFormConfiguracion" property="error" filter="false"></bean:write>
                                 </tr>

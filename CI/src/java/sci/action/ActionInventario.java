@@ -71,7 +71,7 @@ public class ActionInventario extends org.apache.struts.action.Action {
             }
           InventarioMantenimiento inventarioMantenimiento = new InventarioMantenimiento();
           
-          inventarioMantenimiento.guardarInventario(0, idProducto, existencia, estadoExistencia, stockMinimo, estadoFisico);
+          //inventarioMantenimiento.guardarInventario(0, idProducto, existencia, estadoExistencia, stockMinimo, estadoFisico);
          List<Inventario> listai= inventarioMantenimiento.consultarTodoInventario();
             formBean.setListai(listai); 
             
@@ -117,7 +117,7 @@ public class ActionInventario extends org.apache.struts.action.Action {
            
                 formBean.setIdInventario(inventario.getIdInventario());
                formBean.setIdProducto(inventario.getProductos().getIdProducto());
-                formBean.setExistencia(inventario.getExistencia());
+                //formBean.setExistencia(inventario.getExistencia());
                 formBean.setEstadoExistencia(inventario.getEstadoExistencia());
                 formBean.setStockMinimo(inventario.getStockMinimo());
                  formBean.setEstadoFisico(inventario.getEstadoFisico());
@@ -128,7 +128,7 @@ public class ActionInventario extends org.apache.struts.action.Action {
                String mensaje = "<span style='color:red'>Actualizado Correcto" + "<br></span>";
             request.setAttribute("mensaje", mensaje);
            
-           inventarioMantenimiento.modificarInventario(idInventario,idProducto, existencia, estadoExistencia, stockMinimo, estadoFisico);
+           //inventarioMantenimiento.modificarInventario(idInventario,idProducto, existencia, estadoExistencia, stockMinimo, estadoFisico);
             List<Inventario> listai = inventarioMantenimiento.consultarTodoInventario();
             formBean.setListai(listai);
            return mapping.findForward(CONFIRMACIONI);

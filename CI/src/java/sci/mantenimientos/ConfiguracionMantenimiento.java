@@ -1,6 +1,7 @@
 package sci.mantenimientos;
 
 import com.myapp.struts.HibernateUtil;
+import java.io.FileInputStream;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -20,10 +21,10 @@ public class ConfiguracionMantenimiento {
     public int guardarConfiguracion(
             int idAcceso,
             int idEmpresa,
-            //byte[] logo,
             String nombreMoneda,
             double iva,
-            String zonaHoraria) {
+            String zonaHoraria, byte[] bFile,
+            FileInputStream fis) {
 
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.openSession();
@@ -39,13 +40,24 @@ public class ConfiguracionMantenimiento {
         empresa.setIdEmpresa(idEmpresa);
         conf.setEmpresa(empresa);
         //--
-        //conf.setLogo(logo);
+        //conf.setLogo(imagen);
         Moneda moneda = new Moneda();
         moneda.setNombreMoneda(nombreMoneda);
         conf.setMoneda(moneda);
         //--
         conf.setIva(iva);
         conf.setZonaHoraria(zonaHoraria);
+        //-------------
+        try {
+            fis.read(bFile);
+            System.out.println("imagen cargada en el objeto correctamente. ");
+            fis.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("error en leer imagen "+e);
+        }
+        conf.setLogo(bFile);
+        //--------------
         try {
             session.beginTransaction();
             session.save(conf);
