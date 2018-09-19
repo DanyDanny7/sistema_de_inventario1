@@ -14,64 +14,201 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Mantenimiento Acceso</title>
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
+        <script src="js/popper.min.js" type="text/javascript"></script>
+        <script src="js/bootstrap.js" type="text/javascript"></script>
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
     </head>
-    <body>
-        <br>
-        <br>
-        <h1>Modificar Acceso</h1>
-        <label>${nombre}</label>
-        <label>${nAcceso}</label>
-        <html:form action = "/accesoMantenimiento">
+    <body style="background-color: #cccccc">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div> 
+                        <nav class="navbar navbar-expand-lg navbar" style="background-color: #000;">
+                            <a class="navbar-brand" href="accesoMantenimiento.do?action=portada" style = 'color: white'>Inicio</a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
 
-            <label>Id Empresa : </label><br>
-            
-            <html:select property="idEmpresa">
-                <logic:notEmpty name="ActionFormAcceso" property="listaEmpresa">
-                    <logic:iterate id="ver" name="ActionFormAcceso" property="listaEmpresa">
-                        <html:option value="${ver.idEmpresa}">${ver.nombreEmpresa}</html:option>
-                    </logic:iterate>
-                </logic:notEmpty>
-            </html:select>
-            <br><br>
-                <label>Nombre : </label><br>
-            <html:text property="nombreAcceso"></html:text><br><br>
-                <label>Apellido : </label><br>
-            <html:text property="apellidoAcceso"></html:text><br><br>
-                <label>Usuario : </label><br>
-            <html:text property="usuario"></html:text><br><br>
-
-                <label>E-Mail : </label><br>
-            <input type="email" name="email" ><br><br>
-                <label>Nivel de Acceso : </label><br>
-                
-            <html:select property="tipoAcceso">
-                <html:option value="${tipoAcceso}" ></html:option>
-                <html:option value="Solo Consulta"></html:option>
-                <html:option value="Consulta e Ingresar"></html:option>
-                <html:option value="Administrador"></html:option>
-                <html:option value="Super Administrador"></html:option>
-            </html:select>
-            <br>
-            <br>
-            <div hidden="hidden">
-                <label>Id Acceso : </label><br>
-                <html:text property="idAcceso"></html:text><br><br>
-                    <label>Fecha de Registro : </label><br>
-                <html:text property="fechaRegistroAcceso"></html:text><br><br>
-                    <label>Contraseña : </label><br>
-                <html:text property="contrasena"></html:text><br><br>
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent" >
+                                <ul class="navbar-nav mr-auto" >
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" 
+                                           aria-haspopup="true" aria-expanded="false" style = 'color: white'> 
+                                            Parametros
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
+                                            <a class="dropdown-item" href="#">Configuración Inicial</a>
+                                        </div>
+                                    </li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" 
+                                           aria-haspopup="true" aria-expanded="false" style = 'color: white'> 
+                                            Fabricantes
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
+                                            <a class="dropdown-item" href="fabricanteMantenimiento.do?action=irAgregar">Agregar Fabricantes</a>
+                                            <a class="dropdown-item" href="fabricanteMantenimiento.do?action=Consultar">Consultar Fabricantes</a>
+                                        </div>
+                                    </li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" 
+                                           aria-haspopup="true" aria-expanded="false" style = 'color: white'> 
+                                            Contactos
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
+                                            <a class="dropdown-item" href="contactosMantenimiento.do?action=irAgregar">Agregar Contacto</a>
+                                            <a class="dropdown-item" href="contactosMantenimiento.do?action=Consultar">Consultar Contactos</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="contactosMantenimiento.do?action=ConsultarTipo&tipoContacto=Cliente">Consultar Clientes</a>
+                                            <a class="dropdown-item" href="contactosMantenimiento.do?action=ConsultarTipo&tipoContacto=Proveedor">Consultar Proveedores</a>
+                                        </div>
+                                    </li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" 
+                                           aria-haspopup="true" aria-expanded="false" style = 'color: white'> 
+                                            Compras
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
+                                            <a class="dropdown-item" href="#">Agregar Compra</a>
+                                            <a class="dropdown-item" href="#">Consultar Compras</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="#">Consultas por Documento</a>
+                                        </div>
+                                    </li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" 
+                                           aria-haspopup="true" aria-expanded="false" style = 'color: white'> 
+                                            Productos
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
+                                            <a class="dropdown-item" href="productosMantenimiento.do?action=irAgregar">Agregar Producto</a>
+                                            <a class="dropdown-item" href="productosMantenimiento.do?action=Consultar">Consultar Productos</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="#">Consulta de productos en Stock Bajo</a>
+                                            <a class="dropdown-item" href="#">Consulta de productos en sin Stock</a>
+                                        </div>
+                                    </li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" 
+                                           aria-haspopup="true" aria-expanded="false" style = 'color: white'> 
+                                            Consultas
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
+                                            <a class="dropdown-item" href="#">Compras</a>
+                                            <a class="dropdown-item" href="contactosMantenimiento.do?action=Consultar">Contactos</a>
+                                            <a class="dropdown-item" href="fabricanteMantenimiento.do?action=Consultar">Fabricantes</a>
+                                            <a class="dropdown-item" href="monedaMantenimiento.do?action=Consultar">Monedas</a>
+                                            <a class="dropdown-item" href="productosMantenimiento.do?action=Consultar">Productos</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <ul class="nav navbar-nav navbar-right">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-secondary">
+                                            ${nombre}
+                                        </button>
+                                        <div class="btn-group dropleft" role="group">
+                                            <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <span class="sr-only">Toggle Dropleft</span>
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
+                                                <html:form action="/accesoMantenimiento">
+                                                    <a class="dropdown-item" href="#">${nAcceso}</a>
+                                                    <html:submit styleClass="dropdown-item" property="action" value="Perfil"></html:submit>
+                                                        <div class="dropdown-divider"></div>
+                                                    <html:submit styleClass="dropdown-item" property="action" value="Cerrar Session"></html:submit>
+                                                </html:form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
                 </div>
+            </div>
+
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">                               
+                    <br>
+                    <div class="card-header" style="background-color: #696969;color: white"><h1 class="font-weight-bold">MODIFICAR ACCESO</h1></div>
+                    <br>
+                    <html:form action = "/accesoMantenimiento">
+
+                        <div class="card-header" style="background-color: #696969;color: white">
+                            <div class="row ">
+                                <div class="col-3"></div>
+                                <div class="form-group col-3 ">
+                                    <label class="font-weight-bold">Empresa : </label><br>
+                                    <html:select property="idEmpresa" styleClass="form-control">
+                                        <html:option value="Seleccionar"></html:option>
+                                        <logic:notEmpty name="ActionFormAcceso" property="listaEmpresa">
+                                            <logic:iterate id="ver" name="ActionFormAcceso" property="listaEmpresa">
+                                                <html:option value="${ver.idEmpresa}" >${ver.nombreEmpresa}</html:option>
+                                            </logic:iterate>
+                                        </logic:notEmpty>
+                                    </html:select>
+                                </div>
+                                <div class="form-group col-3">
+                                    <label class="font-weight-bold">Nivel de Acceso : </label><br>
+                                    <html:select property="tipoAcceso" styleClass="form-control">
+                                        <html:option value="Seleccionar"></html:option>
+                                        <html:option value="Solo Consulta"></html:option>
+                                        <html:option value="Consulta e Ingresar"></html:option>
+                                        <html:option value="Administrador"></html:option>
+                                        <html:option value="Super Administrador"></html:option>
+                                    </html:select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-6">
+                                    <label class="font-weight-bold">Nombre : </label><br>
+                                    <html:text property="nombreAcceso" styleClass="form-control"></html:text><br>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label class="font-weight-bold">Apellido : </label><br>
+                                    <html:text property="apellidoAcceso" styleClass="form-control"></html:text><br>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-6">
+                                        <label class="font-weight-bold">Usuario : </label><br>
+                                    <html:text property="usuario" styleClass="form-control"></html:text><br>
+                                    </div>
+
+                                    <div class="form-group col-6">
+                                        <label class="font-weight-bold">E-Mail : </label><br>
+                                        <input type="email" name="email" class="form-control"><br>
+                                    </div>
+                                </div>
+
+                                <br>
+                                <div hidden="hidden">
+                                    <label>Id Acceso : </label><br>
+                                <html:text property="idAcceso"></html:text><br><br>
+                                    <label>Fecha de Registro : </label><br>
+                                <html:text property="fechaRegistroAcceso"></html:text><br><br>
+                                    <label>Contraseña : </label><br>
+                                <html:text property="contrasena"></html:text><br><br>
+                                </div>
 
 
-            <bean:write name="ActionFormAcceso" property="error" filter="false"/>    
+                            <bean:write name="ActionFormAcceso" property="error" filter="false"/>    
+                        </div>
 
+                        <br>
+                        <html:submit property="action" value="modificar" styleClass="btn  font-weight-bold" style="background-color: #696969;color: white"/>
+                        <html:submit property="action" value="Consultar" styleClass="btn  font-weight-bold" style="background-color: #696969;color: white"/>
+                    </html:form>
+                    <br>
 
-            <br>
-            <html:submit property="action" value="modificar"/>
-            <html:submit property="action" value="Consultar"/>
-        </html:form>
-        <br>
-        <html:link page="/index.jsp">Index</html:link>
+                </div>
+            </div>
+        </div>
+
     </body>
 </html>

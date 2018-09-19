@@ -77,7 +77,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("    <body>\n");
       out.write("        <div class=\"container-fluid\">\n");
       out.write("            <div class=\"row\">\n");
-      out.write("                <div class=\"col-12\"> primary\n");
+      out.write("                <div class=\"col-12\">\n");
       out.write("                    <div>\n");
       out.write("                        <nav class=\"navbar navbar-expand-lg navbar-light\" style=\"background-color: #000;\">\n");
       out.write("                            <a class=\"navbar-brand\" href=\"accesoMantenimiento.do?action=index\" style = 'color: white'>Inicio</a>\n");

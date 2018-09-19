@@ -18,6 +18,7 @@
         <script src="js/popper.min.js" type="text/javascript"></script>
         <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
         <script src="js/bootstrap.js" type="text/javascript"></script>
+        <link href="../../css/stilo.css" rel="stylesheet" type="text/css"/>
     </head>
     <body style="background-color: #cccccc">
         <div class="container-fluid">

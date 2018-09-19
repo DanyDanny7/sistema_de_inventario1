@@ -60,7 +60,7 @@
 
 
             <br>
-            <html:submit property="action" value="ConsultarId"/>
+            <html:submit property="action" value="modificar "/>
             
         </html:form>
         <br>

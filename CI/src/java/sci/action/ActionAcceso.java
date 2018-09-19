@@ -42,7 +42,7 @@ public class ActionAcceso extends org.apache.struts.action.Action {
         String contrasena = formBean.getContrasena();
         String email = formBean.getEmail();
         String tipoAcceso = formBean.getTipoAcceso();
-        String fechaRegistroAcceso = formato.format(new Date());
+        String fechaRegistroAcceso = formBean.getFechaRegistroAcceso();
         String action = formBean.getAction();
 
         AccesoMantenimiento aman = new AccesoMantenimiento();
@@ -105,6 +105,7 @@ public class ActionAcceso extends org.apache.struts.action.Action {
                 request.setAttribute("nAcceso", Login.id);
                 return mapping.findForward(IR);
             }
+            fechaRegistroAcceso = formato.format(new Date());
             int val = aman.guardarAcceso(idEmpresa, nombreAcceso, apellidoAcceso, usuario, fechaRegistroAcceso, contrasena, email, tipoAcceso);
             if (val != 1) {
                 formBean.setError("<spam style='color:red'>Sugio un error No se Guardó el Registro" + " <br></span>");
@@ -302,13 +303,58 @@ public class ActionAcceso extends org.apache.struts.action.Action {
             IR = INDEX;
         }
         
+        if (action.equalsIgnoreCase("modificar ")) {
+            //if (Login.nAcceso == 1 || Login.nAcceso == 2) {
+            String advertencia = "";
+
+            if (idEmpresa == null || idEmpresa.equals("") || idEmpresa.equals("Seleccionar")) {
+                advertencia += "*Empresa es requerida <br>";
+            }
+            if (nombreAcceso == null || nombreAcceso.equals("")) {
+                advertencia += "*El Nombre es requerido <br>";
+            }
+            if (apellidoAcceso == null || apellidoAcceso.equals("")) {
+                advertencia += "*El Apellido es requerido <br>";
+            }
+            if (usuario == null || usuario.equals("")) {
+                advertencia += "*Es requerido un Usuario <br>";
+            }
+            if (contrasena == null || contrasena.equals("")) {
+                advertencia += "*Es requerido una Contraseña <br>";
+            }
+            if (email == null || email.equals("")) {
+                advertencia += "*Es requerido un Email <br>";
+            }
+            if (tipoAcceso == null || tipoAcceso.equals("") || tipoAcceso.equals("Seleccionar")) {
+                advertencia += "*Es requerido seleccione un Nivel de Acceso <br>";
+            }
+            if (!advertencia.equals("")) {
+                formBean.setError("<spam style = 'color: red' > Por favor complete los espacios requeridos " + " <br> " + advertencia + "</spam>");
+                List<Empresa> listaEmpresa = eman.consultarTodosEmpresa();
+                formBean.setListaEmpresa(listaEmpresa);
+                request.setAttribute("listaEmpresa", listaEmpresa);
+
+                IR = MODIFICAR;
+                request.setAttribute("nombre", Login.nombre);
+                request.setAttribute("nAcceso", Login.nAcceso);
+                request.setAttribute("nAcceso", Login.id);
+                return mapping.findForward(IR);
+            }
+            aman.modificarAcceso(idAcceso, idEmpresa, nombreAcceso, apellidoAcceso, usuario, fechaRegistroAcceso, contrasena, email, tipoAcceso);
+            List<Acceso> listaAcceso = aman.consultarTodoAcceso();
+            formBean.setListaAcceso(listaAcceso);
+            formBean.setError("<spam style='color:blue'>El registro se modificó correctamente" + " <br></span>");
+
+            Login.nombre = aman.consultarAccesoId(idAcceso).getNombreAcceso();
+            IR = PORTADA;
    
-   
+        }
         request.setAttribute("nombre", Login.nombre);
         request.setAttribute("nAcceso", Login.nAcceso);
         request.setAttribute("id", Login.id);
         return mapping.findForward(IR);
 
     }
+    
 
 }
