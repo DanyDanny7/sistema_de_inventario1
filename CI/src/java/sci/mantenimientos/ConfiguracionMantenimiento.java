@@ -22,9 +22,10 @@ public class ConfiguracionMantenimiento {
             int idAcceso,
             int idEmpresa,
             String nombreMoneda,
-            double iva,
-            String zonaHoraria, byte[] bFile,
-            FileInputStream fis) {
+            double iva /*,
+            String zonaHoraria , 
+            byte[] bFile,
+            FileInputStream fis*/) {
 
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.openSession();
@@ -46,9 +47,9 @@ public class ConfiguracionMantenimiento {
         conf.setMoneda(moneda);
         //--
         conf.setIva(iva);
-        conf.setZonaHoraria(zonaHoraria);
+        //conf.setZonaHoraria(zonaHoraria);
         //-------------
-        try {
+        /*try {
             fis.read(bFile);
             System.out.println("imagen cargada en el objeto correctamente. ");
             fis.close();
@@ -56,7 +57,7 @@ public class ConfiguracionMantenimiento {
             e.printStackTrace();
             System.out.println("error en leer imagen "+e);
         }
-        conf.setLogo(bFile);
+        conf.setLogo(bFile);*/
         //--------------
         try {
             session.beginTransaction();

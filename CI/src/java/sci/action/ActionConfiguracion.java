@@ -8,6 +8,8 @@ package sci.action;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -41,7 +43,7 @@ public class ActionConfiguracion extends org.apache.struts.action.Action {
         Integer idConfiguracion = formBean.getIdConfiguracion();
         Integer idAcceso = formBean.getIdAcceso();
         Integer idEmpresa = formBean.getIdEmpresa();
-        
+
         String nombreMoneda = formBean.getNombreMoneda();
         Double iva = formBean.getIva();
         String zonaHoraria = "";
@@ -53,24 +55,21 @@ public class ActionConfiguracion extends org.apache.struts.action.Action {
         Configuracion config = new Configuracion();
         String IR = null;
 
-  //----------------------------------------------------------      
+        //----------------------------------------------------------      
         /*
         
-        byte[] bfile = new byte[(int) afile.length()];
+        
         
         
         FileInputStream fis = new FileInputStream(afile);
-        */
- //-----------------------------------------------------------------
+         */
+        //-----------------------------------------------------------------
         //lo traemos el ufile del for action
-        System.out.println(" prueba 1");
-        FormFile ufile = formBean.getUfile();
         File file = formBean.getFile();
-        
-        System.out.println(" prueba 2");
+        byte[] bfile = new byte[(int) file.length()];
+
         // obtenemos el directorio real
-        String filePath = getServlet().getServletContext().getRealPath("/")+ "upload";
-        System.out.println(" prueba 3");
+        String filePath = getServlet().getServletContext().getRealPath("/") + "upload";
         //creamos el folder de descarga si no existe
         File folder = new File(filePath);
         if (!folder.exists()) {
@@ -78,22 +77,38 @@ public class ActionConfiguracion extends org.apache.struts.action.Action {
         }
         String fileName = file.getName();
         if (!("").equals(fileName)) {
-            System.out.println("Ruta del Servidor : "+filePath);
+            System.out.println("Ruta del Servidor : " + filePath);
             File newFile = new File(filePath, fileName);
-            
+
             if (!newFile.exists()) {
-                FileOutputStream fos = new FileOutputStream(newFile);
-                fos.write(new byte[idEmpresa]);
+                try (FileOutputStream fos = new FileOutputStream(newFile)) {
+                    fos.write(bfile);
+                    fos.flush();
+                    fos.close();
+                } catch (IOException e) {
+                    System.out.println("surgio algun error " + e);
+                }
             }
-            
-            
         }
-        
-        
-        
+        //filePath = getServlet().getServletContext().getRealPath("/") + "upload" + "/"+fileName;
+        FileInputStream fis = new FileInputStream(file);  System.out.println("1111");
+        fis.read();
+
+                /*try {
+            fis.read(bFile);
+            System.out.println("imagen cargada en el objeto correctamente. ");
+            fis.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("error en leer imagen "+e);
+        }
+        conf.setLogo(bFile);*/
+                
+                
+        //System.out.println("File Path : " + result.getPath() + ", FileName : " + result.getName());
+
         System.out.println("hasta aqui vamos bien");
-        
-        
+
 //---------------------------------------------------------------------------
         if (action.equals("Agregar")) {
             //valida campos vacios y nulos && agrega nueva configuracion
@@ -122,7 +137,7 @@ public class ActionConfiguracion extends org.apache.struts.action.Action {
             // validacion de existencia
 
             //System.out.println("Hola mundo");
-            int ver = cman.guardarConfiguracion(idAcceso, idEmpresa, nombreMoneda, iva, zonaHoraria, bfile, fis);
+            int ver = cman.guardarConfiguracion(idAcceso, idEmpresa, nombreMoneda, iva);
             System.out.println("Hola 2 " + ver);
             IR = INICIO;
         }
