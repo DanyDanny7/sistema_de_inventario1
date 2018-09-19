@@ -14,7 +14,7 @@ public class InventarioMantenimiento {
     public int guardarInventario(
             int idInventario,
             int idProductos,
-            int existencia,
+            String existencia,
             String estadoExistencia,
             int stockMinimo,
             String estadoFisico) {
@@ -81,7 +81,7 @@ public class InventarioMantenimiento {
     public int modificarInventario(
             int idInventario,
             int idProductos,
-            int existencia,
+            String existencia,
             String estadoExistencia,
             int stockMinimo,
             String estadoFisico) {

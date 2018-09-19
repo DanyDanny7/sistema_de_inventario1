@@ -1,7 +1,6 @@
 package sci.mantenimientos;
 
 import com.myapp.struts.HibernateUtil;
-import java.io.FileInputStream;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -21,8 +20,7 @@ public class ConfiguracionMantenimiento {
     public int guardarConfiguracion(
             int idAcceso,
             int idEmpresa,
-            byte[] logo,
-            FileInputStream imagen,
+            //byte[] logo,
             String nombreMoneda,
             double iva,
             String zonaHoraria) {
@@ -48,16 +46,6 @@ public class ConfiguracionMantenimiento {
         //--
         conf.setIva(iva);
         conf.setZonaHoraria(zonaHoraria);
-        //--
-        try {
-            imagen.read(logo);
-            imagen.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("Error en config mantenimiento try de imagen");
-        }
-        conf.setLogo(logo);
-        //--
         try {
             session.beginTransaction();
             session.save(conf);
@@ -105,7 +93,7 @@ public class ConfiguracionMantenimiento {
     public int modificarConfiguracion(
             int idAcceso,
             int idEmpresa,
-            byte[] logo,
+            //byte[] logo,
             String nombreMoneda,
             double iva,
             String zonaHoraria) {
@@ -124,7 +112,7 @@ public class ConfiguracionMantenimiento {
         empresa.setIdEmpresa(idEmpresa);
         conf.setEmpresa(empresa);
         //--
-        conf.setLogo(logo);
+        //conf.setLogo(logo);
         Moneda moneda = new Moneda();
         moneda.setNombreMoneda(nombreMoneda);
         conf.setMoneda(moneda);

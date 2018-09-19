@@ -303,6 +303,7 @@ public class ActionAcceso extends org.apache.struts.action.Action {
         }
         
    
+   
         request.setAttribute("nombre", Login.nombre);
         request.setAttribute("nAcceso", Login.nAcceso);
         request.setAttribute("id", Login.id);

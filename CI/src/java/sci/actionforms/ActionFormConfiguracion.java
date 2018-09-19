@@ -5,7 +5,6 @@
  */
 package sci.actionforms;
 
-import java.io.File;
 import java.util.List;
 import sci.persistencia.Configuracion;
 import sci.persistencia.Moneda;
@@ -20,11 +19,7 @@ public class ActionFormConfiguracion extends org.apache.struts.action.ActionForm
     private Integer idAcceso;
     private Integer idEmpresa;
     private String nombreMoneda;
-    
     private byte[] logo;
-    private String logo1;
-    private File file;
-    
     private Double iva;
     private String zonaHoraria;
     private String error;
@@ -32,18 +27,6 @@ public class ActionFormConfiguracion extends org.apache.struts.action.ActionForm
     private List<Configuracion> listaConfiguracion;
     private List<Moneda> listaMoneda;
 
-    public File getFile() {
-        return file;
-    }
-
-    public void setFile(File file) {
-        this.file = file;
-    }
-
-    
-    
-    
-    
     public Integer getIdConfiguracion() {
         return idConfiguracion;
     }
@@ -130,14 +113,6 @@ public class ActionFormConfiguracion extends org.apache.struts.action.ActionForm
 
     public void setListaMoneda(List<Moneda> listaMoneda) {
         this.listaMoneda = listaMoneda;
-    }
-
-    public String getLogo1() {
-        return logo1;
-    }
-
-    public void setLogo1(String logo1) {
-        this.logo1 = logo1;
     }
 
     
