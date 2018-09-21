@@ -17,7 +17,7 @@
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
     </head>
-    <body style="background-color: #cccccc;">
+    <body background="img/fondos/fondo1.jpg">
           <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
@@ -128,6 +128,7 @@
             </div>
 
         </div>
+                                        
         <div class="container">
             <div class="row">
                 <div class="col-12 text-center">

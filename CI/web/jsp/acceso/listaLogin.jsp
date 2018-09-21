@@ -16,10 +16,10 @@
         <title>Lista Login</title>
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
-        
+
     </head>
-    <body background="fondo.jpg">
-         <div class="container-fluid">
+    <body background="img/fondos/fondo1.jpg">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-12 text-center">
                     <div> 
@@ -133,31 +133,31 @@
             <div class="row">
                 <div class="col-12 text-center">
                     <br>
-                    <div class="card-header primary" style="color: white; font-family:  Impact"><h1 class="text-monospace font-weight-bold " >LISTA ACCESO</h1></div>
-                   
+                    <div class="card-header primary" style="color: white;"><h1 class="font-weight-bold " >LISTA ACCESO</h1></div>
+
                     <div class="table table-hover table-sm">
                         <bean:write name="ActionFormAcceso" property="mensaje" filter="false"/>      
                         <table class="bg-light ">
                             <thead class="text-uppercase">
-                                    <tr class="table-default" style="background-color: #000; color: white;font-family: Arial">
-                                        <th >Id Acceso</th>
-                                        <th>Empresa</th>
-                                        <th>Nombre</th>
-                                        <th>Apellido</th>
-                                        <th>Usuario</th>
-                                        <th>Contraseña</th>
-                                        <th>E-mail</th>
-                                        <th>Tipo de Acceso</th>
-                                        <th>Fecha de Registro</th>
-                                        <th></th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <logic:notEmpty name="ActionFormAcceso" property="listaAcceso">
-                                        <logic:iterate id="ver" name="ActionFormAcceso" property="listaAcceso" >
-                                            <tr style="background-color: #DCDCDC;">
-                                                <html:form action = "/accesoMantenimiento" >
+                                <tr class="table-default" style="background-color: #000; color: white;font-family: Arial">
+                                    <th >Id Acceso</th>
+                                    <th>Empresa</th>
+                                    <th>Nombre</th>
+                                    <th>Apellido</th>
+                                    <th>Usuario</th>
+                                    <th>Contraseña</th>
+                                    <th>E-mail</th>
+                                    <th>Tipo de Acceso</th>
+                                    <th>Fecha de Registro</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <logic:notEmpty name="ActionFormAcceso" property="listaAcceso">
+                                    <logic:iterate id="ver" name="ActionFormAcceso" property="listaAcceso" >
+                                        <tr style="background-color: #DCDCDC;">
+                                            <html:form action = "/accesoMantenimiento" >
                                                 <th scope="row"><bean:write name="ver" property="idAcceso"/>
                                                     <div hidden="hidden"><html:text name="ver" property="idAcceso"/></div> </th > 
                                                 <td><bean:write name="ver" property="empresa.nombreEmpresa"/></td>
@@ -170,14 +170,14 @@
                                                 <td><bean:write name="ver" property="fechaRegistroAcceso"/></td>
                                                 <td><html:submit property="action" value="Eliminar" styleClass="btn btn-secondary font-weight-bold" style="color: white;font-family: Arial"/></td>
                                                 <td><html:submit property="action" value="ConsultarId" styleClass="btn btn-secondary font-weight-bold" style="color: white;font-family: Arial"/></td>
-                                                
+
                                             </html:form > 
-                                            </tr>
-                                        </logic:iterate>
-                                    </logic:notEmpty>
-                                </tbody>
-                            </table>
-                      
+                                        </tr>
+                                    </logic:iterate>
+                                </logic:notEmpty>
+                            </tbody>
+                        </table>
+
                     </div>
                 </div>
             </div>

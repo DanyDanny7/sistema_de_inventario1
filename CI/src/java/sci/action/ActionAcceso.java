@@ -38,7 +38,7 @@ public class ActionAcceso extends org.apache.struts.action.Action {
         String apellidoAcceso = formBean.getApellidoAcceso();
         String usuario = formBean.getUsuario();
         String contrasena = formBean.getContrasena();
-        String email = formBean.getEmail();
+        String email = formBean.geteMail();
         String tipoAcceso = formBean.getTipoAcceso();
         String fechaRegistroAcceso = formBean.getFechaRegistroAcceso();
         String action = formBean.getAction();
@@ -132,7 +132,7 @@ public class ActionAcceso extends org.apache.struts.action.Action {
             formBean.setApellidoAcceso(acceso.getApellidoAcceso());
             formBean.setUsuario(acceso.getUsuario());
             formBean.setContrasena(acceso.getContrasena());
-            formBean.setEmail(acceso.getEmail());
+            formBean.seteMail(acceso.getEmail());
             request.setAttribute("tipoAcceso", acceso.getTipoAcceso());
             formBean.setFechaRegistroAcceso(acceso.getFechaRegistroAcceso());
             List<Empresa> listaEmpresa = eman.consultarTodosEmpresa();
@@ -290,7 +290,7 @@ public class ActionAcceso extends org.apache.struts.action.Action {
             formBean.setApellidoAcceso(acceso.getApellidoAcceso());
             formBean.setUsuario(acceso.getUsuario());
             formBean.setContrasena(acceso.getContrasena());
-            formBean.setEmail(acceso.getEmail());
+            formBean.seteMail(acceso.getEmail());
             request.setAttribute("tipoAcceso", acceso.getTipoAcceso());
             formBean.setFechaRegistroAcceso(acceso.getFechaRegistroAcceso());
             List<Empresa> listaEmpresa = eman.consultarTodosEmpresa();

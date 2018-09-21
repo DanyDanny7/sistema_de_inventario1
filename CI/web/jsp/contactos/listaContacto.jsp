@@ -22,7 +22,7 @@
         <script src="js/popper.min.js" type="text/javascript"></script>
         <script src="js/bootstrap.js" type="text/javascript"></script>
     </head>
-    <body style="background-color: #cccccc;"> 
+    <body background="img/fondos/fondo1.jpg"> 
         
         <div class="container-fluid">
             <div class="row">

@@ -19,13 +19,13 @@
         <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
         <script src="js/bootstrap.js" type="text/javascript"></script>
     </head>
-    <body>
+    <body background="img/fondos/fondo1.jpg">
 
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
                     <div> 
-                        <nav class="navbar navbar-expand-lg navbar" style="background-color: #2E9AFE;">
+                        <nav class="navbar navbar-expand-lg navbar" style="background-color: #000;">
                             <a class="navbar-brand" href="accesoMantenimiento.do?action=portada" style = 'color: white'>Inicio</a>
                             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span>

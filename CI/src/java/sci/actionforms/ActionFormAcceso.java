@@ -15,7 +15,7 @@ public class ActionFormAcceso extends org.apache.struts.action.ActionForm {
     private String apellidoAcceso;
     private String usuario;
     private String contrasena;
-    private String email;
+    private String eMail;
     private String tipoAcceso;
     private String fechaRegistroAcceso;
     private String error;
@@ -74,12 +74,12 @@ public class ActionFormAcceso extends org.apache.struts.action.ActionForm {
         this.contrasena = contrasena;
     }
 
-    public String getEmail() {
-        return email;
+    public String geteMail() {
+        return eMail;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void seteMail(String eMail) {
+        this.eMail = eMail;
     }
 
     public String getTipoAcceso() {

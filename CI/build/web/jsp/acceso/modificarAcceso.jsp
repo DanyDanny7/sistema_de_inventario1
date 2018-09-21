@@ -10,7 +10,7 @@
 <%@taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 <!DOCTYPE html>
 <html>
-    <head>
+    <head> 
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Mantenimiento Acceso</title>
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
@@ -19,7 +19,7 @@
         <script src="js/bootstrap.js" type="text/javascript"></script>
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
     </head>
-    <body style="background-color: #cccccc">
+    <body background="img/fondos/fondo1.jpg">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
@@ -135,7 +135,8 @@
             <div class="row">
                 <div class="col-12 text-center">                               
                     <br>
-                    <div class="card-header" style="background-color: #696969;color: white"><h1 class="font-weight-bold">MODIFICAR ACCESO</h1></div>
+                    <div class="card-header" style="color: white"><h1 class="font-weight-bold">MODIFICAR ACCESO</h1></div>
+                    
                     <br>
                     <html:form action = "/accesoMantenimiento">
 
@@ -182,7 +183,7 @@
 
                                     <div class="form-group col-6">
                                         <label class="font-weight-bold">E-Mail : </label><br>
-                                        <input type="email" name="email" class="form-control"><br>
+                                        <input type="email" name="eMail" id="eMail" class="form-control"><br>
                                     </div>
                                 </div>
 

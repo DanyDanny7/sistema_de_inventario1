@@ -20,7 +20,7 @@
         <script src="js/bootstrap.js" type="text/javascript"></script>
         <link href="../../css/stilo.css" rel="stylesheet" type="text/css"/>
     </head>
-    <body style="background-color: #cccccc">
+    <body background="img/fondos/fondo1.jpg">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
@@ -135,7 +135,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 text-center">
-                    <div class="card-header" style="background-color: #696969;color: white"><h2 class="font-weight-bold">AGREGAR ACCESO</h2></div>
+                    <div class="card-header" style="color: white"><h1 class="font-weight-bold">AGREGAR ACCESO</h1></div>
 
                     <br>
                     <html:form action = "/accesoMantenimiento">
