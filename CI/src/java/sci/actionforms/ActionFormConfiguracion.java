@@ -25,13 +25,14 @@ public class ActionFormConfiguracion extends org.apache.struts.action.ActionForm
     private byte[] logo;
     private File file;
     private FormFile ufile;
-    
     private Double iva;
     private String zonaHoraria;
     private String error;
     private String action;
     private List<Configuracion> listaConfiguracion;
     private List<Moneda> listaMoneda;
+    private String mensaje;
+    private String informacion;
 
     public Integer getIdConfiguracion() {
         return idConfiguracion;
@@ -135,6 +136,22 @@ public class ActionFormConfiguracion extends org.apache.struts.action.ActionForm
 
     public void setUfile(FormFile ufile) {
         this.ufile = ufile;
+    }
+
+    public String getMensaje() {
+        return mensaje;
+    }
+
+    public void setMensaje(String mensaje) {
+        this.mensaje = mensaje;
+    }
+
+    public String getInformacion() {
+        return informacion;
+    }
+
+    public void setInformacion(String informacion) {
+        this.informacion = informacion;
     }
 
     

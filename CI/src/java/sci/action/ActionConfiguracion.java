@@ -10,6 +10,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.nio.file.Path;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -43,7 +44,7 @@ public class ActionConfiguracion extends org.apache.struts.action.Action {
         Integer idConfiguracion = formBean.getIdConfiguracion();
         Integer idAcceso = formBean.getIdAcceso();
         Integer idEmpresa = formBean.getIdEmpresa();
-
+        File file = formBean.getFile();
         String nombreMoneda = formBean.getNombreMoneda();
         Double iva = formBean.getIva();
         String zonaHoraria = "";
@@ -54,60 +55,6 @@ public class ActionConfiguracion extends org.apache.struts.action.Action {
         MonedaMantenimiento mman = new MonedaMantenimiento();
         Configuracion config = new Configuracion();
         String IR = null;
-
-        //----------------------------------------------------------      
-        /*
-        
-        
-        
-        
-        FileInputStream fis = new FileInputStream(afile);
-         */
-        //-----------------------------------------------------------------
-        //lo traemos el ufile del for action
-        File file = formBean.getFile();
-        byte[] bfile = new byte[(int) file.length()];
-
-        // obtenemos el directorio real
-        String filePath = getServlet().getServletContext().getRealPath("/") + "upload";
-        //creamos el folder de descarga si no existe
-        File folder = new File(filePath);
-        if (!folder.exists()) {
-            folder.mkdir();
-        }
-        String fileName = file.getName();
-        if (!("").equals(fileName)) {
-            System.out.println("Ruta del Servidor : " + filePath);
-            File newFile = new File(filePath, fileName);
-
-            if (!newFile.exists()) {
-                try (FileOutputStream fos = new FileOutputStream(newFile)) {
-                    fos.write(bfile);
-                    fos.flush();
-                    fos.close();
-                } catch (IOException e) {
-                    System.out.println("surgio algun error " + e);
-                }
-            }
-        }
-        //filePath = getServlet().getServletContext().getRealPath("/") + "upload" + "/"+fileName;
-        FileInputStream fis = new FileInputStream(file);  System.out.println("1111");
-        fis.read();
-
-                /*try {
-            fis.read(bFile);
-            System.out.println("imagen cargada en el objeto correctamente. ");
-            fis.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("error en leer imagen "+e);
-        }
-        conf.setLogo(bFile);*/
-                
-                
-        //System.out.println("File Path : " + result.getPath() + ", FileName : " + result.getName());
-
-        System.out.println("hasta aqui vamos bien");
 
 //---------------------------------------------------------------------------
         if (action.equals("Agregar")) {
@@ -136,7 +83,38 @@ public class ActionConfiguracion extends org.apache.struts.action.Action {
             }
             // validacion de existencia
 
-            //System.out.println("Hola mundo");
+            //---------------------------------------------------------------------------        
+        byte[] bfile  ; //falta ver como llenar este dato
+
+        // obtenemos el directorio real
+        String filePath = getServlet().getServletContext().getRealPath("/") + "upload";
+        //creamos el folder de descarga si no existe
+        File folder = new File(filePath);
+        if (!folder.exists()) {
+            folder.mkdir();
+        }
+        String fileName = file.getName();
+        if (!("").equals(fileName)) {
+            System.out.println("Ruta del Servidor : " + filePath);
+            File newFile = new File(filePath, fileName);
+
+            /*if (!newFile.exists()) {
+                try (FileOutputStream fos = new FileOutputStream(newFile)) {
+                    //fos.write(bfile);
+                    //fos.flush();
+                    //fos.close();
+                    
+                } catch (IOException e) {
+                    System.out.println("surgio algun error " + e);
+                }
+                
+            }*/
+            formBean.setInformacion("el archivo \" "+fileName+" \" no pudo guardarse , por favor "
+                            + "guarde la imagen en la siguiente direccion: <br><br> \" "+filePath+" \" ");
+        }
+    
+//---------------------------------------------------------------------------
+            
             int ver = cman.guardarConfiguracion(idAcceso, idEmpresa, nombreMoneda, iva);
             System.out.println("Hola 2 " + ver);
             IR = INICIO;

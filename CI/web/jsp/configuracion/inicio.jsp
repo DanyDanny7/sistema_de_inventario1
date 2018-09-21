@@ -28,5 +28,6 @@
         <br>
         <html:link page="/index.jsp">Index</html:link>
         <br>
+        <bean:write name="ActionFormConfiguracion" property="informacion" filter="false"></bean:write>
     </body>
 </html>
