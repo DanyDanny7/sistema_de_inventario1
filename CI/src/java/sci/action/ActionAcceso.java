@@ -2,10 +2,7 @@ package sci.action;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.ActionForm;
@@ -15,6 +12,7 @@ import sci.actionforms.ActionFormAcceso;
 import sci.mantenimientos.AccesoMantenimiento;
 import sci.mantenimientos.EmpresaMantenimiento;
 import metodos.Login;
+import sci.mantenimientos.ConfiguracionMantenimiento;
 import sci.persistencia.Acceso;
 import sci.persistencia.Empresa;
 
@@ -47,6 +45,7 @@ public class ActionAcceso extends org.apache.struts.action.Action {
 
         AccesoMantenimiento aman = new AccesoMantenimiento();
         EmpresaMantenimiento eman = new EmpresaMantenimiento();
+        ConfiguracionMantenimiento cman = new ConfiguracionMantenimiento();
 
         String IR = null;
 
@@ -163,6 +162,10 @@ public class ActionAcceso extends org.apache.struts.action.Action {
                 Login.nombre = aman.consultarAccesoId(id).getNombreAcceso();
                 Login.nAcceso = aman.consultarAccesoId(id).getTipoAcceso();
                 Login.user = aman.consultarAccesoId(id).getUsuario();
+                
+                String nameImg = cman.consultarConfiguarionId(1).getZonaHoraria();
+                //Login.img = "<html:img src=\"img/upload/"+nameImg+"\" width=\"40\" height=\"40\"/>";
+                Login.img = "<img src=\"img/upload/"+nameImg+"\" width=\"50\" height=\"50\"/>";
 
                 IR = PORTADA;
 
@@ -189,6 +192,7 @@ public class ActionAcceso extends org.apache.struts.action.Action {
             Login.nombre = "";
             Login.nAcceso = "";
             Login.user = "";
+            Login.img = "";
             IR = INDEX;
 
         }
@@ -352,6 +356,7 @@ public class ActionAcceso extends org.apache.struts.action.Action {
         request.setAttribute("nombre", Login.nombre);
         request.setAttribute("nAcceso", Login.nAcceso);
         request.setAttribute("id", Login.id);
+        request.setAttribute("img", Login.img);
         return mapping.findForward(IR);
 
     }

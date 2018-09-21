@@ -21,20 +21,21 @@ public class Prueba_9_Configuracion {
 
         //-------------------------------------------
         //insertar
-        /*
+        
         int idConfiguracion = 0;
         int idAcceso = 2;
         int idEmpresa = 1;
-        byte[] logo = null;
-        String simboloMoneda = "E";
-        String nombreMoneda = "Euro";
-        String codigoMoneda = "ERU";
+        //byte[] logo = null;
+        //String simboloMoneda = "E";
+        String nombreMoneda = "Dolar Estadounidence";
+        //String codigoMoneda = "ERU";
         double iva = 0.15;
-        String zonaHoraria = "CA";
+        String nombreFile = "CA";
 
-        int respuesta = cman.guardarConfiguracion(idAcceso, idEmpresa, simboloMoneda, nombreMoneda, codigoMoneda, iva, zonaHoraria);
+        //int respuesta = cman.guardarConfiguracion(idAcceso, idEmpresa, simboloMoneda, nombreMoneda, codigoMoneda, iva, zonaHoraria);
+        int respuesta = cman.guardarConfiguracion(idAcceso, idEmpresa, nombreMoneda, iva, nombreFile);
         System.exit(0);
-        */
+        
         //-------------------------------------------------
         //eliminar
         /*

@@ -24,7 +24,7 @@
                 <div class="col-12">
                     <div> 
                         <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #000;">
-                            <a class="navbar-brand" href="accesoMantenimiento.do?action=portada" style = 'color: white'>Inicio</a>
+                            <a class="navbar-brand" href="accesoMantenimiento.do?action=portada" style = 'color: white'>${img}</a>
                             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span>
                             </button>
@@ -150,7 +150,10 @@
                         <html:link page="/jsp/producto/inicioP.jsp">Productos</html:link><br><br>
                         <html:link page="/jsp/empresa/inicio.jsp">Empresa</html:link><br><br>
                         <html:link page="/jsp/iva/inicio.jsp">Iva</html:link><br><br>
-
+                        
+                        
+                        
+                        
                     </div>
                     <div class="col-1"></div>
                 </div>

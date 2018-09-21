@@ -6,11 +6,6 @@
 package sci.action;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.nio.file.Path;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-import org.apache.struts.upload.FormFile;
 import sci.actionforms.ActionFormConfiguracion;
 import sci.mantenimientos.ConfiguracionMantenimiento;
 import sci.mantenimientos.MonedaMantenimiento;
@@ -87,7 +81,7 @@ public class ActionConfiguracion extends org.apache.struts.action.Action {
         byte[] bfile  ; //falta ver como llenar este dato
 
         // obtenemos el directorio real
-        String filePath = getServlet().getServletContext().getRealPath("/") + "upload";
+        String filePath = getServlet().getServletContext().getRealPath("/") + "img/upload";
         //creamos el folder de descarga si no existe
         File folder = new File(filePath);
         if (!folder.exists()) {
@@ -114,8 +108,8 @@ public class ActionConfiguracion extends org.apache.struts.action.Action {
         }
     
 //---------------------------------------------------------------------------
-            
-            int ver = cman.guardarConfiguracion(idAcceso, idEmpresa, nombreMoneda, iva);
+            String nombreFile = file.getName();
+            int ver = cman.guardarConfiguracion(idAcceso, idEmpresa, nombreMoneda, iva, nombreFile);
             System.out.println("Hola 2 " + ver);
             IR = INICIO;
         }

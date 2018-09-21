@@ -7,5 +7,6 @@ public class Login {
     public static String nombre;
     public static String user;
     public static String nAcceso;
+    public static String img;
     
 }

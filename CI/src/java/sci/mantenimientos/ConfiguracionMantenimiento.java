@@ -22,8 +22,8 @@ public class ConfiguracionMantenimiento {
             int idAcceso,
             int idEmpresa,
             String nombreMoneda,
-            double iva /*,
-            String zonaHoraria , 
+            double iva ,
+            String nombreFile /*, 
             byte[] bFile,
             FileInputStream fis*/) {
 
@@ -47,7 +47,7 @@ public class ConfiguracionMantenimiento {
         conf.setMoneda(moneda);
         //--
         conf.setIva(iva);
-        //conf.setZonaHoraria(zonaHoraria);
+        conf.setZonaHoraria(nombreFile);
         //-------------
         /*try {
             fis.read(bFile);
