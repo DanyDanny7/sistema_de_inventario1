@@ -89,15 +89,16 @@ public class ActionAcceso extends org.apache.struts.action.Action {
                 request.setAttribute("nombre", Login.nombre);
                 request.setAttribute("nAcceso", Login.nAcceso);
                 request.setAttribute("nAcceso", Login.id);
+                request.setAttribute("error", advertencia);
                 return mapping.findForward(IR);
             }
             int valUsuario = aman.consultarUsuario(usuario);
-            //System.out.println(acceso.getEmail());
             if (valUsuario != 1) {
-                formBean.setError("<spam style='color:red'>Ya existe un registro con ese Usuario, por favor elija otro" + " <br></span>");
+                String error = ("Ya existe un registro con el usuario \""+ usuario+"\", por favor elija otro ");
                 List<Empresa> listaEmpresa = eman.consultarTodosEmpresa();
                 formBean.setListaEmpresa(listaEmpresa);
                 request.setAttribute("listaEmpresa", listaEmpresa);
+                
                 IR = AGREGAR;
                 request.setAttribute("nombre", Login.nombre);
                 request.setAttribute("nAcceso", Login.nAcceso);
@@ -119,6 +120,8 @@ public class ActionAcceso extends org.apache.struts.action.Action {
             }
             List<Acceso> listaAcceso = aman.consultarTodoAcceso();
             formBean.setListaAcceso(listaAcceso);
+            String mensaje = ("El registro \""+nombreAcceso+"\" se Agregó correctamente ");
+            request.setAttribute("mensaje", mensaje);
             IR = LISTA;
         }
         //----------------------------------------------------------------------
@@ -143,11 +146,18 @@ public class ActionAcceso extends org.apache.struts.action.Action {
         }
         //----------------------------------------------------------------------
         if (action.equals("Eliminar")) {
-            aman.eliminarAcceso(idAcceso);
-            List<Acceso> listaAcceso = aman.consultarTodoAcceso();
-            formBean.setListaAcceso(listaAcceso);
-            System.out.println("desde eliminar");
-            formBean.setMensaje("<spam style = 'color: blue' > Registro (" + idAcceso + ") Eliminado Correctamente <br></spam>");
+            int n = aman.eliminarAcceso(idAcceso);
+            String mensaje = "";
+            if (n == 0) {
+                mensaje = (" Registro (" + idAcceso + ") No se Eliminó ");
+                request.setAttribute("error", mensaje);
+            } else {
+                List<Acceso> listaAcceso = aman.consultarTodoAcceso();
+                formBean.setListaAcceso(listaAcceso);
+
+                mensaje = (" Registro \"" + idAcceso + "\" Eliminado Correctamente ");
+                request.setAttribute("mensaje", mensaje);
+            }
             IR = LISTA;
 
         }
@@ -162,17 +172,17 @@ public class ActionAcceso extends org.apache.struts.action.Action {
                 Login.nombre = aman.consultarAccesoId(id).getNombreAcceso();
                 Login.nAcceso = aman.consultarAccesoId(id).getTipoAcceso();
                 Login.user = aman.consultarAccesoId(id).getUsuario();
-                
+
                 String nameImg = cman.consultarConfiguarionId(1).getZonaHoraria();
                 //Login.img = "<html:img src=\"img/upload/"+nameImg+"\" width=\"40\" height=\"40\"/>";
-                Login.img = "<img src=\"img/upload/"+nameImg+"\" width=\"50\" height=\"50\"/>";
+                Login.img = "<img src=\"img/upload/" + nameImg + "\" width=\"50\" height=\"50\"/>";
 
                 IR = PORTADA;
 
             } else {
                 formBean.setError("<spam style='color:white'> El Usuario o la contraseña son incorrectos. ");
                 String mensaje = "Usuario o Contraseña Incorrectos";
-                
+
                 request.setAttribute("mensaje", mensaje);
                 IR = INDEX;
             }
@@ -232,13 +242,14 @@ public class ActionAcceso extends org.apache.struts.action.Action {
                 request.setAttribute("nombre", Login.nombre);
                 request.setAttribute("nAcceso", Login.nAcceso);
                 request.setAttribute("nAcceso", Login.id);
+                request.setAttribute("error", advertencia);
                 return mapping.findForward(IR);
             }
             aman.modificarAcceso(idAcceso, idEmpresa, nombreAcceso, apellidoAcceso, usuario, fechaRegistroAcceso, contrasena, email, tipoAcceso);
             List<Acceso> listaAcceso = aman.consultarTodoAcceso();
             formBean.setListaAcceso(listaAcceso);
-            formBean.setError("<spam style='color:blue'>El registro se modificó correctamente" + " <br></span>");
-
+            String mensaje = ("El registro \""+nombreAcceso+"\" se modificó correctamente ");
+            request.setAttribute("mensaje", mensaje);
             IR = LISTA;
             //} else {
             /*   List<Acceso> listaAcceso = aman.consultarTodoAcceso();
@@ -298,15 +309,15 @@ public class ActionAcceso extends org.apache.struts.action.Action {
             request.setAttribute("listaEmpresa", listaEmpresa);
             IR = PERFIL;
         }
-   //----------------------------------------------------------------------
+        //----------------------------------------------------------------------
         if (action.equals("portada")) {
             IR = PORTADA;
         }
-   //----------------------------------------------------------------------
+        //----------------------------------------------------------------------
         if (action.equals("index")) {
             IR = INDEX;
         }
-        
+
         if (action.equalsIgnoreCase("modificar ")) {
             //if (Login.nAcceso == 1 || Login.nAcceso == 2) {
             String advertencia = "";
@@ -351,7 +362,7 @@ public class ActionAcceso extends org.apache.struts.action.Action {
 
             Login.nombre = aman.consultarAccesoId(idAcceso).getNombreAcceso();
             IR = PORTADA;
-   
+
         }
         request.setAttribute("nombre", Login.nombre);
         request.setAttribute("nAcceso", Login.nAcceso);
@@ -360,6 +371,5 @@ public class ActionAcceso extends org.apache.struts.action.Action {
         return mapping.findForward(IR);
 
     }
-    
 
 }

@@ -21,12 +21,12 @@
         &nbsp;<html:form action="/contactosMantenimiento">
             &nbsp;&nbsp;<html:submit property="action" value="Consultar"/><br><br>
             <!-- html:submit property="action" value="AgregarContacto"/>-->
-            &nbsp;&nbsp;<a class="font-weight-bold btn btn-light btn-sm"<html:link page="/jsp/contactos/agregarContactos.jsp">Agregar</html:link>
-                           <br>
-                    <br>
-      
-            </html:form> 
-            <br>
-            &nbsp;&nbsp;&nbsp;<a class="font-weight-bold btn btn-primary"<html:link page="/index.jsp">Index</html:link>
-                                 </body>
-                </html>
+            &nbsp;&nbsp;
+            <a class="font-weight-bold btn btn-light btn-sm"><html:link page="/jsp/contactos/agregarContactos.jsp">Agregar</html:link></a>
+                <br>
+                <br>
+        </html:form> 
+        <br>
+        &nbsp;&nbsp;&nbsp;<a class="font-weight-bold btn btn-primary"><html:link page="/index.jsp">Index</html:link></a>
+    </body>
+</html>

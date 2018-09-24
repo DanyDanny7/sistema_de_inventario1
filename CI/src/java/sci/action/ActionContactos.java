@@ -37,7 +37,7 @@ public class ActionContactos extends org.apache.struts.action.Action {
         String tipoContacto = formBean.getTipoContacto();
         String emailContacto = formBean.getEmailContacto();
         String fechaRegistroContacto = formBean.getFechaRegistroContacto();
-        
+
         String action = formBean.getAction();
 
         ContactosMantenimiento contactosMantenimiento = new ContactosMantenimiento();
@@ -54,43 +54,43 @@ public class ActionContactos extends org.apache.struts.action.Action {
             String advertencia = "";
 
             if (nombreContacto == null || nombreContacto.equals("")) {
-                advertencia += "*Nombre del Contacto es requerido<br>";
+                advertencia += "*Nombre del Contacto es requerido    <br> ";
             }
             if (direccionContacto == null || direccionContacto.equals("")) {
-                advertencia += "*Direccion del Contacto es requerido<br>";
+                advertencia += "*Direccion del Contacto es requerido    <br> ";
             }
             if (telefonoContacto == null || telefonoContacto.equals("")) {
-                advertencia += "* Telefono del Contacto es requerido<br>";
+                advertencia += "* Telefono del Contacto es requerido    <br> ";
             }
             if (encargadoContacto == null || encargadoContacto.equals("")) {
-                advertencia += "*Nombre del encargado es requerida<br>";
+                advertencia += "*Nombre del encargado es requerido   <br> ";
             }
             if (telefonoEncargadoContacto == null || telefonoEncargadoContacto.equals("")) {
-                advertencia += "*Telefono del encargado es requerido<br>";
+                advertencia += "*Telefono del encargado es requerido    <br> ";
             }
             if (emailContacto == null || emailContacto.equals("")) {
-                advertencia += "*Email del Contacto es requerido<br>";
+                advertencia += "*Email del Contacto es requerido    <br> ";
             }
             if (tipoContacto == null || tipoContacto.equals("Seleccionar")) {
-                advertencia += "*Es requerido que seleccione un tipo de Contacto <br>";
+                advertencia += "*Es requerido que seleccione un tipo de Contacto    <br> ";
             }
             if (!advertencia.equals("")) {
-                formBean.setError("<span style='color:red'>Por favor complete los espacios vacios" + "<br>" + advertencia + "</span>");
                 IR = AGREGAR;
                 request.setAttribute("nombre", Login.nombre);
                 request.setAttribute("nAcceso", Login.nAcceso);
                 request.setAttribute("id", Login.id);
-
+                request.setAttribute("error", advertencia);
                 return mapping.findForward(IR);
             }
 
             int validacion = contactosMantenimiento.validar(nombreContacto);
             if (validacion != 1) {
-                formBean.setError("<span style='color:red'>El Contacto ya esta registrado..." + "<br></span>");
+                String error = ("<span style='color:red'>El Contacto \"" + nombreContacto + "\" ya esta registrado..." + "<br></span>");
                 IR = AGREGAR;
                 request.setAttribute("nombre", Login.nombre);
                 request.setAttribute("nAcceso", Login.nAcceso);
                 request.setAttribute("id", Login.id);
+                request.setAttribute("error", error);
                 return mapping.findForward(IR);
             }
             fechaRegistroContacto = formato.format(new Date());
@@ -102,6 +102,8 @@ public class ActionContactos extends org.apache.struts.action.Action {
                     + "Clientes</a></li><li class=\"nav-item\"><a class=\"nav-link\" style=\"color: black;\" href=\"contactosMantenimiento.do?action=ConsultarTipo&tipoContacto=Proveedor\">\n"
                     + "Proveedores</a></li></ul>";
             request.setAttribute("codigo", codigo);
+            String mensaje = "El Contacto \""+nombreContacto +"\" se agregó correctamente";
+            request.setAttribute("mensaje", mensaje);
             IR = LISTA;
         }
 
@@ -123,7 +125,7 @@ public class ActionContactos extends org.apache.struts.action.Action {
                 formBean.setTelefonoEncargadoContacto(contactos.getTelefonoEncargadoContacto());
                 formBean.setTipoContacto(contactos.getTipoContacto());
                 formBean.setEmailContacto(contactos.getEmailContacto());
-                System.out.println("action "+contactos.getFechaRegistroContacto());
+                System.out.println("action " + contactos.getFechaRegistroContacto());
                 formBean.setFechaRegistroContacto(contactos.getFechaRegistroContacto());
 
                 IR = MODIFICAR;
@@ -131,44 +133,51 @@ public class ActionContactos extends org.apache.struts.action.Action {
         }
 //--------------------------------------------------------------------        
         if (action.equals("Eliminar")) {
-            contactosMantenimiento.eliminarContactos(idContacto);
-            List<Contactos> listaContacto = contactosMantenimiento.consultarTodosContactos();
-            formBean.setListaContacto(listaContacto);
-            formBean.setMensaje("<spam style = 'color: blue' > Registro (" + idContacto + ") Eliminado Correctamente <br></spam>");
-            return mapping.findForward(LISTA);
+            int n = contactosMantenimiento.eliminarContactos(idContacto);
+            String mensaje = "";
+            if (n == 0) {
+                mensaje = (" Registro (" + idContacto + ") No se Eliminó ");
+                request.setAttribute("error", mensaje);
+            } else {
+                List<Contactos> listaContacto = contactosMantenimiento.consultarTodosContactos();
+                formBean.setListaContacto(listaContacto);
+                mensaje = (" Registro \"" + idContacto + "\" Eliminado Correctamente ");
+                request.setAttribute("mensaje", mensaje);
+            }
+            IR = LISTA;
         }
 //------------------------------------------------------------------------------       
         if (action.equals("Modificar")) {
-            
+
             String advertencia = "";
 
             if (nombreContacto == null || nombreContacto.equals("")) {
-                advertencia += "*Nombre del Contacto es requerido<br>";
+                advertencia += "*Nombre del Contacto es requerido <br>";
             }
             if (direccionContacto == null || direccionContacto.equals("")) {
-                advertencia += "*Direccion del Contacto es requerido<br>";
+                advertencia += "*Direccion del Contacto es requerido <br>";
             }
             if (telefonoContacto == null || telefonoContacto.equals("")) {
-                advertencia += "* Telefono del Contacto es requerido<br>";
+                advertencia += "* Telefono del Contacto es requerido <br>";
             }
             if (encargadoContacto == null || encargadoContacto.equals("")) {
-                advertencia += "*Nombre del encargado es requerida<br>";
+                advertencia += "*Nombre del encargado es requerida <br>";
             }
             if (telefonoEncargadoContacto == null || telefonoEncargadoContacto.equals("")) {
-                advertencia += "*Telefono del encargado es requerido<br>";
+                advertencia += "*Telefono del encargado es requerido <br>";
             }
             if (emailContacto == null || emailContacto.equals("")) {
-                advertencia += "*Email del Contacto es requerido<br>";
+                advertencia += "*Email del Contacto es requerido <br>";
             }
             if (tipoContacto == null || tipoContacto.equals("Seleccionar")) {
                 advertencia += "*Es requerido que seleccione un tipo de Contacto <br>";
             }
             if (!advertencia.equals("")) {
-                formBean.setError("<span style='color:red'>Por favor complete los espacios vacios" + "<br>" + advertencia + "</span>");
                 IR = MODIFICAR;
                 request.setAttribute("nombre", Login.nombre);
                 request.setAttribute("nAcceso", Login.nAcceso);
                 request.setAttribute("id", Login.id);
+                request.setAttribute("error", advertencia);
                 return mapping.findForward(IR);
             }
             contactosMantenimiento.modificarContacto(idContacto, nombreContacto, direccionContacto, tipoContacto, telefonoContacto, emailContacto, encargadoContacto, telefonoEncargadoContacto, fechaRegistroContacto);
@@ -180,6 +189,8 @@ public class ActionContactos extends org.apache.struts.action.Action {
                     + "Clientes</a></li><li class=\"nav-item\"><a class=\"nav-link\" style=\"color: black;\" href=\"contactosMantenimiento.do?action=ConsultarTipo&tipoContacto=Proveedor\">\n"
                     + "Proveedores</a></li></ul>";
             request.setAttribute("codigo", codigo);
+            String mensaje = "El Contacto \""+nombreContacto +"\" se modificó correctamente";
+            request.setAttribute("mensaje", mensaje);
             IR = LISTA;
 
         }

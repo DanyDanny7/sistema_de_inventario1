@@ -15,9 +15,12 @@
         <title>Agregar Contactos</title>
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <script src="js/popper.min.js" type="text/javascript"></script>
         <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
+        <script src="js/popper.min.js" type="text/javascript"></script>
         <script src="js/bootstrap.js" type="text/javascript"></script>
+        <script src="http://codeseven.github.com/toastr/toastr.js"></script>
+        <link href="http://codeseven.github.com/toastr/toastr.css" rel="stylesheet"/>
+        <link href="http://codeseven.github.com/toastr/toastr-responsive.css" rel="stylesheet"/>
     </head>
     <body background="img/fondos/fondo1.jpg">
 
@@ -129,9 +132,7 @@
                     </div>
                 </div>
             </div>
-
         </div>
-
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -145,9 +146,6 @@
                             </div> 
                         </div>
                     </div>
-
-
-
                     <br>
                     <html:form action="/contactosMantenimiento"> 
                         <div class="row">
@@ -160,8 +158,6 @@
                                     <label class="font-weight-bold">Email del contacto:</label><br>
                                     <input type="email" name="emailContacto" class="form-control"><br>
                                 </div>
-
-
                             </div>
                             <div class="row"> 
                                 <div class="form-group col-md-6">
@@ -173,9 +169,7 @@
                                     <label class="font-weight-bold">Telefono del contacto:</label><br>
                                 <html:text property="telefonoContacto" styleClass="form-control"></html:text><br>
                                 </div>
-
                             </div> 
-
                             <div class="row">
 
                                 <div class="form-group col-md-6">
@@ -187,7 +181,6 @@
                                 <html:text property="telefonoEncargadoContacto" styleClass="form-control"></html:text><br>
                                 </div>
                             </div> 
-
                             <div class="row">    
                                 <div class="form-group col-md-3">
                                     <label class="font-weight-bold">Tipo de contacto:</label><br>
@@ -196,40 +189,48 @@
                                     <html:option value="Cliente">Cliente</html:option> 
                                     <html:option value="Proveedor">Proveedor</html:option>
                                 </html:select><br>
-
-                                <bean:write name="ActionFormContactos" property="error" filter="false"/>
                             </div>
                         </div>
-
                         <div class="row">  
-
                             <div class="form-group col-md-auto">
                                 <html:submit property="action" value="Agregar" styleClass="btn  font-weight-bold" style="background-color: #04B404;"/>
                                 <html:submit property="action" value="Consultar" styleClass="btn  font-weight-bold" style="background-color: #04B404;"/>
-                                <a class="font-weight-bold btn text-dark" <html:link page="/jsp/contactos/inicio.jsp" style="background-color: #04B404;">Inicio</html:link>
+                                <a class="font-weight-bold btn text-dark"><html:link page="/jsp/contactos/inicio.jsp" style="background-color: #04B404;">Inicio</html:link></a>
+                                </div>
                             </div>
-                        </div>
-
-                </html:form>
-                <!-- <div class="row">
-                     <div class="form-group col-5">
-                          <a class="font-weight-bold btn btn-primary"<html:link page="/index.jsp">Index</html:link> 
-                            <a class="font-weight-bold btn btn-primary" <html:link page="/jsp/contactos/inicio.jsp" >Inicio</html:link>
-
-                            </div> -->
-
-
+                    </html:form>
+                    <!-- <div class="row">
+                         <div class="form-group col-5">
+                              <a class="font-weight-bold btn btn-primary"<html:link page="/index.jsp">Index</html:link> 
+                                <a class="font-weight-bold btn btn-primary" <html:link page="/jsp/contactos/inicio.jsp" >Inicio</html:link>
+    
+                                </div> -->
+                    </div>
+                </div>
             </div>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-
-
-</body>
-
+            <div id="error">${error}</div>
+        <script type="text/javascript">
+            if ($("#error").text() != "") {
+                window.onload = function () {
+                    toastrs();
+                };
+            };
+            toastr.options = {
+                "debug": false,
+                "onclick": null,
+                "fadeIn": 300,
+                "fadeOut": 100,
+                "timeOut": 7000,
+                "extendedTimeOut": 1000
+            };
+            var showToastrs = false;
+            function toastrs() {
+                if (!showToastrs) {
+                    toastr.error($("#error").text(), 'Error');
+                } else {
+                    toastr.error('no se puede!\'t.', 'Otro error crítico');
+                }
+            }
+        </script>                 
+    </body>
 </html>

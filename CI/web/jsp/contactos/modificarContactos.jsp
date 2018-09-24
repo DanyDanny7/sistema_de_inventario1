@@ -18,12 +18,15 @@
         <title>Modificar</title>
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <script src="js/popper.min.js" type="text/javascript"></script>
         <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
+        <script src="js/popper.min.js" type="text/javascript"></script>
         <script src="js/bootstrap.js" type="text/javascript"></script>
+        <script src="http://codeseven.github.com/toastr/toastr.js"></script>
+        <link href="http://codeseven.github.com/toastr/toastr.css" rel="stylesheet"/>
+        <link href="http://codeseven.github.com/toastr/toastr-responsive.css" rel="stylesheet"/>
     </head>
     <body background="img/fondos/fondo1.jpg">
-       <div class="container-fluid">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-xl">
                     <div> 
@@ -32,7 +35,6 @@
                             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span>
                             </button>
-
                             <div class="collapse navbar-collapse" id="navbarSupportedContent" >
                                 <ul class="navbar-nav mr-auto" >
                                     <li class="nav-item dropdown">
@@ -131,26 +133,19 @@
                     </div>
                 </div>
             </div>
-
         </div>
         <div class="container">
-            
-
             <div class="container">
                 <div class="row">
                     <div class="col-12">
                         <br>
-
                         <div class="col-6">
                             <div class=" col-auto">
                                 <div class="card">
-
                                     <div class="card-header" style="background-color: #D8D8D8;"><h1 class="font-weight-bold">Agregar Contacto</h1></div>
                                 </div> 
                             </div>
                         </div>
-
-
                         <br>
                         <html:form action="/contactosMantenimiento"> 
                             <div class="row">
@@ -163,8 +158,6 @@
                                         <label class="font-weight-bold">Email del contacto:</label><br>
                                         <input type="email" name="emailContacto" class="form-control"><br>
                                     </div>
-
-
                                 </div>
                                 <div class="row"> 
                                     <div class="form-group col-md-6">
@@ -176,11 +169,8 @@
                                         <label class="font-weight-bold">Telefono del contacto:</label><br>
                                     <html:text property="telefonoContacto" styleClass="form-control"></html:text><br>
                                     </div>
-
                                 </div> 
-
                                 <div class="row">
-
                                     <div class="form-group col-md-6">
                                         <label class="font-weight-bold">Encargado:</label><br>
                                     <html:text property="encargadoContacto" styleClass="form-control"></html:text><br>
@@ -190,49 +180,55 @@
                                     <html:text property="telefonoEncargadoContacto" styleClass="form-control"></html:text><br>
                                     </div>
                                 </div> 
-                                    <label class="font-weight-bold">Tipo de contacto:</label><br>
+                                <label class="font-weight-bold">Tipo de contacto:</label><br>
                                 <div class="row">    
                                     <div class="form-group col-md-4">
-                                        
                                     <html:select property="tipoContacto" styleClass="form-control">
                                         <html:option value="Seleccionar"></html:option> 
                                         <html:option value="Cliente">Cliente</html:option> 
                                         <html:option value="Proveedor">Proveedor</html:option>
                                     </html:select><br>
-
                                     <html:hidden property="idContacto" ></html:hidden>
-
                                     <html:hidden property="fechaRegistroContacto"></html:hidden> 
-
-                                    <bean:write name="ActionFormContactos" property="error" filter="false"/>
-                                </div>
-                                <div class="form-group col-md-1">
-                                    
-                                    <div class="form-group col-md-auto">
-                                    <html:submit property="action" value="Modificar" styleClass="btn  font-weight-bold" style="background-color: #04B404;"/>
-                                </div>
+                                    </div>
+                                    <div class="form-group col-md-1">
+                                        <div class="form-group col-md-auto">
+                                        <html:submit property="action" value="Modificar" styleClass="btn  font-weight-bold" style="background-color: #04B404;"/>
+                                    </div>
                                 </div>
                             </div>
-
-                              
-
-                                
-                            
-
                         </html:form>
-
                     </div>
-
                 </div>
-
             </div>
-
         </div>
-    </div>
-
-</div>
-
-</body>
+        <div id="error">${error}</div>
+        <script type="text/javascript">
+            if ($("#error").text() != "") {
+                window.onload = function () {
+                    toastrs();
+                };
+            }
+            ;
+            toastr.options = {
+                "debug": false,
+                "positionClass": "toast-bottom-right",
+                "onclick": null,
+                "fadeIn": 300,
+                "fadeOut": 100,
+                "timeOut": 5000,
+                "extendedTimeOut": 1000
+            };
+            var showToastrs = false;
+            function toastrs() {
+                if (!showToastrs) {
+                    toastr.error($("#error").text(), 'Error');
+                } else {
+                    toastr.error('no se puede!\'t.', 'Otro error crítico');
+                }
+            }
+        </script>
+    </body>
 </html>
 
 
