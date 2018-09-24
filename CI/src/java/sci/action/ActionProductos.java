@@ -11,6 +11,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import sci.actionforms.ActionFormProductos;
 import sci.mantenimientos.FabricantesMantenimiento;
+import sci.mantenimientos.InventarioMantenimiento;
 import sci.mantenimientos.ProductosMantenimiento;
 import sci.persistencia.Fabricantes;
 import sci.persistencia.Productos;
@@ -32,12 +33,14 @@ public class ActionProductos extends org.apache.struts.action.Action {
         Integer idFabricantes = fB.getIdFabricantes();
         String nombreProducto = fB.getNombreProducto();
         Double precioUnitario = fB.getPrecioUnitario();
+        int stockMinimo = fB.getStockMinimo();
         String descripcionProducto = fB.getDescripcionProducto();
         String modelo = fB.getModelo();
         String action = fB.getAction();
 
         ProductosMantenimiento pman = new ProductosMantenimiento();
         FabricantesMantenimiento fman = new FabricantesMantenimiento();
+        InventarioMantenimiento iman= new InventarioMantenimiento();
 
         String IR = null;
 
@@ -95,9 +98,13 @@ public class ActionProductos extends org.apache.struts.action.Action {
             }
 
             pman.guardarProductos(idFabricantes, nombreProducto, precioUnitario, descripcionProducto, modelo);
+         
+            
             System.out.println("despues de guardar");
             List<Productos> listaProductos = pman.consultarTodoProductos();
             fB.setListaProductos(listaProductos);
+            
+            
 
             IR = LISTA;
         }

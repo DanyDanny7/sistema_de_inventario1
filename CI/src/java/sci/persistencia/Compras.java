@@ -1,5 +1,5 @@
 package sci.persistencia;
-// Generated 02-sep-2018 16:06:08 by Hibernate Tools 4.3.1
+// Generated 09-20-2018 02:44:23 PM by Hibernate Tools 4.3.1
 
 
 
@@ -9,38 +9,45 @@ package sci.persistencia;
 public class Compras  implements java.io.Serializable {
 
 
-     private Integer idCompra;
+     private int idCompra;
      private Contactos contactos;
      private Inventario inventario;
      private Iva iva;
      private Productos productos;
+     private String nDocumento;
      private String fechaCompra;
+     private Double cantidad;
      private Double totalCompra;
 
     public Compras() {
     }
 
 	
-    public Compras(Contactos contactos, Inventario inventario, Iva iva, Productos productos) {
+    public Compras(int idCompra, Contactos contactos, Inventario inventario, Iva iva, Productos productos, String nDocumento) {
+        this.idCompra = idCompra;
         this.contactos = contactos;
         this.inventario = inventario;
         this.iva = iva;
         this.productos = productos;
+        this.nDocumento = nDocumento;
     }
-    public Compras(Contactos contactos, Inventario inventario, Iva iva, Productos productos, String fechaCompra, Double totalCompra) {
+    public Compras(int idCompra, Contactos contactos, Inventario inventario, Iva iva, Productos productos, String nDocumento, String fechaCompra, Double cantidad, Double totalCompra) {
+       this.idCompra = idCompra;
        this.contactos = contactos;
        this.inventario = inventario;
        this.iva = iva;
        this.productos = productos;
+       this.nDocumento = nDocumento;
        this.fechaCompra = fechaCompra;
+       this.cantidad = cantidad;
        this.totalCompra = totalCompra;
     }
    
-    public Integer getIdCompra() {
+    public int getIdCompra() {
         return this.idCompra;
     }
     
-    public void setIdCompra(Integer idCompra) {
+    public void setIdCompra(int idCompra) {
         this.idCompra = idCompra;
     }
     public Contactos getContactos() {
@@ -71,12 +78,26 @@ public class Compras  implements java.io.Serializable {
     public void setProductos(Productos productos) {
         this.productos = productos;
     }
+    public String getnDocumento() {
+        return this.nDocumento;
+    }
+    
+    public void setnDocumento(String nDocumento) {
+        this.nDocumento = nDocumento;
+    }
     public String getFechaCompra() {
         return this.fechaCompra;
     }
     
     public void setFechaCompra(String fechaCompra) {
         this.fechaCompra = fechaCompra;
+    }
+    public Double getCantidad() {
+        return this.cantidad;
+    }
+    
+    public void setCantidad(Double cantidad) {
+        this.cantidad = cantidad;
     }
     public Double getTotalCompra() {
         return this.totalCompra;

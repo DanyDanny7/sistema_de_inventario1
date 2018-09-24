@@ -145,6 +145,10 @@
        
             <label class="font-weight-bold">Precio del Producto:</label><br>
             &nbsp;<html:text property="precioUnitario" ></html:text> <br><br>
+            
+            <label class="font-weight-bold">Stock Minimo</label><br>
+            &nbsp;<html:text property="stockMinimo" ></html:text> <br><br>
+      
       
             <label class="font-weight-bold">Descripción del producto:</label><br>
            &nbsp;<html:text property="descripcionProducto" ></html:text> <br><br>

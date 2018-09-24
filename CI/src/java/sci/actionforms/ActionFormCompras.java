@@ -14,16 +14,36 @@ import sci.persistencia.Compras;
  */
 public class ActionFormCompras extends org.apache.struts.action.ActionForm{
     private Integer idCompra;
+    private String  nDocumento; 
     private Integer idContacto; 
-
-  
     private Integer  idInventario; 
+    private Double cantidad; 
     private Integer idIva;
     private Integer IdProducto;
     private String fechaCompra; 
     private Double totalCompra;
     private String action ; 
     private String error; 
+    
+    
+
+    public Double getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(Double cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    public String getnDocumento() {
+        return nDocumento;
+    }
+
+    public void setnDocumento(String nDocumento) {
+        this.nDocumento = nDocumento;
+    }
+
+    
     private List<Compras> listaCompras; 
 
     public Integer getIdContacto() {

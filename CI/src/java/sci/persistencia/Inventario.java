@@ -1,5 +1,5 @@
 package sci.persistencia;
-// Generated 02-sep-2018 16:06:08 by Hibernate Tools 4.3.1
+// Generated 09-20-2018 02:44:23 PM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -13,7 +13,7 @@ public class Inventario  implements java.io.Serializable {
 
      private Integer idInventario;
      private Productos productos;
-     private String existencia;
+     private Double existencia;
      private String estadoExistencia;
      private Integer stockMinimo;
      private String estadoFisico;
@@ -26,7 +26,7 @@ public class Inventario  implements java.io.Serializable {
     public Inventario(Productos productos) {
         this.productos = productos;
     }
-    public Inventario(Productos productos, String existencia, String estadoExistencia, Integer stockMinimo, String estadoFisico, Set comprases) {
+    public Inventario(Productos productos, Double existencia, String estadoExistencia, Integer stockMinimo, String estadoFisico, Set comprases) {
        this.productos = productos;
        this.existencia = existencia;
        this.estadoExistencia = estadoExistencia;
@@ -49,11 +49,11 @@ public class Inventario  implements java.io.Serializable {
     public void setProductos(Productos productos) {
         this.productos = productos;
     }
-    public String getExistencia() {
+    public Double getExistencia() {
         return this.existencia;
     }
     
-    public void setExistencia(String existencia) {
+    public void setExistencia(Double existencia) {
         this.existencia = existencia;
     }
     public String getEstadoExistencia() {

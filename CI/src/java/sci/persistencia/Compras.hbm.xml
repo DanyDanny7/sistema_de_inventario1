@@ -1,30 +1,35 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 02-sep-2018 16:06:09 by Hibernate Tools 4.3.1 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 09-20-2018 02:44:23 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="sci.persistencia.Compras" table="compras" catalog="control_de_inventario1" optimistic-lock="version">
-        <id name="idCompra" type="java.lang.Integer">
-            <column name="id_compra" />
-            <generator class="identity" />
-        </id>
-        <many-to-one name="contactos" class="sci.persistencia.Contactos" fetch="select">
-            <column name="id_contacto" not-null="true" />
-        </many-to-one>
-        <many-to-one name="inventario" class="sci.persistencia.Inventario" fetch="select">
-            <column name="id_inventario" not-null="true" />
-        </many-to-one>
-        <many-to-one name="iva" class="sci.persistencia.Iva" fetch="select">
-            <column name="id_iva" not-null="true" />
-        </many-to-one>
-        <many-to-one name="productos" class="sci.persistencia.Productos" fetch="select">
-            <column name="id_producto" not-null="true" />
-        </many-to-one>
-        <property name="fechaCompra" type="string">
-            <column name="fecha_compra" length="20" />
-        </property>
-        <property name="totalCompra" type="java.lang.Double">
-            <column name="total_compra" precision="9" />
-        </property>
-    </class>
+  <class catalog="control_de_inventario1" name="sci.persistencia.Compras" optimistic-lock="version" table="compras">
+    <id name="idCompra" type="int">
+      <column name="id_compra"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="sci.persistencia.Contactos" fetch="select" name="contactos">
+      <column name="id_contacto" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="sci.persistencia.Inventario" fetch="select" name="inventario">
+      <column name="id_inventario" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="sci.persistencia.Iva" fetch="select" name="iva">
+      <column name="id_iva" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="sci.persistencia.Productos" fetch="select" name="productos">
+      <column name="id_producto" not-null="true"/>
+    </many-to-one>
+    <property name="nDocumento" type="string">
+      <column length="20" name="n_documento" not-null="true"/>
+    </property>
+    <property name="fechaCompra" type="string">
+      <column length="20" name="fecha_compra"/>
+    </property>
+    <property name="cantidad" type="java.lang.Double">
+      <column name="cantidad" precision="9" scale="3"/>
+    </property>
+    <property name="totalCompra" type="java.lang.Double">
+      <column name="total_compra" precision="9"/>
+    </property>
+  </class>
 </hibernate-mapping>

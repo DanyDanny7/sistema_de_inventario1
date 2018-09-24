@@ -17,8 +17,10 @@ public class ComprasMantenimiento {
 
     public int guardarcompras(
             int idCompra,
+            String nDocumento,
             int idContactos,
             int idInventario,
+            double cantidad,
             int idIva,
             int idProductos,
             String fechaCompra,
@@ -31,6 +33,7 @@ public class ComprasMantenimiento {
 
         Compras com = new Compras();
         com.setIdCompra(idCompra);
+        com.setCantidad(cantidad);
         //--
         Contactos contactos = new Contactos();
         contactos.setIdContacto(idContactos);
@@ -49,7 +52,9 @@ public class ComprasMantenimiento {
         com.setProductos(productos);
         //--
         com.setFechaCompra(fechaCompra);
+        com.setnDocumento(nDocumento);
         com.setTotalCompra(totalCompra);
+        com.setCantidad(cantidad);
         try {
             session.beginTransaction();
             session.save(com);
@@ -95,8 +100,10 @@ public class ComprasMantenimiento {
 
     public int ModificarCompras(
             int idCompra,
+            String nDocumento,
             int idContactos,
             int idInventario,
+            double cantidad,
             int idIva,
             int idProductos,
             String fechaCompra,
@@ -109,10 +116,13 @@ public class ComprasMantenimiento {
 
         Compras com = new Compras();
         com.setIdCompra(idCompra);
+        com.setnDocumento(nDocumento);
+       com.setCantidad(cantidad);
         //--
         Contactos contactos = new Contactos();
         contactos.setIdContacto(idContactos);
         com.setContactos(contactos);
+        
         //--
         Inventario inventario = new Inventario();
         inventario.setIdInventario(idInventario);

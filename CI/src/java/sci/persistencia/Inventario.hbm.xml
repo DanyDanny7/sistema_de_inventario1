@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 02-sep-2018 16:06:09 by Hibernate Tools 4.3.1 -->
+<!-- Generated 09-20-2018 02:44:23 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="sci.persistencia.Inventario" table="inventario" catalog="control_de_inventario1" optimistic-lock="version">
         <id name="idInventario" type="java.lang.Integer">
@@ -11,8 +11,8 @@
         <many-to-one name="productos" class="sci.persistencia.Productos" fetch="select">
             <column name="id_producto" not-null="true" />
         </many-to-one>
-        <property name="existencia" type="string">
-            <column name="existencia" length="20" />
+        <property name="existencia" type="java.lang.Double">
+            <column name="existencia" precision="9" scale="3" />
         </property>
         <property name="estadoExistencia" type="string">
             <column name="estado_existencia" length="50" />

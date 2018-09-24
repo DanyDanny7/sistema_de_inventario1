@@ -41,8 +41,10 @@ public class ActionCompras extends org.apache.struts.action.Action {
 
         ActionFormCompras formBean = (ActionFormCompras) form;
         Integer idCompra = formBean.getIdCompra();
+        String nDocumento = formBean.getnDocumento();
         Integer idContacto = formBean.getIdContacto();
         Integer idInventario= formBean.getIdInventario();
+        Double  cantidad = formBean.getCantidad();
         Integer idIva= formBean.getIdIva();
         Integer idProducto = formBean.getIdProducto();
         String fechaCompra = formato.format(new Date());
@@ -61,6 +63,7 @@ public class ActionCompras extends org.apache.struts.action.Action {
             System.out.println(idProducto);
             System.out.println(totalCompra);
 //------------------------------------------------------
+        System.out.println("El action trae: "+action);
         if (action.equals("Agregar")) {
             String advertencia = "";
 
@@ -90,10 +93,24 @@ public class ActionCompras extends org.apache.struts.action.Action {
             InventarioMantenimiento inventario = new InventarioMantenimiento();
             Inventario  inv=   inventario.consultarInventarioId(idInventario);
             
-            //Double a = ( inv.getExistencia()+totalCompra);
             
+            Double existenciaup;
+            existenciaup = ( inv.getExistencia()+cantidad);
+              
+            int idProductos = (inv.getProductos().getIdProducto());
+            Double existencia=(existenciaup);
+            String estadoExistencia=(inv.getEstadoExistencia());
+            int stockMinimo=(inv.getStockMinimo());
+            String estadoFisico=(inv.getEstadoFisico());
+            
+            inventario.modificarInventario(idInventario, idProductos, existencia, estadoExistencia, stockMinimo, estadoFisico);
+              
+         
+         
+         
+                
            
-   comprasMantenimiento.guardarcompras(idCompra, idContacto, idInventario, idIva, idProducto, fechaCompra, totalCompra);
+   comprasMantenimiento.guardarcompras(idCompra,nDocumento ,idContacto, idInventario,cantidad, idIva, idProducto, fechaCompra, totalCompra);
             
    
    List<Compras> listaCompras = comprasMantenimiento.consultarTodoCompras();
@@ -109,9 +126,11 @@ public class ActionCompras extends org.apache.struts.action.Action {
             Compras compras= (Compras) comprasMantenimiento.consultarComprasId(idCompra);
            
                 formBean.setIdCompra(compras.getIdCompra());
+                formBean.setnDocumento(nDocumento);
                formBean.setIdContacto(compras.getContactos().getIdContacto());
                formBean.setIdInventario(compras.getInventario().getIdInventario());
-                formBean.setIdIva(compras.getIva().getIdIva());
+               formBean.setCantidad(cantidad);
+               formBean.setIdIva(compras.getIva().getIdIva());
                 formBean.setIdProducto(compras.getProductos().getIdProducto());
                
                 return mapping.findForward(MODIFICAR);
@@ -145,7 +164,7 @@ public class ActionCompras extends org.apache.struts.action.Action {
                String mensaje = "<span style='color:red'>Actualizado Correcto" + "<br></span>";
             request.setAttribute("mensaje", mensaje);
            
-           comprasMantenimiento.ModificarCompras(idCompra,idContacto,idInventario,idIva,idProducto, fechaCompra,totalCompra);
+           comprasMantenimiento.ModificarCompras(idCompra,nDocumento ,idContacto, idInventario,cantidad, idIva, idProducto, fechaCompra, totalCompra);
             List<Compras> listaCompras = comprasMantenimiento.consultarTodoCompras();
             formBean.setListaCompras(listaCompras);
            return mapping.findForward(IR);
