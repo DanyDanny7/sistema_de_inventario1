@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import metodos.Login;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -126,7 +127,11 @@ public class ActionFabricante extends org.apache.struts.action.Action {
            if (action.equals("irAgregar")) {
             IR = AGREGAR;
         }
-          
+          request.setAttribute("nombre", Login.nombre);
+        request.setAttribute("nAcceso", Login.nAcceso);
+        request.setAttribute("id", Login.id);
+        request.setAttribute("img", Login.img);
+           
 return mapping.findForward(IR);
     }
 }

@@ -147,10 +147,10 @@
                                 <tr class="table-default" style="background-color: #000; color: white;font-family: Arial">
                                     <th>Id Empresa</th>
                                     <th>Empresa</th>
-                                    <th>Nombre</th>
                                     <th>NCR</th>
                                     <th>NIT</th>
                                     <th>Direccion</th>
+                                    <th>Email</th>
                                     <th>Encargado</th>
                                     <th>Telefono</th>
                                     <th></th>

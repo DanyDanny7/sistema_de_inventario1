@@ -142,7 +142,7 @@
                                     </div>
                                     <div class="form-group col-6">
                                         <label>E-Mail : </label><br>
-                                        <input type="email" name="emailEmpresa" class="form-control"><br>
+                                    <html:text property="emailEmpresa" styleClass="form-control" ></html:text><br>
                                     </div>
                                 </div>
 

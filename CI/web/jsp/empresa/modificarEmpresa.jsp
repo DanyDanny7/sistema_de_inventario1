@@ -5,11 +5,22 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
+<%@taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
+<%@taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Modificar Empresa</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
+        <script src="js/popper.min.js" type="text/javascript"></script>
+        <script src="js/bootstrap.js" type="text/javascript"></script>
+        <script src="http://codeseven.github.com/toastr/toastr.js"></script>
+        <link href="http://codeseven.github.com/toastr/toastr.css" rel="stylesheet"/>
+        <link href="http://codeseven.github.com/toastr/toastr-responsive.css" rel="stylesheet"/>
+
     </head>
     <body background="img/fondos/fondo1.jpg">
         <div class="container-fluid">
@@ -123,31 +134,63 @@
 
         </div>
         
-         <h1>Agregar Empresa</h1>
-<br>
-        <html:form action = "/empresaMantenimiento">
+         <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">                               
+                    <br>
+                    <div class="card-header" style="color: white"><h1 class="font-weight-bold">MODIFICAR EMPRESA</h1></div>
+  <html:form action = "/empresaMantenimiento">
+      
             <br>
-            <label>Nombre : </label><br>
-            <html:text property="nombreEmpresa"></html:text><br><br>
-                <label>NCR : </label><br>
-            <html:text property="ncr"></html:text><br><br>
-                <label>NIT : </label><br>
-            <html:text property="nit"></html:text><br><br>
-                <label>Direccion : </label><br>
-            <html:text property="direccionEmpresa"></html:text><br><br>
-                <label>E-Mail : </label><br>
-            <html:text property="emailEmpresa"></html:text><br><br>
-                <label>Encargado : </label><br>
-            <html:text property="encargadoEmpresa"></html:text><br><br>
-                <label>Telefono : </label><br>
-            <html:text property="telefonoEmpresa"></html:text><br><br>
+            <div class="card-header" style="background-color:#f0f3f4;">
+                            <div class="row">
+                                <div class="form-group col-6">
+                                    <label>Nombre : </label><br>
+                                    <html:text property="nombreEmpresa" styleClass="form-control"></html:text><br>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label>E-Mail : </label><br>
+                                    <html:text property="emailEmpresa" styleClass="form-control" ></html:text><br>
+                                    </div>
+                                </div>
 
+                                <div class="row">
+                                    <div class="form-group col-2"></div>
+                                    <div class="form-group col-8">
+                                        <label>Direccion : </label><br>
+                                    <html:text property="direccionEmpresa" styleClass="form-control"></html:text><br>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-4">
+                                        <label>NIT : </label><br>
+                                    <html:text property="nit" styleClass="form-control"></html:text><br>
+                                    </div>
+                                    <div class="form-group col-4">
+                                        <label>NCR : </label><br>
+                                    <html:text property="ncr" styleClass="form-control"></html:text><br>
+                                    </div>
+                                    <div class="form-group col-4">
+                                        <label>Telefono : </label><br>
+                                    <html:text property="telefonoEmpresa" styleClass="form-control"></html:text><br><br>
+                                    </div>
+                                </div>
+
+                                <div hidden="hidden"><div class="form-group col-6">
+                                        <label>Encargado : </label><br>
+                                    <html:text property="encargadoEmpresa" styleClass="form-control"></html:text><br>
+                                                                        </div>
+                                    <html:text property="idEmpresa" ></html:text><br>
+
+                                    </div>
+                                                                        
             
             <bean:write name="ActionFormEmpresa" property="error" filter="false"/>    
-
+            </div>
 
             <br>
-            <html:submit property="action" value="Modificar"/>
+            <html:submit property="action" value="Modificar" styleClass="btn  font-weight-bold" style="background-color:#f0f3f4;color: black"/>
            
       
         </html:form>
