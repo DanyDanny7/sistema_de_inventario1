@@ -18,7 +18,7 @@
         <script src="js/popper.min.js" type="text/javascript"></script>
         <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
         <script src="js/bootstrap.js" type="text/javascript"></script>
-        <link href="../../css/stilo.css" rel="stylesheet" type="text/css"/>
+        
     </head>
     <body background="img/fondos/fondo1.jpg">
         <div class="container-fluid">
@@ -139,7 +139,7 @@
 
                     <br>
                     <html:form action = "/accesoMantenimiento">
-                        <div class="card-header" style="background-color: #696969;color: white">
+                        <div class="card-header" style="background-color:#f0f3f4;">
 
                             <div class="row">
                                 <div class="form-group col-3">
@@ -199,8 +199,8 @@
                         </div>
 
                         <br>
-                        <html:submit property="action" value="Agregar" styleClass="btn  font-weight-bold" style="background-color: #696969; color: white"/>
-                        <html:submit property="action" value="Consultar" styleClass="btn  font-weight-bold" style="background-color: #696969; color: white"/>
+                        <html:submit property="action" value="Agregar" styleClass="btn  font-weight-bold" style="background-color:#f0f3f4; color: black"/>
+                        <html:submit property="action" value="Consultar" styleClass="btn  font-weight-bold" style="background-color:#f0f3f4; color: black"/>
 
                     </html:form>
 

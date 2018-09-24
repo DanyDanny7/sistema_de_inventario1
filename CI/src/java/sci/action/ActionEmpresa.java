@@ -175,6 +175,10 @@ public class ActionEmpresa extends org.apache.struts.action.Action {
             fB.setError("<spam style='color:blue'>El registro se modificó correctamente" + " <br></span>");
             IR = LISTA;
         }
+        
+        if (action.equals("irAgregar")) {
+            IR = AGREGAR;
+        }
 
         request.setAttribute("nombre", Login.nombre);
         request.setAttribute("nAcceso", Login.nAcceso);

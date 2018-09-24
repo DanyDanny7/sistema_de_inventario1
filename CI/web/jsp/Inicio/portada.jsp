@@ -150,9 +150,7 @@
                         <html:link page="/jsp/producto/inicioP.jsp">Productos</html:link><br><br>
                         <html:link page="/jsp/empresa/inicio.jsp">Empresa</html:link><br><br>
                         <html:link page="/jsp/iva/inicio.jsp">Iva</html:link><br><br>
-                        
-                        
-                        
+                         
                         
                     </div>
                     <div class="col-1"></div>

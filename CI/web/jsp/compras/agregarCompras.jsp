@@ -131,18 +131,16 @@
                                         
         <html:form action="/comprasMantenimiento">
 
-            <table border="0">
+           
 
-                <tbody>
-                    <tr>
+             
+                   
                         
                         <td>id Compras </td>
                         <td><html:text property="idCompra" size="20" ></html:text>  </td> 
                             
                         
-                            <td>
-                        
-                    </tr>
+                         
 
                     <tr>
                        <td>id Contactos </td>

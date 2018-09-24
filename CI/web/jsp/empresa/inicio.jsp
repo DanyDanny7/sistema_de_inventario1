@@ -25,9 +25,10 @@
             <br>
         <html:form action = "/empresaMantenimiento">
             <html:submit property="action" value="Consultar"/><br><br>
-            <a class="font-weight-bold btn btn-light btn-sm"<html:link page="/jsp/empresa/agregarEmpresa.jsp">Agregar</html:link>
+            <html:submit property="action" value="irAgregar"/><br><br>
+           
         </html:form>
         <br>
-        <html:link page="/index.jsp">Index</html:link>
+       
     </body>
 </html>

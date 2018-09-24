@@ -150,7 +150,6 @@
                                     <th>Tipo de Acceso</th>
                                     <th>Fecha de Registro</th>
                                     <th></th>
-                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>

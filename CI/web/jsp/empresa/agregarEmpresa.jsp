@@ -13,9 +13,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Mantenimiento Empresa</title>
-        <link href="../../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <script src="../../js/bootstrap.min.js" type="text/javascript"></script>
-        <script src="../../js/jquery-3.3.1.min.js" type="text/javascript"></script>
+        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
     </head>
     <body background="img/fondos/fondo1.jpg">
         <div class="container-fluid">
@@ -128,36 +127,67 @@
             </div>
 
         </div>
-        <h1>Agregar Empresa</h1>
-<br>
-        <html:form action = "/empresaMantenimiento">
-            <br>
-            <label>Nombre : </label><br>
-            <html:text property="nombreEmpresa"></html:text><br><br>
-                <label>NCR : </label><br>
-            <html:text property="ncr"></html:text><br><br>
-                <label>NIT : </label><br>
-            <html:text property="nit"></html:text><br><br>
-                <label>Direccion : </label><br>
-            <html:text property="direccionEmpresa"></html:text><br><br>
-                <label>E-Mail : </label><br>
-            <html:text property="emailEmpresa"></html:text><br><br>
-                <label>Encargado : </label><br>
-            <html:text property="encargadoEmpresa"></html:text><br><br>
-                <label>Telefono : </label><br>
-            <html:text property="telefonoEmpresa"></html:text><br><br>
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <div class="card-header" style="color: white"><h1 class="font-weight-bold">Agregar Empresa</h1></div>
+                    <br>
+                    <html:form action = "/empresaMantenimiento">
+                        <br>
+                        <div class="card-header" style="background-color:#f0f3f4;">
+                            <div class="row">
+                                <div class="form-group col-6">
+                                    <label>Nombre : </label><br>
+                                    <html:text property="nombreEmpresa" styleClass="form-control"></html:text><br>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label>E-Mail : </label><br>
+                                        <input type="email" name="emailEmpresa" class="form-control"><br>
+                                    </div>
+                                </div>
 
-            
-            <bean:write name="ActionFormEmpresa" property="error" filter="false"/>    
+                                <div class="row">
+                                    <div class="form-group col-2"></div>
+                                    <div class="form-group col-8">
+                                        <label>Direccion : </label><br>
+                                    <html:text property="direccionEmpresa" styleClass="form-control"></html:text><br>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-4">
+                                        <label>NIT : </label><br>
+                                    <html:text property="nit" styleClass="form-control"></html:text><br>
+                                    </div>
+                                    <div class="form-group col-4">
+                                        <label>NCR : </label><br>
+                                    <html:text property="ncr" styleClass="form-control"></html:text><br>
+                                    </div>
+                                    <div class="form-group col-4">
+                                        <label>Telefono : </label><br>
+                                    <html:text property="telefonoEmpresa" styleClass="form-control"></html:text><br><br>
+                                    </div>
+                                </div>
 
 
-            <br>
-            <html:submit property="action" value="Agregar"/>
-            <html:submit property="action" value="Consultar"/>
-      
-        </html:form>
-        <br>
-        <html:link page="/index.jsp">Index</html:link>
-    </body>
-</html>
+
+                                <div hidden="hidden"><div class="form-group col-6">
+                                        <label>Encargado : </label><br>
+                                    <html:text property="encargadoEmpresa" styleClass="form-control"></html:text><br>
+                                    </div></div>
+
+
+
+                            <bean:write name="ActionFormEmpresa" property="error" filter="false"/>    
+
+                        </div>
+                        <br>
+                        <html:submit property="action" value="Agregar" styleClass="btn  font-weight-bold" style="background-color:#f0f3f4; color: black"/>
+                        <html:submit property="action" value="Consultar" styleClass="btn  font-weight-bold" style="background-color:#f0f3f4; color: black"/>
+
+                    </html:form>
+                    <br>
+
+                    </body>
+                    </html>
 

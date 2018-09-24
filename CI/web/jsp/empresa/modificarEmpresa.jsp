@@ -123,7 +123,35 @@
 
         </div>
         
-                                                    
+         <h1>Agregar Empresa</h1>
+<br>
+        <html:form action = "/empresaMantenimiento">
+            <br>
+            <label>Nombre : </label><br>
+            <html:text property="nombreEmpresa"></html:text><br><br>
+                <label>NCR : </label><br>
+            <html:text property="ncr"></html:text><br><br>
+                <label>NIT : </label><br>
+            <html:text property="nit"></html:text><br><br>
+                <label>Direccion : </label><br>
+            <html:text property="direccionEmpresa"></html:text><br><br>
+                <label>E-Mail : </label><br>
+            <html:text property="emailEmpresa"></html:text><br><br>
+                <label>Encargado : </label><br>
+            <html:text property="encargadoEmpresa"></html:text><br><br>
+                <label>Telefono : </label><br>
+            <html:text property="telefonoEmpresa"></html:text><br><br>
+
+            
+            <bean:write name="ActionFormEmpresa" property="error" filter="false"/>    
+
+
+            <br>
+            <html:submit property="action" value="Modificar"/>
+           
+      
+        </html:form>
+        <br>                                           
                                                     
                                                     
     </body>

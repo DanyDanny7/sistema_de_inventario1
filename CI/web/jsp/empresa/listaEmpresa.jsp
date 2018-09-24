@@ -15,7 +15,13 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Lista Empresa</title>
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
+        <script src="js/popper.min.js" type="text/javascript"></script>
+        <script src="js/bootstrap.js" type="text/javascript"></script>
+        <script src="http://codeseven.github.com/toastr/toastr.js"></script>
+        <link href="http://codeseven.github.com/toastr/toastr.css" rel="stylesheet"/>
+        <link href="http://codeseven.github.com/toastr/toastr-responsive.css" rel="stylesheet"/>
+
     </head>
     <body background="img/fondos/fondo1.jpg">
         <div class="container-fluid">
@@ -130,34 +136,34 @@
         </div>
         <div class="container">
             <div class="row">
-                <div class="col-12">
-                    <label>${nombre}</label>
-                    <label>${nAcceso}</label>
-                    <div class="table table-striped">
+                <div class="col-12 text-center">
+                    <br>
+                    <div class="card-header primary" style="color: white;"><h1 class="font-weight-bold " >LISTA EMPRESA</h1></div>
+
+                    <div class="table table-hover table-md">
                         <bean:write name="ActionFormEmpresa" property="mensaje" filter="false"/>      
-                        <table>
-                            <thead>
-                                <tr>
-                                    <td>Id Acceso</td>
-                                    <td>Empresa</td>
-                                    <td>Nombre</td>
-                                    <td>Apellido</td>
-                                    <td>Usuario</td>
-                                    <td>Contraseña</td>
-                                    <td>E-mail</td>
-                                    <td>Tipo de Acceso</td>
-                                    <td>Fecha de Registro</td>
-                                    <td></td>
-                                    <td></td>
+                        <table class="bg-light">
+                            <thead class="text-uppercase">
+                                <tr class="table-default" style="background-color: #000; color: white;font-family: Arial">
+                                    <th>Id Empresa</th>
+                                    <th>Empresa</th>
+                                    <th>Nombre</th>
+                                    <th>NCR</th>
+                                    <th>NIT</th>
+                                    <th>Direccion</th>
+                                    <th>Encargado</th>
+                                    <th>Telefono</th>
+                                    <th></th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <logic:notEmpty name="ActionFormEmpresa" property="listaEmpresa">
                                     <logic:iterate id="ver" name="ActionFormEmpresa" property="listaEmpresa" >
-                                        <tr>
+                                        <tr style="background-color: #DCDCDC;">
                                             <html:form action = "/empresaMantenimiento" >
-                                                <td><bean:write name="ver" property="idEmpresa"/>
-                                                    <html:hidden name="ver" property="idEmpresa"/></td > 
+                                                <th scope="row"><bean:write name="ver" property="idEmpresa"/>
+                                                    <div hidden="hidden"><html:text name="ver" property="idEmpresa"/></div></th > 
                                                 <td><bean:write name="ver" property="nombreEmpresa"/></td>
                                                 <td><bean:write name="ver" property="ncr"/></td>
                                                 <td><bean:write name="ver" property="nit"/></td>
@@ -165,8 +171,8 @@
                                                 <td><bean:write name="ver" property="emailEmpresa"/></td>
                                                 <td><bean:write name="ver" property="encargadoEmpresa"/></td>
                                                 <td><bean:write name="ver" property="telefonoEmpresa"/></td>
-                                                <td><html:submit property="action" value="Eliminar"/></td>
-                                                <td><html:submit property="action" value="ConsultarId"/></td>
+                                                <td><html:submit property="action" value="Eliminar" styleClass="btn btn-secondary font-weight-bold" style="color: white;font-family: Arial"/></td>
+                                                <td><html:submit property="action" value="ConsultarId" styleClass="btn btn-secondary font-weight-bold" style="color: white;font-family: Arial"/></td>
 
                                             </html:form > 
                                         </tr>
@@ -174,8 +180,7 @@
                                 </logic:notEmpty>
                             </tbody>
                         </table>
-                        <html:link page="/index.jsp">Index</html:link><br>
-                        <html:link page="/jsp/empresa/inicio.jsp">Regresar</html:link><br><br>
+
 
                     </div>
                 </div>
