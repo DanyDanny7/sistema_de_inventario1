@@ -38,7 +38,7 @@ public class ActionAcceso extends org.apache.struts.action.Action {
         String apellidoAcceso = formBean.getApellidoAcceso();
         String usuario = formBean.getUsuario();
         String contrasena = formBean.getContrasena();
-        String email = formBean.geteMail();
+        String eMail = formBean.geteMail();
         String tipoAcceso = formBean.getTipoAcceso();
         String fechaRegistroAcceso = formBean.getFechaRegistroAcceso();
         String action = formBean.getAction();
@@ -74,7 +74,7 @@ public class ActionAcceso extends org.apache.struts.action.Action {
             if (contrasena == null || contrasena.equals("")) {
                 advertencia += "*Es requerido una Contraseña <br>";
             }
-            if (email == null || email.equals("")) {
+            if (eMail == null || eMail.equals("")) {
                 advertencia += "*Es requerido un Email <br>";
             }
             if (tipoAcceso == null || tipoAcceso.equals("") || tipoAcceso.equals("Seleccionar")) {
@@ -106,7 +106,8 @@ public class ActionAcceso extends org.apache.struts.action.Action {
                 return mapping.findForward(IR);
             }
             fechaRegistroAcceso = formato.format(new Date());
-            int val = aman.guardarAcceso(idEmpresa, nombreAcceso, apellidoAcceso, usuario, fechaRegistroAcceso, contrasena, email, tipoAcceso);
+            
+            int val = aman.guardarAcceso(idEmpresa, nombreAcceso, apellidoAcceso, usuario, fechaRegistroAcceso, contrasena, eMail, tipoAcceso);
             if (val != 1) {
                 formBean.setError("<spam style='color:red'>Sugio un error No se Guardó el Registro" + " <br></span>");
                 List<Empresa> listaEmpresa = eman.consultarTodosEmpresa();
@@ -226,7 +227,7 @@ public class ActionAcceso extends org.apache.struts.action.Action {
             if (contrasena == null || contrasena.equals("")) {
                 advertencia += "*Es requerido una Contraseña <br>";
             }
-            if (email == null || email.equals("")) {
+            if (eMail == null || eMail.equals("")) {
                 advertencia += "*Es requerido un Email <br>";
             }
             if (tipoAcceso == null || tipoAcceso.equals("") || tipoAcceso.equals("Seleccionar")) {
@@ -245,7 +246,7 @@ public class ActionAcceso extends org.apache.struts.action.Action {
                 request.setAttribute("error", advertencia);
                 return mapping.findForward(IR);
             }
-            aman.modificarAcceso(idAcceso, idEmpresa, nombreAcceso, apellidoAcceso, usuario, fechaRegistroAcceso, contrasena, email, tipoAcceso);
+            aman.modificarAcceso(idAcceso, idEmpresa, nombreAcceso, apellidoAcceso, usuario, fechaRegistroAcceso, contrasena, eMail, tipoAcceso);
             List<Acceso> listaAcceso = aman.consultarTodoAcceso();
             formBean.setListaAcceso(listaAcceso);
             String mensaje = ("El registro \""+nombreAcceso+"\" se modificó correctamente ");
@@ -337,7 +338,7 @@ public class ActionAcceso extends org.apache.struts.action.Action {
             if (contrasena == null || contrasena.equals("")) {
                 advertencia += "*Es requerido una Contraseña <br>";
             }
-            if (email == null || email.equals("")) {
+            if (eMail == null || eMail.equals("")) {
                 advertencia += "*Es requerido un Email <br>";
             }
             if (tipoAcceso == null || tipoAcceso.equals("") || tipoAcceso.equals("Seleccionar")) {
@@ -355,7 +356,7 @@ public class ActionAcceso extends org.apache.struts.action.Action {
                 request.setAttribute("nAcceso", Login.id);
                 return mapping.findForward(IR);
             }
-            aman.modificarAcceso(idAcceso, idEmpresa, nombreAcceso, apellidoAcceso, usuario, fechaRegistroAcceso, contrasena, email, tipoAcceso);
+            aman.modificarAcceso(idAcceso, idEmpresa, nombreAcceso, apellidoAcceso, usuario, fechaRegistroAcceso, contrasena, eMail, tipoAcceso);
             List<Acceso> listaAcceso = aman.consultarTodoAcceso();
             formBean.setListaAcceso(listaAcceso);
             formBean.setError("<spam style='color:blue'>El registro se modificó correctamente" + " <br></span>");
