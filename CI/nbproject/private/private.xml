@@ -3,13 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/guillermo.bermudes/Documents/NetBeansProjects/Github/sistema_de_inventario1/CI/web/index.jsp</file>
-            <file>file:/C:/Users/guillermo.bermudes/Documents/NetBeansProjects/Github/sistema_de_inventario1/CI/web/jsp/producto/agregarProductos.jsp</file>
-            <file>file:/C:/Users/guillermo.bermudes/Documents/NetBeansProjects/Github/sistema_de_inventario1/CI/src/java/sci/mantenimientos/Extraer.java</file>
-            <file>file:/C:/Users/guillermo.bermudes/Documents/NetBeansProjects/Github/sistema_de_inventario1/CI/web/WEB-INF/struts-config.xml</file>
-            <file>file:/C:/Users/guillermo.bermudes/Documents/NetBeansProjects/Github/sistema_de_inventario1/CI/src/java/sci/persistencia/Productos.java</file>
-            <file>file:/C:/Users/guillermo.bermudes/Documents/NetBeansProjects/Github/sistema_de_inventario1/CI/src/java/sci/action/ActionProductos.java</file>
-            <file>file:/C:/Users/guillermo.bermudes/Documents/NetBeansProjects/Github/sistema_de_inventario1/CI/src/java/sci/actionforms/ActionFormProductos.java</file>
+            <file>file:/C:/Users/diana.alcantarausam/Documents/NetBeansProjects/sistema_de_inventario1/CI/web/jsp/acceso/agregarAcceso.jsp</file>
+            <file>file:/C:/Users/diana.alcantarausam/Documents/NetBeansProjects/sistema_de_inventario1/CI/web/jsp/compras/agregarCompras.jsp</file>
+            <file>file:/C:/Users/diana.alcantarausam/Documents/NetBeansProjects/sistema_de_inventario1/CI/web/index.jsp</file>
+            <file>file:/C:/Users/diana.alcantarausam/Documents/NetBeansProjects/sistema_de_inventario1/CI/web/jsp/Inicio/portada.jsp</file>
         </group>
     </open-files>
 </project-private>

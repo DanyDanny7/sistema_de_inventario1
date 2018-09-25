@@ -144,12 +144,11 @@
 
                     <br>
                     <div class=" col-auto">
-                        <div class="card">
-
-                            <div class="card-header" style="background-color: #696969;color: white"><h2 class="font-weight-bold">LISTA CONTACTOS</h2></div>
-                        </div> 
+                              <div class="card-header primary" style="color: white;"><h1 class="font-weight-bold " >LISTA CONTACTOS</h1></div>
+                        
                     </div>
                     <br>${codigo}<br>
+                    
                     <div class="table table-hover table-sm ">
                         <table class="bg-light ">
                             <thead class="align-content-center">

@@ -97,9 +97,9 @@ public class ActionContactos extends org.apache.struts.action.Action {
             contactosMantenimiento.guardarContacto(nombreContacto, direccionContacto, tipoContacto, telefonoContacto, emailContacto, encargadoContacto, telefonoEncargadoContacto, fechaRegistroContacto);
             List<Contactos> listaContacto = contactosMantenimiento.consultarTodosContactos();
             formBean.setListaContacto(listaContacto);
-            String codigo = "<ul class=\"nav nav-tabs\"><li class=\"nav-item \" ><a class=\"nav-link active\"style=\"background-color: #000; href=\"contactosMantenimiento.do?action=Consultar\">TODOS</a>\n"
-                    + "</li><li class=\"nav-item\"><a class=\"nav-link\" style=\"color: black;\" href=\"contactosMantenimiento.do?action=ConsultarTipo&tipoContacto=Cliente\">\n"
-                    + "Clientes</a></li><li class=\"nav-item\"><a class=\"nav-link\" style=\"color: black;\" href=\"contactosMantenimiento.do?action=ConsultarTipo&tipoContacto=Proveedor\">\n"
+            String codigo = "<ul class=\"nav nav-tabs\"><li class=\"nav-item \" ><a class=\"nav-link active\"style=\"background-color: #000;color: white \" href=\"contactosMantenimiento.do?action=Consultar\">todo</a>\n"
+                    + "</li><li class=\"nav-item\"><a class=\"nav-link\" style=\"color: white;\" href=\"contactosMantenimiento.do?action=ConsultarTipo&tipoContacto=Cliente\">\n"
+                    + "Clientes</a></li><li class=\"nav-item\"><a class=\"nav-link\" style=\"color: white;\" href=\"contactosMantenimiento.do?action=ConsultarTipo&tipoContacto=Proveedor\">\n"
                     + "Proveedores</a></li></ul>";
             request.setAttribute("codigo", codigo);
             String mensaje = "El Contacto \""+nombreContacto +"\" se agregó correctamente";
@@ -141,6 +141,11 @@ public class ActionContactos extends org.apache.struts.action.Action {
             } else {
                 List<Contactos> listaContacto = contactosMantenimiento.consultarTodosContactos();
                 formBean.setListaContacto(listaContacto);
+                String codigo = "<ul class=\"nav nav-tabs\"><li class=\"nav-item \" ><a class=\"nav-link active\" style=\"background-color: #000;color: white \" href=\"contactosMantenimiento.do?action=Consultar\">Todo</a>\n"
+                    + "</li><li class=\"nav-item\"><a class=\"nav-link\" style=\"color: white;\" href=\"contactosMantenimiento.do?action=ConsultarTipo&tipoContacto=Cliente\">\n"
+                    + "Clientes</a></li><li class=\"nav-item\"><a class=\"nav-link\" style=\"color: white;\" href=\"contactosMantenimiento.do?action=ConsultarTipo&tipoContacto=Proveedor\">\n"
+                    + "Proveedores</a></li></ul>";
+            request.setAttribute("codigo", codigo);
                 mensaje = (" Registro \"" + idContacto + "\" Eliminado Correctamente ");
                 request.setAttribute("mensaje", mensaje);
             }
@@ -184,9 +189,9 @@ public class ActionContactos extends org.apache.struts.action.Action {
             List<Contactos> listaContacto = contactosMantenimiento.consultarTodosContactos();
             formBean.setListaContacto(listaContacto);
             formBean.setError("<spam style='color:blue'>El registro se modificó correctamente" + " <br></span>");
-            String codigo = "<ul class=\"nav nav-tabs\"><li class=\"nav-item \" ><a class=\"nav-link active\" style=\"background-color: #000; href=\"contactosMantenimiento.do?action=Consultar\">Todo</a>\n"
-                    + "</li><li class=\"nav-item\"><a class=\"nav-link\" style=\"color: black;\" href=\"contactosMantenimiento.do?action=ConsultarTipo&tipoContacto=Cliente\">\n"
-                    + "Clientes</a></li><li class=\"nav-item\"><a class=\"nav-link\" style=\"color: black;\" href=\"contactosMantenimiento.do?action=ConsultarTipo&tipoContacto=Proveedor\">\n"
+            String codigo = "<ul class=\"nav nav-tabs\"><li class=\"nav-item \" ><a class=\"nav-link active\" style=\"background-color: #000;color: white \" href=\"contactosMantenimiento.do?action=Consultar\">Todo</a>\n"
+                    + "</li><li class=\"nav-item\"><a class=\"nav-link\" style=\"color: white;\" href=\"contactosMantenimiento.do?action=ConsultarTipo&tipoContacto=Cliente\">\n"
+                    + "Clientes</a></li><li class=\"nav-item\"><a class=\"nav-link\" style=\"color: white;\" href=\"contactosMantenimiento.do?action=ConsultarTipo&tipoContacto=Proveedor\">\n"
                     + "Proveedores</a></li></ul>";
             request.setAttribute("codigo", codigo);
             String mensaje = "El Contacto \""+nombreContacto +"\" se modificó correctamente";
@@ -211,9 +216,9 @@ public class ActionContactos extends org.apache.struts.action.Action {
                 return mapping.findForward(IR);
             } else {
                 formBean.setListaContacto(listaContacto);
-                String codigo = "<ul class=\"nav nav-tabs\" ><li class=\"nav-item \" ><a class=\"nav-link active\" style=\"background-color: #000; color: white \" href=\"contactosMantenimiento.do?action=Consultar\">Todo</a>\n"
-                        + "</li><li class=\"nav-item\"><a class=\"nav-link\" style=\"color: black;\" href=\"contactosMantenimiento.do?action=ConsultarTipo&tipoContacto=Cliente\">\n"
-                        + "Clientes</a></li><li class=\"nav-item\"><a class=\"nav-link\" style=\"color: black;\" href=\"contactosMantenimiento.do?action=ConsultarTipo&tipoContacto=Proveedor\">\n"
+                String codigo = "<ul class=\"nav nav-tabs\" ><li class=\"nav-item \" ><a class=\"nav-link active\" style=\"background-color: #000; color: white \" href=\"contactosMantenimiento.do?action=Consultar\">"
+                        + "Todo</a></li><li class=\"nav-item\"><a class=\"nav-link\" style=\"color: white;\" href=\"contactosMantenimiento.do?action=ConsultarTipo&tipoContacto=Cliente\">\n"
+                        + "Clientes</a></li><li class=\"nav-item\"><a class=\"nav-link\" style=\"color: white;\" href=\"contactosMantenimiento.do?action=ConsultarTipo&tipoContacto=Proveedor\">\n"
                         + "Proveedores</a></li></ul>";
                 request.setAttribute("codigo", codigo);
                 IR = LISTA;
@@ -226,14 +231,14 @@ public class ActionContactos extends org.apache.struts.action.Action {
             cman.tipos(tipoContacto);
             String codigo = "";
             if (tipoContacto.equals("Cliente")) {
-                codigo = "<ul class=\"nav nav-tabs\" ><li class=\"nav-item \" ><a class=\"nav-link \" style=\"color: black;\" href=\"contactosMantenimiento.do?action=Consultar\">Todo</a>\n"
+                codigo = "<ul class=\"nav nav-tabs\" ><li class=\"nav-item \" ><a class=\"nav-link \" style=\"color: white;\" href=\"contactosMantenimiento.do?action=Consultar\">Todo</a>\n"
                         + "</li><li class=\"nav-item\"><a class=\"nav-link active\" style=\"background-color: #000; color: white \" href=\"contactosMantenimiento.do?action=ConsultarTipo&tipoContacto=Cliente\">\n"
-                        + "Clientes</a></li><li class=\"nav-item\"><a class=\"nav-link\" style=\"color: black;\" href=\"contactosMantenimiento.do?action=ConsultarTipo&tipoContacto=Proveedor\">\n"
+                        + "Clientes</a></li><li class=\"nav-item\"><a class=\"nav-link\" style=\"color: white;\" href=\"contactosMantenimiento.do?action=ConsultarTipo&tipoContacto=Proveedor\">\n"
                         + "Proveedores</a></li></ul>";
             }
             if (tipoContacto.equals("Proveedor")) {
-                codigo = "<ul class=\"nav nav-tabs\"><li class=\"nav-item \" ><a class=\"nav-link\" style=\"color: black;\" href=\"contactosMantenimiento.do?action=Consultar\">Todo</a>\n"
-                        + "</li><li class=\"nav-item\"><a class=\"nav-link\" style=\"color: black;\" href=\"contactosMantenimiento.do?action=ConsultarTipo&tipoContacto=Cliente\">\n"
+                codigo = "<ul class=\"nav nav-tabs\"><li class=\"nav-item \" ><a class=\"nav-link\" style=\"color: white;\" href=\"contactosMantenimiento.do?action=Consultar\">Todo</a>\n"
+                        + "</li><li class=\"nav-item\"><a class=\"nav-link\" style=\"color: white;\" href=\"contactosMantenimiento.do?action=ConsultarTipo&tipoContacto=Cliente\">\n"
                         + "Clientes</a></li><li class=\"nav-item\"><a class=\"nav-link active\" style=\"background-color: #000; color: white \" href=\"contactosMantenimiento.do?action=ConsultarTipo&tipoContacto=Proveedor\">\n"
                         + "Proveedores</a></li></ul>";
             }

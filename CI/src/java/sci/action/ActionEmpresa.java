@@ -17,10 +17,10 @@ import sci.persistencia.Empresa;
 
 public class ActionEmpresa extends org.apache.struts.action.Action {
 
-    private static final String LISTA = "irLista";
-    private static final String INICIO = "irInicio";
-    private static final String AGREGAR = "irAgregar";
-    private static final String MODIFICAR = "irModificar";
+    private static final String LISTA = "irListaEmpresa";
+    private static final String INICIO = "irInicioEmpresa";
+    private static final String AGREGAR = "irAgregarEmpresa";
+    private static final String MODIFICAR = "irModificarEmpresa";
 
     @Override
     public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)

@@ -137,98 +137,100 @@
         <div class="container">
             <div class="container">
                 <div class="row">
-                    <div class="col-12">
-                        <br>
-                        <div class="col-6">
-                            <div class=" col-auto">
-                                <div class="card">
-                                    <div class="card-header" style="background-color: #D8D8D8;"><h1 class="font-weight-bold">Agregar Contacto</h1></div>
-                                </div> 
-                            </div>
-                        </div>
+                    <div class="col-12 text-center">
+                        <div class="card-header" style="color: white"><h1 class="font-weight-bold">Modificar Contacto</h1></div>
+
                         <br>
                         <html:form action="/contactosMantenimiento"> 
-                            <div class="row">
-                                <div class="form-group col-md-6">
-                                    <label class="font-weight-bold">Nombre del contacto:</label><br>
-                                    <html:text property="nombreContacto" styleClass="form-control"></html:text><br>
-                                    </div>
-
-                                    <div class="form-group col-md-5">
-                                        <label class="font-weight-bold">Email del contacto:</label><br>
-                                        <input type="email" name="emailContacto" class="form-control"><br>
-                                    </div>
-                                </div>
-                                <div class="row"> 
-                                    <div class="form-group col-md-6">
-                                        <label class="font-weight-bold">Direccion del contacto:</label><br>
-                                    <html:text property="direccionContacto" styleClass="form-control"></html:text> <br>
-                                    </div>                                    
-
-                                    <div class="form-group col-md-5">
-                                        <label class="font-weight-bold">Telefono del contacto:</label><br>
-                                    <html:text property="telefonoContacto" styleClass="form-control"></html:text><br>
-                                    </div>
-                                </div> 
+                            <div class="card-header" style="background-color:#f0f3f4;">
                                 <div class="row">
                                     <div class="form-group col-md-6">
-                                        <label class="font-weight-bold">Encargado:</label><br>
-                                    <html:text property="encargadoContacto" styleClass="form-control"></html:text><br>
+                                        <label class="font-weight-bold">Contacto:</label><br>
+                                        <html:text property="nombreContacto" styleClass="form-control"></html:text><br>
+                                        </div>
+
+                                        <div class="form-group col-md-5">
+                                            <label class="font-weight-bold">Email:</label><br>
+                                        <html:text property="emailContacto" styleClass="form-control"></html:text><br> 
+                                        </div>
                                     </div>
-                                    <div class="form-group col-md-5">
-                                        <label class="font-weight-bold">Telefono del encargado:</label><br>
-                                    <html:text property="telefonoEncargadoContacto" styleClass="form-control"></html:text><br>
-                                    </div>
-                                </div> 
-                                <label class="font-weight-bold">Tipo de contacto:</label><br>
-                                <div class="row">    
-                                    <div class="form-group col-md-4">
-                                    <html:select property="tipoContacto" styleClass="form-control">
-                                        <html:option value="Seleccionar"></html:option> 
-                                        <html:option value="Cliente">Cliente</html:option> 
-                                        <html:option value="Proveedor">Proveedor</html:option>
-                                    </html:select><br>
-                                    <html:hidden property="idContacto" ></html:hidden>
-                                    <html:hidden property="fechaRegistroContacto"></html:hidden> 
-                                    </div>
-                                    <div class="form-group col-md-1">
-                                        <div class="form-group col-md-auto">
-                                        <html:submit property="action" value="Modificar" styleClass="btn  font-weight-bold" style="background-color: #04B404;"/>
+                                    <div class="row"> 
+                                        <div class="form-group col-md-6">
+                                            <label class="font-weight-bold">Direccion:</label><br>
+                                        <html:text property="direccionContacto" styleClass="form-control"></html:text> <br>
+                                        </div>                                    
+
+                                        <div class="form-group col-md-5">
+                                            <label class="font-weight-bold">Telefono contacto:</label><br>
+                                        <html:text property="telefonoContacto" styleClass="form-control"></html:text><br>
+                                        </div>
+                                    </div> 
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            <label class="font-weight-bold">Encargado:</label><br>
+                                        <html:text property="encargadoContacto" styleClass="form-control"></html:text><br>
+                                        </div>
+                                        <div class="form-group col-md-5">
+                                            <label class="font-weight-bold">Telefono encargado:</label><br>
+                                        <html:text property="telefonoEncargadoContacto" styleClass="form-control"></html:text><br>
+                                        </div>
+                                    </div> 
+                                    <div class="row">    
+                                        <div class="form-group col-md-4"></div>
+                                        <div class="form-group col-md-4">
+                                            <label class="font-weight-bold">Tipo de contacto:</label><br>
+                                        <html:select property="tipoContacto" styleClass="form-control">
+                                            <html:option value="Cliente">Cliente</html:option> 
+                                            <html:option value="Proveedor">Proveedor</html:option>
+                                        </html:select><br>
+
                                     </div>
                                 </div>
                             </div>
-                        </html:form>
-                    </div>
+                                        <br>
+                                <div class="row">  
+                                    <html:hidden property="idContacto" ></html:hidden>
+                                    <html:hidden property="fechaRegistroContacto"></html:hidden> 
+
+                                    </div>  
+
+                                    <div class="form-group col-md-auto">
+                                    <html:submit property="action" value="Modificar" styleClass="btn  font-weight-bold" style="background-color:#f0f3f4; color: black"/>
+                                </div>
+                            </div>
+                        </div>
+                    </html:form>
                 </div>
             </div>
         </div>
-        <div id="error">${error}</div>
-        <script type="text/javascript">
-            if ($("#error").text() != "") {
-                window.onload = function () {
-                    toastrs();
-                };
-            }
-            ;
-            toastr.options = {
-                "debug": false,
-                "positionClass": "toast-bottom-right",
-                "onclick": null,
-                "fadeIn": 300,
-                "fadeOut": 100,
-                "timeOut": 5000,
-                "extendedTimeOut": 1000
+    </div>
+    <div id="error">${error}</div>
+    <script type="text/javascript">
+        if ($("#error").text() != "") {
+            window.onload = function () {
+                toastrs();
             };
-            var showToastrs = false;
-            function toastrs() {
-                if (!showToastrs) {
-                    toastr.error($("#error").text(), 'Error');
-                } else {
-                    toastr.error('no se puede!\'t.', 'Otro error crítico');
-                }
+        }
+        ;
+        toastr.options = {
+            "debug": false,
+            "positionClass": "toast-bottom-right",
+            "onclick": null,
+            "fadeIn": 300,
+            "fadeOut": 100,
+            "timeOut": 5000,
+            "extendedTimeOut": 1000
+        };
+        var showToastrs = false;
+        function toastrs() {
+            if (!showToastrs) {
+                toastr.error($("#error").text(), 'Error');
+            } else {
+                toastr.error('no se puede!\'t.', 'Otro error crítico');
             }
-        </script>
-    </body>
+        }
+    </script>
+</body>
 </html>
 
 

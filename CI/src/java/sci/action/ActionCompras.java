@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import metodos.Login;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -19,18 +20,12 @@ import sci.mantenimientos.InventarioMantenimiento;
 import sci.persistencia.Compras;
 import sci.persistencia.Inventario;
 
-
-/**
- *
- * @author guillermo.bermudes
- */
 public class ActionCompras extends org.apache.struts.action.Action {
 
-   
-    private static final String ERROR = "confirmacionErrorF";
-    private static final String IR = "juimonos";
-    private static final String MODIFICAR= "modificarF";
-
+    private static final String INICIO = "irInicioCompras";
+    private static final String LISTA = "listaCompras";
+    private static final String MODIFICAR = "irModificarCompras";
+    private static final String AGREGAR = "irAgregarCompras";
 
     SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -43,133 +38,147 @@ public class ActionCompras extends org.apache.struts.action.Action {
         Integer idCompra = formBean.getIdCompra();
         String nDocumento = formBean.getnDocumento();
         Integer idContacto = formBean.getIdContacto();
-        Integer idInventario= formBean.getIdInventario();
-        Double  cantidad = formBean.getCantidad();
-        Integer idIva= formBean.getIdIva();
+        Integer idInventario = formBean.getIdInventario();
+        Double cantidad = formBean.getCantidad();
+        Integer idIva = formBean.getIdIva();
         Integer idProducto = formBean.getIdProducto();
         String fechaCompra = formato.format(new Date());
-        Double totalCompra= formBean.getTotalCompra();
+        Double totalCompra = formBean.getTotalCompra();
         String action = formBean.getAction();
 
+        String IR = null;
+        
         if (formBean == null || action == null) {
             System.out.println("Error entre formBean o action null");
-            return mapping.findForward(ERROR);
+            IR=INICIO;
         }
-//--------------------------------------------------------
-            System.out.println(idCompra);
-            System.out.println(idContacto);
-            System.out.println(idInventario);
-            System.out.println(idIva);
-            System.out.println(idProducto);
-            System.out.println(totalCompra);
 //------------------------------------------------------
-        System.out.println("El action trae: "+action);
+        System.out.println("El action trae: " + action);
         if (action.equals("Agregar")) {
             String advertencia = "";
 
-            if (idContacto== null || idContacto.equals("")) {
+            if (idContacto == null || idContacto.equals("")) {
                 advertencia = "id de compras  es requerido<br>";
             }
             if (idInventario == null || idInventario.equals("")) {
                 advertencia += "*id inventario es requerido<br>";
             }
-            if (idIva== null || idIva.equals("")) {
+            if (idIva == null || idIva.equals("")) {
                 advertencia += "id iva  es requerido<br>";
             }
-             if (idProducto== null || idProducto.equals("")) {
+            if (idProducto == null || idProducto.equals("")) {
                 advertencia += "*id productos es requerido<br>";
             }
-             if (totalCompra== null || totalCompra.equals("")) {
+            if (totalCompra == null || totalCompra.equals("")) {
                 advertencia += "*id total de compra es requerido<br>";
             }
 
-            
-
             if (!advertencia.equals("")) {
-                formBean.setError("<span style='color:red'>Por favor complete los espacios vacios" + "<br>" + advertencia + "</span>");
-                return mapping.findForward(ERROR);
+               IR = AGREGAR;
+               request.setAttribute("nombre", Login.nombre);
+                request.setAttribute("nAcceso", Login.nAcceso);
+                request.setAttribute("id", Login.id);
+                return mapping.findForward(IR);
             }
             ComprasMantenimiento comprasMantenimiento = new ComprasMantenimiento();
             InventarioMantenimiento inventario = new InventarioMantenimiento();
-            Inventario  inv=   inventario.consultarInventarioId(idInventario);
-            
-            
+            Inventario inv = inventario.consultarInventarioId(idInventario);
+
             Double existenciaup;
-            existenciaup = ( inv.getExistencia()+cantidad);
-              
+            existenciaup = (inv.getExistencia() + cantidad);
+
             int idProductos = (inv.getProductos().getIdProducto());
-            Double existencia=(existenciaup);
-            String estadoExistencia=(inv.getEstadoExistencia());
-            int stockMinimo=(inv.getStockMinimo());
-            String estadoFisico=(inv.getEstadoFisico());
-            
+            Double existencia = (existenciaup);
+            String estadoExistencia = (inv.getEstadoExistencia());
+            int stockMinimo = (inv.getStockMinimo());
+            String estadoFisico = (inv.getEstadoFisico());
+
             inventario.modificarInventario(idInventario, idProductos, existencia, estadoExistencia, stockMinimo, estadoFisico);
-              
-         
-         
-         
-                
-           
-   comprasMantenimiento.guardarcompras(idCompra,nDocumento ,idContacto, idInventario,cantidad, idIva, idProducto, fechaCompra, totalCompra);
-            
-   
-   List<Compras> listaCompras = comprasMantenimiento.consultarTodoCompras();
+
+            comprasMantenimiento.guardarcompras(idCompra, nDocumento, idContacto, idInventario, cantidad, idIva, idProducto, fechaCompra, totalCompra);
+
+            List<Compras> listaCompras = comprasMantenimiento.consultarTodoCompras();
             formBean.setListaCompras(listaCompras);
             String mensaje = "<span style='color:red'>Agregado Correcto" + "<br></span>";
             request.setAttribute("mensaje", mensaje);
-           return mapping.findForward(IR);
+            IR= LISTA;
         }
 //----------------------------------------------------------------------
         if (action.equals("Modificar")) {
-            ComprasMantenimiento comprasMantenimiento = new ComprasMantenimiento();
-
-            Compras compras= (Compras) comprasMantenimiento.consultarComprasId(idCompra);
            
-                formBean.setIdCompra(compras.getIdCompra());
-                formBean.setnDocumento(nDocumento);
-               formBean.setIdContacto(compras.getContactos().getIdContacto());
-               formBean.setIdInventario(compras.getInventario().getIdInventario());
-               formBean.setCantidad(cantidad);
-               formBean.setIdIva(compras.getIva().getIdIva());
-                formBean.setIdProducto(compras.getProductos().getIdProducto());
-               
-                return mapping.findForward(MODIFICAR);
+      String advertencia = "";
+
+            if (idContacto == null || idContacto.equals("")) {
+                advertencia = "id de compras  es requerido<br>";
             }
+            if (idInventario == null || idInventario.equals("")) {
+                advertencia += "*id inventario es requerido<br>";
+            }
+            if (idIva == null || idIva.equals("")) {
+                advertencia += "id iva  es requerido<br>";
+            }
+            if (idProducto == null || idProducto.equals("")) {
+                advertencia += "*id productos es requerido<br>";
+            }
+            if (totalCompra == null || totalCompra.equals("")) {
+                advertencia += "*id total de compra es requerido<br>";
+            }
+
+            if (!advertencia.equals("")) {
+               IR = MODIFICAR;
+               request.setAttribute("nombre", Login.nombre);
+                request.setAttribute("nAcceso", Login.nAcceso);
+                request.setAttribute("id", Login.id);
+                return mapping.findForward(IR);
+            }
+             ComprasMantenimiento comprasMantenimiento = new ComprasMantenimiento();
+             List<Compras> listaCompras = comprasMantenimiento.consultarTodoCompras();
+             formBean.setListaCompras(listaCompras);
+            IR = LISTA;
+        }
         //----------------------------------------------------------------------
-           if (action.equals("Eliminar")) {
+        if (action.equals("Eliminar")) {
             ComprasMantenimiento comprasMantenimiento = new ComprasMantenimiento();
             comprasMantenimiento.eliminarCompras(idCompra);
             List<Compras> listaCompras = comprasMantenimiento.consultarTodoCompras();
-           
+
             formBean.setListaCompras(listaCompras);
             System.out.println("desde eliminar");
             return mapping.findForward(IR);
-         }
-          //----------------------------------------------------------------------
-           if (action.equals("Consultar")) {
-           ComprasMantenimiento comprasMantenimiento = new ComprasMantenimiento();
-            //Acceso acceso = new Acceso();
+        }
+        //----------------------------------------------------------------------
+        if (action.equals("Consultar")) {
+            ComprasMantenimiento comprasMantenimiento = new ComprasMantenimiento();
+       
             List<Compras> listaCompras = comprasMantenimiento.consultarTodoCompras();
 
             if (listaCompras == null) {
                 formBean.setError("<spam style='color:red'> la lista viene vacia " + "<br></spam>");
-                return mapping.findForward(ERROR);
+                IR = LISTA;
+                request.setAttribute("nombre", Login.nombre);
+                request.setAttribute("nAcceso", Login.nAcceso);
+                request.setAttribute("id", Login.id);
+                return mapping.findForward(IR);
             } else {
                 formBean.setListaCompras(listaCompras);
-                return mapping.findForward(IR);
+                IR = LISTA;
             }
-              }
-           if (action.equals("Actualizar")) {
-               ComprasMantenimiento comprasMantenimiento = new ComprasMantenimiento();
-               String mensaje = "<span style='color:red'>Actualizado Correcto" + "<br></span>";
+        }
+        //----------------------------------------------------------------------
+        /*if (action.equals("Actualizar")) {
+            ComprasMantenimiento comprasMantenimiento = new ComprasMantenimiento();
+            String mensaje = "<span style='color:red'>Actualizado Correcto" + "<br></span>";
             request.setAttribute("mensaje", mensaje);
-           
-           comprasMantenimiento.ModificarCompras(idCompra,nDocumento ,idContacto, idInventario,cantidad, idIva, idProducto, fechaCompra, totalCompra);
+
+            comprasMantenimiento.ModificarCompras(idCompra, nDocumento, idContacto, idInventario, cantidad, idIva, idProducto, fechaCompra, totalCompra);
             List<Compras> listaCompras = comprasMantenimiento.consultarTodoCompras();
             formBean.setListaCompras(listaCompras);
-           return mapping.findForward(IR);
-           }
-          
-return null;
+            return mapping.findForward(LISTA);
+        }
+*/
+        request.setAttribute("nombre", Login.nombre);
+        request.setAttribute("nAcceso", Login.nAcceso);
+        request.setAttribute("id", Login.id);
+        return mapping.findForward(IR);
     }
 }

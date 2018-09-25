@@ -11,7 +11,7 @@
 <!-- // Acceso -->
         <form-bean name = "ActionFormAcceso"            type = "sci.actionforms.ActionFormAcceso" />
 <!-- // Compras -->
-        <form-bean name = ""                            type = "" />
+        <form-bean name = "ActionFormCompras"           type = "sci.actionforms.ActionFormCompras" />
 <!-- // Configuracion -->        
         <form-bean name = "ActionFormConfiguracion"     type = "sci.actionforms.ActionFormConfiguracion" />
 <!-- // Contactos -->        
@@ -50,6 +50,10 @@
         <forward name = "irAyuda3Acceso"        path = "/jsp/acceso/ayuda3.jsp"/>
         <forward name = "irPerfil"              path = "/jsp/acceso/perfil.jsp"/>
 <!-- // Compras -->
+        <forward name = "irInicioCompras"       path = "/jsp/compras/Inicio.jsp"/>
+        <forward name = "irInicioCompras"       path = "/jsp/compras/Inicio.jsp"/>
+        <forward name = "irInicioCompras"       path = "/jsp/compras/Inicio.jsp"/>        
+        <forward name = "irInicioCompras"       path = "/jsp/compras/Inicio.jsp"/>       
 <!-- // Configuracion -->
         <forward name = "modificarConfig"       path = "/jsp/configuracion/modificarConfiguracion.jsp"/>
         <forward name = "inicioConfig"          path = "/jsp/configuracion/inicio.jsp"/>
@@ -60,15 +64,15 @@
         <forward name = "irAgregarContactos"    path = "/jsp/contactos/agregarContactos.jsp"/>   
         <forward name = "irInicioContactos"     path = "/jsp/contactos/inicio.jsp"/>
 <!-- // Empresa -->
-        <forward name = "irInicio"              path = "/jsp/empresa/inicio.jsp"/>
-        <forward name = "irLista"               path = "/jsp/empresa/listaEmpresa.jsp"/>
-        <forward name = "irAgregar"             path = "/jsp/empresa/agregarEmpresa.jsp"/>
+        <forward name = "irInicioEmpresa"              path = "/jsp/empresa/inicio.jsp"/>
+        <forward name = "irListaEmpresa"               path = "/jsp/empresa/listaEmpresa.jsp"/>
+        <forward name = "irAgregarEmpresa"             path = "/jsp/empresa/agregarEmpresa.jsp"/>
         <forward name = "irModificar"           path = "/jsp/empresa/modificarEmpresa.jsp"/>
 <!-- // Fabricantes -->
         <forward name = "irInicioFabricantes"   path = "/jsp/fabricante/inicio.jsp"/>
         <forward name = "irAgregarFabricantes"  path = "/jsp/fabricante/agregarFabricante.jsp"/>
         <forward name = "irModificarFabricantes" path= "/jsp/fabricante/modificarFabricante.jsp"/>
-        <forward name = "irListaFabricantes"    path = "/jsp/fabricante/listaFabricantes.jsp"/>
+        <forward name = "irModificarEmpresa"    path = "/jsp/fabricante/listaFabricantes.jsp"/>
 <!-- // FacturaDetalle -->        
 <!-- // FacturaEncabezado -->        
 <!-- // Inventario -->        
@@ -95,8 +99,8 @@
       <action   name = "ActionFormAcceso"           path = "/accesoMantenimiento" 
                scope = "request"                    type = "sci.action.ActionAcceso"/>
 <!--// Compras -->     
-      <action   name = ""                           path = "/" 
-               scope = "request"                    type = ""/>
+      <action   name = "ActionFormCompras"          path = "/comprasMantenimiento" 
+               scope = "request"                    type = "sci.action.ActionCompras"/>
  <!--// Configuracion -->      
         <action name = "ActionFormConfiguracion"    path = "/configuracionMantenimiento" 
                scope = "request"                    type = "sci.action.ActionConfiguracion"/>

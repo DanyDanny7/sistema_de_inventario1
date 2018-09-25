@@ -16,9 +16,16 @@
 
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Mantenimiento de Inventario</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
+        <script src="js/popper.min.js" type="text/javascript"></script>
+        <script src="js/bootstrap.js" type="text/javascript"></script>
+        <script src="http://codeseven.github.com/toastr/toastr.js"></script>
+        <link href="http://codeseven.github.com/toastr/toastr.css" rel="stylesheet"/>
+        <link href="http://codeseven.github.com/toastr/toastr-responsive.css" rel="stylesheet"/>
     </head>
     <body background="img/fondos/fondo1.jpg">
-<div class="container-fluid">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
                     <div> 
@@ -128,62 +135,22 @@
             </div>
 
         </div>
-                                        
+
         <html:form action="/comprasMantenimiento">
-
-           
-
-             
-                   
-                        
-                        <td>id Compras </td>
-                        <td><html:text property="idCompra" size="20" ></html:text>  </td> 
-                            
-                        
-                         
-
-                    <tr>
-                       <td>id Contactos </td>
-                        <td><html:text property="idContacto" size="20" ></html:text>   
- 
-                        
-                    </tr>
-                         
-                        </tr>
-                        <tr>
-
-                            <td>id Inventario </td>
-                            <td><html:text property="idInventario" size="20" ></html:text>   
-
-                            <td> 
-
-                        </tr>
-                        <tr>
-
-                            <td>id Iva  </td>
-                            <td><html:text property="idIva" size="20" ></html:text>   
-
-                            <td> 
-
-                        </tr>
-                        <tr>
-                            <td>id productos</td>
-                            <td><html:text property="idProducto" size="20" ></html:text> 
-                        </tr>
-                        <tr>
-                            <td>total de compra</td>
-                            <td><html:text property="totalCompra" size="20" ></html:text> 
-                        </tr>
-                        
-                       
-                           
-                        <tr>
-
-                        <tr colspan="2">
-                        <bean:write name="ActionFormCompras" property="error" filter="false"/>
-                    </tr>
-                </tbody>  
-            </table>
+            
+            id Compras 
+            <html:text property="idCompra" size="20" ></html:text> 
+                id Contactos 
+            <html:text property="idContacto" size="20" ></html:text>   
+                id Inventario 
+            <html:text property="idInventario" size="20" ></html:text>   
+                id Iva  
+            <html:text property="idIva" size="20" ></html:text>   
+                id productos
+            <html:text property="idProducto" size="20" ></html:text> 
+                total de compra
+            <html:text property="totalCompra" size="20" ></html:text> 
+            <bean:write name="ActionFormCompras" property="error" filter="false"/>
 
             <html:submit property="action" value="Agregar"/>
 
