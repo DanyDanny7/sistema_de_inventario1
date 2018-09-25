@@ -14,7 +14,12 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>ModificarMoneda</title>
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
+        <script src="js/popper.min.js" type="text/javascript"></script>
+        <script src="js/bootstrap.js" type="text/javascript"></script>
+        <script src="http://codeseven.github.com/toastr/toastr.js"></script>
+        <link href="http://codeseven.github.com/toastr/toastr.css" rel="stylesheet"/>
+        <link href="http://codeseven.github.com/toastr/toastr-responsive.css" rel="stylesheet"/>
     </head>
     <body background="img/fondos/fondo1.jpg">
         <div class="container-fluid">
@@ -127,41 +132,57 @@
             </div>
 
         </div>
-                                        
-        <h1>Modificar Moneda</h1>
+
         <div class="container">
             <div class="row">
-                <div class="col-1"></div>
-                <div class="col-10">
+                <div class="col-12 text-center">
+                    <div class="card-header" style="color: white"><h1 class="font-weight-bold">Agregar Moneda</h1></div>
+                    <br>
                     <html:form action="/monedaMantenimiento">
-                        <table>
-                            <tr>
-                            <label>Nombre de la Moneda : </label><br>
-                            <html:text property="nombreMoneda"></html:text><br><br>
-                                <label>Simbolo de la Moneda : </label><br>
-                            <html:text property="simboloMoneda"></html:text><br><br>
-                                <label>Codigo de la Moneda : </label><br>
-                            <html:text property="codigoMoneda"></html:text><br><br>
-                                <label>Equivalencia : </label><br>
-                            <html:text property="equivalencia"></html:text><br><br>
-                                <label>Moneda de Referencia de Cambio:</label><br>
-                            <html:select property="monedaReferencia">
-                                    <logic:notEmpty name="ActionFormMoneda" property="listaMoneda">
-                                        <logic:iterate id="ver" name="ActionFormMoneda" property="listaMoneda">
-                                        <html:option value="${ver.nombreMoneda}" ></html:option>
-                                        </logic:iterate>
-                                    </logic:notEmpty>
-                            </html:select><br><br>
+                        <div class="card-header" style="background-color:#f0f3f4;">
+                            <div class="row">
+                                <div class="form-group col-5">
+                                    <label class="font-weight-bold">Nombre Moneda : </label><br>
+                                    <html:text property="nombreMoneda" styleClass="form-control"></html:text><br>
+                                    </div>
+                                    <div class="form-group col-3">
+                                        <label class="font-weight-bold">Simbolo : </label><br>
+                                    <html:text property="simboloMoneda" styleClass="form-control"></html:text><br>
+                                    </div>
+                                    <div class="form-group col-3">
+                                        <label class="font-weight-bold">Codigo de la Moneda : </label><br>
+                                    <html:text property="codigoMoneda" styleClass="form-control"></html:text><br>
+                                    </div>
+                                </div>    
+                                <div class="row">
+                                    <div class="form-group col-3"></div>
+                                    <div class="form-group col-3">
+                                        <label class="font-weight-bold">Equivalencia : </label><br>
+                                    <html:text property="equivalencia" styleClass="form-control" ></html:text><br>
+                                    </div>
+                                    <div class="form-group col-3">
+                                        <label class="font-weight-bold">Moneda de Cambio:</label><br>
+                                    <html:select property="monedaReferencia" styleClass="form-control">
+                                        <html:option value="Seleccionar"></html:option>
+                                        <logic:notEmpty name="ActionFormMoneda" property="listaMoneda">
+                                            <logic:iterate id="ver" name="ActionFormMoneda" property="listaMoneda">
+                                                <html:option value="${ver.nombreMoneda}" ></html:option>
+                                            </logic:iterate>
+                                        </logic:notEmpty>
+                                    </html:select>
+                                    <br>
+                                </div> 
+                            </div>        
 
                             <bean:write name="ActionFormMoneda" property="error" filter="false"></bean:write>
-                                </tr>
-                            <html:submit property="action" value="modificar"/>
+                            </div>
+                            <br>
+                        <html:submit property="action" value="modificar"  styleClass="btn  font-weight-bold" style="background-color:#f0f3f4; color: black"/>
 
                         </table>
 
                     </html:form>
 
-                    <html:link page="/jsp/moneda/inicio.jsp">Inicio</html:link>
                     <h5>${error}</h5>
                 </div>
                 <div class="col-1"></div>

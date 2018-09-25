@@ -14,8 +14,14 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Lista Moneda</title>
-        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
+        <script src="js/popper.min.js" type="text/javascript"></script>
+        <script src="js/bootstrap.js" type="text/javascript"></script>
+        <script src="http://codeseven.github.com/toastr/toastr.js"></script>
+        <link href="http://codeseven.github.com/toastr/toastr.css" rel="stylesheet"/>
+        <link href="http://codeseven.github.com/toastr/toastr-responsive.css" rel="stylesheet"/>
     </head>
     <body background="img/fondos/fondo1.jpg">
         <div class="container-fluid">
@@ -130,37 +136,39 @@
         </div>
         <div class="container">
             <div class="row">
-                <div class="col-12">
-                    <div class="table table-striped">
-                        <br>
+                <div class="col-12 text-center">
+                   
+                    <div class="card-header primary" style="color: white;"><h1 class="font-weight-bold " >LISTA MONEDA</h1></div>
+
+                    <div class="table table-hover table-md">
                         <bean:write name="ActionFormMoneda" property="mensaje" filter="false"></bean:write>
-                        <br>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <td>Nombre </td>
-                                    <td>Simbolo </td>
-                                    <td>Codigo</td>
-                                    <td>Equivalencia</td>
-                                    <td>Moneda de Referencia</td>
-                                    <td></td>
-                                    <td></td>
+                         
+                            <table class="bg-light ">
+                                <thead class="text-uppercase">
+                                    <tr class="table-default" style="background-color: #000; color: white;font-family: Arial">
+                                        <th>Nombre </th>
+                                        <th>Simbolo </th>
+                                        <th>Codigo</th>
+                                        <th>Equivalencia</th>
+                                        <th>Moneda de Referencia</th>
+                                        <th></th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 <logic:notEmpty name="ActionFormMoneda" property="listaMoneda">
                                     <logic:iterate id="ver" name="ActionFormMoneda" property="listaMoneda" >
-                                        <tr>
+                                        <tr style="background-color: #DCDCDC;">
                                             <html:form action = "/monedaMantenimiento" >
-                                                <td><bean:write name="ver" property="nombreMoneda"/>
-                                                    <div hidden="hidden"><html:text name="ver" property="nombreMoneda" styleClass="hidden"/></div></td>
+                                                <th scope="row"><bean:write name="ver" property="nombreMoneda"/>
+                                                    <div hidden="hidden"><html:text name="ver" property="nombreMoneda" styleClass="hidden"/></div></th>
 
                                                 <td><bean:write name="ver" property="simboloMoneda"/></td>
                                                 <td><bean:write name="ver" property="codigoMoneda"/></td>
                                                 <td><bean:write name="ver" property="equivalencia"/></td>
                                                 <td><bean:write name="ver" property="monedaReferencia"/></td>
-                                                <td><html:submit property="action" value="eliminar"/></td>
-                                                <td><html:submit property="action" value="consultarId"/></td>
+                                                <td><html:submit property="action" value="eliminar" styleClass="btn btn-secondary font-weight-bold" style="color: white;font-family: Arial"/></td>
+                                                <td><html:submit property="action" value="consultarId" styleClass="btn btn-secondary font-weight-bold" style="color: white;font-family: Arial"/></td>
 
                                             </html:form > 
                                         </tr>
@@ -168,9 +176,6 @@
                                 </logic:notEmpty>
                             </tbody>
                         </table>
-                        <html:link page="/index.jsp">Index</html:link><br>
-                        <html:link page="/jsp/moneda/inicio.jsp">Moneda</html:link><br><br>
-
                     </div>
                 </div>
             </div>

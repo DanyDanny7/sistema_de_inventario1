@@ -136,27 +136,54 @@
 
         </div>
 
-        <html:form action="/comprasMantenimiento">
-            
-            id Compras 
-            <html:text property="idCompra" size="20" ></html:text> 
-                id Contactos 
-            <html:text property="idContacto" size="20" ></html:text>   
-                id Inventario 
-            <html:text property="idInventario" size="20" ></html:text>   
-                id Iva  
-            <html:text property="idIva" size="20" ></html:text>   
-                id productos
-            <html:text property="idProducto" size="20" ></html:text> 
-                total de compra
-            <html:text property="totalCompra" size="20" ></html:text> 
-            <bean:write name="ActionFormCompras" property="error" filter="false"/>
+        <br>
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <div class="card-header" style="color: white"><h1 class="font-weight-bold">AGREGAR ACCESO</h1></div>
+                    <br>
+                    <html:form action="/comprasMantenimiento">
+                        <div class="card-header" style="background-color:#f0f3f4;">
 
-            <html:submit property="action" value="Agregar"/>
+                            <div class="row">
+                                <div class="form-group col-3">
+                                    <label class="font-weight-bold">id Contactos:</label>
+                                    <html:text property="idContacto" styleClass="form-control" ></html:text>  
+                                    </div>
+                                    <div class="form-group col-3">
+                                        <label class="font-weight-bold">id Inventario:</label> 
+                                    <html:text property="idInventario" styleClass="form-control"></html:text> 
+                                    </div>
+                                    <div class="form-group col-3">
+                                        <label class="font-weight-bold">id Iva:</label>  
+                                    <html:text property="idIva" styleClass="form-control"></html:text> 
+                                    </div>
+                                    <div class="form-group col-3">
+                                        <label class="font-weight-bold">id productos:</label>
+                                    <html:text property="idProducto" styleClass="form-control" ></html:text> 
+                                    </div>
+                                    <div class="form-group col-3">
+                                        <label class="font-weight-bold">total de compra:</label>
+                                    <html:text property="totalCompra"styleClass="form-control" ></html:text> 
+                                    </div>
 
-            <html:submit property="action" value="Consultar"/>
+                                <bean:write name="ActionFormCompras" property="error" filter="false"/>
+                            </div>
+                        </div>
+                        <div hidden="hidden">
+                            <html:text property="idCompra" size="20" ></html:text>                   
+                            </div>
 
-        </html:form>
-        <html:link page="/index.jsp">Index</html:link>
+
+                        <html:submit property="action" value="Agregar" styleClass="btn  font-weight-bold" style="background-color:#f0f3f4; color: black"/>
+
+                        <html:submit property="action" value="Consultar" styleClass="btn  font-weight-bold" style="background-color:#f0f3f4; color: black"/>
+
+                    </html:form>
+
+                </div>
+            </div>
+        </div>
+
     </body>
 </html>
