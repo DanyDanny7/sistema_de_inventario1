@@ -183,18 +183,13 @@
                                 <div class="row">
                                     <div class="form-group col-6">
                                         <label class="font-weight-bold">E-Mail : </label><br>
-                                        <input type="email" name="email" class="form-control"><br>
+                                        <html:text property="eMail" styleClass="form-control"></html:text><br>
                                     </div>
                                     <div class="form-group col-6">
                                         <label class="font-weight-bold">Contraseña : </label><br>
                                     <html:text property="contrasena" styleClass="form-control"></html:text><br>
                                     </div>
                                 </div>
-
-
-
-
-
                             <bean:write name="ActionFormAcceso" property="error" filter="false"/>    
                         </div>
 
