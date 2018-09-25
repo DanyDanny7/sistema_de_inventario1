@@ -129,7 +129,7 @@
                                         
         <h3 class="font-weight-bold">Formulario de productos</h3>
         <html:form action="/productosMantenimiento">
-            
+            <div class="card-header" style="color: white">
             <label class="font-weight-bold">ID Fabricante:</label><br>
             &nbsp;<html:select property="idFabricantes">
                 <html:option value="Seleccione"></html:option>
@@ -156,9 +156,9 @@
             <label class="font-weight-bold">Modelo:</label><br>
            &nbsp;<html:text property="modelo"></html:text> <br><br>
      
-        <tr colspan="2">
+        
         <bean:write name="ActionFormProductos" property="error" filter="false"/>
-    </tr>
+    </div>    
 
     <br>
     &nbsp;&nbsp;<html:submit property="action" value="Agregar"/>

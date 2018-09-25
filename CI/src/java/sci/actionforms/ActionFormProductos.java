@@ -11,7 +11,7 @@ public class ActionFormProductos extends org.apache.struts.action.ActionForm {
      private String nombreProducto;
      private Double precioUnitario;
      private String descripcionProducto;
-     private int stockMinimo;
+     private Integer stockMinimo;
      private String modelo;
      private String error;
      private String action;
@@ -19,7 +19,16 @@ public class ActionFormProductos extends org.apache.struts.action.ActionForm {
      private List<Productos> listaProductos;
      private List<Fabricantes> listaFabricantes;
 
-    public Integer getIdProducto() {
+    public Integer getStockMinimo() {
+        return stockMinimo;
+    }
+
+    public void setStockMinimo(Integer stockMinimo) {
+        this.stockMinimo = stockMinimo;
+    }
+
+  
+     public Integer getIdProducto() {
         return idProducto;
     }
 
@@ -109,11 +118,5 @@ public class ActionFormProductos extends org.apache.struts.action.ActionForm {
     }
      
      
-      public int getStockMinimo() {
-        return stockMinimo;
-    }
-
-    public void setStockMinimo(int stockMinimo) {
-        this.stockMinimo = stockMinimo;
-    }
+    
 }

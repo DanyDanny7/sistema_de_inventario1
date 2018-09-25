@@ -10,6 +10,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import sci.actionforms.ActionFormProductos;
+import sci.mantenimientos.Extraer;
 import sci.mantenimientos.FabricantesMantenimiento;
 import sci.mantenimientos.InventarioMantenimiento;
 import sci.mantenimientos.ProductosMantenimiento;
@@ -41,7 +42,7 @@ public class ActionProductos extends org.apache.struts.action.Action {
         ProductosMantenimiento pman = new ProductosMantenimiento();
         FabricantesMantenimiento fman = new FabricantesMantenimiento();
         InventarioMantenimiento iman= new InventarioMantenimiento();
-
+        Extraer e= new Extraer();
         String IR = null;
 
         if (fB == null || action == null) {
@@ -98,7 +99,12 @@ public class ActionProductos extends org.apache.struts.action.Action {
             }
 
             pman.guardarProductos(idFabricantes, nombreProducto, precioUnitario, descripcionProducto, modelo);
+            List<Integer>lista= e.consultarTodo();
+       
+         int c = lista.get(0);
          
+            System.out.println(c);
+        iman.guardarInventario(0,c,0.0,"sin existencia",stockMinimo, "");
             
             System.out.println("despues de guardar");
             List<Productos> listaProductos = pman.consultarTodoProductos();
