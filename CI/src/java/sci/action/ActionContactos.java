@@ -149,7 +149,7 @@ public class ActionContactos extends org.apache.struts.action.Action {
                 mensaje = (" Registro \"" + idContacto + "\" Eliminado Correctamente ");
                 request.setAttribute("mensaje", mensaje);
             }
-            IR = LISTA;
+            IR = LISTA;                                     
         }
 //------------------------------------------------------------------------------       
         if (action.equals("Modificar")) {

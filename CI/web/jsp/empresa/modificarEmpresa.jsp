@@ -133,16 +133,16 @@
             </div>
 
         </div>
-        
-         <div class="container">
+
+        <div class="container">
             <div class="row">
                 <div class="col-12 text-center">                               
                     <br>
                     <div class="card-header" style="color: white"><h1 class="font-weight-bold">MODIFICAR EMPRESA</h1></div>
-  <html:form action = "/empresaMantenimiento">
-      
-            <br>
-            <div class="card-header" style="background-color:#f0f3f4;">
+                    <html:form action = "/empresaMantenimiento">
+
+                        <br>
+                        <div class="card-header" style="background-color:#f0f3f4;">
                             <div class="row">
                                 <div class="form-group col-6">
                                     <label>Nombre : </label><br>
@@ -180,22 +180,45 @@
                                 <div hidden="hidden"><div class="form-group col-6">
                                         <label>Encargado : </label><br>
                                     <html:text property="encargadoEmpresa" styleClass="form-control"></html:text><br>
-                                                                        </div>
-                                    <html:text property="idEmpresa" ></html:text><br>
-
                                     </div>
-                                                                        
-            
-            <bean:write name="ActionFormEmpresa" property="error" filter="false"/>    
-            </div>
+                                <html:text property="idEmpresa" ></html:text><br>
 
-            <br>
-            <html:submit property="action" value="Modificar" styleClass="btn  font-weight-bold" style="background-color:#f0f3f4;color: black"/>
-           
-      
-        </html:form>
-        <br>                                           
-                                                    
-                                                    
-    </body>
-</html>
+                                </div>
+   
+                        </div>
+
+                        <br>
+                        <html:submit property="action" value="Modificar" styleClass="btn  font-weight-bold" style="background-color:#f0f3f4;color: black"/>
+
+
+                    </html:form>
+                    <br>                                           
+
+                    <div id="error">${error}</div>
+                    <script type="text/javascript">
+                        if ($("#error").text() != "") {
+                            window.onload = function () {
+                                toastrs();
+                            };
+                        }
+                        ;
+                        toastr.options = {
+                            "debug": false,
+                            
+                            "onclick": null,
+                            "fadeIn": 300,
+                            "fadeOut": 100,
+                            "timeOut": 5000,
+                            "extendedTimeOut": 1000
+                        };
+                        var showToastrs = false;
+                        function toastrs() {
+                            if (!showToastrs) {
+                                toastr.error($("#error").text(), 'Error');
+                            } else {
+                                toastr.error('no se puede!\'t.', 'Otro error crítico');
+                            }
+                        }
+                    </script>                                         
+                    </body>
+                    </html>

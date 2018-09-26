@@ -82,10 +82,20 @@
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
                                             <a class="dropdown-item" href="productosMantenimiento.do?action=irAgregar">Agregar Producto</a>
-                                            <a class="dropdown-item" href="prodroductosMantenimiento.do?action=irAgregaructosMantenimiento.do?action=Consultar">Consultar Productos</a>
+                                            <a class="dropdown-item" href="productosMantenimiento.do?action=Consultar">Consultar Productos</a>
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="#">Consulta de productos en Stock Bajo</a>
                                             <a class="dropdown-item" href="#">Consulta de productos en sin Stock</a>
+                                        </div>
+                                    </li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" 
+                                           aria-haspopup="true" aria-expanded="false" style = 'color: white'> 
+                                            Empresas
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
+                                            <a class="dropdown-item" href="empresaMantenimiento.do?action=irAgregar">Agregar Empresa</a>
+                                            <a class="dropdown-item" href="empresaMantenimiento.do?action=Consultar">Consultar Empresa</a>
                                         </div>
                                     </li>
                                     <li class="nav-item dropdown">
@@ -99,6 +109,7 @@
                                             <a class="dropdown-item" href="fabricanteMantenimiento.do?action=Consultar">Fabricantes</a>
                                             <a class="dropdown-item" href="monedaMantenimiento.do?action=Consultar">Monedas</a>
                                             <a class="dropdown-item" href="productosMantenimiento.do?action=Consultar">Productos</a>
+                                            <a class="dropdown-item" href="empresaMantenimiento.do?action=Consultar">Empresa</a>
                                         </div>
                                     </li>
                                 </ul>

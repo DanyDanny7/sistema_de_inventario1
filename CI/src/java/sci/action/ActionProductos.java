@@ -45,6 +45,7 @@ public class ActionProductos extends org.apache.struts.action.Action {
         Extraer e= new Extraer();
         String IR = null;
 
+        System.out.println("El action tiene "+action);
         if (fB == null || action == null) {
             System.out.println("Error en null action o fB Productos");
             return mapping.findForward(IRINICIO);

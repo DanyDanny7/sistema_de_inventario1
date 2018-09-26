@@ -77,28 +77,34 @@ public class ActionEmpresa extends org.apache.struts.action.Action {
                 request.setAttribute("nombre", Login.nombre);
                 request.setAttribute("nAcceso", Login.nAcceso);
                 request.setAttribute("nAcceso", Login.id);
+                request.setAttribute("error", adver);
                 return mapping.findForward(IR);
             }
             int vali = eman.consultarNombre(nombreEmpresa);
             if (vali != 1) {
-                fB.setError("<spam style='color:red'>Ya existe un registro con ese Nombre, por favor ingrese otro" + " <br></span>");
+                String error = ("Ya existe la Empresa\"" + nombreEmpresa + "\"por favor ingrese otra Empresa");
                 IR = AGREGAR;
                 request.setAttribute("nombre", Login.nombre);
                 request.setAttribute("nAcceso", Login.nAcceso);
                 request.setAttribute("nAcceso", Login.id);
+                request.setAttribute("error", error);
+
                 return mapping.findForward(IR);
             }
             int val = eman.guardarEmpresa(nombreEmpresa, ncr, nit, direccionEmpresa, telefonoEmpresa, encargadoEmpresa, emailEmpresa);
             if (val != 1) {
-                fB.setError("<spam style='color:red'>Sugio un error No se Guardó el Registro" + " <br></span>");
+                String error = ("Sugio un error No se Guardó la empresa\"" + nombreEmpresa);
                 IR = AGREGAR;
                 request.setAttribute("nombre", Login.nombre);
                 request.setAttribute("nAcceso", Login.nAcceso);
                 request.setAttribute("nAcceso", Login.id);
+                request.setAttribute("error", error);
                 return mapping.findForward(IR);
             }
             List<Empresa> listaEmpresa = eman.consultarTodosEmpresa();
             fB.setListaEmpresa(listaEmpresa);
+            String mensaje = "La Empresa \"" + nombreEmpresa + "\" se agregó correctamente";
+            request.setAttribute("mensaje", mensaje);
             IR = LISTA;
         }
 //-------------------------------------------------------------------------------
@@ -106,29 +112,30 @@ public class ActionEmpresa extends org.apache.struts.action.Action {
 
             Empresa empresa = (Empresa) eman.consultarEmpresaId(idEmpresa);
 
-            if (empresa == null) {
-                fB.setError("<span style='color:red'>Error al consultar por Id " + "<br></span>");
-                return mapping.findForward(AGREGAR);
-            } else {
+            fB.setIdEmpresa(empresa.getIdEmpresa());
+            fB.setNombreEmpresa(empresa.getNombreEmpresa());
+            fB.setNcr(empresa.getNcr());
+            fB.setNit(empresa.getNit());
+            fB.setDireccionEmpresa(empresa.getDireccionEmpresa());
+            fB.setTelefonoEmpresa(empresa.getTelefonoEmpresa());
+            fB.setEncargadoEmpresa(empresa.getEncargadoEmpresa());
+            fB.setEmailEmpresa(empresa.getEmailEmpresa());
+            IR = MODIFICAR;
 
-                fB.setIdEmpresa(empresa.getIdEmpresa());
-                fB.setNombreEmpresa(empresa.getNombreEmpresa());
-                fB.setNcr(empresa.getNcr());
-                fB.setNit(empresa.getNit());
-                fB.setDireccionEmpresa(empresa.getDireccionEmpresa());
-                fB.setTelefonoEmpresa(empresa.getTelefonoEmpresa());
-                fB.setEncargadoEmpresa(empresa.getEncargadoEmpresa());
-                fB.setEmailEmpresa(empresa.getEmailEmpresa());
-                IR = MODIFICAR;
-            }
         }
 //-------------------------------------------------------------------------------
         if (action.equals("Eliminar")) {
-            eman.eliminarEmpresa(idEmpresa);
-            List<Empresa> listaEmpresa = eman.consultarTodosEmpresa();
+            int n = eman.eliminarEmpresa(idEmpresa);
+           List<Empresa> listaEmpresa = eman.consultarTodosEmpresa();
             fB.setListaEmpresa(listaEmpresa);
-            fB.setError("<spam style = 'color: blue' > Registro (" + idEmpresa + ") Eliminado Correctamente <br></spam>");
-            IR = LISTA;
+            if (n==0) {
+              String error =  (" Registro \"" + eman.consultarEmpresaId(idEmpresa).getNombreEmpresa() + "\" No se ha Eliminado Correctamente "); 
+              request.setAttribute("error", error);
+            }else{
+                String mensaje = (" Registro \"" + eman.consultarEmpresaId(idEmpresa).getNombreEmpresa() + "\" Eliminado Correctamente ");
+                request.setAttribute("mensaje", mensaje);
+            }
+             IR = LISTA;
         }
 //-------------------------------------------------------------------------------
         if (action.equals("Consultar")) {
@@ -167,15 +174,17 @@ public class ActionEmpresa extends org.apache.struts.action.Action {
                 request.setAttribute("nombre", Login.nombre);
                 request.setAttribute("nAcceso", Login.nAcceso);
                 request.setAttribute("nAcceso", Login.id);
+                request.setAttribute("error", adver);
                 return mapping.findForward(IR);
             }
             eman.modificarEmpresa(idEmpresa, nombreEmpresa, ncr, nit, direccionEmpresa, telefonoEmpresa, encargadoEmpresa, emailEmpresa);
             List<Empresa> listaEmpresa = eman.consultarTodosEmpresa();
             fB.setListaEmpresa(listaEmpresa);
-            fB.setError("<spam style='color:blue'>El registro se modificó correctamente" + " <br></span>");
+            String mensaje = "La Empresa \""+nombreEmpresa +"\" se modificó correctamente";
+            request.setAttribute("mensaje", mensaje);
             IR = LISTA;
         }
-        
+//------------------------------------------------------------------------------------
         if (action.equals("irAgregar")) {
             IR = AGREGAR;
         }

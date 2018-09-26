@@ -14,7 +14,12 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Mantenimiento Empresa</title>
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
+        <script src="js/popper.min.js" type="text/javascript"></script>
+        <script src="js/bootstrap.js" type="text/javascript"></script>
+        <script src="http://codeseven.github.com/toastr/toastr.js"></script>
+        <link href="http://codeseven.github.com/toastr/toastr.css" rel="stylesheet"/>
+        <link href="http://codeseven.github.com/toastr/toastr-responsive.css" rel="stylesheet"/>
     </head>
     <body background="img/fondos/fondo1.jpg">
         <div class="container-fluid">
@@ -147,8 +152,13 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="form-group col-2"></div>
-                                    <div class="form-group col-8">
+
+                                    <div class="form-group col-6">
+                                        <label>Encargado : </label><br>
+                                    <html:text property="encargadoEmpresa" styleClass="form-control"></html:text><br>
+                                    </div>
+
+                                    <div class="form-group col-6">
                                         <label>Direccion : </label><br>
                                     <html:text property="direccionEmpresa" styleClass="form-control"></html:text><br>
                                     </div>
@@ -169,17 +179,6 @@
                                     </div>
                                 </div>
 
-
-
-                                <div hidden="hidden"><div class="form-group col-6">
-                                        <label>Encargado : </label><br>
-                                    <html:text property="encargadoEmpresa" styleClass="form-control"></html:text><br>
-                                    </div></div>
-
-
-
-                            <bean:write name="ActionFormEmpresa" property="error" filter="false"/>    
-
                         </div>
                         <br>
                         <html:submit property="action" value="Agregar" styleClass="btn  font-weight-bold" style="background-color:#f0f3f4; color: black"/>
@@ -188,6 +187,31 @@
                     </html:form>
                     <br>
 
+                    <div id="error">${error}</div>
+                    <script type="text/javascript">
+                        if ($("#error").text() != "") {
+                            window.onload = function () {
+                                toastrs();
+                            };
+                        }
+                        ;
+                        toastr.options = {
+                            "debug": false,
+                            "onclick": null,
+                            "fadeIn": 300,
+                            "fadeOut": 100,
+                            "timeOut": 7000,
+                            "extendedTimeOut": 1000
+                        };
+                        var showToastrs = false;
+                        function toastrs() {
+                            if (!showToastrs) {
+                                toastr.error($("#error").text(), 'Error');
+                            } else {
+                                toastr.error('no se puede!\'t.', 'Otro error crítico');
+                            }
+                        }
+                    </script> 
                     </body>
                     </html>
 
