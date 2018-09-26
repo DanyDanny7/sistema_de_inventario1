@@ -188,5 +188,31 @@
                 <div class="col-1"></div>
             </div>
         </div>
+                <div id="error">${error}</div>
+    <script type="text/javascript">
+        if ($("#error").text() != "") {
+            window.onload = function () {
+                toastrs();
+            };
+        }
+        ;
+        toastr.options = {
+            "debug": false,
+            "positionClass": "toast-bottom-right",
+            "onclick": null,
+            "fadeIn": 300,
+            "fadeOut": 100,
+            "timeOut": 5000,
+            "extendedTimeOut": 1000
+        };
+        var showToastrs = false;
+        function toastrs() {
+            if (!showToastrs) {
+                toastr.error($("#error").text(), 'Error');
+            } else {
+                toastr.error('no se puede!\'t.', 'Otro error crítico');
+            }
+        }
+    </script>
     </body>
 </html>

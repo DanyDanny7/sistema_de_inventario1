@@ -7,6 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <%@taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
+<%@taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -16,6 +17,9 @@
         <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
         <script src="js/popper.min.js" type="text/javascript"></script>
         <script src="js/bootstrap.js" type="text/javascript"></script>
+        <script src="http://codeseven.github.com/toastr/toastr.js"></script>
+        <link href="http://codeseven.github.com/toastr/toastr.css" rel="stylesheet"/>
+        <link href="http://codeseven.github.com/toastr/toastr-responsive.css" rel="stylesheet"/>
 
     </head>
     <body>
@@ -70,7 +74,7 @@
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
                                             <a class="dropdown-item" href="comprasMantenimiento.do?action=irAgregar">Agregar Compra</a>
-                                            <a class="dropdown-item" href="#">Consultar Compras</a>
+                                            <a class="dropdown-item" href="comprasMantenimiento.do?action=Consultar">Consultar Compras</a>
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="#">Consultas por Documento</a>
                                         </div>
