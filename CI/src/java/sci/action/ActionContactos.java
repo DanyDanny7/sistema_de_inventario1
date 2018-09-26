@@ -85,7 +85,7 @@ public class ActionContactos extends org.apache.struts.action.Action {
 
             int validacion = contactosMantenimiento.validar(nombreContacto);
             if (validacion != 1) {
-                String error = ("<span style='color:red'>El Contacto \"" + nombreContacto + "\" ya esta registrado..." + "<br></span>");
+                String error = ("El Contacto \"" + nombreContacto + "\" ya esta registrado...");
                 IR = AGREGAR;
                 request.setAttribute("nombre", Login.nombre);
                 request.setAttribute("nAcceso", Login.nAcceso);

@@ -1,21 +1,19 @@
 <%-- 
-    Document   : modificarContactos
-    Created on : 08-28-2018, 04:17:56 PM
-    Author     : diana.alcantarausam
+    Document   : listaLogin
+    Created on : 08-27-2018, 02:32:14 PM
+    Author     : Admin105
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib uri="http://struts.apache.org/tags-bean" prefix="bean"%>
-<%@taglib uri="http://struts.apache.org/tags-html" prefix="html"%>
-<%@taglib uri="http://struts.apache.org/tags-faces" prefix="faces" %>
+
+<%@taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
+<%@taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
-<%@taglib uri="http://struts.apache.org/tags-nested" prefix="nested" %>
-<%@taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Modificar</title>
+        <title>Lista Factura</title>
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
@@ -28,13 +26,14 @@
     <body background="img/fondos/fondo1.jpg">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-xl">
+                <div class="col-12">
                     <div> 
                         <nav class="navbar navbar-expand-lg navbar" style="background-color: #000;">
                             <a class="navbar-brand" href="accesoMantenimiento.do?action=portada" style = 'color: white'>Inicio</a>
                             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span>
                             </button>
+
                             <div class="collapse navbar-collapse" id="navbarSupportedContent" >
                                 <ul class="navbar-nav mr-auto" >
                                     <li class="nav-item dropdown">
@@ -133,103 +132,53 @@
                     </div>
                 </div>
             </div>
+
         </div>
         <div class="container">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12 text-center">
-                        <div class="card-header" style="color: white"><h1 class="font-weight-bold">Modificar Contacto</h1></div>
+            <div class="row">
+                <div class="col-12 text-center">
+                   
+                    <div class="card-header primary" style="color: white;"><h1 class="font-weight-bold " >LISTA MONEDA</h1></div>
 
-                        <br>
-                        <html:form action="/contactosMantenimiento"> 
-                            <div class="card-header" style="background-color:#f0f3f4;">
-                                <div class="row">
-                                    <div class="form-group col-md-6">
-                                        <label class="font-weight-bold">Contacto:</label><br>
-                                        <html:text property="nombreContacto" styleClass="form-control"></html:text><br>
-                                        </div>
+                    <div class="table table-hover table-md">
+                        <bean:write name="ActionFormMoneda" property="mensaje" filter="false"></bean:write>
+                         
+                            <table class="bg-light ">
+                                <thead class="text-uppercase">
+                                    <tr class="table-default" style="background-color: #000; color: white;font-family: Arial">
+                                        <th>Nombre </th>
+                                        <th>Simbolo </th>
+                                        <th>Codigo</th>
+                                        <th>Equivalencia</th>
+                                        <th>Moneda de Referencia</th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <logic:notEmpty name="ActionFormMoneda" property="listaMoneda">
+                                    <logic:iterate id="ver" name="ActionFormMoneda" property="listaMoneda" >
+                                        <tr style="background-color: #DCDCDC;">
+                                            <html:form action = "/monedaMantenimiento" >
+                                                <th scope="row"><bean:write name="ver" property="nombreMoneda"/>
+                                                    <div hidden="hidden"><html:text name="ver" property="nombreMoneda" styleClass="hidden"/></div></th>
 
-                                        <div class="form-group col-md-5">
-                                            <label class="font-weight-bold">Email:</label><br>
-                                        <html:text property="emailContacto" styleClass="form-control"></html:text><br> 
-                                        </div>
-                                    </div>
-                                    <div class="row"> 
-                                        <div class="form-group col-md-6">
-                                            <label class="font-weight-bold">Direccion:</label><br>
-                                        <html:text property="direccionContacto" styleClass="form-control"></html:text> <br>
-                                        </div>                                    
+                                                <td><bean:write name="ver" property="simboloMoneda"/></td>
+                                                <td><bean:write name="ver" property="codigoMoneda"/></td>
+                                                <td><bean:write name="ver" property="equivalencia"/></td>
+                                                <td><bean:write name="ver" property="monedaReferencia"/></td>
+                                                <td><html:submit property="action" value="eliminar" styleClass="btn btn-secondary font-weight-bold" style="color: white;font-family: Arial"/></td>
+                                                <td><html:submit property="action" value="consultarId" styleClass="btn btn-secondary font-weight-bold" style="color: white;font-family: Arial"/></td>
 
-                                        <div class="form-group col-md-5">
-                                            <label class="font-weight-bold">Telefono contacto:</label><br>
-                                        <html:text property="telefonoContacto" styleClass="form-control"></html:text><br>
-                                        </div>
-                                    </div> 
-                                    <div class="row">
-                                        <div class="form-group col-md-6">
-                                            <label class="font-weight-bold">Encargado:</label><br>
-                                        <html:text property="encargadoContacto" styleClass="form-control"></html:text><br>
-                                        </div>
-                                        <div class="form-group col-md-5">
-                                            <label class="font-weight-bold">Telefono encargado:</label><br>
-                                        <html:text property="telefonoEncargadoContacto" styleClass="form-control"></html:text><br>
-                                        </div>
-                                    </div> 
-                                    <div class="row">    
-                                        <div class="form-group col-md-4"></div>
-                                        <div class="form-group col-md-4">
-                                            <label class="font-weight-bold">Tipo de contacto:</label><br>
-                                        <html:select property="tipoContacto" styleClass="form-control">
-                                            <html:option value="Cliente">Cliente</html:option> 
-                                            <html:option value="Proveedor">Proveedor</html:option>
-                                        </html:select><br>
-
-                                    </div>
-                                </div>
-                            </div>
-                                        <br>
-                                <div class="row">  
-                                    <html:hidden property="idContacto" ></html:hidden>
-                                    <html:hidden property="fechaRegistroContacto"></html:hidden> 
-
-                                    </div>  
-
-                                    <div class="form-group col-md-auto">
-                                    <html:submit property="action" value="Modificar" styleClass="btn  font-weight-bold" style="background-color:#f0f3f4; color: black"/>
-                                </div>
-                            </div>
-                        </div>
-                    </html:form>
+                                            </html:form > 
+                                        </tr>
+                                    </logic:iterate>
+                                </logic:notEmpty>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-
-    <div id="error">${error}</div>
-    <script type="text/javascript">
-        if ($("#error").text() != "") {
-            window.onload = function () {
-                toastrs();
-            };
-        }
-        ;
-        toastr.options = {
-            "debug": false,
-            "positionClass": "toast-bottom-right",
-            "onclick": null,
-            "fadeIn": 300,
-            "fadeOut": 100,
-            "timeOut": 5000,
-            "extendedTimeOut": 1000
-        };
-        var showToastrs = false;
-        function toastrs() {
-            if (!showToastrs) {
-                toastr.error($("#error").text(), 'Error');
-            } else {
-                toastr.error('no se puede!\'t.', 'Otro error crítico');
-            }
-        }
-    </script>
-</body>
+        </div>
+    </body>
 </html>
-
-
