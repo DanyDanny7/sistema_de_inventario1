@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import metodos.Login;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -21,11 +22,8 @@ import sci.mantenimientos.FacturaDetalleMantenimiento;
 import sci.mantenimientos.FacturaEncabezadoMantenimiento;
 import sci.mantenimientos.IvaMantenimiento;
 import sci.mantenimientos.ProductosMantenimiento;
-import sci.persistencia.Configuracion;
 import sci.persistencia.Contactos;
 import sci.persistencia.Empresa;
-import sci.persistencia.FacturaEncabezado;
-import sci.persistencia.Iva;
 import sci.persistencia.Productos;
 
 /**
@@ -78,18 +76,24 @@ public class ActionFactura extends org.apache.struts.action.Action {
         String error = "";
         System.out.println("el valor de la accion es: " + action);
 
+        
         //-------------------------------------------------------------------------      
         if (action.equals("irAgregar")) {
+            System.out.println("Entramos 1");
             fechaFactura = formato.format(new Date());
 //Traemos lista Empresa                
             List<Empresa> listaEmpresa = eman.consultarTodosEmpresa();
             request.setAttribute("listaEmpresa", listaEmpresa);
+            System.out.println("Entramos 2");
 //Traemos lista Contactos                
             List<Contactos> listaContactos = cman.tipos("proveedor");
             request.setAttribute("listaContactos", listaContactos);
+            System.out.println("Entramos 3");
 //Traemos lista Productos                
             List<Productos> listaProductos = pman.consultarTodoProductos();
-            request.setAttribute("listaProductos", listaProductos);            
+            request.setAttribute("listaProductos", listaProductos);
+            System.out.println("Entramos 4 antes de ir" );
+            IR = AGREGAR;
         }
  //-------------------------------------------------------------------------      
         if (action.equals("Agregar")) {
@@ -171,7 +175,11 @@ public class ActionFactura extends org.apache.struts.action.Action {
         }
         //-------------------------------------------------------------------------      
 
-        return null;
+        request.setAttribute("nombre", Login.nombre);
+        request.setAttribute("nAcceso", Login.nAcceso);
+        request.setAttribute("id", Login.id);
+        request.setAttribute("img", Login.img);
+        return mapping.findForward(IR);
     }
 
 }
