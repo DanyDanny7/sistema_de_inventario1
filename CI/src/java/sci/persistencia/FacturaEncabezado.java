@@ -15,7 +15,7 @@ public class FacturaEncabezado  implements java.io.Serializable {
      private Contactos contactos;
      private Empresa empresa;
      private String fechaFactura;
-     private String vendedor;
+     private String estado;
      private Set facturaDetalles = new HashSet(0);
 
     public FacturaEncabezado() {
@@ -26,11 +26,11 @@ public class FacturaEncabezado  implements java.io.Serializable {
         this.contactos = contactos;
         this.empresa = empresa;
     }
-    public FacturaEncabezado(Contactos contactos, Empresa empresa, String fechaFactura, String vendedor, Set facturaDetalles) {
+    public FacturaEncabezado(Contactos contactos, Empresa empresa, String fechaFactura, String estado, Set facturaDetalles) {
        this.contactos = contactos;
        this.empresa = empresa;
        this.fechaFactura = fechaFactura;
-       this.vendedor = vendedor;
+       this.estado = estado;
        this.facturaDetalles = facturaDetalles;
     }
    
@@ -62,12 +62,12 @@ public class FacturaEncabezado  implements java.io.Serializable {
     public void setFechaFactura(String fechaFactura) {
         this.fechaFactura = fechaFactura;
     }
-    public String getVendedor() {
-        return this.vendedor;
+    public String getEstado() {
+        return this.estado;
     }
     
-    public void setVendedor(String vendedor) {
-        this.vendedor = vendedor;
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
     public Set getFacturaDetalles() {
         return this.facturaDetalles;

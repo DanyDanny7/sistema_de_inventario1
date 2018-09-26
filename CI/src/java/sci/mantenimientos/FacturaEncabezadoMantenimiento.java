@@ -13,27 +13,27 @@ import sci.persistencia.FacturaEncabezado;
 public class FacturaEncabezadoMantenimiento {
 
     public int guardarFacturaEncabezado(
-            int idFacturaEncabezado,
-            int idContactos,
+            
+            int idContacto,
             int idEmpresa,
             String fechaFactura,
-            String vendedor) {
+            String estado) {
 
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.openSession();
         int flag = 0;
 
         FacturaEncabezado fae = new FacturaEncabezado();
-        fae.setIdFacturaEncabezado(idFacturaEncabezado);
+        
         fae.setFechaFactura(fechaFactura);
-        fae.setVendedor(vendedor);
+        fae.setEstado(estado);
         //--
         Empresa empresa = new Empresa();
         empresa.setIdEmpresa(idEmpresa);
         fae.setEmpresa(empresa);
         //--
         Contactos contactos = new Contactos();
-        contactos.setIdContacto(idContactos);
+        contactos.setIdContacto(idContacto);
         fae.setContactos(contactos);
         //--
         try {
@@ -45,7 +45,7 @@ public class FacturaEncabezadoMantenimiento {
         } catch (Exception e) {
             if (session.getTransaction().isActive()) {
                 session.getTransaction().rollback();
-                flag = 1;
+                flag = 0;
             }
             System.out.println("Error en guardar FacturaEncabezadoMantenimiento " + e);
         } finally {
@@ -70,7 +70,7 @@ public class FacturaEncabezadoMantenimiento {
         } catch (Exception e) {
             if (session.getTransaction().isActive()) {
                 session.getTransaction().rollback();
-                flag = 1;
+                flag = 0;
             }
             System.out.println("error en eliminar FacturaEncabezadoMantenimiento " + e);
         } finally {
@@ -93,7 +93,7 @@ public class FacturaEncabezadoMantenimiento {
         FacturaEncabezado fae = new FacturaEncabezado();
         fae.setIdFacturaEncabezado(idFacturaEncabezado);
         fae.setFechaFactura(fechaFactura);
-        fae.setVendedor(vendedor);
+        fae.setEstado(vendedor);
         //--
         Empresa empresa = new Empresa();
         empresa.setIdEmpresa(idEmpresa);
@@ -113,7 +113,7 @@ public class FacturaEncabezadoMantenimiento {
         } catch (Exception e) {
             if (session.getTransaction().isActive()) {
                 session.getTransaction().rollback();
-                flag = 1;
+                flag = 0;
             }
             System.out.println("Error en modificar FacturaEncabezadoMantenimiento " + e);
         } finally {

@@ -16,11 +16,10 @@ import sci.persistencia.Productos;
 public class FacturaDetalleMantenimiento {
 
     public int guardarFacuraDetalle(
-            int idFacturaDetalle,
             int idConfiguracion,
             int idFacturaEncabezado,
             int idIva,
-            int idProductos,
+            int idProducto,
             int cantidad,
             double totalFila,
             double totalColumna,
@@ -31,7 +30,6 @@ public class FacturaDetalleMantenimiento {
         int flag = 0;
 
         FacturaDetalle facdet = new FacturaDetalle();
-        facdet.setIdFacturaDetalle(idFacturaDetalle);
         //--
         Configuracion configuracion = new Configuracion();
         configuracion.setIdConfiguracion(idConfiguracion);
@@ -46,7 +44,7 @@ public class FacturaDetalleMantenimiento {
         facdet.setIva(iva);
         //--
         Productos productos = new Productos();
-        productos.setIdProducto(idProductos);
+        productos.setIdProducto(idProducto);
         facdet.setProductos(productos);
         //--
         facdet.setCantidad(cantidad);
@@ -62,7 +60,7 @@ public class FacturaDetalleMantenimiento {
         } catch (Exception e) {
             if (session.getTransaction().isActive()) {
                 session.getTransaction().rollback();
-                flag = 1;
+                flag = 0;
             }
             System.out.println("Error en guardar FacturaDetalleMantenimiento. " + e);
         } finally {
@@ -87,7 +85,7 @@ public class FacturaDetalleMantenimiento {
         } catch (Exception e) {
             if (session.getTransaction().isActive()) {
                 session.getTransaction().rollback();
-                flag = 1;
+                flag = 0;
             }
             System.out.println("Error en eliminar FacturaDetalleMantenimiento "+e);
         } finally {
@@ -144,7 +142,7 @@ public class FacturaDetalleMantenimiento {
         } catch (Exception e) {
             if (session.getTransaction().isActive()) {
                 session.getTransaction().rollback();
-                flag = 1;
+                flag = 0;
             }
             System.out.println("error en modificar FacturaDetalleMantenimiento " +e);
         } finally {
