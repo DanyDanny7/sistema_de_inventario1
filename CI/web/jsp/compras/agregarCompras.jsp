@@ -184,6 +184,30 @@
                 </div>
             </div>
         </div>
-
+<div id="error">${error}</div>
+        <script type="text/javascript">
+            if ($("#error").text() != "") {
+                window.onload = function () {
+                    toastrs();
+                };
+            }
+            ;
+            toastr.options = {
+                "debug": false,
+                "onclick": null,
+                "fadeIn": 300,
+                "fadeOut": 100,
+                "timeOut": 7000,
+                "extendedTimeOut": 1000
+            };
+            var showToastrs = false;
+            function toastrs() {
+                if (!showToastrs) {
+                    toastr.error($("#error").text(), 'Error');
+                } else {
+                    toastr.error('no se puede!\'t.', 'Otro error crítico');
+                }
+            }
+        </script>
     </body>
 </html>

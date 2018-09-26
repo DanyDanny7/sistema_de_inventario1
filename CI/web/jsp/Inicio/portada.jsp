@@ -69,7 +69,7 @@
                                             Compras
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
-                                            <a class="dropdown-item" href="#">Agregar Compra</a>
+                                            <a class="dropdown-item" href="comprasMantenimiento.do?action=irAgregar">Agregar Compra</a>
                                             <a class="dropdown-item" href="#">Consultar Compras</a>
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="#">Consultas por Documento</a>
@@ -161,7 +161,7 @@
                         <html:link page="/jsp/producto/inicioP.jsp">Productos</html:link><br><br>
                         <html:link page="/jsp/empresa/inicio.jsp">Empresa</html:link><br><br>
                         <html:link page="/jsp/iva/inicio.jsp">Iva</html:link><br><br>
-                    
+
                     </div>
                     <div class="col-1"></div>
                 </div>

@@ -15,7 +15,7 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" 
                crossorigin="anonymous">
     </head>
-    <body class="bg-success">
+    <body>
         <h1 class="text-dark font-weight">INICIO PRODUCTO:</h1><br>
  
          

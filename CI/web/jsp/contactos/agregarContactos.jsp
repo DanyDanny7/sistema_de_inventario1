@@ -195,12 +195,7 @@
                             </div>
                         </div>
                     </html:form>
-                    <!-- <div class="row">
-                         <div class="form-group col-5">
-                              <a class="font-weight-bold btn btn-primary"<html:link page="/index.jsp">Index</html:link> 
-                                <a class="font-weight-bold btn btn-primary" <html:link page="/jsp/contactos/inicio.jsp" >Inicio</html:link>
-    
-                                </div> -->
+                   
                     </div>
                 </div>
             </div>

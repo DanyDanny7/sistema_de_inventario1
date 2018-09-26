@@ -16,8 +16,13 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" 
-           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
+        <script src="js/popper.min.js" type="text/javascript"></script>
+        <script src="js/bootstrap.js" type="text/javascript"></script>
+        <script src="http://codeseven.github.com/toastr/toastr.js"></script>
+        <link href="http://codeseven.github.com/toastr/toastr.css" rel="stylesheet"/>
+        <link href="http://codeseven.github.com/toastr/toastr-responsive.css" rel="stylesheet"/>
     </head>
     <body background="img/fondos/fondo1.jpg">
         <div class="container-fluid">
@@ -133,36 +138,41 @@
                                         
         <div class="container">
             <div class="row">
-                <div class="col-12">
+                <div class="col-12 text-center">
+
+                    <br>
+                    <div class=" col-auto">
+                        <div class="card-header primary" style="color: white;"><h1 class="font-weight-bold " >Lista de Productos</h1></div>
+                    </div>
                     <div class="table table-hover table-sm">
                         <table class="bg-light">
-                            <thead>
-                            <h2 class="text-dark font-weight-bold">Lista de Productos</h2>&emsp;
-                                <tr class="table-secondary">
-                                    <td>ID Producto</td>
-                                    <td>Fabricante</td>
-                                    <td>Nombre del producto</td>
-                                    <td>Precio del producto</td>
-                                    <td>Descripción del producto</td>
-                                    <td>Modelo del producto</td>
-                                    <td></td>
-                                    <td></td>
+                            <thead class="align-content-center">
+                            
+                                <tr class="table-default" style="background-color: #000; color: white">
+                                    <th scope="col">ID Producto</th>
+                                    <th>Fabricante</th>
+                                    <th>Nombre del producto</th>
+                                    <th>Precio del producto</th>
+                                    <th>Descripción del producto</th>
+                                    <th>Modelo del producto</th>
+                                    <th></th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
                                <logic:notEmpty name="ActionFormProductos" property="listaProductos">
                                     <logic:iterate id="ver" name="ActionFormProductos" property="listaProductos">
-                                        <tr>
+                                        <tr tyle="background-color: #DCDCDC;">
                                             <html:form action="/productosMantenimiento">
-                                                <td class="table-secondary"><bean:write name="ver" property="idProducto"/>
-                                                     <div hidden="hidden"><html:text name="ver" property="idProducto"/></div></td>
+                                                <th scope="row"><bean:write name="ver" property="idProducto"/>
+                                                     <div hidden="hidden"><html:text name="ver" property="idProducto"/></div></th>
                                                 <td ><bean:write name="ver" property="fabricantes.nombreFabricante"/></td>
                                                 <td ><bean:write name="ver" property="nombreProducto"/></td>
                                                 <td ><bean:write name="ver" property="precioUnitario"/></td>
                                                 <td ><bean:write name="ver" property="descripcionProducto"/></td>
                                                 <td ><bean:write name="ver" property="modelo"/></td>
-                                                <td ><html:submit property="action" value="Eliminar"/></td>
-                                                <td ><html:submit property="action" value="ConsultarId"/></td>
+                                                <td ><html:submit property="action" value="Eliminar" styleClass="btn  font-weight-bold" style="background-color: #696969; color: white"/></td>
+                                                <td ><html:submit property="action" value="ConsultarId" styleClass="btn  font-weight-bold" style="background-color: #696969; color: white"/></td>
                                                 <!-- td><!--html:submit property="action" value="ConsultarTipo"/></td -->
                                             </html:form>
                                         </tr>
@@ -171,13 +181,50 @@
                             </tbody>
                         </table>
                         <br>
-                       <html:form action="/productosMantenimiento">
-                           <html:submit property="action" value="irAgregar" style="btn-primary"/>
-                       </html:form><br>
-                           <a class="font-weight-bold btn btn-primary"<html:link page="/jsp/producto/inicioP.jsp">Inicio</html:link><br><br>
+                                               
                     </div>
                 </div>
             </div>
         </div>
+                    <div id="error" hidden="hidden">${error}</div>
+        <div id="mensaje" hidden="hidden">${mensaje}</div>
+        <div id="info" style="color:white">${info}</div>
+        <script type="text/javascript">
+            window.onload = function () {
+                if ($("#error").text() != "") {
+                    error();
+                }
+                if ($("#mensaje").text() != "") {
+                    mensaje();
+                }
+                if ($("#info").text() != "") {
+                    info();
+                }
+            };
+            toastr.options = {
+                "debug": false,
+                "onclick": null,
+                "fadeIn": 300,
+                "fadeOut": 100,
+                "timeOut": 5000,
+                "extendedTimeOut": 1000
+            };
+            var showToastrs = false;
+            function error() {
+                if (!showToastrs) {
+                    toastr.error($("#error").text(), 'Error');
+                }
+            }
+            function mensaje() {
+                if (!showToastrs) {
+                    toastr.success($("#mensaje").text(), 'Confirmacion');
+                }
+            }
+            function info() {
+                if (!showToastrs) {
+                    toastr.info($("#info").text(), 'Informacion');
+                }
+            }
+        </script>
     </body>
 </html>

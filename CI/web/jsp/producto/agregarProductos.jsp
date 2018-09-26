@@ -13,10 +13,16 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Formulario Productos</title>
-        <link rel="stylesheet" href="css/bootstrap.css" type="text/css">
+        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
+        <script src="js/popper.min.js" type="text/javascript"></script>
+        <script src="js/bootstrap.js" type="text/javascript"></script>
+        <script src="http://codeseven.github.com/toastr/toastr.js"></script>
+        <link href="http://codeseven.github.com/toastr/toastr.css" rel="stylesheet"/>
+        <link href="http://codeseven.github.com/toastr/toastr-responsive.css" rel="stylesheet"/>
     </head>
     <body background="img/fondos/fondo1.jpg">
-<div class="container-fluid">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
                     <div> 
@@ -124,51 +130,90 @@
                     </div>
                 </div>
             </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <div class="card-header" style="color: white"><h1 class="font-weight-bold">AGREGAR PRODUCTOS</h1></div>
+                        <br>
+                        <html:form action="/productosMantenimiento">
+                            <div class="card-header" style="background-color:#f0f3f4;">
+                                <div class="form-group col-md-6">
+                                    <label class="font-weight-bold">ID Fabricante:</label><br>
+                                    <html:select property="idFabricantes">
+                                        <html:option value="Seleccione"></html:option>
+                                        <logic:notEmpty name="ActionFormProductos" property="listaFabricantes">
+                                            <logic:iterate id="ver" name="ActionFormProductos" property="listaFabricantes">
+                                                <html:option value="${ver.idFabricante}">${ver.nombreFabricante}</html:option>
+                                            </logic:iterate>
+                                        </logic:notEmpty>
+                                    </html:select> <br> 
+                                </div>
 
-        </div>
-                                        
-        <h3 class="font-weight-bold">Formulario de productos</h3>
-        <html:form action="/productosMantenimiento">
-            <div class="card-header" style="color: white">
-            <label class="font-weight-bold">ID Fabricante:</label><br>
-            &nbsp;<html:select property="idFabricantes">
-                <html:option value="Seleccione"></html:option>
-                <logic:notEmpty name="ActionFormProductos" property="listaFabricantes">
-                    <logic:iterate id="ver" name="ActionFormProductos" property="listaFabricantes">
-                        <html:option value="${ver.idFabricante}">${ver.nombreFabricante}</html:option>
-                    </logic:iterate>
-                </logic:notEmpty>
-            </html:select> <br>
-            <br>
-            <label class="font-weight-bold">Nombre del Producto:</label><br>
-            &nbsp;<html:text property="nombreProducto"></html:text> <br><br>
-       
-            <label class="font-weight-bold">Precio del Producto:</label><br>
-            &nbsp;<html:text property="precioUnitario" ></html:text> <br><br>
-            
-            <label class="font-weight-bold">Stock Minimo</label><br>
-            &nbsp;<html:text property="stockMinimo" ></html:text> <br><br>
-      
-      
-            <label class="font-weight-bold">Descripción del producto:</label><br>
-           &nbsp;<html:text property="descripcionProducto" ></html:text> <br><br>
-       
-            <label class="font-weight-bold">Modelo:</label><br>
-           &nbsp;<html:text property="modelo"></html:text> <br><br>
-     
-        
-        <bean:write name="ActionFormProductos" property="error" filter="false"/>
-    </div>    
+                                <div class="form-group col-md-6">
+                                    <label class="font-weight-bold">Nombre del Producto:</label><br>
+                                    <html:text property="nombreProducto"></html:text> <br>
+                                    </div>
+                                    <br>
+                                    <div class="form-group col-md-6">
+                                        <label class="font-weight-bold">Precio del Producto:</label><br>
+                                    <html:text property="precioUnitario" ></html:text> <br>
+                                    </div>
+                                    <br>
+                                    <div class="form-group col-md-6">
+                                        <label class="font-weight-bold">Stock Minimo</label><br>
+                                    <html:text property="stockMinimo" ></html:text> <br>
+                                    </div>
+                                    <br>
 
-    <br>
-    &nbsp;&nbsp;<html:submit property="action" value="Agregar"/>
-    &nbsp;<html:submit property="action" value="Consultar"/>
+                                    <div class="form-group col-md-6">
+                                        <label class="font-weight-bold">Descripción del producto:</label><br>
+                                    <html:text property="descripcionProducto" ></html:text> <br>
+                                    </div>
+                                    <br>
+                                    <div class="form-group col-md-6">
+                                        <label class="font-weight-bold">Modelo:</label><br>
+                                    <html:text property="modelo"></html:text> <br>
+                                    </div>
+                                    <br>
+
+                                </div>    
+
+                                <br>
+                            <html:submit property="action" value="Agregar" styleClass="btn  font-weight-bold" style="background-color:#f0f3f4; color: black"/>
+                            <html:submit property="action" value="Consultar" styleClass="btn  font-weight-bold" style="background-color:#f0f3f4; color: black"/>
 
 
 
-</html:form><br>
-<!--  <html:link page="/index.jsp">Index</html:link> -->
-&emsp; &nbsp;&nbsp; <a class="font-weight-bold btn btn-primary btn-sm" <html:link page="/jsp/producto/inicioP.jsp" >Inicio</html:link>
+                        </html:form><br>
+                    </div>
+                </div>
+            </div>
 
-</body>
+
+            <div id="error">${error}</div>
+            <script type="text/javascript">
+                if ($("#error").text() != "") {
+                    window.onload = function () {
+                        toastrs();
+                    };
+                }
+                ;
+                toastr.options = {
+                    "debug": false,
+                    "onclick": null,
+                    "fadeIn": 300,
+                    "fadeOut": 100,
+                    "timeOut": 7000,
+                    "extendedTimeOut": 1000
+                };
+                var showToastrs = false;
+                function toastrs() {
+                    if (!showToastrs) {
+                        toastr.error($("#error").text(), 'Error');
+                    } else {
+                        toastr.error('no se puede!\'t.', 'Otro error crítico');
+                    }
+                }
+            </script>
+    </body>
 </html>

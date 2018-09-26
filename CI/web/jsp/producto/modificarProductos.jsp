@@ -9,11 +9,16 @@
 <%@taglib uri="http://struts.apache.org/tags-html" prefix="html"%>
 <!DOCTYPE html>
 <html>
-    <head>
+    <head> 
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" 
-              integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
+        <script src="js/popper.min.js" type="text/javascript"></script>
+        <script src="js/bootstrap.js" type="text/javascript"></script>
+        <script src="http://codeseven.github.com/toastr/toastr.js"></script>
+        <link href="http://codeseven.github.com/toastr/toastr.css" rel="stylesheet"/>
+        <link href="http://codeseven.github.com/toastr/toastr-responsive.css" rel="stylesheet"/>
     </head>
     <body background="img/fondos/fondo1.jpg"> 
         <div class="container-fluid">
@@ -125,45 +130,90 @@
                 </div>
             </div>
 
-        </div>
-                                        
-        <h2 class="text-dark font-weight-bold">MODIFICAR</h2>
-        <html:form action="/productosMantenimiento">
-        <table border="0">
-            <tbody>           
-            <tr>
-                <td class="bg-dark text-white">ID Producto</td>
-                <td>&nbsp;<html:text property="idProducto"></html:text> 
-            </tr>
-            <tr>
-            <tr>
-                <td class="bg-dark text-white">ID Fabricante</td>
-                <td>&nbsp;<html:text property="idFabricantes"></html:text> 
-            </tr>
-            <tr>
-                <td class="bg-dark text-white">Nombre del Producto</td>
-                <td>&nbsp;<html:text property="nombreProducto"></html:text> 
-            </tr>
-            <tr>
-                <td class="bg-dark text-white">Precio del Producto</td>
-                <td>&nbsp;<html:text property="precioUnitario"></html:text> 
-            </tr>
-            <tr>
-                <td class="bg-dark text-white">Descripción del producto</td>
-                <td>&nbsp;<html:text property="descripcionProducto"></html:text> 
-            </tr>
-            <tr>
-                <td class="bg-dark text-white">Modelo</td>
-                <td>&nbsp;<html:text property="modelo"></html:text> 
-            </tr>
-            <tr colspan="2">
-            <bean:write name="ActionFormProductos" property="error" filter="false"/>
-            </tr>
-            </tbody>  
-        </table>
-            <br>
-            <html:submit property="action" value="Modificar"/>
-        </html:form><br>
-        <a class="font-weight-bold btn btn-primary btn-sm" <html:link page="/jsp/producto/inicioP.jsp" >Inicio</html:link>
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <div class="card-header" style="color: white"><h1 class="font-weight-bold">MODIFICAR PRODUCTOS</h1></div>
+
+
+                        <html:form action="/productosMantenimiento">
+                            <div class="card-header" style="background-color:#f0f3f4;">
+
+                                <div class="form-group col-md-6">
+                                    <label class="font-weight-bold">ID Producto:</label>
+                                    <html:text property="idProducto"></html:text>
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label class="font-weight-bold">ID Fabricante:</label><br>
+                                    <html:select property="idFabricantes">
+                                        <html:option value="Seleccione"></html:option>
+                                            <logic:notEmpty name="ActionFormProductos" property="listaFabricantes">
+                                                <logic:iterate id="ver" name="ActionFormProductos" property="listaFabricantes">
+                                                <html:option value="${ver.idFabricante}">${ver.nombreFabricante}</html:option>
+                                                </logic:iterate>
+                                            </logic:notEmpty>
+                                    </html:select> <br> 
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <label class="font-weight-bold">Nombre del Producto:</label><br>
+                                    <html:text property="nombreProducto"></html:text> <br>
+                                    </div> 
+
+
+                                    <div class="form-group col-md-6">
+                                        <label class="font-weight-bold">Precio del Producto:</label><br>
+                                    <html:text property="precioUnitario" ></html:text> <br>
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label class="font-weight-bold">Descripción del producto:</label><br>
+                                    <html:text property="descripcionProducto" ></html:text> <br>
+                                    </div> 
+
+                                    <div class="form-group col-md-6">
+                                        <label class="font-weight-bold">Modelo:</label><br>
+                                    <html:text property="modelo"></html:text> <br>
+                                    </div> 
+                                </div>
+
+
+                                </tbody>  
+                                </table>
+                                <br>
+                            <html:submit property="action" value="Modificar" styleClass="btn  font-weight-bold" style="background-color:#f0f3f4; color: black"/>
+                        </html:form><br>
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="error">${error}</div>
+            <script type="text/javascript">
+                if ($("#error").text() != "") {
+                    window.onload = function () {
+                        toastrs();
+                    };
+                }
+                ;
+                toastr.options = {
+                    "debug": false,
+                    "positionClass": "toast-bottom-right",
+                    "onclick": null,
+                    "fadeIn": 300,
+                    "fadeOut": 100,
+                    "timeOut": 5000,
+                    "extendedTimeOut": 1000
+                };
+                var showToastrs = false;
+                function toastrs() {
+                    if (!showToastrs) {
+                        toastr.error($("#error").text(), 'Error');
+                    } else {
+                        toastr.error('no se puede!\'t.', 'Otro error crítico');
+                    }
+                }
+            </script>
     </body>
 </html>

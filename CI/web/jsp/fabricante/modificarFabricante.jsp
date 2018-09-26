@@ -136,7 +136,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 text-center">
-                    <div class="card-header" style="color: white"><h1 class="font-weight-bold">AGREGAR FABRICANTE</h1></div>     
+                    <div class="card-header" style="color: white"><h1 class="font-weight-bold">MODIFICAR FABRICANTE</h1></div>     
 
                     <html:form action="/fabricanteMantenimiento">
 
@@ -157,6 +157,7 @@
                                 <div hidden="hidden">
                                 <html:text property="idFabricante" size="100"></html:text>
                                 <html:text property="numeroProductos" size="10" maxlength="10"></html:text>
+                                <html:text property="fechaRegistroFabricante" size="10" maxlength="10"></html:text>
                                 </div>
                             </div>
                                 <br>
