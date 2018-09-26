@@ -6,12 +6,10 @@
 package sci.actionforms;
 
 import java.util.List;
-import sci.persistencia.Configuracion;
 import sci.persistencia.Contactos;
 import sci.persistencia.Empresa;
 import sci.persistencia.FacturaDetalle;
 import sci.persistencia.FacturaEncabezado;
-import sci.persistencia.Iva;
 import sci.persistencia.Productos;
 
 /**
@@ -41,6 +39,9 @@ public class ActionFormFactura extends org.apache.struts.action.ActionForm{
     
     //Adicional
     private String action;
+    private List<Empresa> listaEmpresa;
+    private List<Contactos> listaContactos;
+    private List<Productos> listaProductos;
 
     public Integer getIdFacturaEncabezado() {
         return idFacturaEncabezado;
@@ -168,6 +169,30 @@ public class ActionFormFactura extends org.apache.struts.action.ActionForm{
 
     public void setAction(String action) {
         this.action = action;
+    }
+
+    public List<Empresa> getListaEmpresa() {
+        return listaEmpresa;
+    }
+
+    public void setListaEmpresa(List<Empresa> listaEmpresa) {
+        this.listaEmpresa = listaEmpresa;
+    }
+
+    public List<Contactos> getListaContactos() {
+        return listaContactos;
+    }
+
+    public void setListaContactos(List<Contactos> listaContactos) {
+        this.listaContactos = listaContactos;
+    }
+
+    public List<Productos> getListaProductos() {
+        return listaProductos;
+    }
+
+    public void setListaProductos(List<Productos> listaProductos) {
+        this.listaProductos = listaProductos;
     }
     
     

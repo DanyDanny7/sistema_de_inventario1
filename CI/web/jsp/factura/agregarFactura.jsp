@@ -136,54 +136,36 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 text-center">
-                    <div class="card-header" style="color: white"><h1 class="font-weight-bold">Agregar Moneda</h1></div>
+                    <div class="card-header" style="color: white"><h1 class="font-weight-bold">Agregar Factura</h1></div>
                     <br>
-                    <html:form action="/monedaMantenimiento">
+                    <html:form action="/facturaMantenimiento">
                         <div class="card-header" style="background-color:#f0f3f4;">
                             <div class="row">
-                                <div class="form-group col-5">
-                                    <label class="font-weight-bold">Nombre Moneda : </label><br>
-                                    <html:text property="nombreMoneda" styleClass="form-control"></html:text><br>
-                                    </div>
-                                    <div class="form-group col-3">
-                                        <label class="font-weight-bold">Simbolo : </label><br>
-                                    <html:text property="simboloMoneda" styleClass="form-control"></html:text><br>
-                                    </div>
-                                    <div class="form-group col-3">
-                                        <label class="font-weight-bold">Codigo de la Moneda : </label><br>
-                                    <html:text property="codigoMoneda" styleClass="form-control"></html:text><br>
-                                    </div>
-                            </div>    
-                                    <div class="row">
-                                        <div class="form-group col-3"></div>
-                                       <div class="form-group col-3">
-                                        <label class="font-weight-bold">Equivalencia : </label><br>
-                                    <html:text property="equivalencia" styleClass="form-control" ></html:text><br>
-                                   </div>
-                                    <div class="form-group col-3">
-                                        <label class="font-weight-bold">Moneda de Cambio:</label><br>
-                                    <html:select property="monedaReferencia" styleClass="form-control">
+                                <div>
+                                    <label >Cliente</label><br>
+                                    <html:text property="idContacto"></html:text>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <html:submit property="action" value="Agregar" styleClass="btn  font-weight-bold" style="background-color:#f0f3f4; color: black"/>
+
+                    </html:form>
+                    <h5>${error}</h5>
+                </div>
+                <div class="col-1"></div>
+            </div>
+        </div>
+    </body>
+</html>
+
+<label class="font-weight-bold">Empresa : </label><br>
+                                    <html:select property="idEmpresa" styleClass="form-control">
                                         <html:option value="Seleccionar"></html:option>
-                                        <logic:notEmpty name="ActionFormMoneda" property="listaMoneda">
-                                            <logic:iterate id="ver" name="ActionFormMoneda" property="listaMoneda">
-                                                <html:option value="${ver.nombreMoneda}" ></html:option>
+                                        <logic:notEmpty name="ActionFormAcceso" property="listaEmpresa">
+                                            <logic:iterate id="ver" name="ActionFormAcceso" property="listaEmpresa">
+                                                <html:option value="${ver.idEmpresa}" >${ver.nombreEmpresa}</html:option>
                                             </logic:iterate>
                                         </logic:notEmpty>
                                     </html:select>
-                                    <br>
-                                    </div> 
-                                    </div>        
-                                    
-                                    <bean:write name="ActionFormMoneda" property="error" filter="false"></bean:write>
-                                    </div>
-                                    <br>
-                                <html:submit property="action" value="Agregar" styleClass="btn  font-weight-bold" style="background-color:#f0f3f4; color: black"/>
-
-                            </html:form>
-                            <h5>${error}</h5>
-                        </div>
-                        <div class="col-1"></div>
-                    </div>
-                </div>
-                </body>
-                </html>
