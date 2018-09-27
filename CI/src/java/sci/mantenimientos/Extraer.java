@@ -23,6 +23,7 @@ import sci.persistencia.Productos;
  */
 public class Extraer {
     int variable;
+    List <Integer> lista; ; 
     public List consultarTodo() {
          List<Productos> listaProductos = null;
         SessionFactory factory = HibernateUtil.getSessionFactory();
@@ -33,7 +34,6 @@ public class Extraer {
              Query q   =  session.createQuery("select max(idProducto) from Productos");
          listaProductos = (List<Productos>) q.list();
             System.out.println(listaProductos.get(0));
-            
             System.out.println("Consultar todo Correcto extraer");
         } catch (Exception e) {
             e.printStackTrace();

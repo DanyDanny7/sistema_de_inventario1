@@ -34,18 +34,20 @@ public class ActionProductos extends org.apache.struts.action.Action {
         Integer idFabricantes = fB.getIdFabricantes();
         String nombreProducto = fB.getNombreProducto();
         Double precioUnitario = fB.getPrecioUnitario();
-        int stockMinimo = fB.getStockMinimo();
+        Integer stockMinimo = fB.getStockMinimo();
+       
         String descripcionProducto = fB.getDescripcionProducto();
         String modelo = fB.getModelo();
         String action = fB.getAction();
-
+        System.out.println("aqui");
         ProductosMantenimiento pman = new ProductosMantenimiento();
         FabricantesMantenimiento fman = new FabricantesMantenimiento();
         InventarioMantenimiento iman= new InventarioMantenimiento();
         Extraer e= new Extraer();
+        System.out.println("aqui2");
         String IR = null;
 
-        System.out.println("El action tiene "+action);
+      
         if (fB == null || action == null) {
             System.out.println("Error en null action o fB Productos");
             return mapping.findForward(IRINICIO);
@@ -54,7 +56,7 @@ public class ActionProductos extends org.apache.struts.action.Action {
 
         if (action.equals("Agregar")) {
             String ms = "";
-
+            System.out.println("hola");
             if (idFabricantes <= 0 || idFabricantes == null) {
                 ms += "*Es necesario seleccione un fabricante<br>";
             }
@@ -83,6 +85,7 @@ public class ActionProductos extends org.apache.struts.action.Action {
                 request.setAttribute("id", Login.id);
                 return mapping.findForward(IR);
             }
+            System.out.println("LLEGA AKI?");
             //----     
             int vali = pman.validar(nombreProducto, idFabricantes);
             System.out.println("la vali es " + vali);
@@ -118,6 +121,7 @@ public class ActionProductos extends org.apache.struts.action.Action {
 //-------------------------------------------------------------------------------
 
         if (action.equals("ConsultarId")) {
+           
             Productos productos = (Productos) pman.consultarProductosId(idProducto);
             if (productos == null) {
                 fB.setError("<span style='color:red'>Nose puede consultar por idProducto " + "<br></span>");
@@ -166,9 +170,11 @@ public class ActionProductos extends org.apache.struts.action.Action {
             }
             if (!ms.equals("")) {
                 fB.setError("<span style='color:red'>Por favor complete los espacios vacios" + "<br>" + ms + "</span>");
+                
                 List<Fabricantes> listaFabricantes = fman.consultarTodosFabricantes();
                 fB.setListaFabricantes(listaFabricantes);
                 request.setAttribute("listaFabricantes", listaFabricantes);
+                
                 IR = MODIFICAR;
                 request.setAttribute("nombre", Login.nombre);
                 request.setAttribute("nAcceso", Login.nAcceso);

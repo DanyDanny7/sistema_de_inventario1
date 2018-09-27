@@ -178,7 +178,7 @@
                                     </div> 
                                 </div>
 
-
+<bean:write name="ActionFormProductos" property="error" filter="false"/>
                                 </tbody>  
                                 </table>
                                 <br>
