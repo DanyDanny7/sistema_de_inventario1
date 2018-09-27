@@ -35,19 +35,18 @@ public class ActionProductos extends org.apache.struts.action.Action {
         String nombreProducto = fB.getNombreProducto();
         Double precioUnitario = fB.getPrecioUnitario();
         Integer stockMinimo = fB.getStockMinimo();
-       
+
         String descripcionProducto = fB.getDescripcionProducto();
         String modelo = fB.getModelo();
         String action = fB.getAction();
         System.out.println("aqui");
         ProductosMantenimiento pman = new ProductosMantenimiento();
         FabricantesMantenimiento fman = new FabricantesMantenimiento();
-        InventarioMantenimiento iman= new InventarioMantenimiento();
-        Extraer e= new Extraer();
+        InventarioMantenimiento iman = new InventarioMantenimiento();
+        Extraer e = new Extraer();
         System.out.println("aqui2");
         String IR = null;
 
-      
         if (fB == null || action == null) {
             System.out.println("Error en null action o fB Productos");
             return mapping.findForward(IRINICIO);
@@ -75,7 +74,6 @@ public class ActionProductos extends org.apache.struts.action.Action {
                 ms += "*Modelo del producto es necesario<br>";
             }
             if (!ms.equals("")) {
-                fB.setError("<span style='color:red'>Por favor complete los espacios vacios" + "<br>" + ms + "</span>");
                 List<Fabricantes> listaFabricantes = fman.consultarTodosFabricantes();
                 fB.setListaFabricantes(listaFabricantes);
                 request.setAttribute("listaFabricantes", listaFabricantes);
@@ -83,6 +81,7 @@ public class ActionProductos extends org.apache.struts.action.Action {
                 request.setAttribute("nombre", Login.nombre);
                 request.setAttribute("nAcceso", Login.nAcceso);
                 request.setAttribute("id", Login.id);
+                request.setAttribute("error", ms);
                 return mapping.findForward(IR);
             }
             System.out.println("LLEGA AKI?");
@@ -91,7 +90,7 @@ public class ActionProductos extends org.apache.struts.action.Action {
             System.out.println("la vali es " + vali);
             Fabricantes fab = fman.consultarFabricantesId(idFabricantes);
             if (vali != 2) {
-                fB.setError("<span style='color:red'>Ya existe un producto con este nombre: " + nombreProducto + " del fabricante: " + fab.getNombreFabricante() + " <br></span>");
+                String error = ("Ya existe un producto con este nombre: " + nombreProducto + " del fabricante: " + fab.getNombreFabricante());
                 List<Fabricantes> listaFabricantes = fman.consultarTodosFabricantes();
                 fB.setListaFabricantes(listaFabricantes);
                 request.setAttribute("listaFabricantes", listaFabricantes);
@@ -99,29 +98,35 @@ public class ActionProductos extends org.apache.struts.action.Action {
                 request.setAttribute("nombre", Login.nombre);
                 request.setAttribute("nAcceso", Login.nAcceso);
                 request.setAttribute("id", Login.id);
+                request.setAttribute("error", error);
                 return mapping.findForward(IR);
             }
 
             pman.guardarProductos(idFabricantes, nombreProducto, precioUnitario, descripcionProducto, modelo);
-            List<Integer>lista= e.consultarTodo();
-       
-         int c = lista.get(0);
-         
+            List<Integer> lista = e.consultarTodo();
+
+            int c = lista.get(0);
+
             System.out.println(c);
-        iman.guardarInventario(0,c,0.0,"sin existencia",stockMinimo, "");
-            
+            iman.guardarInventario(0, c, 0.0, "sin existencia", stockMinimo, "");
+
             System.out.println("despues de guardar");
             List<Productos> listaProductos = pman.consultarTodoProductos();
             fB.setListaProductos(listaProductos);
-            
-            
+
+            String mensaje = "El Producto \"" + nombreProducto + "\" se agregó correctamente";
+            request.setAttribute("mensaje", mensaje);
 
             IR = LISTA;
+            request.setAttribute("nombre", Login.nombre);
+            request.setAttribute("nAcceso", Login.nAcceso);
+            request.setAttribute("id", Login.id);
+            return mapping.findForward(IR);
         }
 //-------------------------------------------------------------------------------
 
         if (action.equals("ConsultarId")) {
-           
+
             Productos productos = (Productos) pman.consultarProductosId(idProducto);
             if (productos == null) {
                 fB.setError("<span style='color:red'>Nose puede consultar por idProducto " + "<br></span>");
@@ -142,10 +147,20 @@ public class ActionProductos extends org.apache.struts.action.Action {
 //-------------------------------------------------------------------------------
 
         if (action.equals("Eliminar")) {
-            pman.eliminarProductos(idProducto);
-            List<Productos> listaProductos = pman.consultarTodoProductos();
-            fB.setListaProductos(listaProductos);
-            fB.setMensaje("<spam style = 'color: blue' > Registro (" + idProducto + ") Eliminado Correctamente <br></spam>");
+            int n = pman.eliminarProductos(idProducto);
+            String mensaje = "";
+            if (n == 0) {
+                mensaje = (" Registro (" + idProducto + ") No se Eliminó ");
+                request.setAttribute("error", mensaje);
+                
+            } else {
+                List<Productos> listaProductos = pman.consultarTodoProductos();
+                fB.setListaProductos(listaProductos);
+                
+                mensaje = (" Registro \"" + idProducto + "\" Eliminado Correctamente ");
+                request.setAttribute("mensaje", mensaje);
+                
+            }
             IR = LISTA;
         }
 //-------------------------------------------------------------------------------
@@ -170,11 +185,11 @@ public class ActionProductos extends org.apache.struts.action.Action {
             }
             if (!ms.equals("")) {
                 fB.setError("<span style='color:red'>Por favor complete los espacios vacios" + "<br>" + ms + "</span>");
-                
+
                 List<Fabricantes> listaFabricantes = fman.consultarTodosFabricantes();
                 fB.setListaFabricantes(listaFabricantes);
                 request.setAttribute("listaFabricantes", listaFabricantes);
-                
+
                 IR = MODIFICAR;
                 request.setAttribute("nombre", Login.nombre);
                 request.setAttribute("nAcceso", Login.nAcceso);
@@ -182,7 +197,7 @@ public class ActionProductos extends org.apache.struts.action.Action {
                 return mapping.findForward(IR);
             }
             //----     
-           /* int vali = pman.validar(nombreProducto, idFabricantes);
+            /* int vali = pman.validar(nombreProducto, idFabricantes);
             System.out.println("la vali es " + vali);
             Fabricantes fab = fman.consultarFabricantesId(idFabricantes);
             if (vali != 2) {
@@ -209,10 +224,14 @@ public class ActionProductos extends org.apache.struts.action.Action {
             List<Productos> listaProductos = pman.consultarTodoProductos();
             if (listaProductos == null) {
                 fB.setError("<span style='color:red'>La lista esta vacia." + "<br></span>");
-                return mapping.findForward(LISTA);
+                IR = LISTA;
+                request.setAttribute("nombre", Login.nombre);
+                request.setAttribute("nAcceso", Login.nAcceso);
+                request.setAttribute("id", Login.id);
+                return mapping.findForward(IR);
             } else {
                 fB.setListaProductos(listaProductos);
-                return mapping.findForward(LISTA);
+                IR = LISTA;
             }
 
         }
@@ -224,11 +243,11 @@ public class ActionProductos extends org.apache.struts.action.Action {
             request.setAttribute("listaFabricantes", listaFabricantes);
             IR = AGREGAR;
         }
-        
-                request.setAttribute("nombre", Login.nombre);
-                request.setAttribute("nAcceso", Login.nAcceso);
-                request.setAttribute("id", Login.id);
-                return mapping.findForward(IR);
+
+        request.setAttribute("nombre", Login.nombre);
+        request.setAttribute("nAcceso", Login.nAcceso);
+        request.setAttribute("id", Login.id);
+        return mapping.findForward(IR);
 
     }
 

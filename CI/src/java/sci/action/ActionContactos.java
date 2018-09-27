@@ -102,7 +102,7 @@ public class ActionContactos extends org.apache.struts.action.Action {
                     + "Clientes</a></li><li class=\"nav-item\"><a class=\"nav-link\" style=\"color: white;\" href=\"contactosMantenimiento.do?action=ConsultarTipo&tipoContacto=Proveedor\">\n"
                     + "Proveedores</a></li></ul>";
             request.setAttribute("codigo", codigo);
-            String mensaje = "El Contacto \""+nombreContacto +"\" se agregó correctamente";
+            String mensaje = "El Contacto \"" + nombreContacto + "\" se agregó correctamente";
             request.setAttribute("mensaje", mensaje);
             IR = LISTA;
         }
@@ -142,14 +142,14 @@ public class ActionContactos extends org.apache.struts.action.Action {
                 List<Contactos> listaContacto = contactosMantenimiento.consultarTodosContactos();
                 formBean.setListaContacto(listaContacto);
                 String codigo = "<ul class=\"nav nav-tabs\"><li class=\"nav-item \" ><a class=\"nav-link active\" style=\"background-color: #000;color: white \" href=\"contactosMantenimiento.do?action=Consultar\">Todo</a>\n"
-                    + "</li><li class=\"nav-item\"><a class=\"nav-link\" style=\"color: white;\" href=\"contactosMantenimiento.do?action=ConsultarTipo&tipoContacto=Cliente\">\n"
-                    + "Clientes</a></li><li class=\"nav-item\"><a class=\"nav-link\" style=\"color: white;\" href=\"contactosMantenimiento.do?action=ConsultarTipo&tipoContacto=Proveedor\">\n"
-                    + "Proveedores</a></li></ul>";
-            request.setAttribute("codigo", codigo);
+                        + "</li><li class=\"nav-item\"><a class=\"nav-link\" style=\"color: white;\" href=\"contactosMantenimiento.do?action=ConsultarTipo&tipoContacto=Cliente\">\n"
+                        + "Clientes</a></li><li class=\"nav-item\"><a class=\"nav-link\" style=\"color: white;\" href=\"contactosMantenimiento.do?action=ConsultarTipo&tipoContacto=Proveedor\">\n"
+                        + "Proveedores</a></li></ul>";
+                request.setAttribute("codigo", codigo);
                 mensaje = (" Registro \"" + idContacto + "\" Eliminado Correctamente ");
                 request.setAttribute("mensaje", mensaje);
             }
-            IR = LISTA;                                     
+            IR = LISTA;
         }
 //------------------------------------------------------------------------------       
         if (action.equals("Modificar")) {
@@ -194,7 +194,7 @@ public class ActionContactos extends org.apache.struts.action.Action {
                     + "Clientes</a></li><li class=\"nav-item\"><a class=\"nav-link\" style=\"color: white;\" href=\"contactosMantenimiento.do?action=ConsultarTipo&tipoContacto=Proveedor\">\n"
                     + "Proveedores</a></li></ul>";
             request.setAttribute("codigo", codigo);
-            String mensaje = "El Contacto \""+nombreContacto +"\" se modificó correctamente";
+            String mensaje = "El Contacto \"" + nombreContacto + "\" se modificó correctamente";
             request.setAttribute("mensaje", mensaje);
             IR = LISTA;
 

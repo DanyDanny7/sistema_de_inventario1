@@ -114,6 +114,7 @@
                                             <a class="dropdown-item" href="monedaMantenimiento.do?action=Consultar">Monedas</a>
                                             <a class="dropdown-item" href="productosMantenimiento.do?action=Consultar">Productos</a>
                                             <a class="dropdown-item" href="empresaMantenimiento.do?action=Consultar">Empresa</a>
+                                            <a class="dropdown-item" href="inventarioMantenimiento.do?action=Consultar">Inventario</a>
                                         </div>
                                     </li>
                                 </ul>
