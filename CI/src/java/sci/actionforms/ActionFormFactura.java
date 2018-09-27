@@ -39,7 +39,7 @@ public class ActionFormFactura extends org.apache.struts.action.ActionForm{
     
     //Adicional
     private String action;
-    private List<Empresa> listaEmpresa;
+    
     private List<Contactos> listaContactos;
     private List<Productos> listaProductos;
 
@@ -171,13 +171,6 @@ public class ActionFormFactura extends org.apache.struts.action.ActionForm{
         this.action = action;
     }
 
-    public List<Empresa> getListaEmpresa() {
-        return listaEmpresa;
-    }
-
-    public void setListaEmpresa(List<Empresa> listaEmpresa) {
-        this.listaEmpresa = listaEmpresa;
-    }
 
     public List<Contactos> getListaContactos() {
         return listaContactos;

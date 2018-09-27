@@ -78,9 +78,9 @@
         <forward name = "irModificarFactura"    path = "/jsp/factura/modificarFactura.jsp"/>
         <forward name = "irListaFactura"        path = "/jsp/factura/listaFactura.jsp"/>    
 <!-- // Inventario --> 
-  <forward name="confirmacionNuevoInventario"  path="/jsp/inventario/listaInventario.jsp"/>
-       <forward name="confirmacionErrorInventario"  path="/jsp/inventario/agregarInventario.jsp"/>
-       <forward name= "modificarinventario"         path="/jsp/inventario/ModificarInventario.jsp"/>      
+        <forward name ="confirmacionNuevoInventario"  path = "/jsp/inventario/listaInventario.jsp"/>
+        <forward name ="confirmacionErrorInventario"  path = "/jsp/inventario/agregarInventario.jsp"/>
+        <forward name = "modificarinventario"         path = "/jsp/inventario/ModificarInventario.jsp"/>      
        
                      
 <!-- // Iva -->

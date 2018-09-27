@@ -62,6 +62,7 @@ public class ActionFactura extends org.apache.struts.action.Action {
         //Adicional
         String action = fb.getAction();
 
+
         FacturaEncabezadoMantenimiento feman = new FacturaEncabezadoMantenimiento();
         FacturaDetalleMantenimiento fdman = new FacturaDetalleMantenimiento();
         EmpresaMantenimiento eman = new EmpresaMantenimiento();
@@ -79,23 +80,26 @@ public class ActionFactura extends org.apache.struts.action.Action {
         
         //-------------------------------------------------------------------------      
         if (action.equals("irAgregar")) {
-            System.out.println("Entramos 1");
+            
             fechaFactura = formato.format(new Date());
-//Traemos lista Empresa                
-            List<Empresa> listaEmpresa = eman.consultarTodosEmpresa();
-            fb.setListaEmpresa(listaEmpresa);
-            request.setAttribute("listaEmpresa", listaEmpresa);
-            System.out.println("Entramos 2");
+            fb.setFechaFactura(fechaFactura);
+            String nombreEmpresa = eman.consultarEmpresaId(1).getNombreEmpresa();
+            String direccionEmpresa = eman.consultarEmpresaId(1).getDireccionEmpresa();
+            request.setAttribute("nombreEmpresa", nombreEmpresa);
+            request.setAttribute("direccionEmpresa", direccionEmpresa);
+            
 //Traemos lista Contactos                
             List<Contactos> listaContactos = cman.tipos("cliente");
             fb.setListaContactos(listaContactos);
             request.setAttribute("listaContactos", listaContactos);
-            System.out.println("Entramos 3");
 //Traemos lista Productos                
             List<Productos> listaProductos = pman.consultarTodoProductos();
             fb.setListaProductos(listaProductos);
             request.setAttribute("listaProductos", listaProductos);
-            System.out.println("Entramos 4 antes de ir" );
+           
+            
+            
+            
             IR = AGREGAR;
         }
  //-------------------------------------------------------------------------      
