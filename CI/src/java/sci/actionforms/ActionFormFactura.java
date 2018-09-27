@@ -7,7 +7,6 @@ package sci.actionforms;
 
 import java.util.List;
 import sci.persistencia.Contactos;
-import sci.persistencia.Empresa;
 import sci.persistencia.FacturaDetalle;
 import sci.persistencia.FacturaEncabezado;
 import sci.persistencia.Productos;
@@ -170,7 +169,6 @@ public class ActionFormFactura extends org.apache.struts.action.ActionForm{
     public void setAction(String action) {
         this.action = action;
     }
-
 
     public List<Contactos> getListaContactos() {
         return listaContactos;

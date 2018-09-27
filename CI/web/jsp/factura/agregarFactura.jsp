@@ -212,19 +212,24 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                            <logic:notEmpty name="ActionFormFactura" property="listaFacturaDetalle">
+                                                <logic:iterate id="ver" name="ActionFormFactura" property="listaFacturaDetalle">
+                                                    <tr>
+                                                        <td><bean:write name="ver" property="productos.nombreProducto"></bean:write></td>
+                                                        <td><bean:write name="ver" property="cantidad"></bean:write></td>
+                                                        <td><bean:write name="ver" property="productos.precioUnitario"></bean:write></td>
+                                                        <td><bean:write name="ver" property="totalFila"></bean:write></td>
+                                                    </tr>
+                                                </logic:iterate>
+                                            </logic:notEmpty>
+
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
+                        </div>
 
-                            <br>
+                        <br>
                         <html:submit property="action" value="Guardar" styleClass="btn  font-weight-bold" style="background-color:#f0f3f4; color: black"/>
 
                     </html:form>

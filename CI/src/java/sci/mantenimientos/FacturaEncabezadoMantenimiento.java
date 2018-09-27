@@ -168,4 +168,25 @@ public class FacturaEncabezadoMantenimiento {
         }
         return fae;
     }
+    
+    public List maxIdFacturaEncabezado() {
+         List<FacturaEncabezado> listaFE = null;
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.openSession();
+       
+        session.beginTransaction();
+        try {
+             Query q   =  session.createQuery("select max(idFacturaEncabezado) from FacturaEncabezado");
+         listaFE = (List<FacturaEncabezado>) q.list();
+            System.out.println(listaFE.get(0));
+            System.out.println("Consultar max facturaEncabezado Correcto");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error consultar max id facturaEncabezado. "+e);
+        } finally {
+
+        }
+        
+        return listaFE ;
+    }
 }
