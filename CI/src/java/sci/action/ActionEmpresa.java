@@ -13,6 +13,7 @@ import org.apache.struts.action.ActionMapping;
 import sci.actionforms.ActionFormEmpresa;
 import sci.mantenimientos.EmpresaMantenimiento;
 import metodos.Login;
+import sci.actionforms.ActionFormAcceso;
 import sci.persistencia.Empresa;
 
 public class ActionEmpresa extends org.apache.struts.action.Action {
@@ -21,6 +22,7 @@ public class ActionEmpresa extends org.apache.struts.action.Action {
     private static final String INICIO = "irInicioEmpresa";
     private static final String AGREGAR = "irAgregarEmpresa";
     private static final String MODIFICAR = "irModificarEmpresa";
+    private static final String ACCESO = "irAcceso";
 
     @Override
     public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
@@ -47,7 +49,7 @@ public class ActionEmpresa extends org.apache.struts.action.Action {
         }
 
 //-------------------------------------------------------------------------------
-        if (action.equals("Agregar")) {
+        if (action.equals("Siguiente")) {
             String adver = "";
 
             if (nombreEmpresa == null || nombreEmpresa.equals("")) {
@@ -101,11 +103,15 @@ public class ActionEmpresa extends org.apache.struts.action.Action {
                 request.setAttribute("error", error);
                 return mapping.findForward(IR);
             }
+            
             List<Empresa> listaEmpresa = eman.consultarTodosEmpresa();
             fB.setListaEmpresa(listaEmpresa);
+            ActionFormAcceso fA = (ActionFormAcceso) form;
+            
+            request.setAttribute("listaEmpresa", listaEmpresa);
             String mensaje = "La Empresa \"" + nombreEmpresa + "\" se agregó correctamente";
             request.setAttribute("mensaje", mensaje);
-            IR = LISTA;
+            IR = ACCESO;
         }
 //-------------------------------------------------------------------------------
         if (action.equals("ConsultarId")) {

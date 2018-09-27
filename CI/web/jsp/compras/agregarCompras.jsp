@@ -15,7 +15,7 @@
     <head>
 
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Mantenimiento de Inventario</title>
+        <title>Agregar Compras</title>
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
         <script src="js/popper.min.js" type="text/javascript"></script>
@@ -140,40 +140,43 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 text-center">
-                    <div class="card-header" style="color: white"><h1 class="font-weight-bold">AGREGAR ACCESO</h1></div>
+                    <div class="card-header" style="color: white"><h1 class="font-weight-bold">AGREGAR COMPRAS</h1></div>
                     <br>
                     <html:form action="/comprasMantenimiento">
                         <div class="card-header" style="background-color:#f0f3f4;">
 
                             <div class="row">
                                 <div class="form-group col-3">
-                                    <label class="font-weight-bold">id Contactos:</label>
+                                    <label class="font-weight-bold">Documento:</label>
+                                    <html:text property="nDocumento" styleClass="form-control" ></html:text>  
+                                    </div>
+                                    <div class="form-group col-3">
+                                        <label class="font-weight-bold">Contacto:</label>
                                     <html:text property="idContacto" styleClass="form-control" ></html:text>  
                                     </div>
                                     <div class="form-group col-3">
-                                        <label class="font-weight-bold">id Inventario:</label> 
+                                        <label class="font-weight-bold">Inventario:</label> 
                                     <html:text property="idInventario" styleClass="form-control"></html:text> 
                                     </div>
                                     <div class="form-group col-3">
-                                        <label class="font-weight-bold">id Iva:</label>  
+                                        <label class="font-weight-bold">Iva:</label>  
                                     <html:text property="idIva" styleClass="form-control"></html:text> 
                                     </div>
                                     <div class="form-group col-3">
-                                        <label class="font-weight-bold">id productos:</label>
+                                        <label class="font-weight-bold">Productos:</label>
                                     <html:text property="idProducto" styleClass="form-control" ></html:text> 
                                     </div>
                                     <div class="form-group col-3">
-                                        <label class="font-weight-bold">total de compra:</label>
-                                    <html:text property="totalCompra"styleClass="form-control" ></html:text> 
+                                        <label class="font-weight-bold">Total de compra:</label>
+                                    <html:text property="totalCompra" styleClass="form-control" ></html:text> 
                                     </div>
 
-                                <bean:write name="ActionFormCompras" property="error" filter="false"/>
+                                </div>
                             </div>
-                        </div>
-                        <div hidden="hidden">
+                            <div hidden="hidden">
                             <html:text property="idCompra" size="20" ></html:text>                   
                             </div>
-
+                            <br>
 
                         <html:submit property="action" value="Agregar" styleClass="btn  font-weight-bold" style="background-color:#f0f3f4; color: black"/>
 
@@ -184,7 +187,7 @@
                 </div>
             </div>
         </div>
-<div id="error">${error}</div>
+        <div id="error">${error}</div>
         <script type="text/javascript">
             if ($("#error").text() != "") {
                 window.onload = function () {

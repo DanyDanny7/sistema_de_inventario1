@@ -26,6 +26,7 @@ public class ActionAcceso extends org.apache.struts.action.Action {
     private static final String MODIFICAR = "irModificarAcceso";
     private static final String PERFIL = "irPerfil";
     private static final String AYUDA = "irAyuda2Acceso";
+   
 
     SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -365,6 +366,15 @@ public class ActionAcceso extends org.apache.struts.action.Action {
             IR = PORTADA;
 
         }
+        
+//----------------------------------------------------------------------------------
+            if (action.equalsIgnoreCase("Siguiente")) {
+            List<Empresa> listaEmpresa = eman.consultarTodosEmpresa();
+            formBean.setListaEmpresa(listaEmpresa);
+            request.setAttribute("listaEmpresa", listaEmpresa);
+            IR = AGREGAR;
+        }
+
         request.setAttribute("nombre", Login.nombre);
         request.setAttribute("nAcceso", Login.nAcceso);
         request.setAttribute("id", Login.id);

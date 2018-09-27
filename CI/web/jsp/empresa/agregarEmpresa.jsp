@@ -181,8 +181,9 @@
 
                         </div>
                         <br>
-                        <html:submit property="action" value="Agregar" styleClass="btn  font-weight-bold" style="background-color:#f0f3f4; color: black"/>
-                        <html:submit property="action" value="Consultar" styleClass="btn  font-weight-bold" style="background-color:#f0f3f4; color: black"/>
+                        
+                        <html:submit property="action" value="Siguiente" styleClass="btn  font-weight-bold" style="background-color:#f0f3f4; color: black"/>
+                    <%--    <html:submit property="action" value="Consultar" styleClass="btn  font-weight-bold" style="background-color:#f0f3f4; color: black"/> --%>
 
                     </html:form>
                     <br>
