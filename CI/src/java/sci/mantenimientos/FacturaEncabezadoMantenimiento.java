@@ -189,4 +189,11 @@ public class FacturaEncabezadoMantenimiento {
         
         return listaFE ;
     }
+    public int maxIdFacturaEncabezad(){
+        FacturaEncabezadoMantenimiento fam = new FacturaEncabezadoMantenimiento();
+        List<Integer> lista = fam.maxIdFacturaEncabezado();
+        int idFacturaEncabezado = lista.get(0);
+        return idFacturaEncabezado;
+    }
+    
 }

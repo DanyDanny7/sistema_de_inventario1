@@ -2,6 +2,7 @@ package sci.mantenimientos;
 
 import com.myapp.struts.HibernateUtil;
 import java.util.List;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -195,4 +196,26 @@ public class FacturaDetalleMantenimiento {
         }
         return factdet;
     }
+    public boolean validacionFE (int idFacturaEncabezado){
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.openSession();
+        try {
+            session.beginTransaction();
+            Query q = session.createQuery("from FacturaDetalle a where a.idFacturaEncabezado=:idFacturaEncabezado");
+            q.setParameter("idFacturaEncabezado", idFacturaEncabezado);
+            List<FacturaEncabezado> list = q.list();
+            if (list.size()>0) {
+                session.close();
+                return true;
+            }
+            session.close();
+            return false;
+        } catch (HibernateException e) {
+            session.close();
+            System.out.println("Error en validacion Factura Encabezado "+e);
+            return false;
+        }
+    }
+    
+    
 }

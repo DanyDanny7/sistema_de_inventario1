@@ -2,6 +2,7 @@ package sci.mantenimientos;
 
 import com.myapp.struts.HibernateUtil;
 import java.util.List;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -249,7 +250,7 @@ public class AccesoMantenimiento {
             }
             session.close();
             return 1;
-        } catch (Exception e) {
+        } catch (HibernateException e) {
             session.close();
             System.out.println("Error en login idAcceso " + e);
             return 0;

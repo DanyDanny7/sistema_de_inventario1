@@ -137,7 +137,6 @@
             <div class="row">
                 <div class="col-12 text-center">
                     <div class="card-header" style="color: white"><h1 class="font-weight-bold">Agregar Factura</h1></div>
-                    <br>
                     <html:form action="/facturaMantenimiento">
                         <div class="card-header" style="background-color:#f0f3f4;">
                             <div class="row">
@@ -156,7 +155,7 @@
                                 </div>
                                 <div class="col-3">
                                     <div class="text-left"><label>Numero de Factura : </label></div>
-                                    <h2 class="text-center" style="color: red">00</h2>
+                                    <h2 class="text-center" style="color: red">00000${num}</h2>
                                     <div class="text-left"><label >Fecha : </label></div>
                                     <html:text property="fechaFactura"></html:text>
                                     </div>
