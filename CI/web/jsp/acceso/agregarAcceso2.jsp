@@ -144,24 +144,14 @@
                             <div class="row">
                                 <div class="form-group col-3">
                                     <label class="font-weight-bold">Empresa : </label><br>
-                                    <html:select property="idEmpresa" styleClass="form-control">
-                                        <html:option value="Seleccionar"></html:option>
-                                        <logic:notEmpty name="ActionFormAcceso" property="listaEmpresa">
-                                            <logic:iterate id="ver" name="ActionFormAcceso" property="listaEmpresa">
-                                                <html:option value="${ver.idEmpresa}" >${ver.nombreEmpresa}</html:option>
-                                            </logic:iterate>
-                                        </logic:notEmpty>
-                                    </html:select>
+                                    <html:hidden property="idEmpresa" value="${idEmpresa}" styleClass="form-control"></html:hidden>
+                                    <html:text property="nombreEmpresa" value="${nombreEmpresa}" styleClass="form-control"></html:text><br>
+                                    
                                 </div>
                                 <div class="form-group col-3">
                                     <label class="font-weight-bold">Nivel de Acceso : </label><br>
-                                    <html:select property="tipoAcceso" styleClass="form-control">
-                                        <html:option value="Seleccionar"></html:option>
-                                        <html:option value="Solo Consulta"></html:option>
-                                        <html:option value="Consulta e Ingresar"></html:option>
-                                        <html:option value="Administrador"></html:option>
-                                        <html:option value="Super Administrador"></html:option>
-                                    </html:select>
+                                <html:text property="tipoAcceso" value="Super Administrador" styleClass="form-control " ></html:text><br>
+                                    
                                 </div>
                                 <div class="form-group col-6">
                                     <label class="font-weight-bold">Usuario : </label><br>
@@ -194,7 +184,7 @@
                         </div>
 
                         <br>
-                        <html:submit property="action" value="Agregar" styleClass="btn  font-weight-bold" style="background-color:#f0f3f4; color: black"/>
+                        <html:submit property="action" value="Siguiente" styleClass="btn  font-weight-bold" style="background-color:#f0f3f4; color: black"/>
                         <%--<html:submit property="action" value="Consultar" styleClass="btn  font-weight-bold" style="background-color:#f0f3f4; color: black"/>--%>
 
                     </html:form>

@@ -14,6 +14,7 @@ import sci.actionforms.ActionFormEmpresa;
 import sci.mantenimientos.EmpresaMantenimiento;
 import metodos.Login;
 import sci.actionforms.ActionFormAcceso;
+import sci.mantenimientos.Extraer;
 import sci.persistencia.Empresa;
 
 public class ActionEmpresa extends org.apache.struts.action.Action {
@@ -50,6 +51,12 @@ public class ActionEmpresa extends org.apache.struts.action.Action {
 
 //-------------------------------------------------------------------------------
         if (action.equals("Siguiente")) {
+            
+            Extraer ex = new Extraer();
+            List<Integer> lista = ex.maxIdEmpresa();
+            idEmpresa = lista.get(0);
+            idEmpresa = idEmpresa+1;
+                            
             String adver = "";
 
             if (nombreEmpresa == null || nombreEmpresa.equals("")) {
@@ -82,20 +89,10 @@ public class ActionEmpresa extends org.apache.struts.action.Action {
                 request.setAttribute("error", adver);
                 return mapping.findForward(IR);
             }
-            int vali = eman.consultarNombre(nombreEmpresa);
-            if (vali != 1) {
-                String error = ("Ya existe la Empresa\"" + nombreEmpresa + "\"por favor ingrese otra Empresa");
-                IR = AGREGAR;
-                request.setAttribute("nombre", Login.nombre);
-                request.setAttribute("nAcceso", Login.nAcceso);
-                request.setAttribute("nAcceso", Login.id);
-                request.setAttribute("error", error);
 
-                return mapping.findForward(IR);
-            }
             int val = eman.guardarEmpresa(nombreEmpresa, ncr, nit, direccionEmpresa, telefonoEmpresa, encargadoEmpresa, emailEmpresa);
             if (val != 1) {
-                String error = ("Sugio un error No se Guardó la empresa\"" + nombreEmpresa);
+                String error = ("Surgio un error No se Guardó la empresa\"" + nombreEmpresa);
                 IR = AGREGAR;
                 request.setAttribute("nombre", Login.nombre);
                 request.setAttribute("nAcceso", Login.nAcceso);
@@ -104,13 +101,11 @@ public class ActionEmpresa extends org.apache.struts.action.Action {
                 return mapping.findForward(IR);
             }
             
-            List<Empresa> listaEmpresa = eman.consultarTodosEmpresa();
-            fB.setListaEmpresa(listaEmpresa);
-            ActionFormAcceso fA = (ActionFormAcceso) form;
             
-            request.setAttribute("listaEmpresa", listaEmpresa);
-            String mensaje = "La Empresa \"" + nombreEmpresa + "\" se agregó correctamente";
-            request.setAttribute("mensaje", mensaje);
+            
+            System.out.println("holi"+nombreEmpresa);
+            request.setAttribute("idEmpresa", idEmpresa);
+            request.setAttribute("nombreEmpresa", nombreEmpresa);
             IR = ACCESO;
         }
 //-------------------------------------------------------------------------------

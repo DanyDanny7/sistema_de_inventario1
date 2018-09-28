@@ -173,7 +173,7 @@ public class EmpresaMantenimiento {
             q.setParameter("nombreEmpresa", nombreEmpresa);
             List<Empresa> list = q.list();
             if (list.size() > 0) {
-                return 0;
+                return 2;
             }
             session.close();
             return 1;

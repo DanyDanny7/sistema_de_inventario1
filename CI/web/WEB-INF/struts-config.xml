@@ -48,6 +48,7 @@
         <forward name = "irAyuda2Acceso"        path = "/jsp/acceso/ayuda2.jsp"/>
         <forward name = "irAyuda3Acceso"        path = "/jsp/acceso/ayuda3.jsp"/>
         <forward name = "irPerfil"              path = "/jsp/acceso/perfil.jsp"/>
+        <forward name = "irConfiguración"       path = "/jsp/configuracion/agregarConfiguracion.jsp"/>
 <!-- // Compras -->
         <forward name = "irInicioCompras"       path = "/jsp/compras/inicio.jsp"/>
         <forward name = "listaCompras"          path = "/jsp/compras/listaCompra.jsp"/>
@@ -67,6 +68,7 @@
         <forward name = "irListaEmpresa"        path = "/jsp/empresa/listaEmpresa.jsp"/>
         <forward name = "irAgregarEmpresa"      path = "/jsp/empresa/agregarEmpresa.jsp"/>
         <forward name = "irModificarEmpresa"    path = "/jsp/empresa/modificarEmpresa.jsp"/>
+        <forward name = "irAcceso"              path = "/jsp/acceso/agregarAcceso2.jsp"/>
 <!-- // Fabricantes -->
         <forward name = "irInicioFabricantes"   path = "/jsp/fabricante/inicio.jsp"/>
         <forward name = "irAgregarFabricantes"  path = "/jsp/fabricante/agregarFabricante.jsp"/>

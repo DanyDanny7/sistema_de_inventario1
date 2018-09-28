@@ -64,7 +64,7 @@ public class ComprasMantenimiento {
         } catch (Exception e) {
             if (session.getTransaction().isActive()) {
                 session.getTransaction().rollback();
-                flag = 1;
+                flag = 0;
                 System.out.println("error en guardar compraMantenimiento "+e);
             }
         } finally {

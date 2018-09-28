@@ -48,14 +48,14 @@ public class ActionCompras extends org.apache.struts.action.Action {
         String action = formBean.getAction();
 
         String IR = null;
-        
+
         if (formBean == null || action == null) {
             System.out.println("Error entre formBean o action null");
-            IR=INICIO;
+            IR = INICIO;
         }
 //------------------------------------------------------
         System.out.println("El action trae: " + action);
-        
+
         if (action.equals("Agregar")) {
             System.out.println("Entro");
             String advertencia = "";
@@ -77,8 +77,8 @@ public class ActionCompras extends org.apache.struts.action.Action {
             }
 
             if (!advertencia.equals("")) {
-               IR = AGREGAR;
-               request.setAttribute("nombre", Login.nombre);
+                IR = AGREGAR;
+                request.setAttribute("nombre", Login.nombre);
                 request.setAttribute("nAcceso", Login.nAcceso);
                 request.setAttribute("id", Login.id);
                 request.setAttribute("error", advertencia);
@@ -103,14 +103,14 @@ public class ActionCompras extends org.apache.struts.action.Action {
 
             List<Compras> listaCompras = comprasMantenimiento.consultarTodoCompras();
             formBean.setListaCompras(listaCompras);
-           String mensaje = "La Compra \""+nDocumento +"\" se agregó correctamente";
+            String mensaje = "La Compra \"" + nDocumento + "\" se agregó correctamente";
             request.setAttribute("mensaje", mensaje);
-            IR= LISTA;
+            IR = LISTA;
         }
 //----------------------------------------------------------------------
         if (action.equals("Modificar")) {
-           
-      String advertencia = "";
+
+            String advertencia = "";
 
             if (idContacto == null || idContacto.equals("")) {
                 advertencia = "id de compras  es requerido<br>";
@@ -129,15 +129,15 @@ public class ActionCompras extends org.apache.struts.action.Action {
             }
 
             if (!advertencia.equals("")) {
-               IR = MODIFICAR;
-               request.setAttribute("nombre", Login.nombre);
+                IR = MODIFICAR;
+                request.setAttribute("nombre", Login.nombre);
                 request.setAttribute("nAcceso", Login.nAcceso);
                 request.setAttribute("id", Login.id);
                 return mapping.findForward(IR);
             }
-             ComprasMantenimiento comprasMantenimiento = new ComprasMantenimiento();
-             List<Compras> listaCompras = comprasMantenimiento.consultarTodoCompras();
-             formBean.setListaCompras(listaCompras);
+            ComprasMantenimiento comprasMantenimiento = new ComprasMantenimiento();
+            List<Compras> listaCompras = comprasMantenimiento.consultarTodoCompras();
+            formBean.setListaCompras(listaCompras);
             IR = LISTA;
         }
         //----------------------------------------------------------------------
@@ -153,7 +153,7 @@ public class ActionCompras extends org.apache.struts.action.Action {
         //----------------------------------------------------------------------
         if (action.equals("Consultar")) {
             ComprasMantenimiento comprasMantenimiento = new ComprasMantenimiento();
-       
+
             List<Compras> listaCompras = comprasMantenimiento.consultarTodoCompras();
 
             if (listaCompras == null) {
@@ -168,7 +168,7 @@ public class ActionCompras extends org.apache.struts.action.Action {
                 IR = LISTA;
             }
         }
- //------------------------------------------------------------------------------
+        //------------------------------------------------------------------------------
         /*if (action.equals("Actualizar")) {
             ComprasMantenimiento comprasMantenimiento = new ComprasMantenimiento();
             String mensaje = "<span style='color:red'>Actualizado Correcto" + "<br></span>";
@@ -179,14 +179,13 @@ public class ActionCompras extends org.apache.struts.action.Action {
             formBean.setListaCompras(listaCompras);
             return mapping.findForward(LISTA);
         }
-*/
+         */
 //--------------------------------------------------------------------------------        
-         if (action.equals("irAgregar")) {
-             
-             
+        if (action.equals("irAgregar")) {
+
             IR = AGREGAR;
         }
-        
+
         request.setAttribute("nombre", Login.nombre);
         request.setAttribute("nAcceso", Login.nAcceso);
         request.setAttribute("id", Login.id);

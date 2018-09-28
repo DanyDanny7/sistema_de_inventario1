@@ -11,6 +11,7 @@ public class ActionFormAcceso extends org.apache.struts.action.ActionForm {
     //SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
     private Integer idAcceso;
     private Integer idEmpresa;
+    private String nombreEmpresa;
     private String nombreAcceso;
     private String apellidoAcceso;
     private String usuario;
@@ -144,6 +145,14 @@ public class ActionFormAcceso extends org.apache.struts.action.ActionForm {
 
     public void setListaEmpresa(List<Empresa> listaEmpresa) {
         this.listaEmpresa = listaEmpresa;
+    }
+
+    public String getNombreEmpresa() {
+        return nombreEmpresa;
+    }
+
+    public void setNombreEmpresa(String nombreEmpresa) {
+        this.nombreEmpresa = nombreEmpresa;
     }
 
     
