@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import metodos.Estaticas;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -13,7 +14,6 @@ import sci.mantenimientos.AccesoMantenimiento;
 import sci.mantenimientos.EmpresaMantenimiento;
 import metodos.Login;
 import sci.mantenimientos.ConfiguracionMantenimiento;
-import sci.mantenimientos.Extraer;
 import sci.persistencia.Acceso;
 import sci.persistencia.Empresa;
 
@@ -27,8 +27,8 @@ public class ActionAcceso extends org.apache.struts.action.Action {
     private static final String MODIFICAR = "irModificarAcceso";
     private static final String PERFIL = "irPerfil";
     private static final String AYUDA = "irAyuda2Acceso";
-    private static final String CONF = "irConfiguración";
-   
+    private static final String CONF = "viajando";
+    private static final String ACCESO2 = "irAcceso2";
 
     SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -45,8 +45,6 @@ public class ActionAcceso extends org.apache.struts.action.Action {
         String tipoAcceso = formBean.getTipoAcceso();
         String fechaRegistroAcceso = formBean.getFechaRegistroAcceso();
         String action = formBean.getAction();
-        String nombreEmpresa = formBean.getNombreEmpresa();
-                
 
         AccesoMantenimiento aman = new AccesoMantenimiento();
         EmpresaMantenimiento eman = new EmpresaMantenimiento();
@@ -99,11 +97,11 @@ public class ActionAcceso extends org.apache.struts.action.Action {
             }
             int valUsuario = aman.consultarUsuario(usuario);
             if (valUsuario != 1) {
-                String error = ("Ya existe un registro con el usuario \""+ usuario+"\", por favor elija otro ");
+                String error = ("Ya existe un registro con el usuario \"" + usuario + "\", por favor elija otro ");
                 List<Empresa> listaEmpresa = eman.consultarTodosEmpresa();
                 formBean.setListaEmpresa(listaEmpresa);
                 request.setAttribute("listaEmpresa", listaEmpresa);
-                
+
                 IR = AGREGAR;
                 request.setAttribute("nombre", Login.nombre);
                 request.setAttribute("nAcceso", Login.nAcceso);
@@ -111,7 +109,7 @@ public class ActionAcceso extends org.apache.struts.action.Action {
                 return mapping.findForward(IR);
             }
             fechaRegistroAcceso = formato.format(new Date());
-            
+
             int val = aman.guardarAcceso(idEmpresa, nombreAcceso, apellidoAcceso, usuario, fechaRegistroAcceso, contrasena, eMail, tipoAcceso);
             if (val != 1) {
                 formBean.setError("<spam style='color:red'>Sugio un error No se Guardó el Registro" + " <br></span>");
@@ -126,7 +124,7 @@ public class ActionAcceso extends org.apache.struts.action.Action {
             }
             List<Acceso> listaAcceso = aman.consultarTodoAcceso();
             formBean.setListaAcceso(listaAcceso);
-            String mensaje = ("El registro \""+nombreAcceso+"\" se Agregó correctamente ");
+            String mensaje = ("El registro \"" + nombreAcceso + "\" se Agregó correctamente ");
             request.setAttribute("mensaje", mensaje);
             IR = LISTA;
         }
@@ -135,7 +133,7 @@ public class ActionAcceso extends org.apache.struts.action.Action {
             System.out.println("HOLA TIERRA");
             String advertencia = "";
 
-            if (idEmpresa == null || idEmpresa.equals("") || idEmpresa.equals("Seleccionar")) {
+            if (idEmpresa == null || idEmpresa.equals("")) {
                 advertencia += "*Empresa es requerida <br>";
             }
             if (nombreAcceso == null || nombreAcceso.equals("")) {
@@ -157,52 +155,56 @@ public class ActionAcceso extends org.apache.struts.action.Action {
                 advertencia += "*Es requerido seleccione un Nivel de Acceso <br>";
             }
             if (!advertencia.equals("")) {
-                formBean.setError("<spam style = 'color: red' > Por favor complete los espacios requeridos " + " <br> " + advertencia + "</spam>");
-                List<Empresa> listaEmpresa = eman.consultarTodosEmpresa();
-                formBean.setListaEmpresa(listaEmpresa);
-                request.setAttribute("listaEmpresa", listaEmpresa);
-                IR = AGREGAR;
+
+                IR = ACCESO2;
+
                 request.setAttribute("nombre", Login.nombre);
                 request.setAttribute("nAcceso", Login.nAcceso);
                 request.setAttribute("nAcceso", Login.id);
+                request.setAttribute("idEmpresa", Estaticas.idEmpresa);
+                request.setAttribute("nombreEmpresa", Estaticas.nombreEmpresa);
                 request.setAttribute("error", advertencia);
+                System.out.println("Entra a 2");
                 return mapping.findForward(IR);
             }
             int valUsuario = aman.consultarUsuario(usuario);
             if (valUsuario != 1) {
-                String error = ("Ya existe un registro con el usuario \""+ usuario+"\", por favor elija otro ");
-                List<Empresa> listaEmpresa = eman.consultarTodosEmpresa();
-                formBean.setListaEmpresa(listaEmpresa);
-                request.setAttribute("listaEmpresa", listaEmpresa);
-                
-                IR = AGREGAR;
+                String error = ("Ya existe un registro con el usuario \"" + usuario + "\", por favor elija otro ");
+
+                IR = ACCESO2;
                 request.setAttribute("nombre", Login.nombre);
                 request.setAttribute("nAcceso", Login.nAcceso);
                 request.setAttribute("nAcceso", Login.id);
+                request.setAttribute("idEmpresa", Estaticas.idEmpresa);
+                request.setAttribute("nombreEmpresa", Estaticas.nombreEmpresa);
+                request.setAttribute("error", error);
+                System.out.println("Entra a 3");
                 return mapping.findForward(IR);
             }
+/// en suspenso            
             fechaRegistroAcceso = formato.format(new Date());
-            
+
             int val = aman.guardarAcceso(idEmpresa, nombreAcceso, apellidoAcceso, usuario, fechaRegistroAcceso, contrasena, eMail, tipoAcceso);
             if (val != 1) {
-                formBean.setError("<spam style='color:red'>Sugio un error No se Guardó el Registro" + " <br></span>");
-                List<Empresa> listaEmpresa = eman.consultarTodosEmpresa();
-                formBean.setListaEmpresa(listaEmpresa);
-                request.setAttribute("listaEmpresa", listaEmpresa);
-                IR = AGREGAR;
+                String error = ("Sugio un error No se Guardó el Registro" + nombreAcceso);
+                IR = ACCESO2;
                 request.setAttribute("nombre", Login.nombre);
                 request.setAttribute("nAcceso", Login.nAcceso);
                 request.setAttribute("nAcceso", Login.id);
+                request.setAttribute("idEmpresa", Estaticas.idEmpresa);
+                request.setAttribute("nombreEmpresa", Estaticas.nombreEmpresa);
+                request.setAttribute("error", error);
+                System.out.println("Entra a 4");
                 return mapping.findForward(IR);
             }
-            
-           
-            
-            List<Acceso> listaAcceso = aman.consultarTodoAcceso();
-            formBean.setListaAcceso(listaAcceso);
-            String mensaje = ("El registro \""+nombreAcceso+"\" se Agregó correctamente ");
-            request.setAttribute("mensaje", mensaje);
+
+            request.setAttribute("idEmpresa", Estaticas.idEmpresa);
+            request.setAttribute("nombreEmpresa", Estaticas.nombreEmpresa);
+            request.setAttribute("nAcceso", Login.id);
+            System.out.println("Entra a 5");
+
             IR = CONF;
+
         }
         //----------------------------------------------------------------------
         if (action.equals("ConsultarId")) {
@@ -270,9 +272,7 @@ public class ActionAcceso extends org.apache.struts.action.Action {
         //-------------------------------------------------------------------------
         if (action.equals("Consultar")) {
             List<Acceso> listaAcceso = aman.consultarTodoAcceso();
-
             formBean.setListaAcceso(listaAcceso);
-
             IR = LISTA;
 
         }
@@ -328,7 +328,7 @@ public class ActionAcceso extends org.apache.struts.action.Action {
             aman.modificarAcceso(idAcceso, idEmpresa, nombreAcceso, apellidoAcceso, usuario, fechaRegistroAcceso, contrasena, eMail, tipoAcceso);
             List<Acceso> listaAcceso = aman.consultarTodoAcceso();
             formBean.setListaAcceso(listaAcceso);
-            String mensaje = ("El registro \""+nombreAcceso+"\" se modificó correctamente ");
+            String mensaje = ("El registro \"" + nombreAcceso + "\" se modificó correctamente ");
             request.setAttribute("mensaje", mensaje);
             IR = LISTA;
             //} else {
@@ -444,15 +444,8 @@ public class ActionAcceso extends org.apache.struts.action.Action {
             IR = PORTADA;
 
         }
-        
-//----------------------------------------------------------------------------------
-            if (action.equalsIgnoreCase("Siguiente")) {
-            List<Empresa> listaEmpresa = eman.consultarTodosEmpresa();
-            formBean.setListaEmpresa(listaEmpresa);
-            request.setAttribute("listaEmpresa", listaEmpresa);
-            IR = AGREGAR;
-        }
 
+//----------------------------------------------------------------------------------
         request.setAttribute("nombre", Login.nombre);
         request.setAttribute("nAcceso", Login.nAcceso);
         request.setAttribute("id", Login.id);

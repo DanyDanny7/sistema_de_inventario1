@@ -22,7 +22,6 @@
         <form-bean name = "ActionFormFabricante"        type = "sci.actionforms.ActionFormFabricante"/>
 <!-- // Factura -->        
         <form-bean name = "ActionFormFactura"           type = "sci.actionforms.ActionFormFactura"/>
-
 <!-- // Inventario -->        
         <form-bean name ="ActionFormInventario"         type="sci.actionforms.ActionFormInventario"/>
 <!-- // Iva -->        
@@ -43,12 +42,13 @@
         <forward name = "irListaAcceso"         path = "/jsp/acceso/listaLogin.jsp"/>
         <forward name = "irInicioAcceso"        path = "/jsp/acceso/inicio.jsp"/>
         <forward name = "irAgregarAcceso"       path = "/jsp/acceso/agregarAcceso.jsp"/>
+        <forward name = "irAcceso2"             path = "/jsp/acceso/agregarAcceso2.jsp"/>
         <forward name = "irModificarAcceso"     path = "/jsp/acceso/modificarAcceso.jsp"/>
         <forward name = "irAyuda1Acceso"        path = "/jsp/acceso/ayuda1.jsp"/>
         <forward name = "irAyuda2Acceso"        path = "/jsp/acceso/ayuda2.jsp"/>
         <forward name = "irAyuda3Acceso"        path = "/jsp/acceso/ayuda3.jsp"/>
         <forward name = "irPerfil"              path = "/jsp/acceso/perfil.jsp"/>
-        <forward name = "irConfiguración"       path = "/jsp/configuracion/agregarConfiguracion.jsp"/>
+        <forward name = "viajando"              path = "/jsp/configuracion/agregarConfiguracion.jsp"/>
 <!-- // Compras -->
         <forward name = "irInicioCompras"       path = "/jsp/compras/inicio.jsp"/>
         <forward name = "listaCompras"          path = "/jsp/compras/listaCompra.jsp"/>
@@ -83,8 +83,6 @@
         <forward name ="confirmacionNuevoInventario"  path = "/jsp/inventario/listaInventario.jsp"/>
         <forward name ="confirmacionErrorInventario"  path = "/jsp/inventario/agregarInventario.jsp"/>
         <forward name = "modificarinventario"         path = "/jsp/inventario/ModificarInventario.jsp"/>      
-       
-                     
 <!-- // Iva -->
         <forward name = "irInicioIva"           path = "/jsp/iva/inicio.jsp"/>
         <forward name = "irAgregarIva"          path = "/jsp/iva/agregarIva.jsp"/>

@@ -7,6 +7,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import metodos.Estaticas;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -101,11 +102,11 @@ public class ActionEmpresa extends org.apache.struts.action.Action {
                 return mapping.findForward(IR);
             }
             
+            Estaticas.idEmpresa = idEmpresa;
+            Estaticas.nombreEmpresa = nombreEmpresa;
             
-            
-            System.out.println("holi"+nombreEmpresa);
-            request.setAttribute("idEmpresa", idEmpresa);
-            request.setAttribute("nombreEmpresa", nombreEmpresa);
+            request.setAttribute("idEmpresa", Estaticas.idEmpresa);
+            request.setAttribute("nombreEmpresa", Estaticas.nombreEmpresa);
             IR = ACCESO;
         }
 //-------------------------------------------------------------------------------

@@ -166,8 +166,7 @@
                                 <div class="form-group col-5"><html:file property="file" styleClass="form-control-file"></html:file><br></div>
 
 
-                            <bean:write name="ActionFormConfiguracion" property="error" filter="false"></bean:write>
-
+                          
                             </div>
                             <br>
                         <html:submit property="action" value="Agregar" styleClass="btn  font-weight-bold" style="background-color: #f0f3f4; color: black"/>
