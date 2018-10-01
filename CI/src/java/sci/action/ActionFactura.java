@@ -137,21 +137,23 @@ public class ActionFactura extends org.apache.struts.action.Action {
             }
 //validacion para iva
             List<Iva> i = iman.consultarTodosIva();
-
+                System.out.println("LA LISTA IVA ES "+i.size());
             if (i.size() < 1) {
                 int inew = iman.guardarIva(coman.consultarConfiguarionId(1).getIva(), 0, 0, 0, 0, 0);
                 System.out.println("Se creaó el Iva porque no Existia");
             }
             idIva = iman.maxIdIv();
             estado = "Activo";
-            int val = 0;
+           
 // validacon de guardar el encabezado               
             if (i.size() > 0) {
+                System.out.println("ENTRÓ EN EL IVA ");
                 Iva iva = iman.consultarIvaId(idIva);
                 totalTransaccion = iva.getTotalTransaccion();
-                if (totalTransaccion > 0) {
+                if (totalTransaccion > 0 || i.size()==1) {
+                    System.out.println("ENTRÓ EN EL IVA 2");
                     iman.guardarIva(coman.consultarConfiguarionId(1).getIva(), 0, 0, 0, 0, 0);
-                    val = feman.guardarFacturaEncabezado(idContacto, idEmpresa, fechaFactura, estado, 0, 0);
+                    int val = feman.guardarFacturaEncabezado(idContacto, idEmpresa, fechaFactura, estado, 0, 0);
                 }
             }
             idFacturaEncabezado = feman.maxIdFacturaEncabezad();
@@ -166,11 +168,14 @@ public class ActionFactura extends org.apache.struts.action.Action {
                 request.setAttribute("mensaje", mensaje);
             }
 // para calcular el Sub Total del pie de la factura            
+                
             subTotalTransaccion = sumaTF.sumarTotalFila(idFacturaEncabezado);
             fb.setSubTotalTransaccion(subTotalTransaccion);
             request.setAttribute("subTotalTransaccion", subTotalTransaccion);
 //para calculo del IVA
+            System.out.println("ver que trae "+coman.consultarConfiguarionId(1).getIva());
             double ivaRetenido = subTotalTransaccion * coman.consultarConfiguarionId(1).getIva();
+            
             request.setAttribute("ivaRetenido", ivaRetenido);
 // total transaccion
             totalTransaccion = subTotalTransaccion + ivaRetenido;
