@@ -109,9 +109,7 @@ public class ActionFactura extends org.apache.struts.action.Action {
         }
         //-------------------------------------------------------------------------      
         if (action.equals("Agregar")) {
-//------Para Colocar el numero rojo de factura
-            int maxIdFacturaEncabezado = feman.maxIdFacturaEncabezad();
-            request.setAttribute("num", maxIdFacturaEncabezado);
+
 //------Para Colocar la fecha si no hay una registrada
             if (fechaFactura.equals("")) {
                 fechaFactura = formato.format(new Date());
@@ -150,7 +148,8 @@ public class ActionFactura extends org.apache.struts.action.Action {
                 System.out.println("ENTRÓ EN EL IVA ");
                 Iva iva = iman.consultarIvaId(idIva);
                 totalTransaccion = iva.getTotalTransaccion();
-                if (totalTransaccion > 0 || i.size()==1) {
+                System.out.println("LA TOTAL TRANSACCION TRAE "+totalTransaccion);
+                if (totalTransaccion > 0 || i.size()<2) {
                     System.out.println("ENTRÓ EN EL IVA 2");
                     iman.guardarIva(coman.consultarConfiguarionId(1).getIva(), 0, 0, 0, 0, 0);
                     int val = feman.guardarFacturaEncabezado(idContacto, idEmpresa, fechaFactura, estado, 0, 0);
@@ -200,7 +199,9 @@ public class ActionFactura extends org.apache.struts.action.Action {
             listaFactura = fdman.consultaFacturaEspecifica(idFacturaEncabezado);
             fb.setListaFacturaDetalle(listaFactura);
             request.setAttribute("listaFactura", listaFactura);
-
+//------Para Colocar el numero rojo de factura
+            int maxIdFacturaEncabezado = feman.maxIdFacturaEncabezad();
+            request.setAttribute("num", maxIdFacturaEncabezado);
             IR = AGREGAR;
 
         }
