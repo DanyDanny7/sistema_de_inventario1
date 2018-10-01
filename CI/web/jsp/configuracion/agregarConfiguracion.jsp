@@ -144,18 +144,21 @@
 
                             <div class="row">
                                 <div class="form-group col-5">
-                                    <label>ID Acceso :</label><br>
-                                    <html:text property="idAcceso" styleClass="form-control"></html:text><br>
+                                    <label>Acceso :</label><br>
+                                    <html:hidden property="idAcceso" value="${nAcceso}" styleClass="form-control"></html:hidden>
+                                    <html:text property="nombre" value="${nombre}" styleClass="form-control"></html:text><br>
                                     </div>
                                     <div class="form-group col-5">
-                                        <label>ID Empresa :</label><br>
-                                    <html:text property="idEmpresa" styleClass="form-control"></html:text><br>
+                                        <label>Empresa :</label><br>
+                                    <html:hidden property="idEmpresa" value="${idEmpresa}" styleClass="form-control"></html:hidden>
+                                    <html:text property="nombreEmpresa" value="${nombreEmpresa}" styleClass="form-control"></html:text><br>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-6">
                                         <label>Nombre de Moneda :</label><br>
-                                    <html:text property="nombreMoneda" styleClass="form-control"></html:text><br>
+                                    <html:text property="nombreMoneda" value="${nombreMoneda}" styleClass="form-control"></html:text><br>
+                                    <html:text property="simboloMoneda" value="${simboloMoneda}"styleClass="form-control"></html:text><br>
                                     </div>
                                     <div class="form-group col-5">
                                         <label>Tasa de Iva :</label><br>
