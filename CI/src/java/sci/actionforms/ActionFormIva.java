@@ -19,6 +19,8 @@ public class ActionFormIva extends org.apache.struts.action.ActionForm{
     private Double ivaRetenido;
     private Double ivaPagado;
     private Double ivaTotal;
+    private Double totalTransaccion;
+    private Double subTotalTransaccion;
     private List<Iva> listaIva;
     private String error;
     private String action;
@@ -94,6 +96,22 @@ public class ActionFormIva extends org.apache.struts.action.ActionForm{
 
     public void setIvaTotal(Double ivaTotal) {
         this.ivaTotal = ivaTotal;
+    }
+
+    public Double getTotalTransaccion() {
+        return totalTransaccion;
+    }
+
+    public void setTotalTransaccion(Double totalTransaccion) {
+        this.totalTransaccion = totalTransaccion;
+    }
+
+    public Double getSubTotalTransaccion() {
+        return subTotalTransaccion;
+    }
+
+    public void setSubTotalTransaccion(Double subTotalTransaccion) {
+        this.subTotalTransaccion = subTotalTransaccion;
     }
     
     

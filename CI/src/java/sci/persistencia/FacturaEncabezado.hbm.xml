@@ -19,6 +19,12 @@
     <property name="estado" type="string">
       <column length="50" name="vendedor"/>
     </property>
+    <property name="subTotalTransaccion" type="java.lang.Double">
+       <column name="sub_total_transaccion" precision="9" />
+    </property>
+    <property name="totalTransaccion" type="java.lang.Double">
+       <column name="total_transaccion" precision="9" />
+    </property>
     <set fetch="select" inverse="true" lazy="true" name="facturaDetalles" table="factura_detalle">
       <key>
         <column name="id_factura_encabezado" not-null="true"/>

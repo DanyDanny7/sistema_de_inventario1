@@ -20,6 +20,12 @@
         <property name="ivaTotal" type="java.lang.Double">
             <column name="iva_total" precision="5" />
         </property>
+        <property name="subTotalTransaccion" type="java.lang.Double">
+            <column name="sub_total_transaccion" precision="9" />
+        </property>
+        <property name="totalTransaccion" type="java.lang.Double">
+            <column name="total_transaccion" precision="9" />
+        </property>
         <set name="facturaDetalles" table="factura_detalle" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="id_iva" not-null="true" />

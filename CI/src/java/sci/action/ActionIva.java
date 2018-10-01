@@ -36,6 +36,8 @@ public class ActionIva extends org.apache.struts.action.Action{
         Double ivaRetenido = formBean.getIvaRetenido();
         Double ivaPagado = formBean.getIvaPagado();
         Double ivaTotal = formBean.getIvaTotal();
+        Double totalTransaccion = formBean.getTotalTransaccion();
+        Double subTotalTransaccion = formBean.getTotalTransaccion();
         String action = formBean.getAction();
         
         IvaMantenimiento iman = new IvaMantenimiento();
@@ -60,7 +62,7 @@ public class ActionIva extends org.apache.struts.action.Action{
                 IR = AGREGAR;
             }
             else{
-                iman.guardarIva(ivaTasa, ivaRetenido, ivaPagado, ivaTotal);
+                iman.guardarIva(ivaTasa, ivaRetenido, ivaPagado, ivaTotal, subTotalTransaccion, totalTransaccion);
                 List<Iva> listaIva = iman.consultarTodosIva();
                 formBean.setListaIva(listaIva);
                 formBean.setMensaje("<spam style = 'color: blue' > Registro IVA " + idIva +" Agregado Correctamente <br></spam>");
@@ -94,7 +96,7 @@ public class ActionIva extends org.apache.struts.action.Action{
                 IR = MODIFICAR;
             }
             else{
-                int i = iman.modificarIva(idIva, ivaTasa, ivaRetenido, ivaPagado, ivaTotal);
+                int i = iman.modificarIva(idIva, ivaTasa, ivaRetenido, ivaPagado, ivaTotal, subTotalTransaccion, totalTransaccion);
                 System.out.println("i = "+i);
                 List<Iva> listaIva = iman.consultarTodosIva();
                 formBean.setMensaje("<spam style = 'color: blue' > Registro IVA " + idIva +" Modificado Correctamente <br></spam>");

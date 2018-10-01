@@ -23,6 +23,8 @@ public class ActionFormFactura extends org.apache.struts.action.ActionForm{
     private Integer idEmpresa;
     private String fechaFactura;
     private String estado;
+    private Double totalTransaccion;
+    private Double subTotalTransaccion;
     private List<FacturaEncabezado> listaFacturaEncabezado;
     
     //factura Detalle
@@ -184,6 +186,22 @@ public class ActionFormFactura extends org.apache.struts.action.ActionForm{
 
     public void setListaProductos(List<Productos> listaProductos) {
         this.listaProductos = listaProductos;
+    }
+
+    public Double getTotalTransaccion() {
+        return totalTransaccion;
+    }
+
+    public void setTotalTransaccion(Double totalTransaccion) {
+        this.totalTransaccion = totalTransaccion;
+    }
+
+    public Double getSubTotalTransaccion() {
+        return subTotalTransaccion;
+    }
+
+    public void setSubTotalTransaccion(Double subTotalTransaccion) {
+        this.subTotalTransaccion = subTotalTransaccion;
     }
     
     

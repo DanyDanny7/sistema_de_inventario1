@@ -16,17 +16,21 @@ public class Iva  implements java.io.Serializable {
      private Double ivaRetenido;
      private Double ivaPagado;
      private Double ivaTotal;
+     private Double subTotalTransaccion;
+     private Double totalTransaccion;
      private Set facturaDetalles = new HashSet(0);
      private Set comprases = new HashSet(0);
 
     public Iva() {
     }
 
-    public Iva(Double ivaTasa, Double ivaRetenido, Double ivaPagado, Double ivaTotal, Set facturaDetalles, Set comprases) {
+    public Iva(Double ivaTasa, Double ivaRetenido, Double ivaPagado, Double ivaTotal, Double subTotalTransaccion, Double totalTransaccion, Set facturaDetalles, Set comprases) {
        this.ivaTasa = ivaTasa;
        this.ivaRetenido = ivaRetenido;
        this.ivaPagado = ivaPagado;
        this.ivaTotal = ivaTotal;
+       this.subTotalTransaccion = subTotalTransaccion;
+       this.totalTransaccion = totalTransaccion;
        this.facturaDetalles = facturaDetalles;
        this.comprases = comprases;
     }
@@ -79,6 +83,22 @@ public class Iva  implements java.io.Serializable {
     
     public void setComprases(Set comprases) {
         this.comprases = comprases;
+    }
+
+    public Double getSubTotalTransaccion() {
+        return subTotalTransaccion;
+    }
+
+    public void setSubTotalTransaccion(Double subTotalTransaccion) {
+        this.subTotalTransaccion = subTotalTransaccion;
+    }
+
+    public Double getTotalTransaccion() {
+        return totalTransaccion;
+    }
+
+    public void setTotalTransaccion(Double totalTransaccion) {
+        this.totalTransaccion = totalTransaccion;
     }
 
 

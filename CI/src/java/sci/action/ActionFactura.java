@@ -11,6 +11,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import metodos.Login;
+import metodos.SumarTotalFila;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -25,6 +26,8 @@ import sci.mantenimientos.ProductosMantenimiento;
 import sci.persistencia.Contactos;
 import sci.persistencia.Empresa;
 import sci.persistencia.FacturaDetalle;
+import sci.persistencia.FacturaEncabezado;
+import sci.persistencia.Iva;
 import sci.persistencia.Productos;
 
 /**
@@ -49,6 +52,8 @@ public class ActionFactura extends org.apache.struts.action.Action {
         Integer idEmpresa = fb.getIdEmpresa();
         String fechaFactura = fb.getFechaFactura();
         String estado = fb.getEstado();
+        Double totalTransaccion = fb.getTotalTransaccion();
+        Double subTotalTransaccion = fb.getSubTotalTransaccion();
 
         //factura Detalle
         Integer idFacturaDetalle = fb.getIdFacturaDetalle();
@@ -70,6 +75,7 @@ public class ActionFactura extends org.apache.struts.action.Action {
         ConfiguracionMantenimiento coman = new ConfiguracionMantenimiento();
         IvaMantenimiento iman = new IvaMantenimiento();
         ProductosMantenimiento pman = new ProductosMantenimiento();
+        SumarTotalFila sumaTF = new SumarTotalFila();
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         String IR = null;
         String advertencia = "";
@@ -80,20 +86,17 @@ public class ActionFactura extends org.apache.struts.action.Action {
         //-------------------------------------------------------------------------      
         if (action.equals("irAgregar")) {
 //------Para Colocar el numero rojo de factura
-            int num = feman.maxIdFacturaEncabezad()+1;
+            int num = feman.maxIdFacturaEncabezad() + 1;
             request.setAttribute("num", num);
 //------Para Colocar la fecha si no hay una registrada
-            //if (fechaFactura.equals("") || fechaFactura.equals("null")) {
-             //   fechaFactura = formato.format(new Date());
-            //}
-//---------------------------------------
+            fechaFactura = formato.format(new Date());
             fb.setFechaFactura(fechaFactura);
+//------Para traer datos de la empresa
             String nombreEmpresa = eman.consultarEmpresaId(1).getNombreEmpresa();
             String direccionEmpresa = eman.consultarEmpresaId(1).getDireccionEmpresa();
             request.setAttribute("nombreEmpresa", nombreEmpresa);
             request.setAttribute("direccionEmpresa", direccionEmpresa);
-
-//Traemos lista Contactos                
+//Traemos lista Contactos   --------------------------------             
             List<Contactos> listaContactos = cman.tipos("cliente");
             fb.setListaContactos(listaContactos);
             request.setAttribute("listaContactos", listaContactos);
@@ -107,22 +110,19 @@ public class ActionFactura extends org.apache.struts.action.Action {
         //-------------------------------------------------------------------------      
         if (action.equals("Agregar")) {
 //------Para Colocar el numero rojo de factura
-            int num = feman.maxIdFacturaEncabezad()+1;
-            request.setAttribute("num", num);
+            int maxIdFacturaEncabezado = feman.maxIdFacturaEncabezad();
+            request.setAttribute("num", maxIdFacturaEncabezado);
 //------Para Colocar la fecha si no hay una registrada
             if (fechaFactura.equals("")) {
                 fechaFactura = formato.format(new Date());
             }
+            fb.setFechaFactura(fechaFactura);
 //---------------------------------------
             idEmpresa = 1;
             idConfiguracion = 1;
-
 //Validaciones de Ingreso            
-            if (idContacto == null || idContacto == 0) {
+            if (idContacto == null || idContacto == 0 || idContacto.equals("Seleccionar")) {
                 advertencia = "*Es necesario seleccione un Contacto";
-            }
-            if (idIva == null || idIva == 0) {
-                advertencia += "*Es necesario seleccione un valor para IVA";
             }
             if (idProducto == null || idProducto == 0) {
                 advertencia += "*Es necesario ingrese un Producto";
@@ -135,58 +135,55 @@ public class ActionFactura extends org.apache.struts.action.Action {
 
                 IR = AGREGAR;
             }
-            System.out.println("pasamos filtro 1");
-///***************-------- Sesscion para IVA ------------**************////
-//Traemos la tasa de Iva a aplicar               
-            Double tasaIva = coman.consultarConfiguarionId(idConfiguracion).getIva();
-            Double precioUnitario = pman.consultarProductosId(idProducto).getPrecioUnitario();
+//validacion para iva
+            List<Iva> i = iman.consultarTodosIva();
 
-            totalFila = cantidad * precioUnitario;
-
-            System.out.println("pasamos filtro 1.1");
-
-// validacon de guardar el encabezado
-            System.out.println("para encabezado ");
-            System.out.println("idContacto " + idContacto);
-            System.out.println("idEmpresa " + idEmpresa);
-            System.out.println("fechaFactura" + fechaFactura);
-            System.out.println("estado " + estado);
-            int val = feman.guardarFacturaEncabezado(idContacto, idEmpresa, fechaFactura, estado);
-
+            if (i.size() < 1) {
+                int inew = iman.guardarIva(coman.consultarConfiguarionId(1).getIva(), 0, 0, 0, 0, 0);
+                System.out.println("Se creaó el Iva porque no Existia");
+            }
+            idIva = iman.maxIdIv();
+            estado = "Activo";
+            int val = 0;
+// validacon de guardar el encabezado               
+            if (i.size() > 0) {
+                Iva iva = iman.consultarIvaId(idIva);
+                totalTransaccion = iva.getTotalTransaccion();
+                if (totalTransaccion > 0) {
+                    iman.guardarIva(coman.consultarConfiguarionId(1).getIva(), 0, 0, 0, 0, 0);
+                    val = feman.guardarFacturaEncabezado(idContacto, idEmpresa, fechaFactura, estado, 0, 0);
+                }
+            }
+            idFacturaEncabezado = feman.maxIdFacturaEncabezad();
             System.out.println("para detalle ");
-            idFacturaEncabezado = 5;  //CAMBIAR EL NUMERO QUE LO TRAIGA EL ULTIMO
-            System.out.println("idFactu enca " + idFacturaEncabezado);
-            idIva = 1; //CAMBIAR EL NUMERO QUE LO TRAIGA EL ULTIMO
-            System.out.println("idIva " + idIva);
-            System.out.println("idProducto " + idProducto);
-            System.out.println("cantidad " + cantidad);
-            System.out.println("totalfila " + totalFila);
-            totalColumna = 10.0;
-            System.out.println("totalcolumna " + totalColumna);
-            subtotalColumna = 10.0;
-            System.out.println("stotalcoluma " + subtotalColumna);
-            int val2 = fdman.guardarFacuraDetalle(idConfiguracion, idFacturaEncabezado, idIva, idProducto, cantidad, totalFila, totalColumna, subtotalColumna);
-            System.out.println("encabezado " + val + " detalle " + val2);
-            if (val != 1 || val2 != 1) {
-                error = "Surgío un error, no se guardó el registro ";
+            List<FacturaDetalle> listaFactura;
 
-                IR = AGREGAR;
-            }
-            System.out.println("pasamos filtro 2");
-            if (val == 1 && val2 == 1) {
+            totalFila = pman.consultarProductosId(idProducto).getPrecioUnitario() * cantidad;
+            int val2 = fdman.guardarFacuraDetalle(idConfiguracion, idFacturaEncabezado, idIva, idProducto, cantidad, totalFila, 0, 0);
+
+            if (val2 == 1) {
                 mensaje = "Registro Agregado";
-
-                IR = AGREGAR;
+                request.setAttribute("mensaje", mensaje);
             }
-            System.out.println("pasamos filtro 3");
+// para calcular el Sub Total del pie de la factura            
+            subTotalTransaccion = sumaTF.sumarTotalFila(idFacturaEncabezado);
+            fb.setSubTotalTransaccion(subTotalTransaccion);
+            request.setAttribute("subTotalTransaccion", subTotalTransaccion);
+//para calculo del IVA
+            double ivaRetenido = subTotalTransaccion * coman.consultarConfiguarionId(1).getIva();
+            request.setAttribute("ivaRetenido", ivaRetenido);
+// total transaccion
+            totalTransaccion = subTotalTransaccion + ivaRetenido;
+            request.setAttribute("totalTransaccion", totalTransaccion);
 
-            fb.setFechaFactura(fechaFactura);
             String nombreEmpresa = eman.consultarEmpresaId(1).getNombreEmpresa();
             String direccionEmpresa = eman.consultarEmpresaId(1).getDireccionEmpresa();
             request.setAttribute("nombreEmpresa", nombreEmpresa);
             request.setAttribute("direccionEmpresa", direccionEmpresa);
 
-//Traemos lista Contactos                
+//Traemos lista Contactos  
+            idContacto = feman.consultarFacturaEncabezadoId(idFacturaEncabezado).getContactos().getIdContacto();
+            fb.setIdContacto(idContacto);
             List<Contactos> listaContactos = cman.tipos("cliente");
             fb.setListaContactos(listaContactos);
             request.setAttribute("listaContactos", listaContactos);
@@ -195,11 +192,45 @@ public class ActionFactura extends org.apache.struts.action.Action {
             fb.setListaProductos(listaProductos);
             request.setAttribute("listaProductos", listaProductos);
 //Traemos lista FacturaDetalle                
-            List<FacturaDetalle> listaFactura = fdman.consultarTodosFacturaDetalle();
+            listaFactura = fdman.consultaFacturaEspecifica(idFacturaEncabezado);
             fb.setListaFacturaDetalle(listaFactura);
             request.setAttribute("listaFactura", listaFactura);
 
             IR = AGREGAR;
+
+        }
+        //-------------------------------------------------------------------------
+        if (action.equals("Guardar")) {
+// para calcular el Sub Total del pie de la factura 
+            idFacturaEncabezado = feman.maxIdFacturaEncabezad();
+            subTotalTransaccion = sumaTF.sumarTotalFila(idFacturaEncabezado);
+//para calculo del IVA
+            double ivaRetenido = subTotalTransaccion * coman.consultarConfiguarionId(1).getIva();
+// total transaccion
+            totalTransaccion = subTotalTransaccion + ivaRetenido;
+            
+ //modificar FacturaEncabezado ya que se creo en agregar.           
+            FacturaEncabezado fe = new FacturaEncabezado();
+            fe = feman.consultarFacturaEncabezadoId(idFacturaEncabezado);
+            idContacto = fe.getContactos().getIdContacto();
+            idEmpresa = fe.getEmpresa().getIdEmpresa();
+            fechaFactura = fe.getFechaFactura();
+            estado = fe.getEstado();
+            
+            feman.modificarFacturaEncabezado(idFacturaEncabezado, idContacto, idEmpresa, fechaFactura, estado, subTotalTransaccion, totalTransaccion);
+            
+//Modificar iva ya que se creo en agregar            
+            idIva = iman.maxIdIv();
+            Iva i = new Iva();
+            i = iman.consultarIvaId(idIva);
+            double ivaTasa = i.getIvaTasa();
+            double ivaPagado = i.getIvaPagado();
+            double ivaTotal = ivaRetenido;
+            
+            iman.modificarIva(idIva, ivaTasa, ivaRetenido, ivaPagado, ivaTotal, subTotalTransaccion, totalTransaccion);
+            
+            IR = INICIO;
+            
 
         }
         //-------------------------------------------------------------------------
@@ -215,8 +246,50 @@ public class ActionFactura extends org.apache.struts.action.Action {
 
         }
         //-------------------------------------------------------------------------      
-        if (action.equals("Eliminar")) {
+        if (action.equals("x")) {
 
+            idFacturaEncabezado = feman.maxIdFacturaEncabezad();
+            System.out.println("idFacturaEncabezado ver " + idFacturaEncabezado);
+            int ver = fdman.eliminarFacturaDetalle(idFacturaDetalle);
+            System.out.println("ver ver " + ver);
+
+//------Para Colocar el numero rojo de factura
+            int maxIdFacturaEncabezado = feman.maxIdFacturaEncabezad();
+            request.setAttribute("num", maxIdFacturaEncabezado);
+            //------Para Colocar la fecha si no hay una registrada
+            fechaFactura = feman.consultarFacturaEncabezadoId(idFacturaEncabezado).getFechaFactura();
+            fb.setFechaFactura(fechaFactura);
+            // para calcular el Sub Total del pie de la factura            
+            subTotalTransaccion = sumaTF.sumarTotalFila(idFacturaEncabezado);
+            fb.setSubTotalTransaccion(subTotalTransaccion);
+            request.setAttribute("subTotalTransaccion", subTotalTransaccion);
+//para calculo del IVA
+            double ivaRetenido = subTotalTransaccion * coman.consultarConfiguarionId(1).getIva();
+            request.setAttribute("ivaRetenido", ivaRetenido);
+// total transaccion
+            totalTransaccion = subTotalTransaccion + ivaRetenido;
+            request.setAttribute("totalTransaccion", totalTransaccion);
+
+            String nombreEmpresa = eman.consultarEmpresaId(1).getNombreEmpresa();
+            String direccionEmpresa = eman.consultarEmpresaId(1).getDireccionEmpresa();
+            request.setAttribute("nombreEmpresa", nombreEmpresa);
+            request.setAttribute("direccionEmpresa", direccionEmpresa);
+
+            //Traemos lista Contactos
+            idContacto = feman.consultarFacturaEncabezadoId(idFacturaEncabezado).getContactos().getIdContacto();
+            fb.setIdContacto(idContacto);
+            List<Contactos> listaContactos = cman.tipos("cliente");
+            fb.setListaContactos(listaContactos);
+            request.setAttribute("listaContactos", listaContactos);
+//Traemos lista Productos                
+            List<Productos> listaProductos = pman.consultarTodoProductos();
+            fb.setListaProductos(listaProductos);
+            request.setAttribute("listaProductos", listaProductos);
+//Traemos lista FacturaDetalle
+            List listaFactura = fdman.consultaFacturaEspecifica(idFacturaEncabezado);
+            fb.setListaFacturaDetalle(listaFactura);
+            request.setAttribute("listaFactura", listaFactura);
+            IR = AGREGAR;
         }
         //-------------------------------------------------------------------------      
 
@@ -226,5 +299,5 @@ public class ActionFactura extends org.apache.struts.action.Action {
         request.setAttribute("img", Login.img);
         return mapping.findForward(IR);
     }
-    
+
 }

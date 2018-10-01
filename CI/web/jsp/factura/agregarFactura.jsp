@@ -141,6 +141,7 @@
                         <div class="card-header" style="background-color:#f0f3f4;">
                             <div class="row">
                                 <div class="col-9">
+                                    <html:hidden property="idFacturaEncabezado"></html:hidden>
                                     <h2 class="text-center">${nombreEmpresa}</h2>
                                     <h6 class="text-center">${direccionEmpresa}</h6>
                                     <div class="text-left"><label >Cliente</label></div>
@@ -157,7 +158,7 @@
                                     <div class="text-left"><label>Numero de Factura : </label></div>
                                     <h2 class="text-center" style="color: red">00000${num}</h2>
                                     <div class="text-left"><label >Fecha : </label></div>
-                                    <html:text property="fechaFactura"></html:text>
+                                    <html:text property="fechaFactura" styleClass="form-control"></html:text>
                                     </div>
                                 </div>    
                             </div>
@@ -198,40 +199,64 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-header" style="background-color:#f0f3f4;">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <table>
-                                            <thead>
-                                                <tr style="width:100%"> 
-                                                    <td style="width:400px">Producto : </td>
-                                                    <td style="width:250px">Cantidad : </td>
-                                                    <td style="width:250px">Precio Unitario : </td>
-                                                    <td style="width:250px">Total :</td>
+                    </html:form>
+                    <div class="card-header" style="background-color:#f0f3f4;">
+                        <div class="row">
+                            <div class="col-12">
+                                <table>
+                                    <thead>
+                                        <tr style="width:100%"> 
+                                            <td style="width:400px">Producto : </td>
+                                            <td style="width:250px">Cantidad : </td>
+                                            <td style="width:250px">Precio Unitario : </td>
+                                            <td style="width:180px">Total :</td>
+                                            <td style="width:5px"></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <logic:notEmpty name="ActionFormFactura" property="listaFacturaDetalle">
+                                            <logic:iterate id="ver" name="ActionFormFactura" property="listaFacturaDetalle">
+                                                <tr>
+                                                    <html:form action="/facturaMantenimiento">
+                                                    <td><bean:write name="ver" property="productos.nombreProducto"></bean:write>
+                                                        <html:hidden name="ver" property="idFacturaDetalle"></html:hidden></td>
+                                                    <td><bean:write name="ver" property="cantidad"></bean:write></td>
+                                                    <td><bean:write name="ver" property="productos.precioUnitario"></bean:write></td>
+                                                    <td><bean:write name="ver" property="totalFila"></bean:write></td>
+                                                    <td><html:submit property="action" value="x"/></td>
+                                                    </html:form>
                                                 </tr>
-                                            </thead>
-                                            <tbody>
-                                            <logic:notEmpty name="ActionFormFactura" property="listaFacturaDetalle">
-                                                <logic:iterate id="ver" name="ActionFormFactura" property="listaFacturaDetalle">
-                                                    <tr>
-                                                        <td><bean:write name="ver" property="productos.nombreProducto"></bean:write></td>
-                                                        <td><bean:write name="ver" property="cantidad"></bean:write></td>
-                                                        <td><bean:write name="ver" property="productos.precioUnitario"></bean:write></td>
-                                                        <td><bean:write name="ver" property="totalFila"></bean:write></td>
-                                                    </tr>
-                                                </logic:iterate>
-                                            </logic:notEmpty>
+                                            </logic:iterate>
+                                        </logic:notEmpty>
 
-                                        </tbody>
-                                    </table>
-                                </div>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
+                    </div>
+                    <div class="card-header" style="background-color:#f0f3f4;">
+                        <div class="row">
+                            <div class="col-5">
 
-                        <br>
-                        <html:submit property="action" value="Guardar" styleClass="btn  font-weight-bold" style="background-color:#f0f3f4; color: black"/>
+                            </div>
+                            <div class="col-4 text-right">
+                                <label>Sub Total : </label><br>
+                                <label>Iva : </label><br>
+                                <label>Total : </label>
+                            </div>
+                            <div class="col-3">
+                                <label>${subTotalTransaccion}</label><br>
+                                <label>${ivaRetenido}</label><br>
+                                <label>${totalTransaccion}</label>
+                            </div>
+                        </div>
+                    </div>
 
+                    <br>
+                    <html:form action="/facturaMantenimiento">
+                    <html:submit property="action" value="Guardar" styleClass="btn  font-weight-bold" style="background-color:#f0f3f4; color: black"/>
                     </html:form>
+
                     <h5>${error}</h5>
                 </div>
                 <div class="col-1"></div>

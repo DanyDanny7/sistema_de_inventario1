@@ -196,26 +196,30 @@ public class FacturaDetalleMantenimiento {
         }
         return factdet;
     }
-    public boolean validacionFE (int idFacturaEncabezado){
+    public List consultaFacturaEspecifica (int idFacturaEncabezado){
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.openSession();
         try {
             session.beginTransaction();
-            Query q = session.createQuery("from FacturaDetalle a where a.idFacturaEncabezado=:idFacturaEncabezado");
+            Query q = session.createQuery("from FacturaDetalle f where f.facturaEncabezado.idFacturaEncabezado=:idFacturaEncabezado");
             q.setParameter("idFacturaEncabezado", idFacturaEncabezado);
-            List<FacturaEncabezado> list = q.list();
+            List<FacturaDetalle> list = q.list();
             if (list.size()>0) {
-                session.close();
-                return true;
+                return list;
             }
             session.close();
-            return false;
+            return null;
         } catch (HibernateException e) {
             session.close();
-            System.out.println("Error en validacion Factura Encabezado "+e);
-            return false;
+            System.out.println("Error en consultar Factura "+e);
+            return null;
         }
     }
-    
+    public static void main(String[] args) {
+        FacturaDetalleMantenimiento eman = new FacturaDetalleMantenimiento();
+        
+        List<FacturaEncabezado> list = eman.consultaFacturaEspecifica(26);
+        System.out.println("lis "+list.toString());
+    }
     
 }

@@ -14,7 +14,9 @@ public class IvaMantenimiento {
             double ivaTasa,
             double ivaRetenido,
             double ivaPagado,
-            double ivaTotal
+            double ivaTotal,
+            double subTotalTransaccion,
+            double totalTransaccion
             ) {
 
         SessionFactory factory = HibernateUtil.getSessionFactory();
@@ -27,6 +29,8 @@ public class IvaMantenimiento {
         iva.setIvaPagado(ivaPagado);
         iva.setIvaTotal(ivaTotal);
         iva.setIvaTasa(ivaTasa);
+        iva.setTotalTransaccion(totalTransaccion);
+        iva.setSubTotalTransaccion(subTotalTransaccion);
         try {
             session.beginTransaction();
             session.save(iva);
@@ -36,7 +40,7 @@ public class IvaMantenimiento {
         } catch (Exception e) {
             if (session.getTransaction().isActive()) {
                 session.getTransaction().rollback();
-                flag = 1;
+                flag = 0;
             }
             System.out.println("Error en guardar IvaMantenimiento " + e);
         } finally {
@@ -62,7 +66,7 @@ public class IvaMantenimiento {
         } catch (Exception e) {
             if (session.getTransaction().isActive()) {
                 session.getTransaction().rollback();
-                flag = 1;
+                flag = 0;
             }
             System.out.println("error en eliminar iva " + e);
 
@@ -72,27 +76,27 @@ public class IvaMantenimiento {
         return flag;
     }
     
-    public static void main(String[] args) {
-        IvaMantenimiento iman = new IvaMantenimiento();
-        iman.modificarIva(2, 3, 4, 6, 3);
-    }
-
     public int modificarIva(int idIva,
             double ivaTasa,
             double ivaRetenido,
             double ivaPagado,
-            double ivaTotal) {
+            double ivaTotal,
+            double subTotalTransaccion,
+            double totalTransaccion
+            ) {
 
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.openSession();
         int flag = 0;
 
         Iva iva = new Iva();
-        iva.setIdIva(idIva);
+        
         iva.setIvaRetenido(ivaRetenido);
         iva.setIvaPagado(ivaPagado);
         iva.setIvaTotal(ivaTotal);
         iva.setIvaTasa(ivaTasa);
+        iva.setTotalTransaccion(totalTransaccion);
+        iva.setSubTotalTransaccion(subTotalTransaccion);
         try {
             session.beginTransaction();
             session.update(iva);
@@ -102,7 +106,7 @@ public class IvaMantenimiento {
         } catch (Exception e) {
             if (session.getTransaction().isActive()) {
                 session.getTransaction().rollback();
-                flag = 1;
+                flag = 0;
             }
             System.out.println("Error en modificar IvaMantenimiento " + e);
         } finally {
@@ -150,4 +154,36 @@ public class IvaMantenimiento {
         }
         return iva;
     }
+    public List maxIdIva() {
+         List<Iva> listaI = null;
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.openSession();
+       
+        session.beginTransaction();
+        try {
+             Query q   =  session.createQuery("select max(idIva) from Iva");
+         listaI = (List<Iva>) q.list();
+            System.out.println(listaI.get(0));
+            System.out.println("Consultar max Iva Correcto");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error consultar max id Iva. "+e);
+        } finally {
+
+        }
+        
+        return listaI ;
+    }
+    public int maxIdIv(){
+        IvaMantenimiento fam = new IvaMantenimiento();
+        int idIva = 0; 
+        List<Iva> fe = fam.consultarTodosIva();
+        if (fe.size()>0) {
+            List<Integer> lista = fam.maxIdIva();
+        idIva = lista.get(0);
+        }
+        
+        return idIva;
+    }
+     
 }

@@ -17,7 +17,10 @@ public class FacturaEncabezadoMantenimiento {
             int idContacto,
             int idEmpresa,
             String fechaFactura,
-            String estado) {
+            String estado,
+            double subTotalTransaccion,
+            double totalTransaccion
+            ) {
 
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.openSession();
@@ -27,6 +30,8 @@ public class FacturaEncabezadoMantenimiento {
         
         fae.setFechaFactura(fechaFactura);
         fae.setEstado(estado);
+        fae.setSubTotalTransaccion(subTotalTransaccion);
+        fae.setTotalTransaccion(totalTransaccion);
         //--
         Empresa empresa = new Empresa();
         empresa.setIdEmpresa(idEmpresa);
@@ -81,26 +86,31 @@ public class FacturaEncabezadoMantenimiento {
 
     public int modificarFacturaEncabezado(
             int idFacturaEncabezado,
-            int idContactos,
+            int idContacto,
             int idEmpresa,
             String fechaFactura,
-            String vendedor) {
+            String estado,
+            double subTotalTransaccion,
+            double totalTransaccion
+            ) {
 
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.openSession();
         int flag = 0;
 
         FacturaEncabezado fae = new FacturaEncabezado();
-        fae.setIdFacturaEncabezado(idFacturaEncabezado);
+        
         fae.setFechaFactura(fechaFactura);
-        fae.setEstado(vendedor);
+        fae.setEstado(estado);
+        fae.setSubTotalTransaccion(subTotalTransaccion);
+        fae.setTotalTransaccion(totalTransaccion);
         //--
         Empresa empresa = new Empresa();
         empresa.setIdEmpresa(idEmpresa);
         fae.setEmpresa(empresa);
         //--
         Contactos contactos = new Contactos();
-        contactos.setIdContacto(idContactos);
+        contactos.setIdContacto(idContacto);
         fae.setContactos(contactos);
         //--
 
@@ -191,9 +201,21 @@ public class FacturaEncabezadoMantenimiento {
     }
     public int maxIdFacturaEncabezad(){
         FacturaEncabezadoMantenimiento fam = new FacturaEncabezadoMantenimiento();
-        List<Integer> lista = fam.maxIdFacturaEncabezado();
-        int idFacturaEncabezado = lista.get(0);
+        int idFacturaEncabezado = 0; 
+        List<FacturaEncabezado> fe = fam.consultarTodosFacturaEncabezado();
+        if (fe.size()>0) {
+            List<Integer> lista = fam.maxIdFacturaEncabezado();
+        idFacturaEncabezado = lista.get(0);
+        }
+        
         return idFacturaEncabezado;
+    }
+    
+    public static void main(String[] args) {
+        FacturaEncabezadoMantenimiento fam = new FacturaEncabezadoMantenimiento();
+        int fe = fam.maxIdFacturaEncabezad();
+        
+        System.out.println("fe = " + fe);
     }
     
 }
