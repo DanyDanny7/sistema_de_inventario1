@@ -3,14 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/daniel.bonillausam/Desktop/Archivos%20Daniel/GitHub/sistema_de_inventario1/CI/src/java/sci/mantenimientos/IvaMantenimiento.java</file>
-            <file>file:/C:/Users/daniel.bonillausam/Desktop/Archivos%20Daniel/GitHub/sistema_de_inventario1/CI/web/jsp/fabricante/inicio.jsp</file>
-            <file>file:/C:/Users/daniel.bonillausam/Desktop/Archivos%20Daniel/GitHub/sistema_de_inventario1/CI/src/java/sci/action/ActionFactura.java</file>
-            <file>file:/C:/Users/daniel.bonillausam/Desktop/Archivos%20Daniel/GitHub/sistema_de_inventario1/CI/src/java/sci/actionforms/ActionFormFactura.java</file>
-            <file>file:/C:/Users/daniel.bonillausam/Desktop/Archivos%20Daniel/GitHub/sistema_de_inventario1/CI/src/java/sci/action/ActionAcceso.java</file>
-            <file>file:/C:/Users/daniel.bonillausam/Desktop/Archivos%20Daniel/GitHub/sistema_de_inventario1/CI/web/jsp/factura/inicio.jsp</file>
-            <file>file:/C:/Users/daniel.bonillausam/Desktop/Archivos%20Daniel/GitHub/sistema_de_inventario1/CI/src/java/sci/mantenimientos/FacturaEncabezadoMantenimiento.java</file>
-            <file>file:/C:/Users/daniel.bonillausam/Desktop/Archivos%20Daniel/GitHub/sistema_de_inventario1/CI/web/index.jsp</file>
+            <file>file:/C:/Users/diana.alcantarausam/Documents/NetBeansProjects/sistema_de_inventario1/CI/web/jsp/moneda/agregarMoneda2.jsp</file>
+            <file>file:/C:/Users/diana.alcantarausam/Documents/NetBeansProjects/sistema_de_inventario1/CI/src/java/metodos/Estaticas.java</file>
+            <file>file:/C:/Users/diana.alcantarausam/Documents/NetBeansProjects/sistema_de_inventario1/CI/src/java/sci/action/ActionEmpresa.java</file>
+            <file>file:/C:/Users/diana.alcantarausam/Documents/NetBeansProjects/sistema_de_inventario1/CI/web/WEB-INF/struts-config.xml</file>
+            <file>file:/C:/Users/diana.alcantarausam/Documents/NetBeansProjects/sistema_de_inventario1/CI/src/java/sci/action/ActionConfiguracion.java</file>
+            <file>file:/C:/Users/diana.alcantarausam/Documents/NetBeansProjects/sistema_de_inventario1/CI/web/jsp/Inicio/portada.jsp</file>
+            <file>file:/C:/Users/diana.alcantarausam/Documents/NetBeansProjects/sistema_de_inventario1/CI/src/java/sci/action/ActionAcceso.java</file>
+            <file>file:/C:/Users/diana.alcantarausam/Documents/NetBeansProjects/sistema_de_inventario1/CI/src/java/sci/action/ActionMoneda.java</file>
+            <file>file:/C:/Users/diana.alcantarausam/Documents/NetBeansProjects/sistema_de_inventario1/CI/web/jsp/configuracion/agregarConfiguracion.jsp</file>
+            <file>file:/C:/Users/diana.alcantarausam/Documents/NetBeansProjects/sistema_de_inventario1/CI/web/jsp/moneda/agregarMoneda.jsp</file>
         </group>
     </open-files>
 </project-private>

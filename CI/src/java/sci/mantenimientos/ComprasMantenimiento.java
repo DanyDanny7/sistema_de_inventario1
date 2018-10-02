@@ -55,8 +55,10 @@ public class ComprasMantenimiento {
         com.setnDocumento(nDocumento);
         com.setTotalCompra(totalCompra);
         com.setCantidad(cantidad);
+        
         try {
             session.beginTransaction();
+            System.out.println("ENTRO A GUARDAR");
             session.save(com);
             session.getTransaction().commit();
             flag = 1;
@@ -72,6 +74,8 @@ public class ComprasMantenimiento {
         }
         return flag;
     }
+    
+    
     public int eliminarCompras(int idCompra) {
         Compras com;
         SessionFactory factory = HibernateUtil.getSessionFactory();
@@ -88,7 +92,7 @@ public class ComprasMantenimiento {
         } catch (Exception e) {
             if (session.getTransaction().isActive()) {
                 session.getTransaction().rollback();
-                flag = 1;
+                flag = 0;
             }
             System.out.println("error en eliminar comprasMantenimiento "+e);
         } finally {
@@ -172,7 +176,7 @@ public class ComprasMantenimiento {
             e.printStackTrace();
             System.out.println("Error en consultarTodo ComprasMantenimiento. "+e);
         } finally {
-            session.close();
+
         }
         return listaCom;
     }

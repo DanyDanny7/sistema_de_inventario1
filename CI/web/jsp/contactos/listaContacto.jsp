@@ -184,7 +184,6 @@
                                                 <td ><bean:write name="ver" property="fechaRegistroContacto"/></td>
                                                 <td ><html:submit property="action" value="Eliminar" styleClass="btn  font-weight-bold" style="background-color: #696969; color: white"/></td>
                                                 <td ><html:submit property="action" value="ConsultarId" styleClass="btn  font-weight-bold" style="background-color: #696969; color: white"/></td>
-                                                <!-- td><!--html:submit property="action" value="ConsultarTipo"/></td -->
                                             </html:form>
                                         </tr>
                                     </logic:iterate>

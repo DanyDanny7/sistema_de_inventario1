@@ -5,14 +5,20 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
-<%@taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
+<%@taglib uri="http://struts.apache.org/tags-bean" prefix="bean"%>
+<%@taglib uri="http://struts.apache.org/tags-html" prefix="html"%>
+<%@taglib uri="http://struts.apache.org/tags-faces" prefix="faces" %>
+<%@taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
+<%@taglib uri="http://struts.apache.org/tags-nested" prefix="nested" %>
+<%@taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
 <!DOCTYPE html>
 <html>
     <head>
-     
+
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Mantenimiento de Acceso</title>
+        <title>Modificar Compras</title>
+
+        <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
         <script src="js/popper.min.js" type="text/javascript"></script>
@@ -21,17 +27,17 @@
         <link href="http://codeseven.github.com/toastr/toastr.css" rel="stylesheet"/>
         <link href="http://codeseven.github.com/toastr/toastr-responsive.css" rel="stylesheet"/>
     </head>
+
     <body background="img/fondos/fondo1.jpg">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-12">
+                <div class="col-xl">
                     <div> 
                         <nav class="navbar navbar-expand-lg navbar" style="background-color: #000;">
                             <a class="navbar-brand" href="accesoMantenimiento.do?action=portada" style = 'color: white'>Inicio</a>
                             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span>
                             </button>
-
                             <div class="collapse navbar-collapse" id="navbarSupportedContent" >
                                 <ul class="navbar-nav mr-auto" >
                                     <li class="nav-item dropdown">
@@ -130,75 +136,93 @@
                     </div>
                 </div>
             </div>
-
         </div>
-                                        
-        <html:form action="/comprasMantenimiento">
-            <table border="0">
-                <tbody>
-                   <tr>
-                        <td>Id Compras </td>
-                       <td><html:text property="idCompra" size="20" ></html:text>  </td> 
-                    </tr>
-                    <tr>
-                        <td>Id Contactos </td>
-                        <td><html:text property="idContacto" size="10"></html:text> 
-                    </tr>
-                    <tr>
-                        <td>Id Inventario</td>
-                        <td><html:text property="idInventario" size="10"></html:text> 
-                    </tr>
-                    <tr>
-                        
-                        <td>id iva </td>
-                        <td><html:text property="idIva" size="10" maxlength="20"></html:text> 
-                    </tr>
-                    <tr>
-                        <td>id productos</td>
-                        <td><html:text property="idProducto" size="10" maxlength="10"></html:text> 
-                    </tr>
-                    <tr>
-                        <td>Total Compra</td>
-                        <td><html:text property="totalCompra" size="3" ></html:text> 
-                    </tr>
-                     
-                        
-                       
-                    <tr colspan="2">
-                    <bean:write name="ActionFormCompras" property="error" filter="false"/>
-                    </tr>
-                </tbody>  
-            </table>
-             
-                    <html:submit property="action" value="Actualizar"/>
-                   
-                   
-                    
-        </html:form>
-        <div id="error">${error}</div>
-        <script type="text/javascript">
-            if ($("#error").text() != "") {
-                window.onload = function () {
-                    toastrs();
-                };
-            }
-            ;
-            toastr.options = {
-                "debug": false,
-                "onclick": null,
-                "fadeIn": 300,
-                "fadeOut": 100,
-                "timeOut": 7000,
-                "extendedTimeOut": 1000
-            };
-            var showToastrs = false;
-            function toastrs() {
-                if (!showToastrs) {
-                    toastr.error($("#error").text(), 'Error');
-                } else {
-                    toastr.error('no se puede!\'t.', 'Otro error crítico');
-                }
-            }
-        </script>
-    </body>
-</html>
+
+        <div class="container">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <div class="card-header" style="color: white"><h1 class="font-weight-bold">Modificar Compras</h1></div>
+
+                        <br>
+
+                        <html:form action="/comprasMantenimiento">
+                            <div class="card-header" style="background-color:#f0f3f4;">
+                                <div hidden="hidden">
+                                    <label class="font-weight-bold">id Compras </label><br>
+                                    <html:text property="idCompra" styleClass="form-control"></html:text><br>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            <label class="font-weight-bold">Documento: </label>
+                                        <html:text property="nDocumento" styleClass="form-control"></html:text><br>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label class="font-weight-bold">id Contactos </label>
+                                            <td><html:text property="idContacto" styleClass="form-control"></html:text><br>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            <label class="font-weight-bold">id Inventario</label>
+                                        <html:text property="idInventario" styleClass="form-control"></html:text> 
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label class="font-weight-bold">id productos</label>
+                                        <html:text property="idProducto" styleClass="form-control"></html:text> 
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            <label class="font-weight-bold">id Iva  </label>
+                                        <html:text property="idIva" styleClass="form-control"></html:text>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label class="font-weight-bold">cantidad</label>
+                                        <html:text property="cantidad" styleClass="form-control"></html:text>
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-3"></div> 
+                                        <div class="form-group col-md-6"> 
+                                            <label class="font-weight-bold">total de compra</label>
+                                        <html:text property="totalCompra" styleClass="form-control"></html:text>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <br>
+                            <html:submit property="action" value="Actualizar" styleClass="btn  font-weight-bold" style="background-color:#f0f3f4; color: black"/>
+
+                        </html:form>
+
+                        <div id="error">${error}</div>
+                        <script type="text/javascript">
+                            if ($("#error").text() != "") {
+                                window.onload = function () {
+                                    toastrs();
+                                };
+                            }
+                            ;
+                            toastr.options = {
+                                "debug": false,
+                                "positionClass": "toast-bottom-right",
+                                "onclick": null,
+                                "fadeIn": 300,
+                                "fadeOut": 100,
+                                "timeOut": 5000,
+                                "extendedTimeOut": 1000
+                            };
+                            var showToastrs = false;
+                            function toastrs() {
+                                if (!showToastrs) {
+                                    toastr.error($("#error").text(), 'Error');
+                                } else {
+                                    toastr.error('no se puede!\'t.', 'Otro error crítico');
+                                }
+                            }
+                        </script>
+                        </body>
+                        </html>

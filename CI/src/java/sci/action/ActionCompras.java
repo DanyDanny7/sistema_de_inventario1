@@ -99,7 +99,17 @@ public class ActionCompras extends org.apache.struts.action.Action {
 
             inventario.modificarInventario(idInventario, idProductos, existencia, estadoExistencia, stockMinimo, estadoFisico);
 
-            comprasMantenimiento.guardarcompras(idCompra, nDocumento, idContacto, idInventario, cantidad, idIva, idProducto, fechaCompra, totalCompra);
+            int val = comprasMantenimiento.guardarcompras(idCompra, nDocumento, idContacto, idInventario, cantidad, idIva, idProducto, fechaCompra, totalCompra);
+            if (val != 1) {
+                String error = ("Sugio un error No se Guardó el Registro" +nDocumento);
+               
+                IR = AGREGAR;
+                request.setAttribute("nombre", Login.nombre);
+                request.setAttribute("nAcceso", Login.nAcceso);
+                request.setAttribute("nAcceso", Login.id);
+                request.setAttribute("error", error);
+                return mapping.findForward(IR);
+            }
 
             List<Compras> listaCompras = comprasMantenimiento.consultarTodoCompras();
             formBean.setListaCompras(listaCompras);
@@ -109,46 +119,39 @@ public class ActionCompras extends org.apache.struts.action.Action {
         }
 //----------------------------------------------------------------------
         if (action.equals("Modificar")) {
-
-            String advertencia = "";
-
-            if (idContacto == null || idContacto.equals("")) {
-                advertencia = "id de compras  es requerido<br>";
-            }
-            if (idInventario == null || idInventario.equals("")) {
-                advertencia += "*id inventario es requerido<br>";
-            }
-            if (idIva == null || idIva.equals("")) {
-                advertencia += "id iva  es requerido<br>";
-            }
-            if (idProducto == null || idProducto.equals("")) {
-                advertencia += "*id productos es requerido<br>";
-            }
-            if (totalCompra == null || totalCompra.equals("")) {
-                advertencia += "*id total de compra es requerido<br>";
-            }
-
-            if (!advertencia.equals("")) {
-                IR = MODIFICAR;
-                request.setAttribute("nombre", Login.nombre);
-                request.setAttribute("nAcceso", Login.nAcceso);
-                request.setAttribute("id", Login.id);
-                return mapping.findForward(IR);
-            }
+            
             ComprasMantenimiento comprasMantenimiento = new ComprasMantenimiento();
-            List<Compras> listaCompras = comprasMantenimiento.consultarTodoCompras();
-            formBean.setListaCompras(listaCompras);
-            IR = LISTA;
+            Compras compra = comprasMantenimiento.consultarComprasId(idCompra);
+
+            formBean.setIdCompra(compra.getIdCompra());
+            formBean.setnDocumento(compra.getnDocumento());
+            formBean.setIdContacto(compra.getContactos().getIdContacto());
+            formBean.setIdInventario(compra.getInventario().getIdInventario());
+            formBean.setCantidad(compra.getCantidad());
+            formBean.setIdIva(compra.getIva().getIdIva());
+            formBean.setIdProducto(compra.getProductos().getIdProducto());
+            formBean.setTotalCompra(compra.getTotalCompra());
+
+            IR = MODIFICAR;
         }
         //----------------------------------------------------------------------
         if (action.equals("Eliminar")) {
             ComprasMantenimiento comprasMantenimiento = new ComprasMantenimiento();
-            comprasMantenimiento.eliminarCompras(idCompra);
-            List<Compras> listaCompras = comprasMantenimiento.consultarTodoCompras();
 
-            formBean.setListaCompras(listaCompras);
+            int n = comprasMantenimiento.eliminarCompras(idCompra);
+            String mensaje = "";
+            if (n == 0) {
+                mensaje = (" Registro (" + idCompra + ") No se Eliminó ");
+                request.setAttribute("error", mensaje);
+            } else {
+                List<Compras> listaCompras = comprasMantenimiento.consultarTodoCompras();
+                formBean.setListaCompras(listaCompras);
+                mensaje = (" Registro \"" + idCompra + "\" Eliminado Correctamente ");
+                request.setAttribute("mensaje", mensaje);
+            }
+
             System.out.println("desde eliminar");
-            return mapping.findForward(IR);
+            IR = LISTA;
         }
         //----------------------------------------------------------------------
         if (action.equals("Consultar")) {
@@ -169,17 +172,17 @@ public class ActionCompras extends org.apache.struts.action.Action {
             }
         }
         //------------------------------------------------------------------------------
-        /*if (action.equals("Actualizar")) {
+        if (action.equals("Actualizar")) {
             ComprasMantenimiento comprasMantenimiento = new ComprasMantenimiento();
-            String mensaje = "<span style='color:red'>Actualizado Correcto" + "<br></span>";
-            request.setAttribute("mensaje", mensaje);
-
             comprasMantenimiento.ModificarCompras(idCompra, nDocumento, idContacto, idInventario, cantidad, idIva, idProducto, fechaCompra, totalCompra);
             List<Compras> listaCompras = comprasMantenimiento.consultarTodoCompras();
             formBean.setListaCompras(listaCompras);
-            return mapping.findForward(LISTA);
+            
+            String mensaje = ("El registro \"" + nDocumento + "\" se modificó correctamente ");
+            request.setAttribute("mensaje", mensaje);
+            IR = LISTA;
         }
-         */
+
 //--------------------------------------------------------------------------------        
         if (action.equals("irAgregar")) {
 
