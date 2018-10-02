@@ -25,6 +25,7 @@ public class ActionEmpresa extends org.apache.struts.action.Action {
     private static final String AGREGAR = "irAgregarEmpresa";
     private static final String MODIFICAR = "irModificarEmpresa";
     private static final String ACCESO = "irAcceso";
+    private static final String PORTADA = "portada";
 
     @Override
     public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
@@ -51,7 +52,20 @@ public class ActionEmpresa extends org.apache.struts.action.Action {
         }
 
 //-------------------------------------------------------------------------------
+        /*List<Empresa> listas = eman.consultarTodosEmpresa();
+        if (listas.size()>0) {
+            String error = ("YA EXISTE CONFIGURACION CREADA");
+            System.out.println("YAAAAA");
+            request.setAttribute("error", error);
+        IR = PORTADA; 
+        request.setAttribute("nombre", Login.nombre);
+        request.setAttribute("nAcceso", Login.nAcceso);
+        request.setAttribute("id", Login.id);
+        return mapping.findForward(IR);
+        }     */   
+
         if (action.equals("Siguiente")) {
+            
             
             Extraer ex = new Extraer();
             List<Integer> lista = ex.maxIdEmpresa();

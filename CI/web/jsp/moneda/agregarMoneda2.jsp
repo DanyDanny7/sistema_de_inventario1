@@ -1,6 +1,6 @@
 <%-- 
-    Document   : index
-    Created on : 09-03-2018, 01:42:35 PM
+    Document   : agregarConfiguracion
+    Created on : 08-29-2018, 04:08:52 PM
     Author     : daniel.bonillausam
 --%>
 
@@ -12,7 +12,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Portada</title>
+        <title>Agregar Moneda</title>
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
         <script src="js/popper.min.js" type="text/javascript"></script>
@@ -20,15 +20,14 @@
         <script src="http://codeseven.github.com/toastr/toastr.js"></script>
         <link href="http://codeseven.github.com/toastr/toastr.css" rel="stylesheet"/>
         <link href="http://codeseven.github.com/toastr/toastr-responsive.css" rel="stylesheet"/>
-
     </head>
-    <body>
+    <body background="img/fondos/fondo1.jpg">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
                     <div> 
-                        <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #000;">
-                            <a class="navbar-brand" href="accesoMantenimiento.do?action=portada" style = 'color: white'>${img}</a>
+                        <nav class="navbar navbar-expand-lg navbar" style="background-color: #000;">
+                            <a class="navbar-brand" href="accesoMantenimiento.do?action=portada" style = 'color: white'>Inicio</a>
                             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span>
                             </button>
@@ -41,7 +40,7 @@
                                             Parametros
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
-                                            <a class="dropdown-item" text-dark href="empresaMantenimiento.do?action=irAgregar">Configuración Inicial</a>
+                                            <a class="dropdown-item" href="#">Configuración Inicial</a>
                                         </div>
                                     </li>
                                     <li class="nav-item dropdown">
@@ -50,7 +49,7 @@
                                             Fabricantes
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
-                                            <a class="dropdown-item " href="fabricanteMantenimiento.do?action=irAgregar">Agregar Fabricantes</a>
+                                            <a class="dropdown-item" href="fabricanteMantenimiento.do?action=irAgregar">Agregar Fabricantes</a>
                                             <a class="dropdown-item" href="fabricanteMantenimiento.do?action=Consultar">Consultar Fabricantes</a>
                                         </div>
                                     </li>
@@ -73,8 +72,8 @@
                                             Compras
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
-                                            <a class="dropdown-item" href="comprasMantenimiento.do?action=irAgregar">Agregar Compra</a>
-                                            <a class="dropdown-item" href="comprasMantenimiento.do?action=Consultar">Consultar Compras</a>
+                                            <a class="dropdown-item" href="#">Agregar Compra</a>
+                                            <a class="dropdown-item" href="#">Consultar Compras</a>
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="#">Consultas por Documento</a>
                                         </div>
@@ -93,47 +92,20 @@
                                         </div>
                                     </li>
                                     <li class="nav-item dropdown">
-                                    <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" 
-                                           aria-haspopup="true" aria-expanded="false" style = 'color: white'> 
-                                            Factura
-                                        </a>
-                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
-                                            <a class="dropdown-item" href="facturaMantenimiento.do?action=irAgregar">Agregar Factura</a>
-                                            <a class="dropdown-item" href="facturaMantenimiento.do?action=consultar">Consultar Factura</a>
-                                        </div>
-                                    </li>
-                                    <!--<li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" 
-                                           aria-haspopup="true" aria-expanded="false" style = 'color: white'> 
-                                            Empresas
-                                        </a>
-                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
-                                            <a class="dropdown-item" href="empresaMantenimiento.do?action=irAgregar">Agregar Empresa</a>
-                                            <a class="dropdown-item" href="empresaMantenimiento.do?action=Consultar">Consultar Empresa</a>
-                                        </div>
-                                    </li>-->
-                                    <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" 
                                            aria-haspopup="true" aria-expanded="false" style = 'color: white'> 
                                             Consultas
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
-                                            <a class="dropdown-item" href="comprasMantenimiento.do?action=Consultar">Compras</a>
+                                            <a class="dropdown-item" href="#">Compras</a>
                                             <a class="dropdown-item" href="contactosMantenimiento.do?action=Consultar">Contactos</a>
                                             <a class="dropdown-item" href="fabricanteMantenimiento.do?action=Consultar">Fabricantes</a>
                                             <a class="dropdown-item" href="monedaMantenimiento.do?action=Consultar">Monedas</a>
                                             <a class="dropdown-item" href="productosMantenimiento.do?action=Consultar">Productos</a>
-                                            <a class="dropdown-item" href="empresaMantenimiento.do?action=Consultar">Empresa</a>
-                                            <a class="dropdown-item" href="inventarioMantenimiento.do?action=Consultar">Inventario</a>
-                                            <a class="dropdown-item" href="facturaMantenimiento.do?action=consultar">Facturas</a>
                                         </div>
                                     </li>
                                 </ul>
                                 <ul class="nav navbar-nav navbar-right">
-                                    <div class="btn-group">
-
-                                    </div>
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-secondary">
                                             ${nombre}
@@ -158,49 +130,86 @@
                     </div>
                 </div>
             </div>
-            <div class="container-fluid">
 
-            </div>
+        </div>
 
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <div class="card-header" style="color: white"><h1 class="font-weight-bold">Agregar Moneda</h1></div>
+                    <br>
+                    <html:form action="/monedaMantenimiento">
+                        <div class="card-header" style="background-color:#f0f3f4;">
+                            <div class="row">
+                                <div class="form-group col-5">
+                                    <label class="font-weight-bold">Nombre Moneda : </label><br>
+                                    <html:text property="nombreMoneda" styleClass="form-control"></html:text><br>
+                                    </div>
+                                    <div class="form-group col-3">
+                                        <label class="font-weight-bold">Simbolo : </label><br>
+                                    <html:text property="simboloMoneda" styleClass="form-control"></html:text><br>
+                                    </div>
+                                    <div class="form-group col-3">
+                                        <label class="font-weight-bold">Codigo de la Moneda : </label><br>
+                                    <html:text property="codigoMoneda" styleClass="form-control"></html:text><br>
+                                    </div>
+                            </div>    
+                                    <div class="row">
+                                        <div class="form-group col-3"></div>
+                                        
+                                        <div class="form-group col-5">
+                                        <label class="font-weight-bold">Equivalencia : </label><br>
+                                    <html:text property="equivalencia" styleClass="form-control" ></html:text><br>
+                                   </div>
+                                   
+                                    <div class="form-group col-3">
+                                        <label class="font-weight-bold">Moneda de Cambio:</label><br>
+                                    <html:select property="monedaReferencia" styleClass="form-control">
+                                        <html:option value="Seleccionar"></html:option>
+                                        <logic:notEmpty name="ActionFormAcceso" property="listaMoneda">
+                                            <logic:iterate id="ver" name="ActionFormAcceso" property="listaMoneda">
+                                                <html:option value="${ver.nombreMoneda}" ></html:option>
+                                            </logic:iterate>
+                                        </logic:notEmpty>
+                                    </html:select>
+                                    <br>
+                                    </div> 
+                                    </div>        
+                                    </div>
+                                    <br>
+                                <html:submit property="action" value="Siguiente" styleClass="btn  font-weight-bold" style="background-color:#f0f3f4; color: black"/>
 
-
-            <div class="container">
-                <div class="row">
-                    <div class="col-1"></div>
-                    <div class="col-10">
-                        <h1>Portada</h1>
-
-
+                            </html:form>
+                            <h5>${error}</h5>
+                        </div>
+                        <div class="col-1"></div>
                     </div>
-                    <div class="col-1"></div>
-
                 </div>
-            </div>
-                                            <div id="error" hidden="hidden" >${error}</div>
-            <script type="text/javascript">
-                if ($("#error").text() != "") {
-                    window.onload = function () {
-                        toastrs();
-                    };
-                }
-                ;
-                toastr.options = {
-                    "debug": false,
-                    "onclick": null,
-                    "fadeIn": 300,
-                    "fadeOut": 100,
-                    "timeOut": 7000,
-                    "extendedTimeOut": 1000
-                };
-                var showToastrs = false;
-                function toastrs() {
-                    if (!showToastrs) {
-                        
-                        toastr.info($("#error").text(), 'Informacion');
-                    } else {
-                        toastr.error('no se puede!\'t.', 'Otro error crítico');
-                    }
-                }
-            </script>
-    </body>
-</html>
+                        <div id="error">${error}</div>
+    <script type="text/javascript">
+        if ($("#error").text() != "") {
+            window.onload = function () {
+                toastrs();
+            };
+        }
+        ;
+        toastr.options = {
+            "debug": false,
+            "positionClass": "toast-bottom-right",
+            "onclick": null,
+            "fadeIn": 300,
+            "fadeOut": 100,
+            "timeOut": 5000,
+            "extendedTimeOut": 1000
+        };
+        var showToastrs = false;
+        function toastrs() {
+            if (!showToastrs) {
+                toastr.error($("#error").text(), 'Error');
+            } else {
+                toastr.error('no se puede!\'t.', 'Otro error crítico');
+            }
+        }
+    </script>
+                </body>
+                </html>

@@ -158,7 +158,6 @@
                                     <div class="form-group col-6">
                                         <label>Nombre de Moneda :</label><br>
                                     <html:text property="nombreMoneda" value="${nombreMoneda}" styleClass="form-control"></html:text><br>
-                                    <html:text property="simboloMoneda" value="${simboloMoneda}"styleClass="form-control"></html:text><br>
                                     </div>
                                     <div class="form-group col-5">
                                         <label>Tasa de Iva :</label><br>

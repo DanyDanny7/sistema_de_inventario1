@@ -13,9 +13,12 @@ import sci.actionforms.ActionFormAcceso;
 import sci.mantenimientos.AccesoMantenimiento;
 import sci.mantenimientos.EmpresaMantenimiento;
 import metodos.Login;
+import sci.actionforms.ActionFormMoneda;
 import sci.mantenimientos.ConfiguracionMantenimiento;
+import sci.mantenimientos.MonedaMantenimiento;
 import sci.persistencia.Acceso;
 import sci.persistencia.Empresa;
+import sci.persistencia.Moneda;
 
 public class ActionAcceso extends org.apache.struts.action.Action {
 
@@ -145,7 +148,7 @@ public class ActionAcceso extends org.apache.struts.action.Action {
             if (usuario == null || usuario.equals("")) {
                 advertencia += "*Es requerido un Usuario <br>";
             }
-            if (contrasena == null || contrasena.equals("")) {
+            if (contrasena == null || contrasena.equals("")) { 
                 advertencia += "*Es requerido una Contraseña <br>";
             }
             if (eMail == null || eMail.equals("")) {
@@ -198,13 +201,20 @@ public class ActionAcceso extends org.apache.struts.action.Action {
                 return mapping.findForward(IR);
             }
 
+            MonedaMantenimiento mman = new MonedaMantenimiento();
+            List<Moneda> listaMoneda = mman.consultarTodosMoneda();
+            formBean.setListaMoneda(listaMoneda);
+            request.setAttribute("listaMoneda", listaMoneda);
+            System.out.println("listaMoneda "+listaMoneda.toString());
+            
             request.setAttribute("idEmpresa", Estaticas.idEmpresa);
             request.setAttribute("nombreEmpresa", Estaticas.nombreEmpresa);
             request.setAttribute("nAcceso", Login.id);
+            request.setAttribute("nombre", Login.nombre);
+            
             System.out.println("Entra a 5");
 
             IR = CONF;
-
         }
         //----------------------------------------------------------------------
         if (action.equals("ConsultarId")) {

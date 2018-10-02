@@ -5,6 +5,7 @@ package sci.actionforms;
 import java.util.List;
 import sci.persistencia.Acceso;
 import sci.persistencia.Empresa;
+import sci.persistencia.Moneda;
 
 public class ActionFormAcceso extends org.apache.struts.action.ActionForm {
 
@@ -25,6 +26,15 @@ public class ActionFormAcceso extends org.apache.struts.action.ActionForm {
     private String mensaje;
     private List<Acceso> listaAcceso;
     private List<Empresa> listaEmpresa;
+    private List<Moneda> listaMoneda;
+
+    public List<Moneda> getListaMoneda() {
+        return listaMoneda;
+    }
+
+    public void setListaMoneda(List<Moneda> listaMoneda) {
+        this.listaMoneda = listaMoneda;
+    }
 
     public Integer getIdAcceso() {
         return idAcceso;

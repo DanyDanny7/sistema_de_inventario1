@@ -77,7 +77,7 @@ public class ActionConfiguracion extends org.apache.struts.action.Action {
             }
             // validacion de existencia
 
-            //---------------------------------------------------------------------------        
+//---------------------------------------------------------------------------        
         byte[] bfile  ; //falta ver como llenar este dato
 
         // obtenemos el directorio real

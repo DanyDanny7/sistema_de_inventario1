@@ -48,7 +48,7 @@
         <forward name = "irAyuda2Acceso"        path = "/jsp/acceso/ayuda2.jsp"/>
         <forward name = "irAyuda3Acceso"        path = "/jsp/acceso/ayuda3.jsp"/>
         <forward name = "irPerfil"              path = "/jsp/acceso/perfil.jsp"/>
-        <forward name = "viajando"              path = "/jsp/configuracion/agregarConfiguracion.jsp"/>
+        <forward name = "viajando"              path = "/jsp/moneda/agregarMoneda2.jsp"/>
 <!-- // Compras -->
         <forward name = "irInicioCompras"       path = "/jsp/compras/inicio.jsp"/>
         <forward name = "listaCompras"          path = "/jsp/compras/listaCompra.jsp"/>
@@ -56,7 +56,7 @@
         <forward name = "irAgregarCompras"      path = "/jsp/compras/agregarCompras.jsp"/>       
 <!-- // Configuracion -->
         <forward name = "modificarConfig"       path = "/jsp/configuracion/modificarConfiguracion.jsp"/>
-        <forward name = "inicioConfig"          path = "/jsp/configuracion/inicio.jsp"/>
+        <forward name = "inicioConfig"          path = "/jsp/Inicio/portada.jsp"/>
         <forward name = "agregarConfig"         path = "/jsp/configuracion/agregarConfiguracion.jsp"/>
 <!-- // Contactos --> 
         <forward name = "listaContactos"        path = "/jsp/contactos/listaContacto.jsp"/>
@@ -69,6 +69,7 @@
         <forward name = "irAgregarEmpresa"      path = "/jsp/empresa/agregarEmpresa.jsp"/>
         <forward name = "irModificarEmpresa"    path = "/jsp/empresa/modificarEmpresa.jsp"/>
         <forward name = "irAcceso"              path = "/jsp/acceso/agregarAcceso2.jsp"/>
+        <forward name = "portada"               path = "/jsp/Inicio/portada.jsp"/>
 <!-- // Fabricantes -->
         <forward name = "irInicioFabricantes"   path = "/jsp/fabricante/inicio.jsp"/>
         <forward name = "irAgregarFabricantes"  path = "/jsp/fabricante/agregarFabricante.jsp"/>
@@ -93,6 +94,7 @@
         <forward name = "irAgregarMoneda"       path = "/jsp/moneda/agregarMoneda.jsp"/>
         <forward name = "irModificarMoneda"     path = "/jsp/moneda/modificarMoneda.jsp"/>
         <forward name = "irListaMoneda"         path = "/jsp/moneda/listaMoneda.jsp"/>
+        <forward name = "Go"                    path = "/jsp/configuracion/agregarConfiguracion.jsp"/>
 <!-- // Productos -->
         <forward name = "listaProducto"         path = "/jsp/producto/listaProductos.jsp"/>
         <forward name = "irProducto"            path = "/jsp/producto/agregarProductos.jsp"/>
