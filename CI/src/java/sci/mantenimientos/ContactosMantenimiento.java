@@ -134,7 +134,7 @@ public class ContactosMantenimiento {
             e.printStackTrace();
             System.out.println("Erro en consultar Todo ContactosMAntenimiento " + e);
         } finally {
-
+            session.close();
         }
         return listaContactos;
     }

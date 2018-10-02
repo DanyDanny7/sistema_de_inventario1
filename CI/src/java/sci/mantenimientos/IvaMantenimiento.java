@@ -91,6 +91,7 @@ public class IvaMantenimiento {
 
         Iva iva = new Iva();
         
+        iva.setIdIva(idIva);
         iva.setIvaRetenido(ivaRetenido);
         iva.setIvaPagado(ivaPagado);
         iva.setIvaTotal(ivaTotal);
@@ -129,6 +130,7 @@ public class IvaMantenimiento {
             e.printStackTrace();
             System.out.println("Error en consultarTodo IvaMantenimiento " + e);
         } finally {
+             session.close();           
         }
         return listaIva;
     }

@@ -166,7 +166,7 @@ public class FacturaDetalleMantenimiento {
             e.printStackTrace();
             System.out.println("Error en Consultar Todos FacturaDetalleMantenimiento");
         } finally {
-
+            session.close();
         }
         return listafactd;
     }

@@ -132,7 +132,9 @@ public class InventarioMantenimiento {
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Errorr en consultar todo InventarioMantenimiento "+e);
-        } finally{}
+        } finally{
+             session.close();       
+        }
         return listaInventario;
     }
     

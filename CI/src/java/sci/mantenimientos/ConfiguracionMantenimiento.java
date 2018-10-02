@@ -163,7 +163,7 @@ public class ConfiguracionMantenimiento {
             e.printStackTrace();
             System.out.println("Error en consultar todo ConfiguracionMantenimiento " + e);
         } finally {
-
+            session.close();
         }
         return listaConf;
     }

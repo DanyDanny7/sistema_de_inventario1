@@ -172,7 +172,7 @@ public class ComprasMantenimiento {
             e.printStackTrace();
             System.out.println("Error en consultarTodo ComprasMantenimiento. "+e);
         } finally {
-
+            session.close();
         }
         return listaCom;
     }

@@ -121,7 +121,7 @@ public class FabricantesMantenimiento {
             e.printStackTrace();
             System.out.println("Error en Consultar todos FabricantesMantenimiento "+e);
         } finally {
-
+            session.close();
         }
         return listaFabricantes;
     }

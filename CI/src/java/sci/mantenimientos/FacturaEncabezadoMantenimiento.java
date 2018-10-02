@@ -100,6 +100,7 @@ public class FacturaEncabezadoMantenimiento {
 
         FacturaEncabezado fae = new FacturaEncabezado();
         
+        fae.setIdFacturaEncabezado(idFacturaEncabezado);
         fae.setFechaFactura(fechaFactura);
         fae.setEstado(estado);
         fae.setSubTotalTransaccion(subTotalTransaccion);
@@ -146,7 +147,7 @@ public class FacturaEncabezadoMantenimiento {
             e.printStackTrace();
             System.out.println("Error en Consultar Todo Factura Encabezado " + e);
         } finally {
-
+            session.close();
         }
         return listafactE;
     }

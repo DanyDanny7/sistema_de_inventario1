@@ -207,6 +207,8 @@ public class ActionFactura extends org.apache.struts.action.Action {
         }
         //-------------------------------------------------------------------------
         if (action.equals("Guardar")) {
+            
+            
 // para calcular el Sub Total del pie de la factura 
             idFacturaEncabezado = feman.maxIdFacturaEncabezad();
             subTotalTransaccion = sumaTF.sumarTotalFila(idFacturaEncabezado);
@@ -223,6 +225,17 @@ public class ActionFactura extends org.apache.struts.action.Action {
             fechaFactura = fe.getFechaFactura();
             estado = fe.getEstado();
             
+            
+            System.out.println("idFacturaEncabezado "+idFacturaEncabezado);
+            System.out.println("idContacto "+idContacto);
+            System.out.println("idEmpresa "+idEmpresa);
+            System.out.println("fechaFactura "+fechaFactura);
+            System.out.println("estado "+estado);
+            System.out.println("subTotalTransaccion "+subTotalTransaccion);
+            System.out.println("otalTransaccion "+totalTransaccion);
+            
+            
+            
             feman.modificarFacturaEncabezado(idFacturaEncabezado, idContacto, idEmpresa, fechaFactura, estado, subTotalTransaccion, totalTransaccion);
             
 //Modificar iva ya que se creo en agregar            
@@ -235,9 +248,9 @@ public class ActionFactura extends org.apache.struts.action.Action {
             
             iman.modificarIva(idIva, ivaTasa, ivaRetenido, ivaPagado, ivaTotal, subTotalTransaccion, totalTransaccion);
             
-            IR = INICIO;
             
-
+            
+            IR = INICIO;
         }
         //-------------------------------------------------------------------------
         if (action.equals("Modificar")) {

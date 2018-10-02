@@ -131,6 +131,7 @@ public class ProductosMantenimiento {
             e.printStackTrace();
             System.out.println("Error en consultar todo producto mantenimiento " + e);
         } finally {
+            session.close();            
         }
         return listaProductos;
     }

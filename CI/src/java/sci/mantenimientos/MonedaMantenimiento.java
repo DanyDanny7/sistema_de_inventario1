@@ -1,4 +1,3 @@
-
 package sci.mantenimientos;
 
 import com.myapp.struts.HibernateUtil;
@@ -8,10 +7,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import sci.persistencia.Moneda;
 
-
 public class MonedaMantenimiento {
-    
-    
+
     public int guardarMoneda(
             String nombreMoneda,
             String simboloMoneda,
@@ -124,6 +121,7 @@ public class MonedaMantenimiento {
             e.printStackTrace();
             System.out.println("Error en consultarTodo MonedaMantenimiento " + e);
         } finally {
+            session.close();
         }
         return listaMoneda;
     }
@@ -137,7 +135,7 @@ public class MonedaMantenimiento {
             session.beginTransaction();
             moneda = (Moneda) session.get(Moneda.class, nombreMoneda);
             System.out.println("Consultar por Id Correcto MonedaMantenimiento");
-                        session.getTransaction().commit();
+            session.getTransaction().commit();
         } catch (Exception e) {
             if (session.getTransaction().isActive()) {
                 session.getTransaction().rollback();
@@ -150,6 +148,7 @@ public class MonedaMantenimiento {
         }
         return moneda;
     }
+
     public List<Moneda> consultaNombreMoneda(String nombreMoneda) {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.openSession();
@@ -160,7 +159,7 @@ public class MonedaMantenimiento {
             query.setParameter("nombreMoneda", nombreMoneda);
             List<Moneda> listaMoneda = query.list();
             if (listaMoneda.size() > 0) {
-                
+
                 return listaMoneda;
             }
             session.close();
@@ -171,6 +170,7 @@ public class MonedaMantenimiento {
             return null;
         }
     }
+
     public List<Moneda> consultaCodigoMoneda(String codigoMoneda) {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.openSession();
@@ -181,7 +181,7 @@ public class MonedaMantenimiento {
             query.setParameter("codigoMoneda", codigoMoneda);
             List<Moneda> listaMoneda = query.list();
             if (listaMoneda.size() > 0) {
-                
+
                 return listaMoneda;
             }
             session.close();
