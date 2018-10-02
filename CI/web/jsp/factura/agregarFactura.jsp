@@ -223,7 +223,7 @@
                                                     <td><bean:write name="ver" property="cantidad"></bean:write></td>
                                                     <td><bean:write name="ver" property="productos.precioUnitario"></bean:write></td>
                                                     <td><bean:write name="ver" property="totalFila"></bean:write></td>
-                                                    <td><html:submit property="action" value="x"/></td>
+                                                    <td><html:submit property="action" value="x "/></td>
                                                     </html:form>
                                                 </tr>
                                             </logic:iterate>
@@ -264,13 +264,3 @@
         </div>
     </body>
 </html>
-<%--
-<label class="font-weight-bold">Empresa : </label><br>
-                                    <html:select property="idEmpresa" styleClass="form-control">
-                                        <html:option value="Seleccionar"></html:option>
-                                        <logic:notEmpty name="ActionFormAcceso" property="listaEmpresa">
-                                            <logic:iterate id="ver" name="ActionFormAcceso" property="listaEmpresa">
-                                                <html:option value="${ver.idEmpresa}" >${ver.nombreEmpresa}</html:option>
-                                            </logic:iterate>
-                                        </logic:notEmpty>
-   *                                </html:select>  --%>

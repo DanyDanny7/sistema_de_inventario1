@@ -12,7 +12,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Modificar Factura</title>
+        <title>Agregar Factura</title>
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
         <script src="js/popper.min.js" type="text/javascript"></script>
@@ -136,49 +136,125 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 text-center">
-                    <div class="card-header" style="color: white"><h1 class="font-weight-bold">Agregar Moneda</h1></div>
-                    <br>
-                    <html:form action="/monedaMantenimiento">
+                    <div class="card-header" style="color: white"><h1 class="font-weight-bold">Agregar Factura</h1></div>
+                    <html:form action="/facturaMantenimiento">
                         <div class="card-header" style="background-color:#f0f3f4;">
                             <div class="row">
-                                <div class="form-group col-5">
-                                    <label class="font-weight-bold">Nombre Moneda : </label><br>
-                                    <html:text property="nombreMoneda" styleClass="form-control"></html:text><br>
-                                    </div>
-                                    <div class="form-group col-3">
-                                        <label class="font-weight-bold">Simbolo : </label><br>
-                                    <html:text property="simboloMoneda" styleClass="form-control"></html:text><br>
-                                    </div>
-                                    <div class="form-group col-3">
-                                        <label class="font-weight-bold">Codigo de la Moneda : </label><br>
-                                    <html:text property="codigoMoneda" styleClass="form-control"></html:text><br>
-                                    </div>
-                                </div>    
-                                <div class="row">
-                                    <div class="form-group col-3"></div>
-                                    <div class="form-group col-3">
-                                        <label class="font-weight-bold">Equivalencia : </label><br>
-                                    <html:text property="equivalencia" styleClass="form-control" ></html:text><br>
-                                    </div>
-                                    <div class="form-group col-3">
-                                        <label class="font-weight-bold">Moneda de Cambio:</label><br>
-                                    <html:select property="monedaReferencia" styleClass="form-control">
+                                <div class="col-9">
+                                    <html:hidden property="idFacturaEncabezado"></html:hidden>
+                                    <h2 class="text-center">${nombreEmpresa}</h2>
+                                    <h6 class="text-center">${direccionEmpresa}</h6>
+                                    <div class="text-left"><label >Cliente</label></div>
+                                    <html:select property="idContacto" styleClass="form-control">
                                         <html:option value="Seleccionar"></html:option>
-                                        <logic:notEmpty name="ActionFormMoneda" property="listaMoneda">
-                                            <logic:iterate id="ver" name="ActionFormMoneda" property="listaMoneda">
-                                                <html:option value="${ver.nombreMoneda}" ></html:option>
+                                        <logic:notEmpty name="ActionFormFactura" property="listaContactos">
+                                            <logic:iterate id="ver" name="ActionFormFactura" property="listaContactos">
+                                                <html:option value="${ver.idContacto}" >${ver.nombreContacto}</html:option>
                                             </logic:iterate>
                                         </logic:notEmpty>
                                     </html:select>
-                                    <br>
-                                </div> 
-                            </div>        
-
-                            <bean:write name="ActionFormMoneda" property="error" filter="false"></bean:write>
+                                </div>
+                                <div class="col-3">
+                                    <div class="text-left"><label>Numero de Factura : </label></div>
+                                    <h2 class="text-center" style="color: red">00000${num}</h2>
+                                    <div class="text-left"><label >Fecha : </label></div>
+                                    <html:text property="fechaFactura" styleClass="form-control"></html:text>
+                                    </div>
+                                </div>    
                             </div>
                             <br>
-                        <html:submit property="action" value="modificar"  styleClass="btn  font-weight-bold" style="background-color:#f0f3f4; color: black"/>
+                            <div class="card-header" style="background-color:#f0f3f4;">
+                                <div class="row">
+                                    <div class="col-10">
+                                        <table>
+                                            <thead>
+                                                <tr style="width:100%">
+                                                    <td style="width:700px">Producto</td>
+                                                    <td>    </td>
+                                                    <td style="width:400px">Cantidad</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="align-content-center">
+                                                <tr>
+                                                    <td>
+                                                    <html:select property="idProducto" styleClass="form-control" >
+                                                        <html:option value="Seleccionar"></html:option>
+                                                        <logic:notEmpty name="ActionFormFactura" property="listaProductos">
+                                                            <logic:iterate id="ver" name="ActionFormFactura" property="listaProductos">
+                                                                <html:option value="${ver.idProducto}" >${ver.nombreProducto}</html:option>
+                                                            </logic:iterate>
+                                                        </logic:notEmpty>
+                                                    </html:select> 
+                                                </td>
+                                                <td>  </td>
+                                                <td><html:text property="cantidad" styleClass="form-control"></html:text></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
 
+                                    </div>
+                                    <div class="col-2">
+                                        <br>
+                                    <html:submit  property="action" value="Agregar" styleClass="btn  font-weight-bold " style="background-color:#000; color: white"></html:submit>
+                                    </div>
+                                </div>
+                            </div>
+                    </html:form>
+                    <div class="card-header" style="background-color:#f0f3f4;">
+                        <div class="row">
+                            <div class="col-12">
+                                <table>
+                                    <thead>
+                                        <tr style="width:100%"> 
+                                            <td style="width:400px">Producto : </td>
+                                            <td style="width:250px">Cantidad : </td>
+                                            <td style="width:250px">Precio Unitario : </td>
+                                            <td style="width:180px">Total :</td>
+                                            <td style="width:5px"></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <logic:notEmpty name="ActionFormFactura" property="listaFacturaDetalle">
+                                            <logic:iterate id="ver" name="ActionFormFactura" property="listaFacturaDetalle">
+                                                <tr>
+                                                    <html:form action="/facturaMantenimiento">
+                                                    <td><bean:write name="ver" property="productos.nombreProducto"></bean:write>
+                                                        <html:hidden name="ver" property="idFacturaDetalle"></html:hidden></td>
+                                                    <td><bean:write name="ver" property="cantidad"></bean:write></td>
+                                                    <td><bean:write name="ver" property="productos.precioUnitario"></bean:write></td>
+                                                    <td><bean:write name="ver" property="totalFila"></bean:write></td>
+                                                    <td><html:submit property="action" value=" x"/></td>
+                                                    </html:form>
+                                                </tr>
+                                            </logic:iterate>
+                                        </logic:notEmpty>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-header" style="background-color:#f0f3f4;">
+                        <div class="row">
+                            <div class="col-5">
+
+                            </div>
+                            <div class="col-4 text-right">
+                                <label>Sub Total : </label><br>
+                                <label>Iva : </label><br>
+                                <label>Total : </label>
+                            </div>
+                            <div class="col-3">
+                                <label>${subTotalTransaccion}</label><br>
+                                <label>${ivaRetenido}</label><br>
+                                <label>${totalTransaccion}</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br>
+                    <html:form action="/facturaMantenimiento">
+                    <html:submit property="action" value="Guardar" styleClass="btn  font-weight-bold" style="background-color:#f0f3f4; color: black"/>
                     </html:form>
 
                     <h5>${error}</h5>

@@ -24,7 +24,7 @@
       
             <br>
         <html:form action = "/empresaMantenimiento">
-            <html:submit property="action" value="Consultar"/><br><br>
+            <html:submit property="action" value="consultar"/><br><br>
             <html:submit property="action" value="irAgregar"/><br><br>
            
         </html:form>

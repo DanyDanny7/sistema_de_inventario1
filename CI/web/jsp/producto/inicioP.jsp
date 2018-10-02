@@ -25,6 +25,6 @@
            
             </html:form> 
                 
-            &nbsp;&nbsp;&nbsp;<a class="font-weight-bold btn btn-primary"<html:link page="/index.jsp">Index</html:link>
+            &nbsp;&nbsp;&nbsp;<a class="font-weight-bold btn btn-primary"><html:link page="/index.jsp">Index</html:link></a>
                                  </body>
                 </html>
