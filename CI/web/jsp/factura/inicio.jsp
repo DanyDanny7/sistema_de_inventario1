@@ -22,7 +22,7 @@
         <br>
         <br>
         <html:form action="/facturaMantenimiento">
-            <html:submit property="action" value="consultar">Mostrar</html:submit>
+            <html:submit property="action" value="Consultar">Mostrar</html:submit>
             <html:submit property="action" value="irAgregar">Mostrar</html:submit>
         </html:form>
             <br>

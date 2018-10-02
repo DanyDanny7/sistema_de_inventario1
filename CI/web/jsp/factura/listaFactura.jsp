@@ -146,27 +146,29 @@
                             <table class="bg-light ">
                                 <thead class="text-uppercase">
                                     <tr class="table-default" style="background-color: #000; color: white;font-family: Arial">
-                                        <th>Nombre </th>
-                                        <th>Simbolo </th>
-                                        <th>Codigo</th>
-                                        <th>Equivalencia</th>
-                                        <th>Moneda de Referencia</th>
+                                        <th>ID Factura</th>
+                                        <th>Fecha </th>
+                                        <th>Empresa</th>
+                                        <th>Contacto</th>
+                                        <th>Sub Total </th>
+                                        <th>Total </th>
                                         <th></th>
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <logic:notEmpty name="ActionFormMoneda" property="listaMoneda">
-                                    <logic:iterate id="ver" name="ActionFormMoneda" property="listaMoneda" >
+                                <logic:notEmpty name="ActionFormFactura" property="listaFacturaEncabezado">
+                                    <logic:iterate id="ver" name="ActionFormFactura" property="listaFacturaEncabezado" >
                                         <tr style="background-color: #DCDCDC;">
-                                            <html:form action = "/monedaMantenimiento" >
-                                                <th scope="row"><bean:write name="ver" property="nombreMoneda"/>
-                                                    <div hidden="hidden"><html:text name="ver" property="nombreMoneda" styleClass="hidden"/></div></th>
+                                            <html:form action = "/facturaMantenimiento" >
+                                                <th scope="row"><bean:write name="ver" property="idFacturaEncabezado"/>
+                                                    <div hidden="hidden"><html:text name="ver" property="idFacturaEncabezado" styleClass="hidden"/></div></th>
 
-                                                <td><bean:write name="ver" property="simboloMoneda"/></td>
-                                                <td><bean:write name="ver" property="codigoMoneda"/></td>
-                                                <td><bean:write name="ver" property="equivalencia"/></td>
-                                                <td><bean:write name="ver" property="monedaReferencia"/></td>
+                                                <td><bean:write name="ver" property="facturaFecha"/></td>
+                                                <td><bean:write name="ver" property="empresa.nombreEmpresa"/></td>
+                                                <td><bean:write name="ver" property="contactos.nombreContacto"/></td>
+                                                <td><bean:write name="ver" property="subTotalTransaccion"/></td>
+                                                <td><bean:write name="ver" property="totalTransaccion"/></td>
                                                 <td><html:submit property="action" value="eliminar" styleClass="btn btn-secondary font-weight-bold" style="color: white;font-family: Arial"/></td>
                                                 <td><html:submit property="action" value="consultarId" styleClass="btn btn-secondary font-weight-bold" style="color: white;font-family: Arial"/></td>
 

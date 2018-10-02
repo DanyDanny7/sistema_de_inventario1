@@ -259,6 +259,9 @@ public class ActionFactura extends org.apache.struts.action.Action {
         //-------------------------------------------------------------------------      
         if (action.equals("Consultar")) {
 
+            List<FacturaEncabezado> listaFacturaEncabezado = feman.consultarTodosFacturaEncabezado();
+            fb.setListaFacturaEncabezado(listaFacturaEncabezado);
+            request.setAttribute("listaFacturaEncabezado", listaFacturaEncabezado);
         }
         //-------------------------------------------------------------------------      
         if (action.equals("ConsultarId")) {
