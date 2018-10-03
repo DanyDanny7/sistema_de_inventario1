@@ -41,16 +41,16 @@ Contributor(s):
 -->
 <hibernate-reverse-engineering>
   <schema-selection match-catalog="control_de_inventario1"/>
+  <table-filter match-name="moneda"/>
+  <table-filter match-name="contactos"/>
   <table-filter match-name="productos"/>
+  <table-filter match-name="configuracion"/>
+  <table-filter match-name="factura_encabezado"/>
+  <table-filter match-name="empresa"/>
+  <table-filter match-name="iva"/>
   <table-filter match-name="factura_detalle"/>
   <table-filter match-name="fabricantes"/>
-  <table-filter match-name="contactos"/>
-  <table-filter match-name="configuracion"/>
   <table-filter match-name="acceso"/>
   <table-filter match-name="inventario"/>
-  <table-filter match-name="iva"/>
-  <table-filter match-name="factura_encabezado"/>
   <table-filter match-name="compras"/>
-  <table-filter match-name="moneda"/>
-  <table-filter match-name="empresa"/>
 </hibernate-reverse-engineering>

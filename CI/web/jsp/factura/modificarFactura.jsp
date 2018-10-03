@@ -12,7 +12,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Agregar Factura</title>
+        <title>Modificar Factura</title>
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
         <script src="js/popper.min.js" type="text/javascript"></script>
@@ -136,7 +136,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 text-center">
-                    <div class="card-header" style="color: white"><h1 class="font-weight-bold">Agregar Factura</h1></div>
+                    <div class="card-header" style="color: white"><h1 class="font-weight-bold">Modificar Factura</h1></div>
                     <html:form action="/facturaMantenimiento">
                         <div class="card-header" style="background-color:#f0f3f4;">
                             <div class="row">
@@ -195,7 +195,7 @@
                                     </div>
                                     <div class="col-2">
                                         <br>
-                                    <html:submit  property="action" value="Agregar" styleClass="btn  font-weight-bold " style="background-color:#000; color: white"></html:submit>
+                                    <html:submit  property="action" value="Agregar " styleClass="btn  font-weight-bold " style="background-color:#000; color: white"></html:submit>
                                     </div>
                                 </div>
                             </div>

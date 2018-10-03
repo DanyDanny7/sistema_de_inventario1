@@ -215,11 +215,38 @@ public class FacturaDetalleMantenimiento {
             return null;
         }
     }
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         FacturaDetalleMantenimiento eman = new FacturaDetalleMantenimiento();
         
         List<FacturaEncabezado> list = eman.consultaFacturaEspecifica(26);
         System.out.println("lis "+list.toString());
-    }
+    }*/
     
+    public int consultarIva (Integer idFacturaEncabezado){
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.openSession();
+        int idIva = 0;
+        try {
+            session.beginTransaction();
+            Query q = session.createQuery("from FacturaDetalle f "
+                    + "where "
+                    + "f.facturaEncabezado.idFacturaEncabezado=:idFacturaEncabezado");
+            q.setParameter("idFacturaEncabezado", idFacturaEncabezado);
+            List<FacturaDetalle> list = q.list();
+            idIva = list.get(0).getIva().getIdIva();
+        } catch (Exception e) {
+            System.out.println("error, consultarIva de FacturaDetalleMantenimiento "+e);
+        }finally{
+            session.close();
+        }
+        return idIva;
+    }
+    public static void main(String[] args) {
+        FacturaDetalleMantenimiento eman = new FacturaDetalleMantenimiento();
+        
+        int idFacturaEncabezado= 58;
+        int ver = eman.consultarIva(idFacturaEncabezado);
+        System.out.println("idIva "+ver);
+        System.exit(0);
+    }
 }

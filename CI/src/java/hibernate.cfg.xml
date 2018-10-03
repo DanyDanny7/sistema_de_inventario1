@@ -46,17 +46,17 @@ Contributor(s):
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/control_de_inventario1?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">root</property>
-    <mapping resource="sci/persistencia/Empresa.hbm.xml"/>
     <mapping resource="sci/persistencia/Contactos.hbm.xml"/>
-    <mapping resource="sci/persistencia/Iva.hbm.xml"/>
     <mapping resource="sci/persistencia/Productos.hbm.xml"/>
-    <mapping resource="sci/persistencia/FacturaEncabezado.hbm.xml"/>
     <mapping resource="sci/persistencia/Inventario.hbm.xml"/>
-    <mapping resource="sci/persistencia/FacturaDetalle.hbm.xml"/>
-    <mapping resource="sci/persistencia/Fabricantes.hbm.xml"/>
-    <mapping resource="sci/persistencia/Acceso.hbm.xml"/>
+    <mapping resource="sci/persistencia/Iva.hbm.xml"/>
     <mapping resource="sci/persistencia/Configuracion.hbm.xml"/>
     <mapping resource="sci/persistencia/Compras.hbm.xml"/>
+    <mapping resource="sci/persistencia/Empresa.hbm.xml"/>
+    <mapping resource="sci/persistencia/Acceso.hbm.xml"/>
+    <mapping resource="sci/persistencia/Fabricantes.hbm.xml"/>
+    <mapping resource="sci/persistencia/FacturaDetalle.hbm.xml"/>
+    <mapping resource="sci/persistencia/FacturaEncabezado.hbm.xml"/>
     <mapping resource="sci/persistencia/Moneda.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>
