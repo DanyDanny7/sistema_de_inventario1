@@ -15,7 +15,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Lista Producto</title>
+        <title>JSP Page</title>
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
         <script src="js/popper.min.js" type="text/javascript"></script>
@@ -24,7 +24,6 @@
         <link href="http://codeseven.github.com/toastr/toastr.css" rel="stylesheet"/>
         <link href="http://codeseven.github.com/toastr/toastr-responsive.css" rel="stylesheet"/>
     </head>
-    
     <body background="img/fondos/fondo1.jpg">
         <div class="container-fluid">
             <div class="row">
@@ -163,12 +162,12 @@
                             <tbody>
                                <logic:notEmpty name="ActionFormProductos" property="listaProductos">
                                     <logic:iterate id="ver" name="ActionFormProductos" property="listaProductos">
-                                        <tr style="background-color: #DCDCDC;">
+                                        <tr tyle="background-color: #DCDCDC;">
                                             <html:form action="/productosMantenimiento">
                                                 <th scope="row"><bean:write name="ver" property="idProducto"/>
                                                      <div hidden="hidden"><html:text name="ver" property="idProducto"/></div></th>
                                                 <td ><bean:write name="ver" property="fabricantes.nombreFabricante"/></td>
-                                                <td ><bean:write name="ver" property="productos.nombreProducto"/></td>
+                                                <td ><bean:write name="ver" property="nombreProducto"/></td>
                                                 <td ><bean:write name="ver" property="precioUnitario"/></td>
                                                 <td ><bean:write name="ver" property="descripcionProducto"/></td>
                                                 <td ><bean:write name="ver" property="modelo"/></td>

@@ -139,48 +139,52 @@
                         <html:form action="/productosMantenimiento">
                             <div class="card-header" style="background-color:#f0f3f4;">
 
-                                <div class="form-group col-md-6">
+                                <div hidden="hidden">
                                     <label class="font-weight-bold">ID Producto:</label>
                                     <html:text property="idProducto"></html:text>
                                     </div>
 
-                                    <div class="form-group col-md-6">
-                                        <label class="font-weight-bold">ID Fabricante:</label><br>
-                                    <html:select property="idFabricantes">
-                                        <html:option value="Seleccione"></html:option>
-                                            <logic:notEmpty name="ActionFormProductos" property="listaFabricantes">
-                                                <logic:iterate id="ver" name="ActionFormProductos" property="listaFabricantes">
-                                                <html:option value="${ver.idFabricante}">${ver.nombreFabricante}</html:option>
-                                                </logic:iterate>
-                                            </logic:notEmpty>
-                                    </html:select> <br> 
-                                </div>
-
-                                <div class="form-group col-md-6">
-                                    <label class="font-weight-bold">Nombre del Producto:</label><br>
-                                    <html:text property="nombreProducto"></html:text> <br>
-                                    </div> 
-
-
-                                    <div class="form-group col-md-6">
-                                        <label class="font-weight-bold">Precio del Producto:</label><br>
-                                    <html:text property="precioUnitario" ></html:text> <br>
+                                    <div class="row"> 
+                                        <div class="form-group col-md-6">
+                                            <label class="font-weight-bold">ID Fabricante:</label><br>
+                                        <html:select property="idFabricantes" styleClass="form-control">
+                                            <html:option value="Seleccione"></html:option>
+                                                <logic:notEmpty name="ActionFormProductos" property="listaFabricantes">
+                                                    <logic:iterate id="ver" name="ActionFormProductos" property="listaFabricantes">
+                                                    <html:option value="${ver.idFabricante}">${ver.nombreFabricante}</html:option>
+                                                    </logic:iterate>
+                                                </logic:notEmpty>
+                                        </html:select> <br> 
                                     </div>
 
                                     <div class="form-group col-md-6">
-                                        <label class="font-weight-bold">Descripción del producto:</label><br>
-                                    <html:text property="descripcionProducto" ></html:text> <br>
-                                    </div> 
+                                        <label class="font-weight-bold">Nombre del Producto:</label><br>
+                                        <html:text property="nombreProducto" styleClass="form-control"></html:text> <br>
+                                        </div>
+                                    </div>
 
-                                    <div class="form-group col-md-6">
-                                        <label class="font-weight-bold">Modelo:</label><br>
-                                    <html:text property="modelo"></html:text> <br>
+
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            <label class="font-weight-bold">Precio del Producto:</label><br>
+                                        <html:text property="precioUnitario" styleClass="form-control"></html:text> <br>
+                                        </div>
+                                        <br>
+                                        <div class="form-group col-md-6">
+                                            <label class="font-weight-bold">Descripción del producto:</label><br>
+                                        <html:text property="descripcionProducto" styleClass="form-control"></html:text> <br>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                       
+                                        <div class="form-group col-md-3"></div>
+                                        <div class="form-group col-md-6">
+                                            <label class="font-weight-bold">Modelo:</label><br>
+                                        <html:text property="modelo" styleClass="form-control"></html:text> <br>
+                                        </div>
                                     </div> 
                                 </div>
-
-<bean:write name="ActionFormProductos" property="error" filter="false"/>
-                                </tbody>  
-                                </table>
                                 <br>
                             <html:submit property="action" value="Modificar" styleClass="btn  font-weight-bold" style="background-color:#f0f3f4; color: black"/>
                         </html:form><br>

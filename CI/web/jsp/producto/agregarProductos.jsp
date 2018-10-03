@@ -115,6 +115,7 @@
                                                 <span class="sr-only">Toggle Dropleft</span>
                                             </button>
                                             <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
+
                                                 <html:form action="/accesoMantenimiento">
                                                     <a class="dropdown-item" href="#">${nAcceso}</a>
                                                     <html:submit styleClass="dropdown-item" property="action" value="Perfil"></html:submit>
@@ -130,94 +131,93 @@
                     </div>
                 </div>
             </div>
-        </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <div class="card-header" style="color: white"><h1 class="font-weight-bold">AGREGAR PRODUCTOS</h1></div>
+                        <br>
 
-        <div class="container">
-            <div class="row">
-                <div class="col-12 text-center">
-                    <div class="card-header" style="color: white"><h1 class="font-weight-bold">AGREGAR PRODUCTOS</h1></div>
-                    <br>
-                    <html:form action="/productosMantenimiento">
-                        <div class="card-header" style="background-color:#f0f3f4;">
-                            <div class="row">
-                                <div class="form-group col-md-6">
-                                <label class="font-weight-bold">Fabricante:</label><br>
-                                <html:select property="idFabricantes" styleClass="form-control">
-                                    <html:option value="Seleccione"></html:option>
-                                    <logic:notEmpty name="ActionFormProductos" property="listaFabricantes">
-                                        <logic:iterate id="ver" name="ActionFormProductos" property="listaFabricantes">
-                                            <html:option value="${ver.idFabricante}">${ver.nombreFabricante}</html:option>
-                                        </logic:iterate>
-                                    </logic:notEmpty>
-                                </html:select> <br> 
-                            </div>
-
-                            <div class="form-group col-md-6">
-                                <label class="font-weight-bold">Nombre del Producto:</label><br>
-                                <html:text property="nombreProducto" styleClass="form-control"></html:text> <br>
-                                </div>
-                            </div>
-                                <div class="row">
+                        <html:form action="/productosMantenimiento">
+                            <div class="card-header" style="background-color:#f0f3f4;">
+                                <div class="row"> 
                                     <div class="form-group col-md-6">
-                                    <label class="font-weight-bold">Precio del Producto:</label><br>
-                                <html:text property="precioUnitario" styleClass="form-control"></html:text> <br>
-                                </div>
-                                <br>
-                                <div class="form-group col-md-6">
-                                    <label class="font-weight-bold">Stock Minimo</label><br>
-                                <html:text property="stockMinimo" styleClass="form-control"></html:text> <br>
-                                </div>
-                                <br>
-                                </div>
-                                <div class="row">
+                                        <label class="font-weight-bold">ID Fabricante:</label><br>
+                                        <html:select property="idFabricantes" styleClass="form-control">
+                                            <html:option value="Seleccione"></html:option>
+                                            <logic:notEmpty name="ActionFormProductos" property="listaFabricantes">
+                                                <logic:iterate id="ver" name="ActionFormProductos" property="listaFabricantes">
+                                                    <html:option value="${ver.idFabricante}">${ver.nombreFabricante}</html:option>
+                                                </logic:iterate>
+                                            </logic:notEmpty>
+                                        </html:select> <br> 
+                                    </div>
+
                                     <div class="form-group col-md-6">
-                                    <label class="font-weight-bold">Descripción del producto:</label><br>
-                                <html:text property="descripcionProducto" styleClass="form-control"></html:text> <br>
-                                </div>
+                                        <label class="font-weight-bold">Nombre del Producto:</label><br>
+                                        <html:text property="nombreProducto" styleClass="form-control"></html:text> <br>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            <label class="font-weight-bold">Precio del Producto:</label><br>
+                                        <html:text property="precioUnitario" styleClass="form-control"></html:text> <br>
+                                        </div>
+                                        <br>
+                                        <div class="form-group col-md-6">
+                                            <label class="font-weight-bold">Stock Minimo</label><br>
+                                        <html:text property="stockMinimo" styleClass="form-control"></html:text> <br>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            <label class="font-weight-bold">Descripción del producto:</label><br>
+                                        <html:text property="descripcionProducto" styleClass="form-control"></html:text> <br>
+                                        </div>
+                                        <br>
+                                        <div class="form-group col-md-6">
+                                            <label class="font-weight-bold">Modelo:</label><br>
+                                        <html:text property="modelo" styleClass="form-control"></html:text> <br>
+                                        </div>
+                                    </div>   
+
+                                </div>    
+
                                 <br>
-                                <div class="form-group col-md-6">
-                                    <label class="font-weight-bold">Modelo:</label><br>
-                                <html:text property="modelo" styleClass="form-control"></html:text> <br>
-                                </div>
-                                </div>
-                              
-                            </div>    
-
-                            <br>
-                        <html:submit property="action" value="Agregar" styleClass="btn  font-weight-bold" style="background-color:#f0f3f4; color: black"/>
+                            <html:submit property="action" value="Agregar" styleClass="btn  font-weight-bold" style="background-color:#f0f3f4; color: black"/>
 
 
 
-                    </html:form><br>
+                        </html:form><br>
+                    </div>
                 </div>
             </div>
-        </div>
 
 
-        <div id="error">${error}</div>
-        <script type="text/javascript">
-            if ($("#error").text() != "") {
-                window.onload = function () {
-                    toastrs();
-                };
-            }
-            ;
-            toastr.options = {
-                "debug": false,
-                "onclick": null,
-                "fadeIn": 300,
-                "fadeOut": 100,
-                "timeOut": 7000,
-                "extendedTimeOut": 1000
-            };
-            var showToastrs = false;
-            function toastrs() {
-                if (!showToastrs) {
-                    toastr.error($("#error").text(), 'Error');
-                } else {
-                    toastr.error('no se puede!\'t.', 'Otro error crítico');
+            <div id="error">${error}</div>
+            <script type="text/javascript">
+                if ($("#error").text() != "") {
+                    window.onload = function () {
+                        toastrs();
+                    };
                 }
-            }
-        </script>
+                ;
+                toastr.options = {
+                    "debug": false,
+                    "onclick": null,
+                    "fadeIn": 300,
+                    "fadeOut": 100,
+                    "timeOut": 7000,
+                    "extendedTimeOut": 1000
+                };
+                var showToastrs = false;
+                function toastrs() {
+                    if (!showToastrs) {
+                        toastr.error($("#error").text(), 'Error');
+                    } else {
+                        toastr.error('no se puede!\'t.', 'Otro error crítico');
+                    }
+                }
+            </script>
     </body>
 </html>

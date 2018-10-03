@@ -152,14 +152,14 @@ public class ActionProductos extends org.apache.struts.action.Action {
             if (n == 0) {
                 mensaje = (" Registro (" + idProducto + ") No se Eliminó ");
                 request.setAttribute("error", mensaje);
-                
+
             } else {
                 List<Productos> listaProductos = pman.consultarTodoProductos();
                 fB.setListaProductos(listaProductos);
-                
+
                 mensaje = (" Registro \"" + idProducto + "\" Eliminado Correctamente ");
                 request.setAttribute("mensaje", mensaje);
-                
+
             }
             IR = LISTA;
         }

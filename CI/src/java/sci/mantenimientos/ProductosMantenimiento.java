@@ -67,7 +67,7 @@ public class ProductosMantenimiento {
         } catch (Exception e) {
             if (session.getTransaction().isActive()) {
                 session.getTransaction().rollback();
-                flag = 1;
+                flag = 0;
                 System.out.println("Erro en eliminar ProductosMantenimiento " + e);
             }
         } finally {
@@ -131,7 +131,6 @@ public class ProductosMantenimiento {
             e.printStackTrace();
             System.out.println("Error en consultar todo producto mantenimiento " + e);
         } finally {
-            session.close();            
         }
         return listaProductos;
     }
