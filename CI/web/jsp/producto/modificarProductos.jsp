@@ -177,7 +177,7 @@
                                     </div>
 
                                     <div class="row">
-                                       
+
                                         <div class="form-group col-md-3"></div>
                                         <div class="form-group col-md-6">
                                             <label class="font-weight-bold">Modelo:</label><br>
@@ -193,7 +193,7 @@
             </div>
 
 
-            <div id="error">${error}</div>
+            <div id="error" hidden="hidden">${error}</div>
             <script type="text/javascript">
                 if ($("#error").text() != "") {
                     window.onload = function () {
@@ -203,7 +203,6 @@
                 ;
                 toastr.options = {
                     "debug": false,
-                    "positionClass": "toast-bottom-right",
                     "onclick": null,
                     "fadeIn": 300,
                     "fadeOut": 100,

@@ -226,18 +226,20 @@ public class ActionMoneda extends org.apache.struts.action.Action {
                 advertencia += "*Es requerido una Moneda de Referencia de Cambio <br>";
             }
             if (!advertencia.equals("")) {
-                formBean.setError("<spam style = 'color: red' > Por favor complete los espacios vacios  <br> " + advertencia + "</spam>");
+                String error=("<spam style = 'color: red' > Por favor complete los espacios vacios  <br> " + advertencia + "</spam>");
 
                 request.setAttribute("nombre", Login.nombre);
                 request.setAttribute("nAcceso", Login.nAcceso);
                 request.setAttribute("nAcceso", Login.id);
+                request.setAttribute("error", error);
 
                 return mapping.findForward(AGREGAR);
             }
             mman.modificarMoneda(nombreMoneda, simboloMoneda, codigoMoneda, equivalencia, monedaReferencia);
             List<Moneda> listaMoneda = mman.consultarTodosMoneda();
             formBean.setListaMoneda(listaMoneda);
-            formBean.setMensaje("<spam style = 'color: blue' > Moneda ( " + nombreMoneda + " ) Modificada Correctamente <br></spam>");
+            String Mensaje =(" Moneda ( " + nombreMoneda + " ) Modificada Correctamente");
+            request.setAttribute("mensaje", Mensaje);
             IR = LISTA;
         }
 //-----------------------------------------------------------------------------
@@ -245,7 +247,8 @@ public class ActionMoneda extends org.apache.struts.action.Action {
             mman.eliminarMoneda(nombreMoneda);
             List<Moneda> listaMoneda = mman.consultarTodosMoneda();
             formBean.setListaMoneda(listaMoneda);
-            formBean.setMensaje("<spam style = 'color: blue' > Moneda ( " + nombreMoneda + " ) Eliminada Correctamente <br></spam>");
+            String mensaje =("Moneda ( " + nombreMoneda + " ) Eliminada Correctamente");
+            request.setAttribute("mensaje", mensaje);
             IR = LISTA;
         }
 //------------------------------------------------------------------------------------

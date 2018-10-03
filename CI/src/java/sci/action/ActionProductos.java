@@ -184,7 +184,7 @@ public class ActionProductos extends org.apache.struts.action.Action {
                 ms += "*Modelo del producto es necesario<br>";
             }
             if (!ms.equals("")) {
-                fB.setError("<span style='color:red'>Por favor complete los espacios vacios" + "<br>" + ms + "</span>");
+                String error = ("Por favor complete los espacios vacios" + ms);
 
                 List<Fabricantes> listaFabricantes = fman.consultarTodosFabricantes();
                 fB.setListaFabricantes(listaFabricantes);
@@ -194,6 +194,7 @@ public class ActionProductos extends org.apache.struts.action.Action {
                 request.setAttribute("nombre", Login.nombre);
                 request.setAttribute("nAcceso", Login.nAcceso);
                 request.setAttribute("id", Login.id);
+                request.setAttribute("error", error);
                 return mapping.findForward(IR);
             }
             //----     
@@ -215,7 +216,8 @@ public class ActionProductos extends org.apache.struts.action.Action {
             pman.modificarProductos(idProducto, idFabricantes, nombreProducto, precioUnitario, descripcionProducto, modelo);
             List<Productos> listaProductos = pman.consultarTodoProductos();
             fB.setListaProductos(listaProductos);
-            fB.setError("<spam style='color:blue'>El registro se modificó correctamente" + " <br></span>");
+            String error = ("El registro se"+nombreProducto+" modificó correctamente" );
+            request.setAttribute("mensaje", error);
             IR = LISTA;
         }
 
