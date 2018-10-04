@@ -7,6 +7,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://struts.apache.org/tags-bean" prefix="bean"%>
 <%@taglib uri="http://struts.apache.org/tags-html" prefix="html"%>
+<%@taglib uri="http://struts.apache.org/tags-faces" prefix="faces" %>
+<%@taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
+<%@taglib uri="http://struts.apache.org/tags-nested" prefix="nested" %>
+<%@taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
 <!DOCTYPE html>
 <html>
     <head> 
@@ -184,6 +188,10 @@
                                         <html:text property="modelo" styleClass="form-control"></html:text> <br>
                                         </div>
                                     </div> 
+                                         <div class="form-group col-md-6">
+                                            <label class="font-weight-bold">Stock Minimo</label><br>
+                                        <html:text property="stockMinimo" styleClass="form-control"></html:text> <br>
+                                        </div>
                                 </div>
                                 <br>
                             <html:submit property="action" value="Modificar" styleClass="btn  font-weight-bold" style="background-color:#f0f3f4; color: black"/>

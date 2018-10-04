@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import sci.actionforms.ActionFormProductos;
 import sci.persistencia.Empresa;
+import sci.persistencia.Inventario;
 import sci.persistencia.Productos;
 
 /**
@@ -86,5 +87,26 @@ public class Extraer {
         return emp;
 
   }
-
+   public int extraerStock(int idProducto) {
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.openSession();
+        try {
+            session.beginTransaction();
+            Query query = session.createQuery("from Inventario i where i.productos.idProducto=:idProducto ");
+            query.setParameter("idProducto", idProducto);
+            
+            List<Inventario> list = query.list();
+            if (list.size() > 0) {
+                int stockminimo = list.get(0).getStockMinimo();
+                System.out.println("El stock minimo es : " + stockminimo);
+                return stockminimo;
+            }
+            session.close();
+            return 0;
+        } catch (Exception e) {
+            session.close();
+            System.out.println("Error en productos " + e.getMessage());
+            return 0;
+        }
+    }
 }

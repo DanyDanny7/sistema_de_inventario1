@@ -15,6 +15,7 @@ import sci.mantenimientos.FabricantesMantenimiento;
 import sci.mantenimientos.InventarioMantenimiento;
 import sci.mantenimientos.ProductosMantenimiento;
 import sci.persistencia.Fabricantes;
+import sci.persistencia.Inventario;
 import sci.persistencia.Productos;
 
 public class ActionProductos extends org.apache.struts.action.Action {
@@ -128,6 +129,9 @@ public class ActionProductos extends org.apache.struts.action.Action {
         if (action.equals("ConsultarId")) {
 
             Productos productos = (Productos) pman.consultarProductosId(idProducto);
+            System.out.println("este es el id productos "+ idProducto);
+            int stockMinimo1= e.extraerStock(idProducto);
+            
             if (productos == null) {
                 fB.setError("<span style='color:red'>Nose puede consultar por idProducto " + "<br></span>");
                 return mapping.findForward(LISTA);
@@ -138,9 +142,11 @@ public class ActionProductos extends org.apache.struts.action.Action {
                 fB.setPrecioUnitario(productos.getPrecioUnitario());
                 fB.setDescripcionProducto(productos.getDescripcionProducto());
                 fB.setModelo(productos.getModelo());
-                List<Fabricantes> listaFabricantes = fman.consultarTodosFabricantes();
+                fB.setStockMinimo(stockMinimo1);
+                  List<Fabricantes> listaFabricantes = fman.consultarTodosFabricantes();
                 fB.setListaFabricantes(listaFabricantes);
                 request.setAttribute("listaFabricantes", listaFabricantes);
+                System.out.println("este es 123"+listaFabricantes);
                 IR = MODIFICAR;
             }
         }
