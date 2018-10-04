@@ -130,6 +130,7 @@ public class ActionAcceso extends org.apache.struts.action.Action {
             String mensaje = ("El registro \"" + nombreAcceso + "\" se Agregó correctamente ");
             request.setAttribute("mensaje", mensaje);
             IR = LISTA;
+        } else {
         }
 //----------------------------------------------------------------------------------        
         if (action.equals("Siguiente")) {

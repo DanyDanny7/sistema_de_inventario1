@@ -62,16 +62,14 @@ public class ActionEmpresa extends org.apache.struts.action.Action {
         request.setAttribute("nAcceso", Login.nAcceso);
         request.setAttribute("id", Login.id);
         return mapping.findForward(IR);
-        }     */   
-
+        }     */
         if (action.equals("Siguiente")) {
-            
-            
+
             Extraer ex = new Extraer();
             List<Integer> lista = ex.maxIdEmpresa();
             idEmpresa = lista.get(0);
-            idEmpresa = idEmpresa+1;
-                            
+            idEmpresa = idEmpresa + 1;
+
             String adver = "";
 
             if (nombreEmpresa == null || nombreEmpresa.equals("")) {
@@ -115,10 +113,10 @@ public class ActionEmpresa extends org.apache.struts.action.Action {
                 request.setAttribute("error", error);
                 return mapping.findForward(IR);
             }
-            
+
             Estaticas.idEmpresa = idEmpresa;
             Estaticas.nombreEmpresa = nombreEmpresa;
-            
+
             request.setAttribute("idEmpresa", Estaticas.idEmpresa);
             request.setAttribute("nombreEmpresa", Estaticas.nombreEmpresa);
             IR = ACCESO;
@@ -141,17 +139,22 @@ public class ActionEmpresa extends org.apache.struts.action.Action {
         }
 //-------------------------------------------------------------------------------
         if (action.equals("Eliminar")) {
+            String nombreE = eman.consultarEmpresaId(idEmpresa).getNombreEmpresa();
             int n = eman.eliminarEmpresa(idEmpresa);
-           List<Empresa> listaEmpresa = eman.consultarTodosEmpresa();
-            fB.setListaEmpresa(listaEmpresa);
-            if (n==0) {
-              String error =  (" Registro \"" + eman.consultarEmpresaId(idEmpresa).getNombreEmpresa() + "\" No se ha Eliminado Correctamente "); 
-              request.setAttribute("error", error);
-            }else{
-                String mensaje = (" Registro \"" + eman.consultarEmpresaId(idEmpresa).getNombreEmpresa() + "\" Eliminado Correctamente ");
+            if (n == 0) {
+                String error = (" Registro \"" + nombreE + "\" No se ha Eliminado Correctamente ");
+                request.setAttribute("error", error);
+            } else {
+                List<Empresa> listaEmpresas = eman.consultarTodosEmpresa();
+                fB.setListaEmpresa(listaEmpresas);
+
+                String mensaje = (" Registro \"" + nombreE + "\" Eliminado Correctamente ");
                 request.setAttribute("mensaje", mensaje);
             }
-             IR = LISTA;
+            List<Empresa> listaEmpresas = eman.consultarTodosEmpresa();
+            fB.setListaEmpresa(listaEmpresas);
+
+            IR = LISTA;
         }
 //-------------------------------------------------------------------------------
         if (action.equals("Consultar")) {
@@ -196,7 +199,7 @@ public class ActionEmpresa extends org.apache.struts.action.Action {
             eman.modificarEmpresa(idEmpresa, nombreEmpresa, ncr, nit, direccionEmpresa, telefonoEmpresa, encargadoEmpresa, emailEmpresa);
             List<Empresa> listaEmpresa = eman.consultarTodosEmpresa();
             fB.setListaEmpresa(listaEmpresa);
-            String mensaje = "La Empresa \""+nombreEmpresa +"\" se modificó correctamente";
+            String mensaje = "La Empresa \"" + nombreEmpresa + "\" se modificó correctamente";
             request.setAttribute("mensaje", mensaje);
             IR = LISTA;
         }

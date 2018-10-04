@@ -247,8 +247,8 @@ public class ActionMoneda extends org.apache.struts.action.Action {
             mman.eliminarMoneda(nombreMoneda);
             List<Moneda> listaMoneda = mman.consultarTodosMoneda();
             formBean.setListaMoneda(listaMoneda);
-            String mensaje =("Moneda ( " + nombreMoneda + " ) Eliminada Correctamente");
-            request.setAttribute("mensaje", mensaje);
+            String mensaje =("Error al eliminar ( " + nombreMoneda + " ) Moneda Principal");
+            request.setAttribute("error", mensaje);
             IR = LISTA;
         }
 //------------------------------------------------------------------------------------

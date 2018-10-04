@@ -133,6 +133,7 @@ public class ActionContactos extends org.apache.struts.action.Action {
         }
 //--------------------------------------------------------------------        
         if (action.equals("Eliminar")) {
+            String nombreC = contactosMantenimiento.consultarContactosId(idContacto).getNombreContacto();
             int n = contactosMantenimiento.eliminarContactos(idContacto);
             String mensaje = "";
             if (n == 0) {
@@ -149,6 +150,9 @@ public class ActionContactos extends org.apache.struts.action.Action {
                 mensaje = (" Registro \"" + idContacto + "\" Eliminado Correctamente ");
                 request.setAttribute("mensaje", mensaje);
             }
+            List<Contactos> listaContacto = contactosMantenimiento.consultarTodosContactos();
+            formBean.setListaContacto(listaContacto);
+
             IR = LISTA;
         }
 //------------------------------------------------------------------------------       

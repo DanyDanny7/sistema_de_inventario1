@@ -158,49 +158,97 @@
                     </div>
                 </div>
             </div>
-            <div class="container-fluid">
+        </div>
+        <br>
+        <div class="container-fluid">
+            <div id="demo" class="carousel slide" data-ride="carousel">
 
+                <!-- Indicators -->
+                <ul class="carousel-indicators">
+                    <li data-target="#demo" data-slide-to="0" class="active"></li>
+                    <li data-target="#demo" data-slide-to="1"></li>
+                    <li data-target="#demo" data-slide-to="2"></li>
+                    <li data-target="#demo" data-slide-to="3"></li>
+                    <li data-target="#demo" data-slide-to="4"></li>
+                </ul>
+
+                <!-- The slideshow -->
+                <div class="carousel-inner">
+
+
+
+                    <div class="carousel-item active">
+                        <img src="img/carousel/inventario1.jpg" alt="Los Angeles" width="200" height="300">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="img/carousel/inventario2.jpg" alt="Chicago" width="200" height="300">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="img/carousel/inventario3.jpg" alt="New York" width="200" height="300">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="img/carousel/inventario4.jpg" alt="New York" width="200" height="300">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="img/carousel/inventario5.jpg" alt="New York" width="200" height="300">
+                    </div>
+                </div>
+
+                <!-- Left and right controls -->
+                <a class="carousel-control-prev" href="#demo" data-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                </a>
+                <a class="carousel-control-next" href="#demo" data-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </a>
+
+                <style>
+                    /* Make the image fully responsive */
+                    .carousel-inner img {
+                        width: 1650px;
+                        height: 700px;
+                    }
+                </style>
+
+            </div>
             </div>
 
 
+                <div class="container">
+                    <div class="row">
+                        <div class="col-1"></div>
+                        <div class="col-10">
 
-            <div class="container">
-                <div class="row">
-                    <div class="col-1"></div>
-                    <div class="col-10">
-                        <h1>Portada</h1>
-
+                        </div>
+                        <div class="col-1"></div>
 
                     </div>
-                    <div class="col-1"></div>
-
                 </div>
-            </div>
-                                            <div id="error" hidden="hidden" >${error}</div>
-            <script type="text/javascript">
-                if ($("#error").text() != "") {
-                    window.onload = function () {
-                        toastrs();
-                    };
-                }
-                ;
-                toastr.options = {
-                    "debug": false,
-                    "onclick": null,
-                    "fadeIn": 300,
-                    "fadeOut": 100,
-                    "timeOut": 7000,
-                    "extendedTimeOut": 1000
-                };
-                var showToastrs = false;
-                function toastrs() {
-                    if (!showToastrs) {
-                        
-                        toastr.info($("#error").text(), 'Informacion');
-                    } else {
-                        toastr.error('no se puede!\'t.', 'Otro error crítico');
+                <div id="error" hidden="hidden" >${error}</div>
+                <script type="text/javascript">
+                    if ($("#error").text() != "") {
+                        window.onload = function () {
+                            toastrs();
+                        };
                     }
-                }
-            </script>
-    </body>
-</html>
+                    ;
+                    toastr.options = {
+                        "debug": false,
+                        "onclick": null,
+                        "fadeIn": 300,
+                        "fadeOut": 100,
+                        "timeOut": 7000,
+                        "extendedTimeOut": 1000
+                    };
+                    var showToastrs = false;
+                    function toastrs() {
+                        if (!showToastrs) {
+
+                            toastr.info($("#error").text(), 'Informacion');
+                        } else {
+                            toastr.error('no se puede!\'t.', 'Otro error crítico');
+                        }
+                    }
+                </script>
+                </body>
+                </html>
