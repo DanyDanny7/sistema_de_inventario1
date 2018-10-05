@@ -145,6 +145,13 @@ public class ActionConfiguracion extends org.apache.struts.action.Action {
             request.setAttribute("listaMoneda", listaMoneda);
             IR = AGREGAR;
         }
+//--------------------------------------------------------------------------------
+        if (action.equalsIgnoreCase("Detalle")) {
+            List<Moneda> listaMoneda = mman.consultarTodosMoneda();
+            formBean.setListaMoneda(listaMoneda);
+            request.setAttribute("listaMoneda", listaMoneda);
+            IR = AGREGAR;
+        }
         return mapping.findForward(IR);
     }
 
