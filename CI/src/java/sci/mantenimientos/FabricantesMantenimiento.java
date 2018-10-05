@@ -52,9 +52,9 @@ public class FabricantesMantenimiento {
         Session session = factory.openSession();
         int flag = 0;
 
-        session.beginTransaction();
+        
         try {
-            
+            session.beginTransaction();
             fab = (Fabricantes) session.get(Fabricantes.class, idFabricante);
             session.delete(fab);
             session.getTransaction().commit();
@@ -63,10 +63,9 @@ public class FabricantesMantenimiento {
         } catch (Exception e) {
             if (session.getTransaction().isActive()) {
                 session.getTransaction().rollback();
-                flag = 0;
             }
             System.out.println("Error en Eliminar FabricantesMantenimiento "+e);
-            
+            flag = 1;
         } finally {
             session.close();
         }
@@ -121,7 +120,7 @@ public class FabricantesMantenimiento {
             e.printStackTrace();
             System.out.println("Error en Consultar todos FabricantesMantenimiento "+e);
         } finally {
-            session.close();
+
         }
         return listaFabricantes;
     }

@@ -7,6 +7,7 @@ package sci.actionforms;
 
 import java.util.List;
 import sci.persistencia.Fabricantes;
+import sci.persistencia.Productos;
 
 /**
  *
@@ -22,6 +23,15 @@ public class ActionFormFabricante extends org.apache.struts.action.ActionForm {
     private String error;
     private String action;
     private List <Fabricantes> listaFabricante;
+    private List <Productos> listaProductos;
+
+    public List<Productos> getListaProductos() {
+        return listaProductos;
+    }
+
+    public void setListaProductos(List<Productos> listaProductos) {
+        this.listaProductos = listaProductos;
+    }
 
     public Integer getIdFabricante() {
         return idFabricante;

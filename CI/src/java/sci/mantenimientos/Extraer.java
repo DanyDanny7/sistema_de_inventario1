@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import sci.actionforms.ActionFormProductos;
 import sci.persistencia.Empresa;
+import sci.persistencia.Fabricantes;
 import sci.persistencia.Inventario;
 import sci.persistencia.Productos;
 
@@ -63,7 +64,7 @@ public class Extraer {
         return lista;
     }
 
-  public Empresa consultarEmpresaId(int idEmpresa) {
+    public Empresa consultarEmpresaId(int idEmpresa) {
         // List<Empresa> listaUsuarios = null;
         Empresa emp = new Empresa();
         SessionFactory factory = HibernateUtil.getSessionFactory();
@@ -86,15 +87,16 @@ public class Extraer {
         }
         return emp;
 
-  }
-   public int extraerStock(int idProducto) {
+    }
+
+    public int extraerStock(int idProducto) {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.openSession();
         try {
             session.beginTransaction();
             Query query = session.createQuery("from Inventario i where i.productos.idProducto=:idProducto ");
             query.setParameter("idProducto", idProducto);
-            
+
             List<Inventario> list = query.list();
             if (list.size() > 0) {
                 int stockminimo = list.get(0).getStockMinimo();
@@ -109,4 +111,47 @@ public class Extraer {
             return 0;
         }
     }
+
+    public List consultarTodoP(int idfabricante) {
+        List<Productos> listaProductos = null;
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.openSession();
+
+        session.beginTransaction();
+        try {
+            Query q = session.createQuery("from Productos p where p.fabricantes.idFabricante=:idFabricante");
+            int idFabricante = 0;
+            q.setParameter("idFabricante", idfabricante);
+            listaProductos = (List<Productos>) q.list();
+
+            System.out.println("Consultar todo Correcto extraer");
+            return listaProductos;
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error en consultarTodo extraer. " + e);
+            return null;
+        } finally {
+            session.close();
+        }
+    }
+    
+    public List consultarTodosFabricantes2() {
+        List<Fabricantes> listaFabricantes = null;
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.openSession();
+
+        session.beginTransaction();
+        try {
+            Query q = session.createQuery("from Fabricantes");
+            listaFabricantes = (List<Fabricantes>) q.list();
+            System.out.println("Consultar todo Correcto FabricantesMantenimiento ");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error en Consultar todos FabricantesMantenimiento "+e);
+        } finally {
+
+        }
+        return listaFabricantes;
+    }
+    
 }
