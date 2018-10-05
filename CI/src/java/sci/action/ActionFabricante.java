@@ -169,7 +169,8 @@ public class ActionFabricante extends org.apache.struts.action.Action {
             List<Fabricantes> listaFabricante = e.consultarTodosFabricantes2();
             formBean.setListaFabricante(listaFabricante);
             formBean.setListaProductos(listaProductos);
-
+            request.setAttribute("listaFabricante", listaFabricante);
+            request.setAttribute("listaProductos", listaProductos);
             IR = LISTA2;
         }
 //-----------------------------------------------------------------------------------        

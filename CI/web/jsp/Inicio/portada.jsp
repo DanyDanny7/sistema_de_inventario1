@@ -119,6 +119,7 @@
                                             <a class="dropdown-item" href="empresaMantenimiento.do?action=Consultar">Empresa</a>
                                             <a class="dropdown-item" href="inventarioMantenimiento.do?action=Consultar">Inventario</a>
                                             <a class="dropdown-item" href="facturaMantenimiento.do?action=consultar">Facturas</a>
+                                            <a class="dropdown-item" href="fabricanteMantenimiento.do?action=Consultar2">FP</a>
                                         </div>
                                     </li>
                                 </ul>
