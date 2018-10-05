@@ -108,6 +108,7 @@ public class ActionAcceso extends org.apache.struts.action.Action {
                 request.setAttribute("nombre", Login.nombre);
                 request.setAttribute("nAcceso", Login.nAcceso);
                 request.setAttribute("nAcceso", Login.id);
+                request.setAttribute("error", error);
                 return mapping.findForward(IR);
             }
             fechaRegistroAcceso = formato.format(new Date());
@@ -217,7 +218,7 @@ public class ActionAcceso extends org.apache.struts.action.Action {
             IR = CONF;
         }
         //----------------------------------------------------------------------
-        if (action.equals("ConsultarId")) {
+        if (action.equals("Detalle")) {
 
             Acceso acceso = (Acceso) aman.consultarAccesoId(idAcceso);
 
@@ -297,7 +298,7 @@ public class ActionAcceso extends org.apache.struts.action.Action {
 
         }
         //---------------------------------------------------------------------------
-        if (action.equalsIgnoreCase("modificar")) {
+        if (action.equalsIgnoreCase("Modificar")) {
             //if (Login.nAcceso == 1 || Login.nAcceso == 2) {
             String advertencia = "";
 

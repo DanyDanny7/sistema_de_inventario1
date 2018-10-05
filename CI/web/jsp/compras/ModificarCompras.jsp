@@ -194,7 +194,7 @@
                                 </div>
 
                                 <br>
-                            <html:submit property="action" value="Actualizar" styleClass="btn  font-weight-bold" style="background-color:#f0f3f4; color: black"/>
+                            <html:submit property="action" value="Modificar" styleClass="btn  font-weight-bold" style="background-color:#f0f3f4; color: black"/>
 
                         </html:form>
 

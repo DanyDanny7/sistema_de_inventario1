@@ -196,7 +196,7 @@ public class ActionMoneda extends org.apache.struts.action.Action {
             IR = LISTA;
         }
 //---------------------------------------------------------------------------
-        if (action.equalsIgnoreCase("consultarId")) {
+        if (action.equalsIgnoreCase("Detalle")) {
             Moneda moneda = (Moneda) mman.consultarMonedaId(nombreMoneda);
             formBean.setNombreMoneda(moneda.getNombreMoneda());
             formBean.setSimboloMoneda(moneda.getSimboloMoneda());
@@ -208,7 +208,7 @@ public class ActionMoneda extends org.apache.struts.action.Action {
             IR = MODIFICAR;
         }
 //------------------------------------------------------------------------
-        if (action.equals("modificar")) {
+        if (action.equals("Modificar")) {
             String advertencia = "";
             if (nombreMoneda == null || nombreMoneda.equals("")) {
                 advertencia = "*Es requerido el Nombre de la Moneda <br>";

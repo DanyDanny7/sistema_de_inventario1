@@ -76,7 +76,7 @@ public class ActionIva extends org.apache.struts.action.Action{
             IR = LISTA;
         }
 //----------------------------------------------------------------------------------
-        if (action.equalsIgnoreCase("consultarId")) {
+        if (action.equalsIgnoreCase("Detalle")) {
             
             Iva iva = (Iva) iman.consultarIvaId(idIva);
             
@@ -88,7 +88,7 @@ public class ActionIva extends org.apache.struts.action.Action{
             IR = MODIFICAR;
         }
 //----------------------------------------------------------------------------------
-        if (action.equalsIgnoreCase("modificar")) {
+        if (action.equalsIgnoreCase("Modificar")) {
             if (ivaTasa < 0) {
                 String advertencia = "";
                 advertencia = "<spam style = 'color: red' > Es requerido seleccione un iva positivo <br></spam>";

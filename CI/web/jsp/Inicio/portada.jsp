@@ -92,7 +92,7 @@
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
                                             <a class="dropdown-item" href="facturaMantenimiento.do?action=irAgregar">Agregar Factura</a>
-                                            <a class="dropdown-item" href="facturaMantenimiento.do?action=consultar">Consultar Factura</a>
+                                            <a class="dropdown-item" href="facturaMantenimiento.do?action=Consultar">Consultar Factura</a>
                                         </div>
                                     </li>
                                     <!--<li class="nav-item dropdown">

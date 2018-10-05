@@ -118,7 +118,7 @@ public class ActionCompras extends org.apache.struts.action.Action {
             IR = LISTA;
         }
 //----------------------------------------------------------------------
-        if (action.equals("Modificar")) {
+        if (action.equals("Detalle")) {
             
             ComprasMantenimiento comprasMantenimiento = new ComprasMantenimiento();
             Compras compra = comprasMantenimiento.consultarComprasId(idCompra);
@@ -172,7 +172,7 @@ public class ActionCompras extends org.apache.struts.action.Action {
             }
         }
         //------------------------------------------------------------------------------
-        if (action.equals("Actualizar")) {
+        if (action.equals("Modificar")) {
             ComprasMantenimiento comprasMantenimiento = new ComprasMantenimiento();
             comprasMantenimiento.ModificarCompras(idCompra, nDocumento, idContacto, idInventario, cantidad, idIva, idProducto, fechaCompra, totalCompra);
             List<Compras> listaCompras = comprasMantenimiento.consultarTodoCompras();

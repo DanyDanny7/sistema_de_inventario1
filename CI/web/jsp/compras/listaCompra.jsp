@@ -181,7 +181,7 @@
                                                 <td><bean:write name="ver" property="totalCompra"/></td>
 
                                                 <td><html:submit property="action" value="Eliminar" styleClass="btn  font-weight-bold" style="background-color: #696969; color: white"/></td>
-                                                <td><html:submit property="action" value="Modificar" styleClass="btn  font-weight-bold" style="background-color: #696969; color: white"/></td>
+                                                <td><html:submit property="action" value="Detalle" styleClass="btn  font-weight-bold" style="background-color: #696969; color: white"/></td>
 
                                             </html:form>
                                         </tr>

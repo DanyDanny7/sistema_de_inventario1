@@ -82,7 +82,7 @@ public class ActionInventario extends org.apache.struts.action.Action {
         
              }
             
-            
+//-------------------------------------------------------------------------------            
             if (action.equals("Consultar")) {
             InventarioMantenimiento inventarioMantenimiento = new InventarioMantenimiento();
             //Acceso acceso = new Acceso();
@@ -96,7 +96,7 @@ public class ActionInventario extends org.apache.struts.action.Action {
                 return mapping.findForward(CONFIRMACIONI);
             }
               }
-       
+ //-------------------------------------------------------------------------------      
              if (action.equals("Eliminar")) {
             InventarioMantenimiento inventarioMantenimiento = new InventarioMantenimiento();
             inventarioMantenimiento.eliminarInventario(formBean.getIdInventario());
@@ -110,7 +110,9 @@ public class ActionInventario extends org.apache.struts.action.Action {
             System.out.println("desde eliminar");
             return mapping.findForward(CONFIRMACIONI);
          }
-              if (action.equals("Modificar")) {
+             
+//-------------------------------------------------------------------------------             
+              if (action.equals("Detalle")) {
             InventarioMantenimiento inventarioMantenimiento = new InventarioMantenimiento();
 
             Inventario inventario = (Inventario) inventarioMantenimiento.consultarInventarioId(idInventario);
@@ -123,7 +125,8 @@ public class ActionInventario extends org.apache.struts.action.Action {
                  formBean.setEstadoFisico(inventario.getEstadoFisico());
                 return mapping.findForward(MODIFICARI);
             }
-              if (action.equals("Actualizar")) {
+//-------------------------------------------------------------------------------              
+              if (action.equals("Modificar")) {
                InventarioMantenimiento inventarioMantenimiento = new InventarioMantenimiento();
                String mensaje = "<span style='color:red'>Actualizado Correcto" + "<br></span>";
             request.setAttribute("mensaje", mensaje);

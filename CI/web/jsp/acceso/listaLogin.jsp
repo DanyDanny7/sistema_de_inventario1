@@ -174,7 +174,7 @@
                                                 <td><bean:write name="ver" property="tipoAcceso"/></td>
                                                 <td><bean:write name="ver" property="fechaRegistroAcceso"/></td>
                                                 <td><html:submit property="action" value="Eliminar" styleClass="btn btn-secondary font-weight-bold" style="color: white;font-family: Arial"/></td>
-                                                <td><html:submit property="action" value="ConsultarId" styleClass="btn btn-secondary font-weight-bold" style="color: white;font-family: Arial"/></td>
+                                                <td><html:submit property="action" value="Detalle" styleClass="btn btn-secondary font-weight-bold" style="color: white;font-family: Arial"/></td>
 
                                             </html:form > 
                                         </tr>

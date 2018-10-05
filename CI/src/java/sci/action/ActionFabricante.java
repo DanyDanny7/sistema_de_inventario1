@@ -64,6 +64,7 @@ public class ActionFabricante extends org.apache.struts.action.Action {
             }
 
             if (!advertencia.equals("")) {
+                System.out.println("Entro");
                 IR = AGREGAR;
                 request.setAttribute("nombre", Login.nombre);
                 request.setAttribute("nAcceso", Login.nAcceso);
@@ -71,13 +72,27 @@ public class ActionFabricante extends org.apache.struts.action.Action {
                 request.setAttribute("error", advertencia);
                 return mapping.findForward(IR);
             }
+            
+            int valFab = fabricantesMantenimiento.validarFabricantes(nombreFabricante);
+            if (valFab != 1) {
+                String error = ("Ya existe el fabricante\""+nombreFabricante+"\",por favor ingrese otro.");
+                
+                IR = AGREGAR;
+                request.setAttribute("nombre", Login.nombre);
+                request.setAttribute("nAcceso", Login.nAcceso);
+                request.setAttribute("nAcceso", Login.id);
+                request.setAttribute("error", error);
+                return mapping.findForward(IR);
+            }
             fechaRegistroFabricante = formato.format(new Date());
+            
             fabricantesMantenimiento.guardarFabricantes(0, nombreFabricante, descripcionFabricante, 0, fechaRegistroFabricante);
             List<Fabricantes> listaFabricantes = fabricantesMantenimiento.consultarTodosFabricantes();
             formBean.setListaFabricante(listaFabricantes);
 
             String mensaje = "El Contacto \"" + nombreFabricante + "\" se agregó correctamente";
             request.setAttribute("mensaje", mensaje);
+            
             IR = LISTA;
         }
 //----------------------------------------------------------------------

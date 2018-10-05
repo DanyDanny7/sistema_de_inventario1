@@ -168,7 +168,7 @@
                                                 <td><bean:write name="ver" property="equivalencia"/></td>
                                                 <td><bean:write name="ver" property="monedaReferencia"/></td>
                                                 <td><html:submit property="action" value="eliminar" styleClass="btn btn-secondary font-weight-bold" style="color: white;font-family: Arial"/></td>
-                                                <td><html:submit property="action" value="consultarId" styleClass="btn btn-secondary font-weight-bold" style="color: white;font-family: Arial"/></td>
+                                                <td><html:submit property="action" value="Detalle" styleClass="btn btn-secondary font-weight-bold" style="color: white;font-family: Arial"/></td>
 
                                             </html:form > 
                                         </tr>

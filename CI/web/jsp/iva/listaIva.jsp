@@ -168,7 +168,7 @@
                                                 <td><bean:write name="ver" property="ivaPagado"/></td>
                                                 <td><bean:write name="ver" property="ivaTotal"/></td>
                                                 <td><html:submit property="action" value="eliminar"/></td>
-                                                <td><html:submit property="action" value="consultarId"/></td>
+                                                <td><html:submit property="action" value="Detalle"/></td>
 
                                             </html:form > 
                                         </tr>

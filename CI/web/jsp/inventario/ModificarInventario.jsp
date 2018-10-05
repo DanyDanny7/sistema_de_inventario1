@@ -169,7 +169,7 @@
                 </tbody>  
             </table>
              
-                    <html:submit property="action" value="Actualizar"/>
+                    <html:submit property="action" value="Modificar"/>
                    
                    
                     

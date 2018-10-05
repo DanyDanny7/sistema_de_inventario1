@@ -172,7 +172,7 @@
                                                 <td ><bean:write name="ver" property="descripcionProducto"/></td>
                                                 <td ><bean:write name="ver" property="modelo"/></td>
                                                 <td ><html:submit property="action" value="Eliminar" styleClass="btn  font-weight-bold" style="background-color: #696969; color: white"/></td>
-                                                <td ><html:submit property="action" value="ConsultarId" styleClass="btn  font-weight-bold" style="background-color: #696969; color: white"/></td>
+                                                <td ><html:submit property="action" value="Detalle" styleClass="btn  font-weight-bold" style="background-color: #696969; color: white"/></td>
                                                 <!-- td><!--html:submit property="action" value="ConsultarTipo"/></td -->
                                             </html:form>
                                         </tr>

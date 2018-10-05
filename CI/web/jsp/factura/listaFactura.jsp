@@ -140,19 +140,19 @@
 
                     <div class="card-header primary" style="color: white;"><h1 class="font-weight-bold " >LISTA FACTURA</h1></div>
 
-                    <div class="table table-hover table-md">
+                    <div class="table table-hover">
 
                         <table class="bg-light ">
                             <thead class="text-uppercase">
                                 <tr class="table-default" style="background-color: #000; color: white;font-family: Arial">
-                                    <th>ID Factura</th>
-                                    <th>Fecha </th>
-                                    <th>Contacto</th>
-                                    <th>Sub Total </th>
-                                    <th>Total </th>
-                                    <th>Estado </th>
-                                    <th></th>
-                                    <th></th>
+                                    <th style="width:200px">ID Factura</th>
+                                    <th style="width:200px">Fecha </th>
+                                    <th style="width:200px">Contacto</th>
+                                    <th style="width:200px">Sub Total </th>
+                                    <th style="width:200px">Total </th>
+                                    <th style="width:200px">Estado </th>
+                                    <th style="width:200px"></th>
+                                    <th style="width:200px"></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -168,8 +168,8 @@
                                                 <td><bean:write name="ver" property="subTotalTransaccion"/></td>
                                                 <td><bean:write name="ver" property="totalTransaccion"/></td>
                                                 <td><bean:write name="ver" property="estado"/></td>
-                                                <td><html:submit property="action" value="anular" styleClass="btn btn-secondary font-weight-bold" style="color: white;font-family: Arial"/></td>
-                                                <td><html:submit property="action" value="detalle" styleClass="btn btn-secondary font-weight-bold" style="color: white;font-family: Arial"/></td>
+                                                <td><html:submit property="action" value="anular" styleClass="btn btn-secondary font-weight-bold" style="color: white;font-family: Arial; width:100px"/></td>
+                                                <td><html:submit property="action" value="Detalle" styleClass="btn btn-secondary font-weight-bold" style="color: white;font-family: Arial; width:100px"/></td>
                                             </html:form> 
                                         </tr>
                                     </logic:iterate>

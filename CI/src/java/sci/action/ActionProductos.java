@@ -126,7 +126,7 @@ public class ActionProductos extends org.apache.struts.action.Action {
         }
 //-------------------------------------------------------------------------------
 
-        if (action.equals("ConsultarId")) {
+        if (action.equals("Detalle")) {
 
             Productos productos = (Productos) pman.consultarProductosId(idProducto);
             System.out.println("este es el id productos "+ idProducto);

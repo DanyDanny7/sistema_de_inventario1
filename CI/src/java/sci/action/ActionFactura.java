@@ -399,7 +399,7 @@ public class ActionFactura extends org.apache.struts.action.Action {
 
         }
         //-------------------------------------------------------------------------      
-        if (action.equals("detalle")) {
+        if (action.equals("Detalle")) {
 //FacturaEncabezado
             FacturaEncabezado fe = feman.consultarFacturaEncabezadoId(idFacturaEncabezado);
             idFacturaEncabezado = fe.getIdFacturaEncabezado();
@@ -567,10 +567,10 @@ public class ActionFactura extends org.apache.struts.action.Action {
         }
         //-------------------------------------------------------------------------      
 
-        //request.setAttribute("nombre", Login.nombre);
-        //request.setAttribute("nAcceso", Login.nAcceso);
-        //request.setAttribute("id", Login.id);
-        //request.setAttribute("img", Login.img);
+        request.setAttribute("nombre", Login.nombre);
+        request.setAttribute("nAcceso", Login.nAcceso);
+        request.setAttribute("id", Login.id);
+        request.setAttribute("img", Login.img);
         return mapping.findForward(IR);
     }
 

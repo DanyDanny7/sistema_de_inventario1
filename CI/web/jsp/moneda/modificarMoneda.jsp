@@ -177,7 +177,7 @@
                             <bean:write name="ActionFormMoneda" property="error" filter="false"></bean:write>
                             </div>
                             <br>
-                        <html:submit property="action" value="modificar"  styleClass="btn  font-weight-bold" style="background-color:#f0f3f4; color: black"/>
+                        <html:submit property="action" value="Modificar"  styleClass="btn  font-weight-bold" style="background-color:#f0f3f4; color: black"/>
 
                         </table>
 
