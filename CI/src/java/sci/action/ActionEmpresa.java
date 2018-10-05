@@ -126,7 +126,7 @@ public class ActionEmpresa extends org.apache.struts.action.Action {
 //-------------------------------------------------------------------------------
         if (action.equals("Detalle")) {
 
-            Empresa empresa = (Empresa) eman.consultarEmpresaId(1);
+            Empresa empresa = (Empresa) eman.consultarEmpresaId(idEmpresa);
 
             fB.setIdEmpresa(empresa.getIdEmpresa());
             fB.setNombreEmpresa(empresa.getNombreEmpresa());
