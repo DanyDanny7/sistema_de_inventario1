@@ -31,6 +31,18 @@
                                 </ul>
                                 <ul class="nav navbar-nav navbar-right">
                                     <div class="btn-group dropleft">
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" 
+                                               aria-haspopup="true" aria-expanded="false" style = 'color: white'> 
+                                                <img src="img/configuracion/configuración.png" width="40" height="40" alt=""/>
+                                            </a>
+                                            <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
+                                                <a class="dropdown-item" text-dark href="empresaMantenimiento.do?action=irAgregar">Configuración Inicial</a>
+                                            </div>
+                                        </li>
+                                    </div>
+                                    <div>   </div>
+                                    <div class="btn-group dropleft">
                                         <button type="button" class="btn btn-outline-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             Iniciar Secion
                                         </button>
@@ -65,7 +77,7 @@
                         </div>
                     </div>
                 </div>
-                
+
             </div>
 
             <div class="container">
@@ -80,19 +92,19 @@
                     <div class="col-1"></div>
                 </div>
 
-                <p id="hola" hidden="hidden">${mensaje}</p>
+                <p id="info" hidden="hidden">${info}</p>
         </div>
         <script type="text/javascript">
 
-            if ($("#hola").text() != "") {
+            if ($("#info").text() != "") {
                 window.onload = function () {
                     toastrs();
                 };
-            };
+            }
+            ;
 
             toastr.options = {
                 "debug": false,
-                "positionClass": "toast-bottom-right",
                 "onclick": null,
                 "fadeIn": 300,
                 "fadeOut": 100,
@@ -105,7 +117,7 @@
             function toastrs() {
 
                 if (!showToastrs) {
-                    toastr.error($("#hola").text(), 'Error');
+                    toastr.info($("#info").text(), 'Error');
 
 
                 } else {

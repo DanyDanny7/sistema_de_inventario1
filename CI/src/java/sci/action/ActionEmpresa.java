@@ -25,7 +25,7 @@ public class ActionEmpresa extends org.apache.struts.action.Action {
     private static final String AGREGAR = "irAgregarEmpresa";
     private static final String MODIFICAR = "irModificarEmpresa";
     private static final String ACCESO = "irAcceso";
-    private static final String PORTADA = "portada";
+    private static final String INDEX = "irIndex";
 
     @Override
     public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
@@ -45,6 +45,8 @@ public class ActionEmpresa extends org.apache.struts.action.Action {
         EmpresaMantenimiento eman = new EmpresaMantenimiento();
 
         String IR = null;
+        
+        System.out.println("El Valor de Action es = "+action);
 
         if (fB == null || action == null) {
             System.out.println("Error fromBean o Action estan null");
@@ -122,9 +124,9 @@ public class ActionEmpresa extends org.apache.struts.action.Action {
             IR = ACCESO;
         }
 //-------------------------------------------------------------------------------
-        if (action.equals("ConsultarId")) {
+        if (action.equals("Detalle")) {
 
-            Empresa empresa = (Empresa) eman.consultarEmpresaId(idEmpresa);
+            Empresa empresa = (Empresa) eman.consultarEmpresaId(1);
 
             fB.setIdEmpresa(empresa.getIdEmpresa());
             fB.setNombreEmpresa(empresa.getNombreEmpresa());
@@ -205,7 +207,20 @@ public class ActionEmpresa extends org.apache.struts.action.Action {
         }
 //------------------------------------------------------------------------------------
         if (action.equals("irAgregar")) {
-            IR = AGREGAR;
+            
+            Empresa empresa = eman.consultarEmpresaId(1);
+            
+            if (null != empresa) {
+                String info = "Configuracion ya realizada por Favor Inicie Session.";
+                request.setAttribute("info", info);
+                IR = INDEX;
+            } else {
+                String info = "Por Favor Inicie Session. ";
+                request.setAttribute("info", info);
+                IR = AGREGAR;
+            }
+            
+            
         }
 
         request.setAttribute("nombre", Login.nombre);

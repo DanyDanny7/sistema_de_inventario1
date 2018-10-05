@@ -35,15 +35,7 @@
 
                             <div class="collapse navbar-collapse" id="navbarSupportedContent" >
                                 <ul class="navbar-nav mr-auto" >
-                                    <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" 
-                                           aria-haspopup="true" aria-expanded="false" style = 'color: white'> 
-                                            Parametros
-                                        </a>
-                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
-                                            <a class="dropdown-item" text-dark href="empresaMantenimiento.do?action=irAgregar">Configuración Inicial</a>
-                                        </div>
-                                    </li>
+                                    
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" 
                                            aria-haspopup="true" aria-expanded="false" style = 'color: white'> 
@@ -131,9 +123,20 @@
                                     </li>
                                 </ul>
                                 <ul class="nav navbar-nav navbar-right">
-                                    <div class="btn-group">
-
+                                    <div class="btn-group dropleft">
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" 
+                                               aria-haspopup="true" aria-expanded="false" style = 'color: white'> 
+                                                <img src="img/configuracion/configuración.png" width="40" height="40" alt=""/>
+                                            </a>
+                                            <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
+                                                <a class="dropdown-item" text-dark href="configuracionMantenimiento.do?action=Detalle">Configuración</a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item" text-dark href="empresaMantenimiento.do?action=irAgregar">Configuración Inicial</a>
+                                            </div>
+                                        </li>
                                     </div>
+                                    <div>   </div>
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-secondary">
                                             ${nombre}
