@@ -75,6 +75,8 @@
         <forward name = "irAgregarFabricantes"      path = "/jsp/fabricante/agregarFabricante.jsp"/>
         <forward name = "irModificarFabricantes"    path= "/jsp/fabricante/modificarFabricante.jsp"/>
         <forward name = "irListaFabricantes"        path = "/jsp/fabricante/listaFabricantes.jsp"/>
+        <forward name = "irListaFabricantes2"       path = "/jsp/fabricante/buscarpfabricante.jsp"/>
+
 <!-- // Factura -->
         <forward name = "irInicioFactura"       path = "/jsp/factura/inicio.jsp"/>
         <forward name = "irAgregarFactura"      path = "/jsp/factura/agregarFactura.jsp"/>

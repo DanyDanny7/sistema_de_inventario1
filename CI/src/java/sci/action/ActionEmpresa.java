@@ -190,7 +190,6 @@ public class ActionEmpresa extends org.apache.struts.action.Action {
                 adver += "*Email de la empresa requerido.<br>";
             }
             if (!adver.equals("")) {
-                fB.setError("<spam style = 'color: red' > Por favor complete los espacios requeridos " + " <br> " + adver + "</spam>");
                 IR = MODIFICAR;
                 request.setAttribute("nombre", Login.nombre);
                 request.setAttribute("nAcceso", Login.nAcceso);

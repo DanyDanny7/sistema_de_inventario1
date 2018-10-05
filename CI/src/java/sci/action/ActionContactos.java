@@ -108,7 +108,7 @@ public class ActionContactos extends org.apache.struts.action.Action {
         }
 
 //---------------------------------------------------------------------        
-        if (action.equals("ConsultarId")) {
+        if (action.equals("Detalle")) {
             Contactos contactos = (Contactos) contactosMantenimiento.consultarContactosId(idContacto);
 
             if (contactos == null) {
@@ -137,7 +137,7 @@ public class ActionContactos extends org.apache.struts.action.Action {
             int n = contactosMantenimiento.eliminarContactos(idContacto);
             String mensaje = "";
             if (n == 0) {
-                mensaje = (" Registro (" + idContacto + ") No se Eliminó ");
+                mensaje = (" Registro (" + nombreC + ") No se Eliminó ");
                 request.setAttribute("error", mensaje);
             } else {
                 List<Contactos> listaContacto = contactosMantenimiento.consultarTodosContactos();
@@ -147,7 +147,7 @@ public class ActionContactos extends org.apache.struts.action.Action {
                         + "Clientes</a></li><li class=\"nav-item\"><a class=\"nav-link\" style=\"color: white;\" href=\"contactosMantenimiento.do?action=ConsultarTipo&tipoContacto=Proveedor\">\n"
                         + "Proveedores</a></li></ul>";
                 request.setAttribute("codigo", codigo);
-                mensaje = (" Registro \"" + idContacto + "\" Eliminado Correctamente ");
+                mensaje = (" Registro \"" + nombreC + "\" Eliminado Correctamente ");
                 request.setAttribute("mensaje", mensaje);
             }
             List<Contactos> listaContacto = contactosMantenimiento.consultarTodosContactos();

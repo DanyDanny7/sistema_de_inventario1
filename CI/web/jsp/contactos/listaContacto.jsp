@@ -141,14 +141,11 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 text-center">
-
                     <br>
-                    <div class=" col-auto">
-                              <div class="card-header primary" style="color: white;"><h1 class="font-weight-bold " >LISTA CONTACTOS</h1></div>
-                        
-                    </div>
+                    <div class="card-header primary" style="color: white;"><h1 class="font-weight-bold " >LISTA CONTACTOS</h1></div>
+
                     <br>${codigo}<br>
-                    
+
                     <div class="table table-hover table-sm ">
                         <table class="bg-light ">
                             <thead class="align-content-center">

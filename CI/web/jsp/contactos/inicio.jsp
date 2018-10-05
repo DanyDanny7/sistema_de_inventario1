@@ -18,15 +18,14 @@
     <body>
         <h1 class="text-DARK font-weight-bold">SELECCIONE :</h1>
         <h4>${msg}</h4>
-        &nbsp;<html:form action="/contactosMantenimiento">
-            &nbsp;&nbsp;<html:submit property="action" value="Consultar"/><br><br>
-            <!-- html:submit property="action" value="AgregarContacto"/>-->
-            &nbsp;&nbsp;
+        <html:form action="/contactosMantenimiento">
+            <html:submit property="action" value="Consultar"/><br><br>
+
             <a class="font-weight-bold btn btn-light btn-sm"><html:link page="/jsp/contactos/agregarContactos.jsp">Agregar</html:link></a>
                 <br>
                 <br>
         </html:form> 
         <br>
-        &nbsp;&nbsp;&nbsp;<a class="font-weight-bold btn btn-primary"><html:link page="/index.jsp">Index</html:link></a>
+        <a class="font-weight-bold btn btn-primary"><html:link page="/index.jsp">Index</html:link></a>
     </body>
 </html>

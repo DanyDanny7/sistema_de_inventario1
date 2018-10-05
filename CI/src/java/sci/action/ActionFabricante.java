@@ -1,4 +1,3 @@
-
 package sci.action;
 
 import java.text.SimpleDateFormat;
@@ -6,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import metodos.Login;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -22,7 +22,6 @@ import sci.persistencia.Productos;
  */
 public class ActionFabricante extends org.apache.struts.action.Action {
 
-    
     private static final String AGREGAR = "irAgregarFabricantes";
     private static final String INICIO = "irInicioFabricantes";
     private static final String LISTA = "irListaFabricantes";
@@ -41,8 +40,7 @@ public class ActionFabricante extends org.apache.struts.action.Action {
         Integer numeroProductos = formBean.getNumeroProductos();
         String nombreFabricante = formBean.getNombreFabricante();
         String descripcionFabricante = formBean.getDescripcionFabricante();
-
-        String fechaRegistroFabricante = formato.format(new Date());
+        String fechaRegistroFabricante = formBean.getFechaRegistroFabricante();
         String action = formBean.getAction();
         String IR = null;
 
@@ -51,9 +49,11 @@ public class ActionFabricante extends org.apache.struts.action.Action {
             return mapping.findForward(INICIO);
         }
 //--------------------------------------------------------
+        FabricantesMantenimiento fabricantesMantenimiento = new FabricantesMantenimiento();
 
 //------------------------------------------------------
         if (action.equals("Agregar")) {
+
             String advertencia = "";
 
             if (nombreFabricante == null || nombreFabricante.equals("")) {
@@ -62,99 +62,121 @@ public class ActionFabricante extends org.apache.struts.action.Action {
             if (descripcionFabricante == null || descripcionFabricante.equals("")) {
                 advertencia += "*descripcion es requerido<br>";
             }
-            if (numeroProductos == null || numeroProductos.equals("")) {
-                advertencia += "*numero de productos es requerido<br>";
+
+            if (!advertencia.equals("")) {
+                IR = AGREGAR;
+                request.setAttribute("nombre", Login.nombre);
+                request.setAttribute("nAcceso", Login.nAcceso);
+                request.setAttribute("id", Login.id);
+                request.setAttribute("error", advertencia);
+                return mapping.findForward(IR);
+            }
+            fechaRegistroFabricante = formato.format(new Date());
+            fabricantesMantenimiento.guardarFabricantes(0, nombreFabricante, descripcionFabricante, 0, fechaRegistroFabricante);
+            List<Fabricantes> listaFabricantes = fabricantesMantenimiento.consultarTodosFabricantes();
+            formBean.setListaFabricante(listaFabricantes);
+
+            String mensaje = "El Contacto \"" + nombreFabricante + "\" se agregó correctamente";
+            request.setAttribute("mensaje", mensaje);
+            IR = LISTA;
+        }
+//----------------------------------------------------------------------
+        if (action.equals("Detalle")) {
+
+            Fabricantes fabricante = (Fabricantes) fabricantesMantenimiento.consultarFabricantesId(idFabricante);
+
+            formBean.setIdFabricante(fabricante.getIdFabricante());
+            formBean.setNombreFabricante(fabricante.getNombreFabricante());
+            formBean.setNumeroProductos(0);
+            formBean.setDescripcionFabricante(fabricante.getDescripcionFabricante());
+            formBean.setFechaRegistroFabricante(fabricante.getFechaRegistroFabricante());
+
+            IR = MODIFICAR;
+        }
+//----------------------------------------------------------------------
+        if (action.equals("Eliminar")) {
+            String nombreF = fabricantesMantenimiento.consultarFabricantesId(idFabricante).getNombreFabricante();
+            int n = fabricantesMantenimiento.eliminarFabricante(formBean.getIdFabricante());
+            if (n == 0) {
+                String error = (" Registro (" + nombreF + ") No se Eliminó ");
+                request.setAttribute("error", error);
+            } else {
+                List<Fabricantes> listaFabricantes = fabricantesMantenimiento.consultarTodosFabricantes();
+                formBean.setListaFabricante(listaFabricantes);
+
+                String mensaje = (" Registro \"" + nombreF + "\" Eliminado Correctamente ");
+                request.setAttribute("mensaje", mensaje);
+            }
+            List<Fabricantes> listaFabricantes = fabricantesMantenimiento.consultarTodosFabricantes();
+            formBean.setListaFabricante(listaFabricantes);
+            IR = LISTA;
+        }
+//----------------------------------------------------------------------
+        if (action.equals("Consultar")) {
+            List<Fabricantes> listaFabricantes = fabricantesMantenimiento.consultarTodosFabricantes();
+            formBean.setListaFabricante(listaFabricantes);
+            IR = LISTA;
+                
+        }
+//----------------------------------------------------------------------------------
+        if (action.equals("Modificar")) {
+            
+            String advertencia = "";
+
+            if (nombreFabricante == null || nombreFabricante.equals("")) {
+                advertencia = "*Nombre del fabricante es requerido<br>";
+            }
+            if (descripcionFabricante == null || descripcionFabricante.equals("")) {
+                advertencia += "*descripcion es requerido<br>";
             }
 
             if (!advertencia.equals("")) {
-                formBean.setError("<span style='color:red'>Por favor complete los espacios vacios" + "<br>" + advertencia + "</span>");
-                return mapping.findForward(AGREGAR);
+                IR = MODIFICAR;
+                request.setAttribute("nombre", Login.nombre);
+                request.setAttribute("nAcceso", Login.nAcceso);
+                request.setAttribute("id", Login.id);
+                request.setAttribute("error", advertencia);
+                return mapping.findForward(IR);
             }
-            FabricantesMantenimiento fabricantesMantenimiento = new FabricantesMantenimiento();
-           
-            String mensaje = "<span style='color:red'>Agregado Correcto" + "<br></span>";
-            request.setAttribute("mensaje", mensaje);
-           
-           fabricantesMantenimiento.guardarFabricantes(0, nombreFabricante, descripcionFabricante, numeroProductos, fechaRegistroFabricante);
+            
+            fabricantesMantenimiento.ActualizarFabricantes(idFabricante, nombreFabricante, 0, descripcionFabricante, fechaRegistroFabricante);
             List<Fabricantes> listaFabricantes = fabricantesMantenimiento.consultarTodosFabricantes();
             formBean.setListaFabricante(listaFabricantes);
-           return mapping.findForward(LISTA);
+            String mensaje = "<span style='color:red'>Actualizado Correcto" + "<br></span>";
+            request.setAttribute("mensaje", mensaje);
+            IR =LISTA;
         }
-//----------------------------------------------------------------------
-        if (action.equals("Modificar")) {
-            FabricantesMantenimiento fabricantesMantenimiento = new FabricantesMantenimiento();
-
-            Fabricantes fabricante = (Fabricantes) fabricantesMantenimiento.consultarFabricantesId(idFabricante );
-           
-                formBean.setIdFabricante(fabricante.getIdFabricante());
-               formBean.setNombreFabricante(fabricante.getNombreFabricante());
-                formBean.setNumeroProductos(fabricante.getNumeroProductos());
-                formBean.setDescripcionFabricante(fabricante.getDescripcionFabricante());
-                formBean.setFechaRegistroFabricante(fabricante.getFechaRegistroFabricante());
-               
-                return mapping.findForward(MODIFICAR);
-            }
-        //----------------------------------------------------------------------
-           if (action.equals("Eliminar")) {
-            FabricantesMantenimiento fabricantesMantenimiento = new FabricantesMantenimiento();
-            fabricantesMantenimiento.eliminarFabricante(formBean.getIdFabricante());
-            List<Fabricantes> listaFabricantes = fabricantesMantenimiento.consultarTodosFabricantes();
-           
-            formBean.setListaFabricante(listaFabricantes);
-            System.out.println("desde eliminar");
-            return mapping.findForward(LISTA);
-         }
-          //----------------------------------------------------------------------
-           if (action.equals("Consultar")) {
-            FabricantesMantenimiento fabricantesMantenimiento = new FabricantesMantenimiento();
-            //Acceso acceso = new Acceso();
-            List<Fabricantes> listaFabricantes = fabricantesMantenimiento.consultarTodosFabricantes();
-
-            
-                formBean.setListaFabricante(listaFabricantes);
-                return mapping.findForward(LISTA);
-            
-              }
-           if (action.equals("Actualizar")) {
-               FabricantesMantenimiento fabricantesMantenimiento = new FabricantesMantenimiento();
-               String mensaje = "<span style='color:red'>Actualizado Correcto" + "<br></span>";
-            request.setAttribute("mensaje", mensaje);
-           
-           fabricantesMantenimiento.ActualizarFabricantes(idFabricante, nombreFabricante, numeroProductos, descripcionFabricante, fechaRegistroFabricante);
-            List<Fabricantes> listaFabricantes = fabricantesMantenimiento.consultarTodosFabricantes();
-            formBean.setListaFabricante(listaFabricantes);
-           return mapping.findForward(LISTA);
-           }
-           //-------------------------------------------------------------------------------
-           if (action.equals("irAgregar")) {
+//-------------------------------------------------------------------------------
+        if (action.equals("irAgregar")) {
             IR = AGREGAR;
         }
 //-------------------------------------------------------------------------------------           
-             if (action.equals("Consultar2")) {
+        if (action.equals("Consultar2")) {
             Extraer e = new Extraer();
             //Acceso acceso = new Acceso();
             List<Fabricantes> listaFabricante = e.consultarTodosFabricantes2();
 
-            
-                formBean.setListaFabricante(listaFabricante);
-                return mapping.findForward(LISTA2);
-          
-              }
-              if (action.equals("fproductos")) {
+            formBean.setListaFabricante(listaFabricante);
+            IR =LISTA2;
+
+        }
+//---------------------------------------------------------------------------------        
+        if (action.equals("fproductos")) {
             Extraer e = new Extraer();
-            //Acceso acceso = new Acceso();
-                  System.out.println(idFabricante);
+            System.out.println(idFabricante);
             List<Productos> listaProductos = e.consultarTodoP(idFabricante);
-                  System.out.println("esta es la lista"+listaProductos);
-           List<Fabricantes> listaFabricante = e.consultarTodosFabricantes2();
-           formBean.setListaFabricante(listaFabricante);
-                formBean.setListaProductos(listaProductos);
-                
-                return mapping.findForward(LISTA2);
-            
-              }
-             
-          
-return mapping.findForward(IR);
+            System.out.println("esta es la lista" + listaProductos);
+            List<Fabricantes> listaFabricante = e.consultarTodosFabricantes2();
+            formBean.setListaFabricante(listaFabricante);
+            formBean.setListaProductos(listaProductos);
+
+            IR = LISTA2;
+        }
+//-----------------------------------------------------------------------------------        
+        request.setAttribute("nombre", Login.nombre);
+        request.setAttribute("nAcceso", Login.nAcceso);
+        request.setAttribute("id", Login.id);
+        return mapping.findForward(IR);
+
     }
 }
