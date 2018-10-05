@@ -131,7 +131,7 @@
                                                 <img src="img/configuracion/configuración.png" width="40" height="40" alt=""/>
                                             </a>
                                             <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
-                                                <a class="dropdown-item" text-dark href="configuracionMantenimiento.do?action=Detalle">Configuración</a>
+                                                <a class="dropdown-item" text-dark href="configuracionMantenimiento.do?action=consultaId">Configuración</a>
                                                 <div class="dropdown-divider"></div>
                                                 <a class="dropdown-item" text-dark href="empresaMantenimiento.do?action=irAgregar">Configuración Inicial</a>
                                             </div>

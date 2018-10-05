@@ -10,11 +10,14 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import metodos.Login;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import sci.actionforms.ActionFormConfiguracion;
+import sci.actionforms.ActionFormMoneda;
 import sci.mantenimientos.ConfiguracionMantenimiento;
+import sci.mantenimientos.EmpresaMantenimiento;
 import sci.mantenimientos.MonedaMantenimiento;
 import sci.persistencia.Configuracion;
 import sci.persistencia.Moneda;
@@ -28,6 +31,7 @@ public class ActionConfiguracion extends org.apache.struts.action.Action {
     private static final String INICIO = "inicioConfig";
     private static final String MODIFICAR = "modificarConfig";
     private static final String AGREGAR = "agregarConfig";
+    private static final String LISTAMONEDA = "irListaMoneda";
 
     SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -134,8 +138,11 @@ public class ActionConfiguracion extends org.apache.struts.action.Action {
         }
         if (action.equals("Modificar")) {
             //valida campos vacios y nulos && agrega nueva configuracion
-
-            cman.modificarConfiguracion(idAcceso, idEmpresa, nombreMoneda, iva, zonaHoraria);
+            
+            cman.modificarConfiguracion(idAcceso, 1, nombreMoneda, iva, zonaHoraria);
+            
+            
+            
             IR = INICIO;
         }
 //--------------------------------------------------------------------------------
@@ -152,6 +159,36 @@ public class ActionConfiguracion extends org.apache.struts.action.Action {
             request.setAttribute("listaMoneda", listaMoneda);
             IR = AGREGAR;
         }
+///------------------------------------------------
+        if (action.equals("consultaId")) {
+            Configuracion conf = cman.consultarConfiguarionId(1);
+            EmpresaMantenimiento eman = new EmpresaMantenimiento();
+            String nombreEmpresa = eman.consultarEmpresaId(1).getNombreEmpresa();
+            
+            formBean.setIdConfiguracion(conf.getIdConfiguracion());
+            formBean.setNombreMoneda(conf.getMoneda().getNombreMoneda());
+            formBean.setZonaHoraria(conf.getZonaHoraria());
+            formBean.setIva(conf.getIva());
+            
+            
+            
+            System.out.println("Nombre "+nombreMoneda);
+            request.setAttribute("nombreEmpresa", nombreEmpresa);
+            String nameImgP = conf.getZonaHoraria();
+            String imgP = "<img src=\"img/upload/" + nameImgP + "\" width=\"200\" height=\"200\"/>";
+            request.setAttribute("imgP", imgP);
+            
+            List<Moneda> listaMoneda = mman.consultarTodosMoneda();
+            formBean.setListaMoneda(listaMoneda);
+            request.setAttribute("listaMoneda", listaMoneda);
+            
+            
+            IR = MODIFICAR;
+        }
+        
+///---------------------------------------------------------
+    
+        
         return mapping.findForward(IR);
     }
 

@@ -3,21 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/diana.alcantarausam/Documents/NetBeansProjects/sistema_de_inventario1/CI/web/jsp/contactos/modificarContactos.jsp</file>
-            <file>file:/C:/Users/diana.alcantarausam/Documents/NetBeansProjects/sistema_de_inventario1/CI/web/jsp/contactos/agregarContactos.jsp</file>
-            <file>file:/C:/Users/diana.alcantarausam/Documents/NetBeansProjects/sistema_de_inventario1/CI/web/jsp/fabricante/listaFabricantes.jsp</file>
-            <file>file:/C:/Users/diana.alcantarausam/Documents/NetBeansProjects/sistema_de_inventario1/CI/web/jsp/fabricante/modificarFabricante.jsp</file>
-            <file>file:/C:/Users/diana.alcantarausam/Documents/NetBeansProjects/sistema_de_inventario1/CI/src/java/sci/action/ActionEmpresa.java</file>
-            <file>file:/C:/Users/diana.alcantarausam/Documents/NetBeansProjects/sistema_de_inventario1/CI/web/WEB-INF/struts-config.xml</file>
-            <file>file:/C:/Users/diana.alcantarausam/Documents/NetBeansProjects/sistema_de_inventario1/CI/web/jsp/fabricante/botonfp.jsp</file>
-            <file>file:/C:/Users/diana.alcantarausam/Documents/NetBeansProjects/sistema_de_inventario1/CI/src/java/sci/action/ActionFabricante.java</file>
-            <file>file:/C:/Users/diana.alcantarausam/Documents/NetBeansProjects/sistema_de_inventario1/CI/web/jsp/fabricante/agregarFabricante.jsp</file>
-            <file>file:/C:/Users/diana.alcantarausam/Documents/NetBeansProjects/sistema_de_inventario1/CI/src/java/sci/action/ActionContactos.java</file>
-            <file>file:/C:/Users/diana.alcantarausam/Documents/NetBeansProjects/sistema_de_inventario1/CI/web/jsp/factura/agregarFactura.jsp</file>
-            <file>file:/C:/Users/diana.alcantarausam/Documents/NetBeansProjects/sistema_de_inventario1/CI/web/jsp/contactos/listaContacto.jsp</file>
-            <file>file:/C:/Users/diana.alcantarausam/Documents/NetBeansProjects/sistema_de_inventario1/CI/web/jsp/fabricante/inicio.jsp</file>
-            <file>file:/C:/Users/diana.alcantarausam/Documents/NetBeansProjects/sistema_de_inventario1/CI/web/jsp/Inicio/portada.jsp</file>
-            <file>file:/C:/Users/diana.alcantarausam/Documents/NetBeansProjects/sistema_de_inventario1/CI/web/jsp/fabricante/buscarpfabricante.jsp</file>
+            <file>file:/C:/Users/daniel.bonillausam/Desktop/Archivos%20Daniel/GitHub/sistema_de_inventario1/CI/web/jsp/Inicio/portada.jsp</file>
+            <file>file:/C:/Users/daniel.bonillausam/Desktop/Archivos%20Daniel/GitHub/sistema_de_inventario1/CI/src/java/sci/action/ActionConfiguracion.java</file>
+            <file>file:/C:/Users/daniel.bonillausam/Desktop/Archivos%20Daniel/GitHub/sistema_de_inventario1/CI/src/java/sci/action/ActionFactura.java</file>
+            <file>file:/C:/Users/daniel.bonillausam/Desktop/Archivos%20Daniel/GitHub/sistema_de_inventario1/CI/src/java/sci/action/ActionFabricante.java</file>
+            <file>file:/C:/Users/daniel.bonillausam/Desktop/Archivos%20Daniel/GitHub/sistema_de_inventario1/CI/web/jsp/factura/agregarFactura.jsp</file>
+            <file>file:/C:/Users/daniel.bonillausam/Desktop/Archivos%20Daniel/GitHub/sistema_de_inventario1/CI/web/jsp/factura/inicio.jsp</file>
+            <file>file:/C:/Users/daniel.bonillausam/Desktop/Archivos%20Daniel/GitHub/sistema_de_inventario1/CI/web/jsp/producto/agregarProductos.jsp</file>
+            <file>file:/C:/Users/daniel.bonillausam/Desktop/Archivos%20Daniel/GitHub/sistema_de_inventario1/CI/src/java/sci/action/ActionEmpresa.java</file>
         </group>
     </open-files>
 </project-private>

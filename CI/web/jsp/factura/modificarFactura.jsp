@@ -145,10 +145,10 @@
                                     <h2 class="text-center">${nombreEmpresa}</h2>
                                     <h6 class="text-center">${direccionEmpresa}</h6>
                                     <div class="text-left"><label >Cliente</label></div>
-                                    <html:select property="idContacto" styleClass="form-control">
-                                        <logic:notEmpty name="ActionFormFactura" property="listaContactos">
-                                            <logic:iterate id="ver" name="ActionFormFactura" property="listaContactos">
-                                                <html:option value="${ver.idContacto}" >${ver.nombreContacto}</html:option>
+                                    <html:select property="nombreMoneda" styleClass="form-control">
+                                        <logic:notEmpty name="ActionFormConfiguracion" property="listaMoneda">
+                                            <logic:iterate id="ver" name="ActionFormConfiguracion" property="listaMoneda">
+                                                <html:option value="${ver.nombreMoneda}" >${ver.nombreMoneda}</html:option>
                                             </logic:iterate>
                                         </logic:notEmpty>
                                     </html:select>
