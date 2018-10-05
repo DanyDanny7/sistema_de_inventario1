@@ -146,7 +146,6 @@
                                     <h6 class="text-center">${direccionEmpresa}</h6>
                                     <div class="text-left"><label >Cliente</label></div>
                                     <html:select property="idContacto" styleClass="form-control">
-                                        <html:option value="Seleccionar"></html:option>
                                         <logic:notEmpty name="ActionFormFactura" property="listaContactos">
                                             <logic:iterate id="ver" name="ActionFormFactura" property="listaContactos">
                                                 <html:option value="${ver.idContacto}" >${ver.nombreContacto}</html:option>
@@ -254,13 +253,39 @@
 
                     <br>
                     <html:form action="/facturaMantenimiento">
-                    <html:submit property="action" value="Guardar" styleClass="btn  font-weight-bold" style="background-color:#f0f3f4; color: black"/>
+                        <html:hidden property="idFacturaEncabezado"></html:hidden>
+                        <html:hidden property="idContacto"></html:hidden>
+                    <html:submit property="action" value="Guardar " styleClass="btn  font-weight-bold" style="background-color:#f0f3f4; color: black"/>
                     </html:form>
 
-                    <h5>${error}</h5>
                 </div>
                 <div class="col-1"></div>
             </div>
         </div>
+                <div id="error">${error}</div>
+        <script type="text/javascript">
+            if ($("#error").text() != "") {
+                window.onload = function () {
+                    toastrs();
+                };
+            }
+            ;
+            toastr.options = {
+                "debug": false,
+                "onclick": null,
+                "fadeIn": 300,
+                "fadeOut": 100,
+                "timeOut": 7000,
+                "extendedTimeOut": 1000
+            };
+            var showToastrs = false;
+            function toastrs() {
+                if (!showToastrs) {
+                    toastr.error($("#error").text(), 'Error');
+                } else {
+                    toastr.error('no se puede!\'t.', 'Otro error crítico');
+                }
+            }
+        </script>
     </body>
 </html>

@@ -215,12 +215,12 @@ public class FacturaDetalleMantenimiento {
             return null;
         }
     }
-    /*public static void main(String[] args) {
+    public static void main(String[] args) {
         FacturaDetalleMantenimiento eman = new FacturaDetalleMantenimiento();
         
         List<FacturaEncabezado> list = eman.consultaFacturaEspecifica(26);
         System.out.println("lis "+list.toString());
-    }*/
+    }
     
     public int consultarIva (Integer idFacturaEncabezado){
         SessionFactory factory = HibernateUtil.getSessionFactory();
@@ -240,7 +240,7 @@ public class FacturaDetalleMantenimiento {
             session.close();
         }
         return idIva;
-    }
+    }/*
     public static void main(String[] args) {
         FacturaDetalleMantenimiento eman = new FacturaDetalleMantenimiento();
         
@@ -248,5 +248,5 @@ public class FacturaDetalleMantenimiento {
         int ver = eman.consultarIva(idFacturaEncabezado);
         System.out.println("idIva "+ver);
         System.exit(0);
-    }
+    }*/
 }

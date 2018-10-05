@@ -187,7 +187,7 @@
                 </div>
             </div>
         </div>
-                        <div id="error" hidden="hidden">${error}</div>
+        <div id="error" hidden="hidden">${error}</div>
         <div id="mensaje" hidden="hidden">${mensaje}</div>
         <div id="info" style="color:white">${info}</div>
         <script type="text/javascript">

@@ -26,6 +26,7 @@ public class SumarTotalFila {
             }
         } catch (Exception e) {
             System.out.println("error en el catch de sumar total fila "+e);
+            suma = 0.0;
         }
         return suma;
     }

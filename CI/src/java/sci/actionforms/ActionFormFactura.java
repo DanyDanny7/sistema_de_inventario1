@@ -84,6 +84,22 @@ public class ActionFormFactura extends org.apache.struts.action.ActionForm{
         this.estado = estado;
     }
 
+    public Double getTotalTransaccion() {
+        return totalTransaccion;
+    }
+
+    public void setTotalTransaccion(Double totalTransaccion) {
+        this.totalTransaccion = totalTransaccion;
+    }
+
+    public Double getSubTotalTransaccion() {
+        return subTotalTransaccion;
+    }
+
+    public void setSubTotalTransaccion(Double subTotalTransaccion) {
+        this.subTotalTransaccion = subTotalTransaccion;
+    }
+
     public List<FacturaEncabezado> getListaFacturaEncabezado() {
         return listaFacturaEncabezado;
     }
@@ -188,21 +204,5 @@ public class ActionFormFactura extends org.apache.struts.action.ActionForm{
         this.listaProductos = listaProductos;
     }
 
-    public Double getTotalTransaccion() {
-        return totalTransaccion;
-    }
-
-    public void setTotalTransaccion(Double totalTransaccion) {
-        this.totalTransaccion = totalTransaccion;
-    }
-
-    public Double getSubTotalTransaccion() {
-        return subTotalTransaccion;
-    }
-
-    public void setSubTotalTransaccion(Double subTotalTransaccion) {
-        this.subTotalTransaccion = subTotalTransaccion;
-    }
-    
     
 }
