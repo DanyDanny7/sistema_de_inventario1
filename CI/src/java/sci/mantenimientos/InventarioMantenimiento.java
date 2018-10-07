@@ -8,7 +8,6 @@ import org.hibernate.SessionFactory;
 import sci.persistencia.Inventario;
 import sci.persistencia.Productos;
 
-
 public class InventarioMantenimiento {
 
     public int guardarInventario(
@@ -45,7 +44,7 @@ public class InventarioMantenimiento {
             if (session.getTransaction().isActive()) {
                 session.getTransaction().rollback();
                 flag = 1;
-                System.out.println("Errro en Guardado InventarioMantenimiento "+e);
+                System.out.println("Errro en Guardado InventarioMantenimiento " + e);
             }
         } finally {
             session.close();
@@ -53,13 +52,12 @@ public class InventarioMantenimiento {
         return flag;
     }
 
-    
-    public int eliminarInventario(int idInventario){
-        Inventario inv ;
+    public int eliminarInventario(int idInventario) {
+        Inventario inv;
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.openSession();
         int flag = 0;
-        
+
         try {
             session.beginTransaction();
             inv = (Inventario) session.get(Inventario.class, idInventario);
@@ -68,16 +66,17 @@ public class InventarioMantenimiento {
             flag = 1;
             System.out.println("Eliminado Correcto InventarioMantenimiento");
         } catch (Exception e) {
-            if(session.getTransaction().isActive()){
-            session.getTransaction().rollback();
-            flag=1;
+            if (session.getTransaction().isActive()) {
+                session.getTransaction().rollback();
+                flag = 1;
             }
-            System.out.println("Error en eliminar InventarioMantenimiento "+e);
-        } finally{
+            System.out.println("Error en eliminar InventarioMantenimiento " + e);
+        } finally {
             session.close();
         }
         return flag;
     }
+
     public int modificarInventario(
             int idInventario,
             int idProductos,
@@ -112,58 +111,82 @@ public class InventarioMantenimiento {
             if (session.getTransaction().isActive()) {
                 session.getTransaction().rollback();
                 flag = 1;
-                System.out.println("Error en modificadr InventarioMantenimiento "+e);
+                System.out.println("Error en modificadr InventarioMantenimiento " + e);
             }
         } finally {
             session.close();
         }
         return flag;
     }
-    public List consultarTodoInventario(){
+
+    public List consultarTodoInventario() {
         List<Inventario> listaInventario = null;
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.openSession();
-        
+
         session.beginTransaction();
         try {
             Query q = session.createQuery("from Inventario");
             listaInventario = (List<Inventario>) q.list();
             System.out.println("Consultar todo Correcto  InventarioMantenimiento");
         } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("Errorr en consultar todo InventarioMantenimiento "+e);
-        } finally{
-             session.close();       
+            System.out.println("Errorr en consultar todo InventarioMantenimiento " + e);
+        } finally {
+            //session.close();       
         }
         return listaInventario;
     }
-    
-    
-    public Inventario consultarInventarioId(int idInventario){
+
+    public Inventario consultarInventarioId(int idInventario) {
         //List<Inventario> listaInventario = null;
         Inventario inv = new Inventario();
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.openSession();
 
-        
         try {
             session.beginTransaction();
             inv = (Inventario) session.get(Inventario.class, idInventario);
             // Query q = session.createQuery("from Inventario where idInventario = " + idInventario );
-          //  listaInventario = (List<Inventario>) q.list();
+            //  listaInventario = (List<Inventario>) q.list();
             System.out.println("Consulta por id correcto InventarioMantenimiento");
             session.getTransaction().commit();
-           // return listaInventario;
+            // return listaInventario;
         } catch (Exception e) {
             if (session.getTransaction().isActive()) {
                 session.getTransaction().rollback();
-            System.out.println("error en consulta por id InventarioMantenimiento. " +e);
-            inv = null;
-        }
-    }finally{
+                System.out.println("error en consulta por id InventarioMantenimiento. " + e);
+                inv = null;
+            }
+        } finally {
             session.close();
         }
-    return inv;
-}
+        return inv;
+    }
+    public int consultarInventarioIdProducto(int idProducto){
+        int idInventario = 0;
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.openSession();
+        
+        try {
+            session.beginTransaction();
+            Query q = session.createQuery("from Inventario i where i.productos.idProducto=:idProducto");
+            q.setParameter("idProducto", idProducto);
+            List<Inventario> listaInventario = q.list();
+            idInventario = listaInventario.get(0).getIdInventario();
+            System.out.println("idInventario "+listaInventario.get(0).getIdInventario());
+        } catch (Exception e) {
+            //session.close();
+            System.out.println("Error en consultar inventario por id producto "+e);
+            
+        }
+        return idInventario;
+    }
+    public static void main(String[] args) {
+        InventarioMantenimiento i = new InventarioMantenimiento();
+        
+        int idProducto = 4;
+        i.consultarInventarioIdProducto(idProducto);
+        
+    }
 
 }

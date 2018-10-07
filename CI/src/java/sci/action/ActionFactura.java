@@ -160,9 +160,9 @@ public class ActionFactura extends org.apache.struts.action.Action {
                         int val = feman.guardarFacturaEncabezado(idContacto, idEmpresa, fechaFactura, estado, 0, 0);
                     }
                 }
-                // es necesario realizar de nuevo la consulta max id
-                // de lo contrario en el primer registro guardará el id anterior
-                // al que se haya creado es decir el penultimo
+// es necesario realizar de nuevo la consulta max id
+// de lo contrario en el primer registro guardará el id anterior
+// al que se haya creado es decir el penultimo
                 idIva = iman.maxIdIv();
 
                 idFacturaEncabezado = feman.maxIdFacturaEncabezad();

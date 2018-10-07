@@ -165,7 +165,7 @@
                                                 <html:form action = "/inventarioMantenimiento">
                                                     <th scope="row"><bean:write name="ver" property="idInventario"/>
                                                         <div hidden="hidden"> <html:text name="ver" property="idInventario"/></div> </th>
-                                                    <td><bean:write name="ver" property="productos.idProducto"/></td>
+                                                    <td><bean:write name="ver" property="productos.nombreProducto"/></td>
                                                     <td><bean:write name="ver" property="existencia"/></td>
                                                     <td><bean:write name="ver" property="estadoExistencia"/></td>
                                                     <td><bean:write name="ver" property="stockMinimo"/></td>

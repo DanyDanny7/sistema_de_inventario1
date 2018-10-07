@@ -20,11 +20,13 @@ import sci.mantenimientos.ComprasMantenimiento;
 import sci.mantenimientos.ConfiguracionMantenimiento;
 import sci.mantenimientos.ContactosMantenimiento;
 import sci.mantenimientos.InventarioMantenimiento;
+import sci.mantenimientos.IvaMantenimiento;
 import sci.mantenimientos.ProductosMantenimiento;
 import sci.persistencia.Compras;
 import sci.persistencia.Contactos;
 import sci.persistencia.Empresa;
 import sci.persistencia.Inventario;
+import sci.persistencia.Iva;
 import sci.persistencia.Productos;
 
 public class ActionCompras extends org.apache.struts.action.Action {
@@ -33,6 +35,7 @@ public class ActionCompras extends org.apache.struts.action.Action {
     private static final String LISTA = "listaCompras";
     private static final String MODIFICAR = "irModificarCompras";
     private static final String AGREGAR = "irAgregarCompras";
+    private static final String PORTADA = "irPortada";
 
     SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -57,6 +60,8 @@ public class ActionCompras extends org.apache.struts.action.Action {
         ConfiguracionMantenimiento conman = new ConfiguracionMantenimiento();
         ProductosMantenimiento pman = new ProductosMantenimiento();
         ComprasMantenimiento coman = new ComprasMantenimiento();
+        IvaMantenimiento iman = new IvaMantenimiento();
+        InventarioMantenimiento inman = new InventarioMantenimiento();
         SumarTotalFila sumaTF = new SumarTotalFila();
         String IR = null;
 
@@ -85,21 +90,24 @@ public class ActionCompras extends org.apache.struts.action.Action {
 
             IR = AGREGAR;
         }
-//------------------------------------------------------
+
 
         System.out.println("El action trae: " + action);
-
+//------------------------------------------------------
         if (action.equals("Agregar")) {
 
             System.out.println("Entro");
             String advertencia = "";
 
+            
+            
 //------Para Colocar la fecha si no hay una registrada
             if (fechaCompra.equals("")) {
                 fechaCompra = formato.format(new Date());
             }
             fb.setFechaCompra(fechaCompra);
-
+            
+            
 // Validaciones de ingreso            
             if (nDocumento.equals("null") || nDocumento.equals("") || nDocumento.equals("0")) {
                 advertencia += "*Ingrese el Numero de Documento <br>";
@@ -120,18 +128,40 @@ public class ActionCompras extends org.apache.struts.action.Action {
 
                 request.setAttribute("error", advertencia);
             }
+            //nDocumento = coman.consultarComprasId(coman.maxIdCompras()).getnDocumento();
             if (advertencia.equals("")) {
-
-                idInventario = 1;
-                idIva = 2;
+                
+                List<Iva> i = iman.consultarTodosIva();
+                if (i.size() < 1) {
+                    int inew = iman.guardarIva(conman.consultarConfiguarionId(1).getIva(), 0, 0, 0, 0, 0);
+                    System.out.println("Se creaó el Iva porque no Existia");
+                }
+                idIva = iman.maxIdIv();
+                if (i.size()>0) {
+                    Iva iva = iman.consultarIvaId(idIva);
+                    Double totalTransaccion = iva.getTotalTransaccion();
+                    Double ivaPagado = iva.getIvaPagado();
+                    
+                    if ((totalTransaccion > 0 && ivaPagado > 0) || i.size()<2) {
+                        System.out.println("Entró a crear nuevo iva");
+                        iman.guardarIva(conman.consultarConfiguarionId(1).getIva(), 0, 0, 0, 0, 0);
+                    }
+                }
+// es necesario realizar de nuevo la consulta max id
+// de lo contrario en el primer registro guardará el id anterior
+// al que se haya creado es decir el penultimo                
+                idIva = iman.maxIdIv();
+                idInventario = inman.consultarInventarioIdProducto(idProducto);
 
 //Calcular total Compra
                 totalCompra = cantidad * pman.consultarProductosId(idProducto).getPrecioUnitario();
 
                 int val = coman.guardarcompras(nDocumento, idContacto, idInventario, cantidad, idIva, idProducto, fechaCompra, totalCompra);
+                
                 System.out.println("val ver =" + val);
-
             }
+            fb.setIdContacto(idContacto);
+            request.setAttribute("idContacto", idContacto);
 // para calcular total saldos del pie de factura
             Double subTotalTransaccion = sumaTF.sumarTotalCompra(nDocumento);
             request.setAttribute("subTotalTransaccion", subTotalTransaccion);
@@ -247,7 +277,7 @@ public class ActionCompras extends org.apache.struts.action.Action {
             Double subTotalTransaccionIva = sumaTF.sumarTotalCompra(nDocumento)/(1+conman.consultarConfiguarionId(1).getIva());
             request.setAttribute("subTotalTransaccionIva", subTotalTransaccionIva);
 // para calculo de IVA
-            Double ivaPagado = subTotalTransaccion * conman.consultarConfiguarionId(1).getIva();
+            Double ivaPagado = subTotalTransaccionIva * conman.consultarConfiguarionId(1).getIva();
             request.setAttribute("ivaPagado", ivaPagado);
 // para calculo total Transaccion   
             Double totalTransaccion = subTotalTransaccion + ivaPagado;
@@ -271,6 +301,57 @@ public class ActionCompras extends org.apache.struts.action.Action {
         }
 
 //--------------------------------------------------------------------------------        
+
+
+        if (action.equals("Guardar")) {
+            
+            
+            idCompra = coman.maxIdCompras();
+            System.out.println("id " + idCompra);
+            Compras com = coman.consultarComprasId(idCompra);
+            System.out.println("ndoc " + com.getnDocumento());
+            nDocumento = com.getnDocumento();
+            fb.setnDocumento(nDocumento);
+            System.out.println("Antes de calcular iva");
+            //int iv = iman.guardarIva(0, 0, 0, 0, 0, 0)
+            
+// para calcular total saldos del pie de factura
+            Double subTotalTransaccion = sumaTF.sumarTotalCompra(nDocumento);
+            request.setAttribute("subTotalTransaccion", subTotalTransaccion);
+            System.out.println(" antes de total pie");
+// para calcular total saldos del pie de factura
+            Double subTotalTransaccionIva = sumaTF.sumarTotalCompra(nDocumento)/(1+conman.consultarConfiguarionId(1).getIva());
+            request.setAttribute("subTotalTransaccionIva", subTotalTransaccionIva);
+            System.out.println(" antes de calculo iva");
+// para calculo de IVA
+            Double ivaPagado = subTotalTransaccionIva * conman.consultarConfiguarionId(1).getIva();
+            request.setAttribute("ivaPagado", ivaPagado);
+            System.out.println(" antes de totaltransaccion");
+// para calculo total Transaccion   
+            Double totalTransaccion = subTotalTransaccion + ivaPagado;
+            request.setAttribute("totalTransaccion", totalTransaccion);
+// modificar datos de iva 
+            System.out.println(" antes de modificar iva");
+            idIva = iman.maxIdIv();
+            Iva i = iman.consultarIvaId(idIva);
+                double ivaTasa = i.getIvaTasa();
+                double ivaRetenido = i.getIvaRetenido();
+                double ivaTotal = ivaPagado;
+                
+                int ver = iman.modificarIva(idIva, ivaTasa, ivaRetenido, ivaPagado, ivaTotal, subTotalTransaccionIva, totalTransaccion);
+                System.out.println("Ver "+ver);
+                
+  
+                
+            System.out.println("Antes de ir a portada");
+            IR = PORTADA;
+        }
+    
+
+
+
+//--------------------------------------------------------------------------------        
+
         //request.setAttribute("nombre", Login.nombre);
         //request.setAttribute("nAcceso", Login.nAcceso);
         //request.setAttribute("id", Login.id);
