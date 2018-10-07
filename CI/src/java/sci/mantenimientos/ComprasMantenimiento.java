@@ -231,6 +231,34 @@ public class ComprasMantenimiento {
         }
         return listaCom;
     }
+//---------------------------------------------------------------------------------     
+     public List consultarTodoComprasGrup() {
+        List<Compras> listaCom = null;
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.openSession();
+
+        session.beginTransaction();
+        try {
+            Query q = session.createQuery("select "
+                    + "compras.nDocumento "
+                    + "from Compras compras "
+                    + "group by compras.nDocumento");
+            listaCom = (List<Compras>) q.list();
+            System.out.println("Consultar todo Correcto ComprasMAntenimiento");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error en consultarTodo ComprasMantenimiento. "+e);
+        } finally {
+
+        }
+        return listaCom;
+    }
+     public static void main(String[] args) {
+        ComprasMantenimiento cman = new  ComprasMantenimiento();
+        
+         System.out.println("ver lsita "+cman.consultarTodoComprasGrup());
+    }
+//---------------------------------------------------------------------------------     
      public List maxCompras(){
          List<Compras> lista = null;
         SessionFactory factory = HibernateUtil.getSessionFactory();
@@ -256,13 +284,13 @@ public class ComprasMantenimiento {
          }
          return idCompras;
      }
-     public static void main(String[] args) {
+     /*public static void main(String[] args) {
         ComprasMantenimiento cman = new  ComprasMantenimiento();
         
         List<Integer> ver1 = cman.maxCompras();
          System.out.println("ver 1 "+ver1);
         int ver = cman.maxIdCompras();
          System.out.println("Ver "+ver);
-    }
+    }*/
     
 }

@@ -11,6 +11,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import metodos.Login;
+import metodos.N_Documento;
 import metodos.SumarTotalFila;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -76,7 +77,7 @@ public class ActionCompras extends org.apache.struts.action.Action {
             fechaCompra = formato.format(new Date());
             fb.setFechaCompra(fechaCompra);
             //Traemos lista Contactos   --------------------------------             
-            List<Contactos> listaContactos = cman.tipos("cliente");
+            List<Contactos> listaContactos = cman.tipos("Proveedor");
             fb.setListaContactos(listaContactos);
             request.setAttribute("listaContactos", listaContactos);
 //Traemos lista Productos                
@@ -151,6 +152,7 @@ public class ActionCompras extends org.apache.struts.action.Action {
 // de lo contrario en el primer registro guardará el id anterior
 // al que se haya creado es decir el penultimo                
                 idIva = iman.maxIdIv();
+                System.out.println("VER ID PRODUCTO "+idProducto);
                 idInventario = inman.consultarInventarioIdProducto(idProducto);
 
 //Calcular total Compra
@@ -193,18 +195,35 @@ public class ActionCompras extends org.apache.struts.action.Action {
 //----------------------------------------------------------------------
         if (action.equals("Detalle")) {
 
-            ComprasMantenimiento comprasMantenimiento = new ComprasMantenimiento();
-            Compras compra = comprasMantenimiento.consultarComprasId(idCompra);
+            List<Compras> li = coman.consultaNDocumento(nDocumento);
+            
+            
+            fb.setIdCompra(li.get(0).getIdCompra());
+            fb.setnDocumento(li.get(0).getnDocumento());
+            fb.setIdContacto(li.get(0).getContactos().getIdContacto());
+            fb.setIdInventario(li.get(0).getInventario().getIdInventario());
+            fb.setCantidad(li.get(0).getCantidad());
+            fb.setIdIva(li.get(0).getIva().getIdIva());
+            fb.setIdProducto(li.get(0).getProductos().getIdProducto());
+            fb.setTotalCompra(li.get(0).getTotalCompra());
 
-            fb.setIdCompra(compra.getIdCompra());
-            fb.setnDocumento(compra.getnDocumento());
-            fb.setIdContacto(compra.getContactos().getIdContacto());
-            fb.setIdInventario(compra.getInventario().getIdInventario());
-            fb.setCantidad(compra.getCantidad());
-            fb.setIdIva(compra.getIva().getIdIva());
-            fb.setIdProducto(compra.getProductos().getIdProducto());
-            fb.setTotalCompra(compra.getTotalCompra());
+            
+            
+//------Para Colocar la fecha si no hay una registrada
+            fechaCompra = formato.format(new Date());
+            fb.setFechaCompra(fechaCompra);
+            //Traemos lista Contactos   --------------------------------             
+            List<Contactos> listaContactos = cman.tipos("Proveedor");
+            fb.setListaContactos(listaContactos);
+            request.setAttribute("listaContactos", listaContactos);
+//Traemos lista Productos                
+            List<Productos> listaProductos = pman.consultarTodoProductos();
+            fb.setListaProductos(listaProductos);
+            request.setAttribute("listaProductos", listaProductos);
+// Traemos compras por documento
+            fb.setListaCompras(li);
 
+              
             IR = MODIFICAR;
         }
         //----------------------------------------------------------------------
@@ -229,8 +248,8 @@ public class ActionCompras extends org.apache.struts.action.Action {
         //----------------------------------------------------------------------
         if (action.equals("Consultar")) {
             ComprasMantenimiento comprasMantenimiento = new ComprasMantenimiento();
-
-            List<Compras> listaCompras = comprasMantenimiento.consultarTodoCompras();
+            N_Documento nd = new N_Documento();
+            List<Compras> listaCompras = nd.unirListas();
 
             if (listaCompras == null) {
                 fb.setError("<spam style='color:red'> la lista viene vacia " + "<br></spam>");
@@ -328,7 +347,7 @@ public class ActionCompras extends org.apache.struts.action.Action {
             request.setAttribute("ivaPagado", ivaPagado);
             System.out.println(" antes de totaltransaccion");
 // para calculo total Transaccion   
-            Double totalTransaccion = subTotalTransaccion + ivaPagado;
+            Double totalTransaccion = subTotalTransaccionIva + ivaPagado;
             request.setAttribute("totalTransaccion", totalTransaccion);
 // modificar datos de iva 
             System.out.println(" antes de modificar iva");
@@ -347,10 +366,8 @@ public class ActionCompras extends org.apache.struts.action.Action {
             IR = PORTADA;
         }
     
-
-
-
 //--------------------------------------------------------------------------------        
+
 
         //request.setAttribute("nombre", Login.nombre);
         //request.setAttribute("nAcceso", Login.nAcceso);
@@ -358,3 +375,4 @@ public class ActionCompras extends org.apache.struts.action.Action {
         return mapping.findForward(IR);
     }
 }
+

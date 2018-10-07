@@ -152,16 +152,13 @@
                         <table class="bg-light ">
                             <thead class="align-content-center"> 
                                 <tr  class="table-default" style="background-color: #000; color: white">
-                                    <th>Id Compra</th>
+                                    <%--           <th>Id Compra</th>--%>
                                     <th>documento</th>
-                                    <th>Contactos</th>
-                                    <th>Existencia</th>
-                                    <th>cantidad </th>
-                                    <th>Id Iva</th>
-                                    <th>Producto</th>
-                                    <th>Total de compra</th>
-
-                                    <th></th>
+                                                  <th>Contactos</th>
+                                                  <th>Fecha </th>
+                                                  <th>Sub Total Transaccion</th>
+                                                  <th>Total de Transaccion</th>
+                           
                                     <th></th>
                                 </tr>
                             </thead>
@@ -170,17 +167,16 @@
                                     <logic:iterate id="ver" name="ActionFormCompras" property="listaCompras" >
                                         <tr style="background-color: #DCDCDC;">
                                             <html:form action = "/comprasMantenimiento">
-                                                <th scope="row"><bean:write name="ver" property="idCompra"/>
-                                                    <div hidden="hidden"> <html:text name="ver" property="idCompra"/></div> </th>
-                                                <td><bean:write name="ver" property="nDocumento"/></td>
-                                                <td><bean:write name="ver" property="contactos.nombreContacto"/></td>
-                                                <td><bean:write name="ver" property="inventario.existencia"/></td>
-                                                <td><bean:write name="ver" property="cantidad"/></td>
-                                                <td><bean:write name="ver" property="iva.idIva"/></td>
-                                                <td><bean:write name="ver" property="productos.nombreProducto"/></td>
-                                                <td><bean:write name="ver" property="totalCompra"/></td>
+                                               
+                                         
+                                                <td><bean:write name="ver" property="nDocumento"/>
+                                                <html:text name="ver" property="nDocumento"/></td>
+                                                            <td><bean:write name="ver" property="contactos.nombreContacto"/></td>
+                                                            <td><bean:write name="ver" property="fechaCompra"/></td>
+                                                            <td><bean:write name="ver" property="iva.subTotalTransaccion"/></td>
+                                                            <td><bean:write name="ver" property="iva.totalTransaccion"/></td>
+                                     
 
-                                                <td><html:submit property="action" value="Eliminar" styleClass="btn  font-weight-bold" style="background-color: #696969; color: white"/></td>
                                                 <td><html:submit property="action" value="Detalle" styleClass="btn  font-weight-bold" style="background-color: #696969; color: white"/></td>
 
                                             </html:form>

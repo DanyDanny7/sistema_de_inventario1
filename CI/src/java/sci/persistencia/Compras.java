@@ -22,6 +22,11 @@ public class Compras  implements java.io.Serializable {
     public Compras() {
     }
 
+    public Compras(int idCompra) {
+        this.idCompra = idCompra;
+    }
+    
+
 	
     public Compras(int idCompra, Contactos contactos, Inventario inventario, Iva iva, Productos productos, String nDocumento) {
         this.idCompra = idCompra;

@@ -52,7 +52,7 @@
 <!-- // Compras -->
         <forward name = "irInicioCompras"       path = "/jsp/compras/inicio.jsp"/>
         <forward name = "listaCompras"          path = "/jsp/compras/listaCompra.jsp"/>
-        <forward name = "irModificarCompras"    path = "/jsp/compras/ModificarCompras.jsp"/>        
+        <forward name = "irModificarCompras"    path = "/jsp/compras/modificarCompras.jsp"/>        
         <forward name = "irAgregarCompras"      path = "/jsp/compras/agregarCompras.jsp"/>       
 <!-- // Configuracion -->
         <forward name = "modificarConfig"       path = "/jsp/configuracion/modificarConfiguracion.jsp"/>

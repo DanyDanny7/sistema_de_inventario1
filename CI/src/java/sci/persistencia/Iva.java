@@ -24,6 +24,11 @@ public class Iva  implements java.io.Serializable {
     public Iva() {
     }
 
+    public Iva(Integer idIva) {
+        this.idIva = idIva;
+    }
+
+    
     public Iva(Double ivaTasa, Double ivaRetenido, Double ivaPagado, Double ivaTotal, Double subTotalTransaccion, Double totalTransaccion, Set facturaDetalles, Set comprases) {
        this.ivaTasa = ivaTasa;
        this.ivaRetenido = ivaRetenido;

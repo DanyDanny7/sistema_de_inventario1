@@ -26,6 +26,11 @@ public class Contactos  implements java.io.Serializable {
     public Contactos() {
     }
 
+    public Contactos(Integer idContacto) {
+        this.idContacto = idContacto;
+    }
+
+    
     public Contactos(String nombreContacto, String direccionContacto, String telefonoContacto, String encargadoContacto, String telefonoEncargadoContacto, String tipoContacto, String emailContacto, String fechaRegistroContacto, Set facturaEncabezados, Set comprases) {
        this.nombreContacto = nombreContacto;
        this.direccionContacto = direccionContacto;
