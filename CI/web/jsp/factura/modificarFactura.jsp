@@ -134,10 +134,11 @@
         </div>
 
         <div class="container">
+            
             <div class="row">
-                <div class="col-12 text-center">
+               <div class="col-12 text-center">
                     <div class="card-header" style="color: white"><h1 class="font-weight-bold">Modificar Factura</h1></div>
-                    <html:form action="/facturaMantenimiento">
+                 <html:form action="/facturaMantenimiento">
                         <div class="card-header" style="background-color:#f0f3f4;">
                             <div class="row">
                                 <div class="col-9">
@@ -145,14 +146,15 @@
                                     <h2 class="text-center">${nombreEmpresa}</h2>
                                     <h6 class="text-center">${direccionEmpresa}</h6>
                                     <div class="text-left"><label >Cliente</label></div>
-                                    <html:select property="nombreMoneda" styleClass="form-control">
-                                        <logic:notEmpty name="ActionFormConfiguracion" property="listaMoneda">
-                                            <logic:iterate id="ver" name="ActionFormConfiguracion" property="listaMoneda">
-                                                <html:option value="${ver.nombreMoneda}" >${ver.nombreMoneda}</html:option>
+                                    <html:select property="idContacto" styleClass="form-control">
+                                        <html:option value="Seleccionar"></html:option>
+                                        <logic:notEmpty name="ActionFormFactura" property="listaContactos">
+                                            <logic:iterate id="ver" name="ActionFormFactura" property="listaContactos">
+                                                <html:option value="${ver.idContacto}" >${ver.nombreContacto}</html:option>
                                             </logic:iterate>
                                         </logic:notEmpty>
-                                    </html:select>
-                                </div>
+                                    </html:select>   
+                                </div>  
                                 <div class="col-3">
                                     <div class="text-left"><label>Numero de Factura : </label></div>
                                     <h2 class="text-center" style="color: red">00000${num}</h2>
@@ -160,7 +162,7 @@
                                     <html:text property="fechaFactura" styleClass="form-control"></html:text>
                                     </div>
                                 </div>    
-                            </div>
+                            </div>    
                             <br>
                             <div class="card-header" style="background-color:#f0f3f4;">
                                 <div class="row">
@@ -198,12 +200,12 @@
                                     </div>
                                 </div>
                             </div>
-                    </html:form>
-                    <div class="card-header" style="background-color:#f0f3f4;">
+                    </html:form>        
+                   <div class="card-header" style="background-color:#f0f3f4;">
                         <div class="row">
                             <div class="col-12">
                                 <table>
-                                    <thead>
+                                     <thead>
                                         <tr style="width:100%"> 
                                             <td style="width:400px">Producto : </td>
                                             <td style="width:250px">Cantidad : </td>
@@ -212,7 +214,7 @@
                                             <td style="width:5px"></td>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                   <tbody>
                                         <logic:notEmpty name="ActionFormFactura" property="listaFacturaDetalle">
                                             <logic:iterate id="ver" name="ActionFormFactura" property="listaFacturaDetalle">
                                                 <tr>
@@ -228,11 +230,11 @@
                                             </logic:iterate>
                                         </logic:notEmpty>
 
-                                    </tbody>
+                                    </tbody>            
                                 </table>
                             </div>
                         </div>
-                    </div>
+                    </div>              
                     <div class="card-header" style="background-color:#f0f3f4;">
                         <div class="row">
                             <div class="col-5">
@@ -258,7 +260,7 @@
                     <html:submit property="action" value="Guardar " styleClass="btn  font-weight-bold" style="background-color:#f0f3f4; color: black"/>
                     </html:form>
 
-                </div>
+                </div>  
                 <div class="col-1"></div>
             </div>
         </div>

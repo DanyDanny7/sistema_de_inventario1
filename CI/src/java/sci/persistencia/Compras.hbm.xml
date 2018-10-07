@@ -5,7 +5,7 @@
   <class catalog="control_de_inventario1" name="sci.persistencia.Compras" optimistic-lock="version" table="compras">
     <id name="idCompra" type="int">
       <column name="id_compra"/>
-      <generator class="assigned"/>
+      <generator class="identity"/>
     </id>
     <many-to-one class="sci.persistencia.Contactos" fetch="select" name="contactos">
       <column name="id_contacto" not-null="true"/>

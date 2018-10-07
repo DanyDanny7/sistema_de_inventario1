@@ -7,6 +7,8 @@ package sci.actionforms;
 
 import java.util.List;
 import sci.persistencia.Compras;
+import sci.persistencia.Contactos;
+import sci.persistencia.Productos;
 
 /**
  *
@@ -24,15 +26,16 @@ public class ActionFormCompras extends org.apache.struts.action.ActionForm{
     private Double totalCompra;
     private String action ; 
     private String error; 
-    
-    
+    private List<Contactos> listaContactos;
+    private List<Productos> listaProductos;
+    private List<Compras> listaCompras;
 
-    public Double getCantidad() {
-        return cantidad;
+    public Integer getIdCompra() {
+        return idCompra;
     }
 
-    public void setCantidad(Double cantidad) {
-        this.cantidad = cantidad;
+    public void setIdCompra(Integer idCompra) {
+        this.idCompra = idCompra;
     }
 
     public String getnDocumento() {
@@ -43,23 +46,12 @@ public class ActionFormCompras extends org.apache.struts.action.ActionForm{
         this.nDocumento = nDocumento;
     }
 
-    
-    private List<Compras> listaCompras; 
-
     public Integer getIdContacto() {
         return idContacto;
     }
 
     public void setIdContacto(Integer idContacto) {
         this.idContacto = idContacto;
-    }
-    
-    public Integer getIdCompra() {
-        return idCompra;
-    }
-
-    public void setIdCompra(Integer idCompra) {
-        this.idCompra = idCompra;
     }
 
     public Integer getIdInventario() {
@@ -68,6 +60,14 @@ public class ActionFormCompras extends org.apache.struts.action.ActionForm{
 
     public void setIdInventario(Integer idInventario) {
         this.idInventario = idInventario;
+    }
+
+    public Double getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(Double cantidad) {
+        this.cantidad = cantidad;
     }
 
     public Integer getIdIva() {
@@ -118,6 +118,22 @@ public class ActionFormCompras extends org.apache.struts.action.ActionForm{
         this.error = error;
     }
 
+    public List<Contactos> getListaContactos() {
+        return listaContactos;
+    }
+
+    public void setListaContactos(List<Contactos> listaContactos) {
+        this.listaContactos = listaContactos;
+    }
+
+    public List<Productos> getListaProductos() {
+        return listaProductos;
+    }
+
+    public void setListaProductos(List<Productos> listaProductos) {
+        this.listaProductos = listaProductos;
+    }
+
     public List<Compras> getListaCompras() {
         return listaCompras;
     }
@@ -125,9 +141,6 @@ public class ActionFormCompras extends org.apache.struts.action.ActionForm{
     public void setListaCompras(List<Compras> listaCompras) {
         this.listaCompras = listaCompras;
     }
-    
-    
-    
     
     
 }

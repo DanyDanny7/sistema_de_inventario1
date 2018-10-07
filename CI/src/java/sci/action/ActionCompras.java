@@ -11,15 +11,21 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import metodos.Login;
+import metodos.SumarTotalFila;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import sci.actionforms.ActionFormCompras;
 import sci.mantenimientos.ComprasMantenimiento;
+import sci.mantenimientos.ConfiguracionMantenimiento;
+import sci.mantenimientos.ContactosMantenimiento;
 import sci.mantenimientos.InventarioMantenimiento;
+import sci.mantenimientos.ProductosMantenimiento;
 import sci.persistencia.Compras;
+import sci.persistencia.Contactos;
 import sci.persistencia.Empresa;
 import sci.persistencia.Inventario;
+import sci.persistencia.Productos;
 
 public class ActionCompras extends org.apache.struts.action.Action {
 
@@ -35,102 +41,139 @@ public class ActionCompras extends org.apache.struts.action.Action {
             HttpServletRequest request, HttpServletResponse response)
             throws java.lang.Exception {
 
-        ActionFormCompras formBean = (ActionFormCompras) form;
-        Integer idCompra = formBean.getIdCompra();
-        String nDocumento = formBean.getnDocumento();
-        Integer idContacto = formBean.getIdContacto();
-        Integer idInventario = formBean.getIdInventario();
-        Double cantidad = formBean.getCantidad();
-        Integer idIva = formBean.getIdIva();
-        Integer idProducto = formBean.getIdProducto();
+        ActionFormCompras fb = (ActionFormCompras) form;
+        Integer idCompra = fb.getIdCompra();
+        String nDocumento = fb.getnDocumento();
+        Integer idContacto = fb.getIdContacto();
+        Integer idInventario = fb.getIdInventario();
+        Double cantidad = fb.getCantidad();
+        Integer idIva = fb.getIdIva();
+        Integer idProducto = fb.getIdProducto();
         String fechaCompra = formato.format(new Date());
-        Double totalCompra = formBean.getTotalCompra();
-        String action = formBean.getAction();
+        Double totalCompra = fb.getTotalCompra();
+        String action = fb.getAction();
 
+        ContactosMantenimiento cman = new ContactosMantenimiento();
+        ConfiguracionMantenimiento conman = new ConfiguracionMantenimiento();
+        ProductosMantenimiento pman = new ProductosMantenimiento();
+        ComprasMantenimiento coman = new ComprasMantenimiento();
+        SumarTotalFila sumaTF = new SumarTotalFila();
         String IR = null;
 
-        if (formBean == null || action == null) {
+        if (fb == null || action == null) {
             System.out.println("Error entre formBean o action null");
             IR = INICIO;
         }
 //------------------------------------------------------
+        if (action.equals("irAgregar")) {
+
+//------Para Colocar la fecha si no hay una registrada
+            fechaCompra = formato.format(new Date());
+            fb.setFechaCompra(fechaCompra);
+            //Traemos lista Contactos   --------------------------------             
+            List<Contactos> listaContactos = cman.tipos("cliente");
+            fb.setListaContactos(listaContactos);
+            request.setAttribute("listaContactos", listaContactos);
+//Traemos lista Productos                
+            List<Productos> listaProductos = pman.consultarTodoProductos();
+            fb.setListaProductos(listaProductos);
+            request.setAttribute("listaProductos", listaProductos);
+//Traemos lista Compras               
+            /*   List<Compras> listaCompras = coman.consultarTodoCompras();
+            fb.setListaCompras(listaCompras);
+            request.setAttribute("listaCompras", listaCompras);*/
+
+            IR = AGREGAR;
+        }
+//------------------------------------------------------
+
         System.out.println("El action trae: " + action);
 
         if (action.equals("Agregar")) {
+
             System.out.println("Entro");
             String advertencia = "";
 
-            if (idContacto == null || idContacto.equals("")) {
-                advertencia = "id de compras  es requerido<br>";
+//------Para Colocar la fecha si no hay una registrada
+            if (fechaCompra.equals("")) {
+                fechaCompra = formato.format(new Date());
             }
-            if (idInventario == null || idInventario.equals("")) {
-                advertencia += "*id inventario es requerido<br>";
+            fb.setFechaCompra(fechaCompra);
+
+// Validaciones de ingreso            
+            if (nDocumento.equals("null") || nDocumento.equals("") || nDocumento.equals("0")) {
+                advertencia += "*Ingrese el Numero de Documento <br>";
             }
-            if (idIva == null || idIva.equals("")) {
-                advertencia += "id iva  es requerido<br>";
-            }
-            if (idProducto == null || idProducto.equals("")) {
-                advertencia += "*id productos es requerido<br>";
-            }
-            if (totalCompra == null || totalCompra.equals("")) {
-                advertencia += "*id total de compra es requerido<br>";
+            if (idContacto < 1) {
+                advertencia += "*Seleccione un  Proveedor <br>";
             }
 
+            if (idProducto < 1 || idProducto == null) {
+                advertencia += "*Seleccione un  Producto <br>";
+            }
+
+            if (cantidad == null || cantidad == 0) {
+                advertencia += "*Elija una Cantidad<br>";
+            }
+            System.out.println("el advertencia tiene = " + advertencia);
             if (!advertencia.equals("")) {
-                IR = AGREGAR;
-                request.setAttribute("nombre", Login.nombre);
-                request.setAttribute("nAcceso", Login.nAcceso);
-                request.setAttribute("id", Login.id);
+
                 request.setAttribute("error", advertencia);
-                return mapping.findForward(IR);
             }
-            ComprasMantenimiento comprasMantenimiento = new ComprasMantenimiento();
-            InventarioMantenimiento inventario = new InventarioMantenimiento();
-            Inventario inv = inventario.consultarInventarioId(idInventario);
+            if (advertencia.equals("")) {
 
-            Double existenciaup;
-            existenciaup = (inv.getExistencia() + cantidad);
+                idInventario = 1;
+                idIva = 2;
 
-            int idProductos = (inv.getProductos().getIdProducto());
-            Double existencia = (existenciaup);
-            String estadoExistencia = (inv.getEstadoExistencia());
-            int stockMinimo = (inv.getStockMinimo());
-            String estadoFisico = (inv.getEstadoFisico());
+//Calcular total Compra
+                totalCompra = cantidad * pman.consultarProductosId(idProducto).getPrecioUnitario();
 
-            inventario.modificarInventario(idInventario, idProductos, existencia, estadoExistencia, stockMinimo, estadoFisico);
+                int val = coman.guardarcompras(nDocumento, idContacto, idInventario, cantidad, idIva, idProducto, fechaCompra, totalCompra);
+                System.out.println("val ver =" + val);
 
-            int val = comprasMantenimiento.guardarcompras(idCompra, nDocumento, idContacto, idInventario, cantidad, idIva, idProducto, fechaCompra, totalCompra);
-            if (val != 1) {
-                String error = ("Sugio un error No se Guardó el Registro" +nDocumento);
-               
-                IR = AGREGAR;
-                request.setAttribute("nombre", Login.nombre);
-                request.setAttribute("nAcceso", Login.nAcceso);
-                request.setAttribute("nAcceso", Login.id);
-                request.setAttribute("error", error);
-                return mapping.findForward(IR);
             }
+// para calcular total saldos del pie de factura
+            Double subTotalTransaccion = sumaTF.sumarTotalCompra(nDocumento);
+            request.setAttribute("subTotalTransaccion", subTotalTransaccion);
+// para calcular total saldos del pie de factura
+            Double subTotalTransaccionIva = sumaTF.sumarTotalCompra(nDocumento)/(1+conman.consultarConfiguarionId(1).getIva());
+            request.setAttribute("subTotalTransaccionIva", subTotalTransaccionIva);
+// para calculo de IVA
+            Double ivaPagado = subTotalTransaccion * conman.consultarConfiguarionId(1).getIva();
+            request.setAttribute("ivaPagado", ivaPagado);
+// para calculo total Transaccion   
+            Double totalTransaccion = subTotalTransaccion + ivaPagado;
+            request.setAttribute("totalTransaccion", totalTransaccion);
 
-            List<Compras> listaCompras = comprasMantenimiento.consultarTodoCompras();
-            formBean.setListaCompras(listaCompras);
-            String mensaje = "La Compra \"" + nDocumento + "\" se agregó correctamente";
-            request.setAttribute("mensaje", mensaje);
-            IR = LISTA;
+//Traemos lista Compras
+            List<Compras> listaCompras = coman.consultaNDocumento(nDocumento);
+            fb.setListaCompras(listaCompras);
+            System.out.println("ver lsita " + listaCompras.toString());
+//Traemos lista Contactos   --------------------------------             
+            List<Contactos> listaContactos = cman.tipos("Proveedor");
+            fb.setListaContactos(listaContactos);
+            request.setAttribute("listaContactos", listaContactos);
+//Traemos lista Productos                
+            List<Productos> listaProductos = pman.consultarTodoProductos();
+            fb.setListaProductos(listaProductos);
+            request.setAttribute("listaProductos", listaProductos);
+
+            IR = AGREGAR;
         }
 //----------------------------------------------------------------------
         if (action.equals("Detalle")) {
-            
+
             ComprasMantenimiento comprasMantenimiento = new ComprasMantenimiento();
             Compras compra = comprasMantenimiento.consultarComprasId(idCompra);
 
-            formBean.setIdCompra(compra.getIdCompra());
-            formBean.setnDocumento(compra.getnDocumento());
-            formBean.setIdContacto(compra.getContactos().getIdContacto());
-            formBean.setIdInventario(compra.getInventario().getIdInventario());
-            formBean.setCantidad(compra.getCantidad());
-            formBean.setIdIva(compra.getIva().getIdIva());
-            formBean.setIdProducto(compra.getProductos().getIdProducto());
-            formBean.setTotalCompra(compra.getTotalCompra());
+            fb.setIdCompra(compra.getIdCompra());
+            fb.setnDocumento(compra.getnDocumento());
+            fb.setIdContacto(compra.getContactos().getIdContacto());
+            fb.setIdInventario(compra.getInventario().getIdInventario());
+            fb.setCantidad(compra.getCantidad());
+            fb.setIdIva(compra.getIva().getIdIva());
+            fb.setIdProducto(compra.getProductos().getIdProducto());
+            fb.setTotalCompra(compra.getTotalCompra());
 
             IR = MODIFICAR;
         }
@@ -145,7 +188,7 @@ public class ActionCompras extends org.apache.struts.action.Action {
                 request.setAttribute("error", mensaje);
             } else {
                 List<Compras> listaCompras = comprasMantenimiento.consultarTodoCompras();
-                formBean.setListaCompras(listaCompras);
+                fb.setListaCompras(listaCompras);
                 mensaje = (" Registro \"" + idCompra + "\" Eliminado Correctamente ");
                 request.setAttribute("mensaje", mensaje);
             }
@@ -160,14 +203,14 @@ public class ActionCompras extends org.apache.struts.action.Action {
             List<Compras> listaCompras = comprasMantenimiento.consultarTodoCompras();
 
             if (listaCompras == null) {
-                formBean.setError("<spam style='color:red'> la lista viene vacia " + "<br></spam>");
+                fb.setError("<spam style='color:red'> la lista viene vacia " + "<br></spam>");
                 IR = LISTA;
                 request.setAttribute("nombre", Login.nombre);
                 request.setAttribute("nAcceso", Login.nAcceso);
                 request.setAttribute("id", Login.id);
                 return mapping.findForward(IR);
             } else {
-                formBean.setListaCompras(listaCompras);
+                fb.setListaCompras(listaCompras);
                 IR = LISTA;
             }
         }
@@ -176,22 +219,61 @@ public class ActionCompras extends org.apache.struts.action.Action {
             ComprasMantenimiento comprasMantenimiento = new ComprasMantenimiento();
             comprasMantenimiento.ModificarCompras(idCompra, nDocumento, idContacto, idInventario, cantidad, idIva, idProducto, fechaCompra, totalCompra);
             List<Compras> listaCompras = comprasMantenimiento.consultarTodoCompras();
-            formBean.setListaCompras(listaCompras);
-            
+            fb.setListaCompras(listaCompras);
+
             String mensaje = ("El registro \"" + nDocumento + "\" se modificó correctamente ");
             request.setAttribute("mensaje", mensaje);
             IR = LISTA;
         }
+        //--------------------------------------------------------------
+        if (action.equals("x ")) {
+            int val = coman.eliminarCompras(idCompra);
+            System.out.println("id " + idCompra);
+            idCompra = coman.maxIdCompras();
+            System.out.println("id " + idCompra);
+            Compras com = coman.consultarComprasId(idCompra);
+            System.out.println("ndoc " + com.getnDocumento());
+            nDocumento = com.getnDocumento();
+            fb.setnDocumento(nDocumento);
+            fb.setIdProducto(com.getProductos().getIdProducto());
+            fb.setIdContacto(com.getContactos().getIdContacto());
+            fb.setFechaCompra(com.getFechaCompra());
 
-//--------------------------------------------------------------------------------        
-        if (action.equals("irAgregar")) {
+
+// para calcular total saldos del pie de factura
+            Double subTotalTransaccion = sumaTF.sumarTotalCompra(nDocumento);
+            request.setAttribute("subTotalTransaccion", subTotalTransaccion);
+// para calcular total saldos del pie de factura
+            Double subTotalTransaccionIva = sumaTF.sumarTotalCompra(nDocumento)/(1+conman.consultarConfiguarionId(1).getIva());
+            request.setAttribute("subTotalTransaccionIva", subTotalTransaccionIva);
+// para calculo de IVA
+            Double ivaPagado = subTotalTransaccion * conman.consultarConfiguarionId(1).getIva();
+            request.setAttribute("ivaPagado", ivaPagado);
+// para calculo total Transaccion   
+            Double totalTransaccion = subTotalTransaccion + ivaPagado;
+            request.setAttribute("totalTransaccion", totalTransaccion);            
+//..... TRAER DATOS
+//Traemos lista Compras
+             System.out.println("Ndoc antes de ver lista "+nDocumento);
+            List<Compras> listaCompras = coman.consultaNDocumento(nDocumento);
+            fb.setListaCompras(listaCompras);
+            System.out.println("ver lsita " + listaCompras.toString());
+//Traemos lista Contactos   --------------------------------             
+            List<Contactos> listaContactos = cman.tipos("Proveedor");
+            fb.setListaContactos(listaContactos);
+            request.setAttribute("listaContactos", listaContactos);
+//Traemos lista Productos                
+            List<Productos> listaProductos = pman.consultarTodoProductos();
+            fb.setListaProductos(listaProductos);
+            request.setAttribute("listaProductos", listaProductos);
 
             IR = AGREGAR;
         }
 
-        request.setAttribute("nombre", Login.nombre);
-        request.setAttribute("nAcceso", Login.nAcceso);
-        request.setAttribute("id", Login.id);
+//--------------------------------------------------------------------------------        
+        //request.setAttribute("nombre", Login.nombre);
+        //request.setAttribute("nAcceso", Login.nAcceso);
+        //request.setAttribute("id", Login.id);
         return mapping.findForward(IR);
     }
 }

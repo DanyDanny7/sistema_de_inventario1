@@ -1,7 +1,9 @@
 package metodos;
 
 import java.util.List;
+import sci.mantenimientos.ComprasMantenimiento;
 import sci.mantenimientos.FacturaDetalleMantenimiento;
+import sci.persistencia.Compras;
 import sci.persistencia.FacturaDetalle;
 
 /**
@@ -26,6 +28,26 @@ public class SumarTotalFila {
             }
         } catch (Exception e) {
             System.out.println("error en el catch de sumar total fila "+e);
+            suma = 0.0;
+        }
+        return suma;
+    }
+    public Double sumarTotalCompra(String nDocumento) {
+        //suma la columna de "TotalFila" dentro de Factura Detalle tras recibir un id de Compra.
+        ComprasMantenimiento cman = new ComprasMantenimiento();
+        double suma = 0.0;
+
+        try {
+            List<Compras> listaCompras = cman.consultaNDocumento(nDocumento);
+            //System.out.println("lista "+listaFactura.toString());
+            //System.out.println("ver "+listaFactura.size());
+            if (listaCompras.size() > 0) {
+                for (int i = 0; i < listaCompras.size(); i++) {
+                    suma += listaCompras.get(i).getTotalCompra();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("error en el catch de sumar total compra "+e);
             suma = 0.0;
         }
         return suma;

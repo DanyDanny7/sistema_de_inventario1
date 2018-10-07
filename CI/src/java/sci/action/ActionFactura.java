@@ -400,8 +400,9 @@ public class ActionFactura extends org.apache.struts.action.Action {
         }
         //-------------------------------------------------------------------------      
         if (action.equals("Detalle")) {
+            
 //FacturaEncabezado
-            FacturaEncabezado fe = feman.consultarFacturaEncabezadoId(idFacturaEncabezado);
+           FacturaEncabezado fe = feman.consultarFacturaEncabezadoId(idFacturaEncabezado);
             idFacturaEncabezado = fe.getIdFacturaEncabezado();
 
             fb.setIdFacturaDetalle(fe.getIdFacturaEncabezado());
@@ -418,6 +419,7 @@ public class ActionFactura extends org.apache.struts.action.Action {
             request.setAttribute("nombreEmpresa", nombreEmpresa);
             request.setAttribute("direccionEmpresa", direccionEmpresa);
             request.setAttribute("num", idFacturaEncabezado);
+            
 //Traemos lista contactos 
             List<Contactos> listaContactos = cman.consultarTodosContactos();
             fb.setListaContactos(listaContactos);
@@ -442,7 +444,6 @@ public class ActionFactura extends org.apache.struts.action.Action {
 // total transaccion
             totalTransaccion = subTotalTransaccion + ivaRetenido;
             request.setAttribute("totalTransaccion", totalTransaccion);
-
             IR = MODIFICAR;
         }
         //-------------------------------------------------------------------------      

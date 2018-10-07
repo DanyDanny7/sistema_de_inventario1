@@ -140,62 +140,122 @@
             <div class="row">
                 <div class="col-12 text-center">
                     <div class="card-header" style="color: white"><h1 class="font-weight-bold">Agregar Compra</h1></div>
-
                     <br>
                     <html:form action="/comprasMantenimiento">
                         <div class="card-header" style="background-color:#f0f3f4;">
-
-                            <div hidden="hidden">
-                                <label class="font-weight-bold">id Compras </label><br>
-                                <html:text property="idCompra" styleClass="form-control"></html:text><br>
-                            </div>
-                            
                             <div class="row">
-                                <div class="form-group col-md-6">
-                                    <label class="font-weight-bold">Documento: </label>
-                                <html:text property="nDocumento" styleClass="form-control"></html:text><br>
+                                <div class="col-9">
+                                    <br>
+                                    <div class="text-left"><label >Proveedor</label></div>
+                                    <html:select property="idContacto" styleClass="form-control">
+                                        <html:option value="Seleccionar"></html:option>
+                                        <logic:notEmpty name="ActionFormCompras" property="listaContactos">
+                                            <logic:iterate id="ver" name="ActionFormCompras" property="listaContactos">
+                                                <html:option value="${ver.idContacto}" >${ver.nombreContacto}</html:option>
+                                            </logic:iterate>
+                                        </logic:notEmpty>
+                                    </html:select>
+                                    <br>
                                 </div>
-                                <div class="form-group col-md-6">
-                                    <label class="font-weight-bold">id Contactos </label>
-                                    <td><html:text property="idContacto" styleClass="form-control"></html:text><br>
+                                <div class="col-3">
+                                    <div class="text-left"><label>Numero de Documento : </label></div>
+                                    <html:text property="nDocumento" styleClass="form-control" style="color: red"></html:text>
+                                        <div class="text-left"><label >Fecha : </label></div>
+                                    <html:text property="fechaCompra" styleClass="form-control"></html:text>
+                                    </div>
                                 </div>
-                            </div>
-                                <div class="row">
-                                    <div class="form-group col-md-6">
-                                    <label class="font-weight-bold">id Inventario</label>
-                                <html:text property="idInventario" styleClass="form-control"></html:text> 
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label class="font-weight-bold">id productos</label>
-                                <html:text property="idProducto" styleClass="form-control"></html:text> 
-                                </div>
-                                </div>
-                                <div class="row">
-                                   <div class="form-group col-md-6">
-                                    <label class="font-weight-bold">id Iva  </label>
-                                <html:text property="idIva" styleClass="form-control"></html:text>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label class="font-weight-bold">cantidad</label>
-                                <html:text property="cantidad" styleClass="form-control"></html:text>
-                                </div>
-                                 
-                                </div>
-                                <div class="row">
-                                    <div class="form-group col-md-3"></div> 
-                                    <div class="form-group col-md-6"> 
-                                    <label class="font-weight-bold">total de compra</label>
-                                <html:text property="totalCompra" styleClass="form-control"></html:text>
-                                </div>
-                                </div>
-                                
-
                             </div>
                             <br>
-                        <html:submit property="action" value="Agregar" styleClass="btn  font-weight-bold" style="background-color:#f0f3f4; color: black"/>
+                            <div class="card-header" style="background-color:#f0f3f4;">
+                                <div class="row">
+                                    <div class="col-10">
+                                        <table>
+                                            <thead>
+                                                <tr style="width:100%">
+                                                    <td style="width:700px">Producto</td>
+                                                    <td>    </td>
+                                                    <td style="width:400px">Cantidad</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="align-content-center">
+                                                <tr>
+                                                    <td>
+                                                    <html:select property="idProducto" styleClass="form-control" >
+                                                        <html:option value="Seleccionar"></html:option>
+                                                        <logic:notEmpty name="ActionFormCompras" property="listaProductos">
+                                                            <logic:iterate id="ver" name="ActionFormCompras" property="listaProductos">
+                                                                <html:option value="${ver.idProducto}" >${ver.nombreProducto}</html:option>
+                                                            </logic:iterate>
+                                                        </logic:notEmpty>
+                                                    </html:select> 
+                                                </td>
+                                                <td>  </td>
+                                                <td><html:text property="cantidad" styleClass="form-control"></html:text></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="col-2">
+                                        <br>
+                                    <html:submit  property="action" value="Agregar" styleClass="btn  font-weight-bold " style="background-color:#000; color: white"></html:submit>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-header" style="background-color:#f0f3f4;">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <table>
+                                            <thead>
+                                                <tr style="width:100%"> 
+                                                    <td style="width:400px">Producto : </td>
+                                                    <td style="width:250px">Cantidad : </td>
+                                                    <td style="width:250px">Precio Unitario : </td>
+                                                    <td style="width:180px">Total :</td>
+                                                    <td style="width:5px"></td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                           <logic:notEmpty name="ActionFormCompras" property="listaCompras">
+                                                <logic:iterate id="ver" name="ActionFormCompras" property="listaCompras">
+                                                    <tr>
+                                                         <html:form action="/comprasMantenimiento"> 
+                                                            <td><bean:write name="ver" property="productos.nombreProducto"></bean:write>
+                                                                <html:hidden name="ver" property="idCompra"></html:hidden></td>
+                                                            <td><bean:write name="ver" property="cantidad"></bean:write></td>
+                                                            <td><bean:write name="ver" property="productos.precioUnitario"></bean:write></td>
+                                                            <td><bean:write name="ver" property="totalCompra"></bean:write></td>
+                                                            <td><html:submit property="action" value="x "/></td>
+                                                          </html:form> 
+                                                    </tr>
+                                                </logic:iterate>
+                                            </logic:notEmpty> 
 
-                        <html:submit property="action" value="Consultar" styleClass="btn  font-weight-bold" style="background-color:#f0f3f4; color: black"/>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-header" style="background-color:#f0f3f4;">
+                            <div class="row">
+                                <div class="col-5">
 
+                                </div>
+                                <div class="col-4 text-right">
+                                    <label>Sub Total con Iva : </label><br>
+                                    <label>Sub Total sin Iva : </label><br>
+                                    <label>Iva : </label><br>
+                                    <label>Total : </label>
+                                </div>
+                                <div class="col-3">
+                                    <label>${subTotalTransaccion}</label><br>
+                                    <label>${subTotalTransaccionIva}</label><br>
+                                    <label>${ivaPagado}</label><br>
+                                    <label>${totalTransaccion}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <html:submit property="action" value="Guardar" styleClass="btn  font-weight-bold" style="background-color:#f0f3f4; color: black"/>
                     </html:form>
                 </div>
             </div>

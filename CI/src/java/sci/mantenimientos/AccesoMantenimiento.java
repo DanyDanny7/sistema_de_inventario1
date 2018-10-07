@@ -165,7 +165,6 @@ public class AccesoMantenimiento {
                 System.out.println("error en consulta por id acceso. " + e);
                 ace = null;
             }
-            e.printStackTrace();
 
         } finally {
             session.close();
@@ -230,7 +229,7 @@ public class AccesoMantenimiento {
             }
             session.close();
             return 0;
-        } catch (Exception e) {
+        } catch (HibernateException e) {
             session.close();
             System.out.println("Error en login idAcceso " + e);
             return 0;

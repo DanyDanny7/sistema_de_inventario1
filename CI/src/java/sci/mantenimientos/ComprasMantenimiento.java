@@ -16,7 +16,6 @@ import sci.persistencia.Productos;
 public class ComprasMantenimiento {
 
     public int guardarcompras(
-            int idCompra,
             String nDocumento,
             int idContactos,
             int idInventario,
@@ -32,7 +31,6 @@ public class ComprasMantenimiento {
         int flag = 0;
 
         Compras com = new Compras();
-        com.setIdCompra(idCompra);
         com.setCantidad(cantidad);
         //--
         Contactos contactos = new Contactos();
@@ -162,24 +160,7 @@ public class ComprasMantenimiento {
 
     
 
-    public List consultarTodoCompras() {
-        List<Compras> listaCom = null;
-        SessionFactory factory = HibernateUtil.getSessionFactory();
-        Session session = factory.openSession();
-
-        session.beginTransaction();
-        try {
-            Query q = session.createQuery("from Compras");
-            listaCom = (List<Compras>) q.list();
-            System.out.println("Consultar todo Correcto ComprasMAntenimiento");
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("Error en consultarTodo ComprasMantenimiento. "+e);
-        } finally {
-
-        }
-        return listaCom;
-    }
+   
 
     
     public Compras consultarComprasId(int idCompra) {
@@ -207,5 +188,81 @@ public class ComprasMantenimiento {
         }
         return com;
 }
+    public List consultaNDocumento(String nDocumento){
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.openSession();
+        List<Compras> list = null;
+        try {
+            session.beginTransaction();
+            Query q = session.createQuery("from Compras c where c.nDocumento=:nDocumento");
+            q.setParameter("nDocumento", nDocumento);
+            list = q.list();
+        } catch (Exception e) {
+ 
+            System.out.println("Error en consultaNDocumento "+e);
+            //session.close();
+        }finally{
+        
+        }
+        return list;
+    }
+    /*public static void main(String[] args) {
+        ComprasMantenimiento cman = new  ComprasMantenimiento();
+        String nDocumento = "23";
+        List<Compras> lista = cman.consultaNDocumento(nDocumento);
+        System.out.println("lsita "+lista.toString());
+    }*/
+    
+     public List consultarTodoCompras() {
+        List<Compras> listaCom = null;
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.openSession();
+
+        session.beginTransaction();
+        try {
+            Query q = session.createQuery("from Compras");
+            listaCom = (List<Compras>) q.list();
+            System.out.println("Consultar todo Correcto ComprasMAntenimiento");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error en consultarTodo ComprasMantenimiento. "+e);
+        } finally {
+
+        }
+        return listaCom;
+    }
+     public List maxCompras(){
+         List<Compras> lista = null;
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.openSession();
+         try {
+             session.beginTransaction();
+             Query q = session.createQuery("select max(idCompra) from Compras");
+             lista = (List<Compras>) q.list();
+             System.out.println(lista.get(0));
+             System.out.println("Consulta id max correcta en compras ");
+         } catch (Exception e) {
+             System.out.println("Error en idmax Compras "+e);
+         }
+         return lista;
+     }
+     public int maxIdCompras(){
+        ComprasMantenimiento cman = new  ComprasMantenimiento();
+        int idCompras = 0;
+        List<Compras> lc = cman.consultarTodoCompras();
+         if (lc.size()>0) {
+             List<Integer> lista = cman.maxCompras();
+             idCompras = lista.get(0);
+         }
+         return idCompras;
+     }
+     public static void main(String[] args) {
+        ComprasMantenimiento cman = new  ComprasMantenimiento();
+        
+        List<Integer> ver1 = cman.maxCompras();
+         System.out.println("ver 1 "+ver1);
+        int ver = cman.maxIdCompras();
+         System.out.println("Ver "+ver);
+    }
     
 }

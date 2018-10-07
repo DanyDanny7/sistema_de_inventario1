@@ -185,8 +185,9 @@ public class FacturaEncabezadoMantenimiento {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.openSession();
        
-        session.beginTransaction();
+        
         try {
+            session.beginTransaction();
              Query q   =  session.createQuery("select max(idFacturaEncabezado) from FacturaEncabezado");
          listaFE = (List<FacturaEncabezado>) q.list();
             System.out.println(listaFE.get(0));

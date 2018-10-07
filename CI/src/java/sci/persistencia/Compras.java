@@ -107,6 +107,8 @@ public class Compras  implements java.io.Serializable {
         this.totalCompra = totalCompra;
     }
 
+    
+
 
 
 
