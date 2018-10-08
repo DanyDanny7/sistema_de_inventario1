@@ -143,31 +143,29 @@
                             <thead class="align-content-center">
                             
                                 <tr class="table-default" style="background-color: #000; color: white">
-                                    <th scope="col">ID Producto</th>
-                                    <th>nombre producto</th>
+                                    <th scope="col">nombre producto</th>
                                     <th>precio unitario</th>
                                     <th>existencia</th>
                                     <th>stock minimo</th>
                                     <th>descripcion producto</th>
-                                     <th>modelo</th>
+                                    <th>modelo</th>
+                                     
                                     <th></th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                               <logic:notEmpty name="ActionFormInventario" property="listai">
-                                    <logic:iterate id="ver" name="ActionFormInventario" property="listai">
+                               <logic:notEmpty name="ActionFormInventario" property="listainventario">
+                                    <logic:iterate id="ver" name="ActionFormInventario" property="listainventario">
                                         <tr tyle="background-color: #DCDCDC;">
                                             <html:form action="/inventarioMantenimiento">
-                                               <bean:write name="ver" property="productos.nombreProducto"/>
-                                                    
+                                                <td> <bean:write name="ver" property="productos.nombreProducto"/></td>
                                                 <td ><bean:write name="ver" property="productos.precioUnitario"/></td>
                                                 <td ><bean:write name="ver" property="existencia"/></td>
                                                 <td ><bean:write name="ver" property="stockMinimo"/></td>
                                                 <td ><bean:write name="ver" property="productos.descripcionProducto"/></td>
                                                 <td ><bean:write name="ver" property="productos.modelo"/></td>
-                                                <td ><html:submit property="action" value="Eliminar" styleClass="btn  font-weight-bold" style="background-color: #696969; color: white"/></td>
-                                                <td ><html:submit property="action" value="Detalle" styleClass="btn  font-weight-bold" style="background-color: #696969; color: white"/></td>
+                                                
                                                 <!-- td><!--html:submit property="action" value="ConsultarTipo"/></td -->
                                             </html:form>
                                         </tr>
