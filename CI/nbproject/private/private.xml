@@ -3,14 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/guillermo.bermudes/Documents/NetBeansProjects/Github/sistema_de_inventario1/CI/web/index.jsp</file>
-            <file>file:/C:/Users/guillermo.bermudes/Documents/NetBeansProjects/Github/sistema_de_inventario1/CI/web/jsp/compras/listaCompra.jsp</file>
             <file>file:/C:/Users/guillermo.bermudes/Documents/NetBeansProjects/Github/sistema_de_inventario1/CI/web/jsp/inventario/consultaproductosinstock.jsp</file>
+            <file>file:/C:/Users/guillermo.bermudes/Documents/NetBeansProjects/Github/sistema_de_inventario1/CI/test/Pruebas/PRUEBAEXTRAER.java</file>
+            <file>file:/C:/Users/guillermo.bermudes/Documents/NetBeansProjects/Github/sistema_de_inventario1/CI/src/java/sci/action/ActionInventario.java</file>
             <file>file:/C:/Users/guillermo.bermudes/Documents/NetBeansProjects/Github/sistema_de_inventario1/CI/src/java/sci/persistencia/Inventario.java</file>
-            <file>file:/C:/Users/guillermo.bermudes/Documents/NetBeansProjects/Github/sistema_de_inventario1/CI/web/jsp/Inicio/portada.jsp</file>
-            <file>file:/C:/Users/guillermo.bermudes/Documents/NetBeansProjects/Github/sistema_de_inventario1/CI/web/jsp/inventario/listaInventario.jsp</file>
-            <file>file:/C:/Users/guillermo.bermudes/Documents/NetBeansProjects/Github/sistema_de_inventario1/CI/src/java/sci/action/ActionProductos.java</file>
-            <file>file:/C:/Users/guillermo.bermudes/Documents/NetBeansProjects/Github/sistema_de_inventario1/CI/src/java/sci/persistencia/Productos.java</file>
+            <file>file:/C:/Users/guillermo.bermudes/Documents/NetBeansProjects/Github/sistema_de_inventario1/CI/src/java/sci/mantenimientos/InventarioMantenimiento.java</file>
         </group>
     </open-files>
 </project-private>

@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Sin existencia</title>
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
         <script src="js/popper.min.js" type="text/javascript"></script>
@@ -136,7 +136,7 @@
 
                     <br>
                     <div class=" col-auto">
-                        <div class="card-header primary" style="color: white;"><h1 class="font-weight-bold " >Lista de Productos</h1></div>
+                        <div class="card-header primary" style="color: white;"><h1 class="font-weight-bold " >Productos con stock cero</h1></div>
                     </div>
                     <div class="table table-hover table-sm">
                         <table class="bg-light">

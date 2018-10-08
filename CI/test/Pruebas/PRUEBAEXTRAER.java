@@ -15,6 +15,8 @@ import sci.mantenimientos.InventarioMantenimiento;
 public class PRUEBAEXTRAER {
     public static void main(String[] args) {
         InventarioMantenimiento in = new InventarioMantenimiento();
-        System.out.println(in.consultarExistenciacero())    ;
+      
+        in.existenciabaja();
+        System.out.println(  in.existenciabaja().toString())    ;
     }
 }

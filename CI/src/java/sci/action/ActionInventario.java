@@ -22,7 +22,7 @@ public class ActionInventario extends org.apache.struts.action.Action {
     private static final String ERRORI = "confirmacionErrorInventario";
    private static final String MODIFICARI="modificarinventario";
    private static final String CONFIRMACIONII= "existenciacero";
-   
+   private static final String CONFIRMACIONIII= "existenciabaja";
 
 
     @Override
@@ -137,7 +137,7 @@ public class ActionInventario extends org.apache.struts.action.Action {
             formBean.setListainventario(listai);
            return mapping.findForward(CONFIRMACIONI);
            }
-               if (action.equals("existenciacero")) {
+              if (action.equals("existenciacero")) {
             InventarioMantenimiento inventarioMantenimiento = new InventarioMantenimiento();
             //Acceso acceso = new Acceso();
             List<Inventario> listainventario = inventarioMantenimiento.consultarExistenciacero();
@@ -153,7 +153,22 @@ public class ActionInventario extends org.apache.struts.action.Action {
                 return mapping.findForward(CONFIRMACIONII);
             }
               }
-
+                  if (action.equals("existenciabajaa")) {
+            InventarioMantenimiento inventarioMantenimiento = new InventarioMantenimiento();
+            //Acceso acceso = new Acceso();
+            List<Inventario> listainventario = inventarioMantenimiento.existenciabaja();
+                   System.out.println("lista "+listainventario);
+            if (listainventario == null) {
+                formBean.setError("<spam style='color:red'> la lista viene vacia " + "<br></spam>");
+                return mapping.findForward(ERRORI);
+            } else {
+                System.out.println("lista llena");
+                formBean.setListainventario(listainventario);
+                
+                request.setAttribute("listainventario", listainventario);
+                return mapping.findForward(CONFIRMACIONIII);
+            }
+              }
 //---------------------------------------------------------------------        
     /*     if (action.equals("ConsultarId")) {
             AccesoMantenimiento accesoMantenimiento = new AccesoMantenimiento();

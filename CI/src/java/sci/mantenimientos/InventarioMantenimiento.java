@@ -199,6 +199,23 @@ public class InventarioMantenimiento {
             return null;
         }
     }
+     public List<Inventario> existenciabaja() {
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.openSession();
+       
+        try {
+            Query q = session.createQuery("from Inventario i where i.existencia <i.stockMinimo");
+          
+            List<Inventario> list = q.list();
+            System.out.println("consulta por tipo correcto");
+            //session.close();
+            return list;
+        } catch (Exception e) {
+            System.out.println("error en consulta tipo de acceso " + e);
+            session.close();
+            return null;
+        }
+    }
     public static void main(String[] args) {
         InventarioMantenimiento i = new InventarioMantenimiento();
         
