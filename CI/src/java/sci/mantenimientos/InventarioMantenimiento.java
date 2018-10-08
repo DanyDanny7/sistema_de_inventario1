@@ -182,6 +182,23 @@ public class InventarioMantenimiento {
         }
         return idInventario;
     }
+    public List<Inventario> consultarExistenciacero() {
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.openSession();
+        double numero = 0;
+        try {
+            Query q = session.createQuery("from Inventario i where i.existencia=:numero");
+            q.setParameter("numero", numero);
+            List<Inventario> list = q.list();
+            System.out.println("consulta por tipo correcto");
+            //session.close();
+            return list;
+        } catch (Exception e) {
+            System.out.println("error en consulta tipo de acceso " + e);
+            session.close();
+            return null;
+        }
+    }
     public static void main(String[] args) {
         InventarioMantenimiento i = new InventarioMantenimiento();
         

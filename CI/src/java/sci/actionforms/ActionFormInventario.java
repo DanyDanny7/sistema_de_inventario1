@@ -10,16 +10,16 @@ public class ActionFormInventario extends org.apache.struts.action.ActionForm {
    private String estadoExistencia; 
    private int stockMinimo;
    private String estadoFisico; 
-   private  List<Inventario> listai; 
+   private  List<Inventario> listainventario; 
    private String error;
     private String action;
 
-    public List<Inventario> getListai() {
-        return listai;
+    public List<Inventario> getListainventario() {
+        return listainventario;
     }
 
-    public void setListai(List<Inventario> listai) {
-        this.listai = listai;
+    public void setListainventario(List<Inventario> listainventario) {
+        this.listainventario = listainventario;
     }
 
     public Integer getIdInventario() {

@@ -21,6 +21,7 @@ public class ActionInventario extends org.apache.struts.action.Action {
     private static final String CONFIRMACIONI = "confirmacionNuevoInventario";
     private static final String ERRORI = "confirmacionErrorInventario";
    private static final String MODIFICARI="modificarinventario";
+   private static final String CONFIRMACIONII= "existenciacero";
    
 
 
@@ -73,7 +74,7 @@ public class ActionInventario extends org.apache.struts.action.Action {
           
           //inventarioMantenimiento.guardarInventario(0, idProducto, existencia, estadoExistencia, stockMinimo, estadoFisico);
          List<Inventario> listai= inventarioMantenimiento.consultarTodoInventario();
-            formBean.setListai(listai); 
+            formBean.setListainventario(listai); 
             
             String mensaje="<span style='color:red'>agregado correcto"+"<br></span>";
             request.setAttribute("mensaje",mensaje);
@@ -92,7 +93,7 @@ public class ActionInventario extends org.apache.struts.action.Action {
                 formBean.setError("<spam style='color:red'> la lista viene vacia " + "<br></spam>");
                 return mapping.findForward(ERRORI);
             } else {
-                formBean.setListai(listainventario);
+                formBean.setListainventario(listainventario);
                 return mapping.findForward(CONFIRMACIONI);
             }
               }
@@ -102,7 +103,7 @@ public class ActionInventario extends org.apache.struts.action.Action {
             inventarioMantenimiento.eliminarInventario(formBean.getIdInventario());
             List<Inventario> listai = inventarioMantenimiento.consultarTodoInventario();
            
-            formBean.setListai(listai);
+            formBean.setListainventario(listai);
             
             String mensaje="<span style='color:red'>eliminado correcto"+"<br></span>";
             request.setAttribute("mensaje",mensaje);
@@ -133,9 +134,25 @@ public class ActionInventario extends org.apache.struts.action.Action {
            
            //inventarioMantenimiento.modificarInventario(idInventario,idProducto, existencia, estadoExistencia, stockMinimo, estadoFisico);
             List<Inventario> listai = inventarioMantenimiento.consultarTodoInventario();
-            formBean.setListai(listai);
+            formBean.setListainventario(listai);
            return mapping.findForward(CONFIRMACIONI);
            }
+               if (action.equals("existenciacero")) {
+            InventarioMantenimiento inventarioMantenimiento = new InventarioMantenimiento();
+            //Acceso acceso = new Acceso();
+            List<Inventario> listainventario = inventarioMantenimiento.consultarExistenciacero();
+                   System.out.println("lista "+listainventario);
+            if (listainventario == null) {
+                formBean.setError("<spam style='color:red'> la lista viene vacia " + "<br></spam>");
+                return mapping.findForward(ERRORI);
+            } else {
+                System.out.println("lista llena");
+                formBean.setListainventario(listainventario);
+                
+                request.setAttribute("listainventario", listainventario);
+                return mapping.findForward(CONFIRMACIONII);
+            }
+              }
 
 //---------------------------------------------------------------------        
     /*     if (action.equals("ConsultarId")) {

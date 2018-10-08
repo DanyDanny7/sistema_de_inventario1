@@ -81,7 +81,7 @@
                                             <a class="dropdown-item" href="productosMantenimiento.do?action=Consultar">Consultar Productos</a>
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="#">Consulta de productos en Stock Bajo</a>
-                                            <a class="dropdown-item" href="#">Consulta de productos en sin Stock</a>
+                                            <a class="dropdown-item" href="inventarioMantenimiento.do?action=existenciacero">Consulta de productos en sin Stock</a>
                                         </div>
                                     </li>
                                     <li class="nav-item dropdown">
