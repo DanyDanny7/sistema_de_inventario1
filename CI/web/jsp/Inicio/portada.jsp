@@ -67,8 +67,6 @@
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
                                             <a class="dropdown-item" href="comprasMantenimiento.do?action=irAgregar">Agregar Compra</a>
                                             <a class="dropdown-item" href="comprasMantenimiento.do?action=Consultar">Consultar Compras</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Consultas por Documento</a>
                                         </div>
                                     </li>
                                     <li class="nav-item dropdown">
@@ -132,8 +130,6 @@
                                             </a>
                                             <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
                                                 <a class="dropdown-item" text-dark href="configuracionMantenimiento.do?action=consultaId">Configuración</a>
-                                                <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item" text-dark href="empresaMantenimiento.do?action=irAgregar">Configuración Inicial</a>
                                             </div>
                                         </li>
                                     </div>

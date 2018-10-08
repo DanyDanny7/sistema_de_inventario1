@@ -170,7 +170,7 @@
                                                
                                          
                                                 <td><bean:write name="ver" property="nDocumento"/>
-                                                <html:text name="ver" property="nDocumento"/></td>
+                                                <html:hidden name="ver" property="nDocumento"/></td>
                                                             <td><bean:write name="ver" property="contactos.nombreContacto"/></td>
                                                             <td><bean:write name="ver" property="fechaCompra"/></td>
                                                             <td><bean:write name="ver" property="iva.subTotalTransaccion"/></td>

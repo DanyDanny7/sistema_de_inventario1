@@ -151,9 +151,7 @@
                                 <div class="form-group col-3"></div>
                             </div>
                                 <div class="row">
-                                    <div class="col-12 ">
-                                        <div class="form-group col-5"><html:file property="file" styleClass="form-control-file"></html:file><br></div>
-                                    </div>
+                                    
                                 </div>
                             <div class="row">
                                 <div class="form-group col-7">
