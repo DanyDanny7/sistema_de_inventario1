@@ -21,12 +21,13 @@ import sci.mantenimientos.ContactosMantenimiento;
 import sci.mantenimientos.EmpresaMantenimiento;
 import sci.mantenimientos.FacturaDetalleMantenimiento;
 import sci.mantenimientos.FacturaEncabezadoMantenimiento;
+import sci.mantenimientos.InventarioMantenimiento;
 import sci.mantenimientos.IvaMantenimiento;
 import sci.mantenimientos.ProductosMantenimiento;
 import sci.persistencia.Contactos;
-import sci.persistencia.Empresa;
 import sci.persistencia.FacturaDetalle;
 import sci.persistencia.FacturaEncabezado;
+import sci.persistencia.Inventario;
 import sci.persistencia.Iva;
 import sci.persistencia.Productos;
 
@@ -36,7 +37,7 @@ import sci.persistencia.Productos;
  */
 public class ActionFactura extends org.apache.struts.action.Action {
 
-    private static final String INICIO = "irInicioFactura";
+    private static final String PORTADA = "irPortada";
     private static final String AGREGAR = "irAgregarFactura";
     private static final String MODIFICAR = "irModificarFactura";
     private static final String LISTA = "irListaFactura";
@@ -74,6 +75,7 @@ public class ActionFactura extends org.apache.struts.action.Action {
         ContactosMantenimiento cman = new ContactosMantenimiento();
         ConfiguracionMantenimiento coman = new ConfiguracionMantenimiento();
         IvaMantenimiento iman = new IvaMantenimiento();
+        InventarioMantenimiento inman = new InventarioMantenimiento();
         ProductosMantenimiento pman = new ProductosMantenimiento();
         SumarTotalFila sumaTF = new SumarTotalFila();
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
@@ -171,6 +173,26 @@ public class ActionFactura extends org.apache.struts.action.Action {
                 totalFila = pman.consultarProductosId(idProducto).getPrecioUnitario() * cantidad;
                 int val2 = fdman.guardarFacuraDetalle(idConfiguracion, idFacturaEncabezado, idIva, idProducto, cantidad, totalFila, 0, 0);
 
+// reducir la existencia del inventario     
+            Integer idInventario = inman.consultarInventarioIdProducto(idProducto);
+            Inventario iv = inman.consultarInventarioId(idInventario);
+            double existencia = iv.getExistencia() - cantidad;
+            String estadoExistencia = iv.getEstadoExistencia();
+            int stockMinimo = iv.getStockMinimo();
+            String estadoFisico = iv.getEstadoFisico();
+            int id_producto = iv.getProductos().getIdProducto();
+
+            if (existencia > 0 && existencia <= stockMinimo) {
+                estadoExistencia = "Stock Bajo";
+            }
+            if (existencia > stockMinimo) {
+                estadoExistencia = "Con Existencia";
+            } else {
+                estadoExistencia = "Sin Existencia";
+            }
+
+            inman.modificarInventario(idInventario, id_producto, existencia, estadoExistencia, stockMinimo, estadoFisico);
+//--------------  
                 if (val2 == 1) {
                     mensaje = "Registro Agregado";
                     request.setAttribute("mensaje", mensaje);
@@ -340,7 +362,7 @@ public class ActionFactura extends org.apache.struts.action.Action {
 
             iman.modificarIva(idIva, ivaTasa, ivaRetenido, ivaPagado, ivaTotal, subTotalTransaccion, totalTransaccion);
 
-            IR = INICIO;
+            IR = PORTADA;
         }
         //-------------------------------------------------------------------------
         if (action.equals("Guardar ")) {
@@ -383,7 +405,7 @@ public class ActionFactura extends org.apache.struts.action.Action {
 
             iman.modificarIva(idIva, ivaTasa, ivaRetenido, ivaPagado, ivaTotal, subTotalTransaccion, totalTransaccion);
 
-            IR = INICIO;
+            IR = PORTADA;
         }
         //-------------------------------------------------------------------------
         if (action.equals("Modificar")) {
@@ -479,7 +501,26 @@ public class ActionFactura extends org.apache.struts.action.Action {
         //-------------------------------------------------------------------------      
         if (action.equals("x ")) {
 
-            //idFacturaEncabezado = feman.maxIdFacturaEncabezad();
+// reducir la existencia del inventario            
+            Integer idInventario = inman.consultarInventarioIdProducto(fdman.consultarFacturaDetalleId(idFacturaDetalle).getProductos().getIdProducto());
+            Inventario iv = inman.consultarInventarioId(idInventario);
+            double existencia = iv.getExistencia() + fdman.consultarFacturaDetalleId(idFacturaDetalle).getCantidad();
+            String estadoExistencia = iv.getEstadoExistencia();
+            int stockMinimo = iv.getStockMinimo();
+            String estadoFisico = iv.getEstadoFisico();
+            int id_producto = iv.getProductos().getIdProducto();
+
+            if (existencia > 0 && existencia <= stockMinimo) {
+                estadoExistencia = "Stock Bajo";
+            }
+            if (existencia > stockMinimo) {
+                estadoExistencia = "Con Existencia";
+            } else {
+                estadoExistencia = "Sin Existencia";
+            }
+
+            inman.modificarInventario(idInventario, id_producto, existencia, estadoExistencia, stockMinimo, estadoFisico);
+//--------------
             int ver = fdman.eliminarFacturaDetalle(idFacturaDetalle);
             System.out.println("ver ver " + ver);
 
@@ -526,6 +567,29 @@ public class ActionFactura extends org.apache.struts.action.Action {
             idFacturaEncabezado = fdman.consultarFacturaDetalleId(idFacturaDetalle).getFacturaEncabezado().getIdFacturaEncabezado();
             fb.setIdFacturaEncabezado(idFacturaEncabezado);
             System.out.println("idFacturaEncabezado ver " + idFacturaEncabezado);
+ 
+// reducir la existencia del inventario            
+            Integer idInventario = inman.consultarInventarioIdProducto(fdman.consultarFacturaDetalleId(idFacturaDetalle).getProductos().getIdProducto());
+            Inventario iv = inman.consultarInventarioId(idInventario);
+            double existencia = iv.getExistencia() + fdman.consultarFacturaDetalleId(idFacturaDetalle).getCantidad();
+            String estadoExistencia = iv.getEstadoExistencia();
+            int stockMinimo = iv.getStockMinimo();
+            String estadoFisico = iv.getEstadoFisico();
+            int id_producto = iv.getProductos().getIdProducto();
+
+            if (existencia > 0 && existencia <= stockMinimo) {
+                estadoExistencia = "Stock Bajo";
+            }
+            if (existencia > stockMinimo) {
+                estadoExistencia = "Con Existencia";
+            } else {
+                estadoExistencia = "Sin Existencia";
+            }
+
+            inman.modificarInventario(idInventario, id_producto, existencia, estadoExistencia, stockMinimo, estadoFisico);
+//--------------           
+            
+            
             int ver = fdman.eliminarFacturaDetalle(idFacturaDetalle);
             System.out.println("ver ver " + ver);
 

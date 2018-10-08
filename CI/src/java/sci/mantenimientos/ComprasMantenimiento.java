@@ -206,12 +206,36 @@ public class ComprasMantenimiento {
         }
         return list;
     }
-    /*public static void main(String[] args) {
+    public boolean consultaNDocumento2(String nDocumento, Integer idContacto){
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.openSession();
+        List<Compras> list = null;
+        boolean val = false;
+        try {
+            session.beginTransaction();
+            Query q = session.createQuery("from Compras c where c.nDocumento=:nDocumento and c.contactos.idContacto=:idContacto");
+            q.setParameter("nDocumento", nDocumento);
+            q.setParameter("idContacto", idContacto);
+            list = q.list();
+            if (list.size()>0) {
+                val = true;
+            }
+        } catch (Exception e) {
+ 
+            System.out.println("Error en consultaNDocumento "+e);
+            //session.close();
+        }finally{
+            session.close();
+        }
+        return val;
+    }
+    public static void main(String[] args) {
         ComprasMantenimiento cman = new  ComprasMantenimiento();
-        String nDocumento = "23";
-        List<Compras> lista = cman.consultaNDocumento(nDocumento);
-        System.out.println("lsita "+lista.toString());
-    }*/
+        String nDocumento = "02";
+        Integer idContacto = 17;
+        boolean ver = cman.consultaNDocumento2(nDocumento, idContacto);
+        System.out.println("lsita "+ver);
+    }
     
      public List consultarTodoCompras() {
         List<Compras> listaCom = null;
@@ -252,12 +276,12 @@ public class ComprasMantenimiento {
 
         }
         return listaCom;
-    }
+    }/*
      public static void main(String[] args) {
         ComprasMantenimiento cman = new  ComprasMantenimiento();
         
          System.out.println("ver lsita "+cman.consultarTodoComprasGrup());
-    }
+    }*/
 //---------------------------------------------------------------------------------     
      public List maxCompras(){
          List<Compras> lista = null;

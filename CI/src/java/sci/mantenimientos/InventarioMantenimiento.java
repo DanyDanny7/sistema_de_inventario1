@@ -174,10 +174,11 @@ public class InventarioMantenimiento {
             List<Inventario> listaInventario = q.list();
             idInventario = listaInventario.get(0).getIdInventario();
             System.out.println("idInventario "+listaInventario.get(0).getIdInventario());
+            session.close();
         } catch (Exception e) {
             //session.close();
             System.out.println("Error en consultar inventario por id producto "+e);
-            
+            session.close();
         }
         return idInventario;
     }

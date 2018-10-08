@@ -5,6 +5,7 @@
  */
 package sci.action;
 
+import com.myapp.struts.HibernateUtil;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -17,6 +18,8 @@ import metodos.SumarTotalFila;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import sci.actionforms.ActionFormCompras;
 import sci.mantenimientos.ComprasMantenimiento;
 import sci.mantenimientos.ConfiguracionMantenimiento;
@@ -105,6 +108,7 @@ public class ActionCompras extends org.apache.struts.action.Action {
                 fechaCompra = formato.format(new Date());
             }
             fb.setFechaCompra(fechaCompra);
+// validar ingreso de n_doc por empresa
 
 // Validaciones de ingreso            
             if (nDocumento.equals("null") || nDocumento.equals("") || nDocumento.equals("0")) {
@@ -141,8 +145,16 @@ public class ActionCompras extends org.apache.struts.action.Action {
                     Double ivaPagado = iva.getIvaPagado();
 
                     if ((totalTransaccion > 0 && ivaPagado > 0) || i.size() < 2) {
-                        System.out.println("Entró a crear nuevo iva");
-                        iman.guardarIva(conman.consultarConfiguarionId(1).getIva(), 0, 0, 0, 0, 0);
+                        if (coman.consultaNDocumento2(nDocumento, idContacto)) {
+                            advertencia += "*Ya existe un Documento " + nDocumento + " para el Proveedor " + idContacto;
+                        }
+                        if (!advertencia.equals("")) {
+                            request.setAttribute("error", advertencia);
+                        } else {
+                            System.out.println("Entró a crear nuevo iva");
+                            iman.guardarIva(conman.consultarConfiguarionId(1).getIva(), 0, 0, 0, 0, 0);
+                        }
+
                     }
                 }
 // es necesario realizar de nuevo la consulta max id
@@ -155,7 +167,25 @@ public class ActionCompras extends org.apache.struts.action.Action {
 //Calcular total Compra
                 totalCompra = cantidad * pman.consultarProductosId(idProducto).getPrecioUnitario();
 
+// guardar la compra
                 int val = coman.guardarcompras(nDocumento, idContacto, idInventario, cantidad, idIva, idProducto, fechaCompra, totalCompra);
+//guardar en el inventario   
+                //------------------------------*--------------
+                Inventario iv = inman.consultarInventarioId(idInventario);
+                double existencia = iv.getExistencia() + cantidad;
+                String estadoExistencia = iv.getEstadoExistencia();
+                int stockMinimo = iv.getStockMinimo();
+                String estadoFisico = iv.getEstadoFisico();
+                int id_producto = iv.getProductos().getIdProducto();
+
+                if (existencia <= stockMinimo) {
+                    estadoExistencia = "Stock Bajo";
+                } else {
+                    estadoExistencia = "Con Existencia";
+                }
+
+                inman.modificarInventario(idInventario, id_producto, existencia, estadoExistencia, stockMinimo, estadoFisico);
+//----------------------------------------------------------
 
                 System.out.println("val ver =" + val);
             }
@@ -225,7 +255,7 @@ public class ActionCompras extends org.apache.struts.action.Action {
             //nDocumento = coman.consultarComprasId(coman.maxIdCompras()).getnDocumento();
             if (advertencia.equals("")) {
 
-                System.out.println("Quiero ver el "+idCompra);
+                System.out.println("Quiero ver el " + idCompra);
 
                 idIva = coman.consultarComprasId(idCompra).getIva().getIdIva();
 
@@ -239,6 +269,20 @@ public class ActionCompras extends org.apache.struts.action.Action {
                 totalCompra = cantidad * pman.consultarProductosId(idProducto).getPrecioUnitario();
 
                 int val = coman.guardarcompras(nDocumento, idContacto, idInventario, cantidad, idIva, idProducto, fechaCompra, totalCompra);
+                Inventario iv = inman.consultarInventarioId(idInventario);
+                double existencia = iv.getExistencia() + cantidad;
+                String estadoExistencia = iv.getEstadoExistencia();
+                int stockMinimo = iv.getStockMinimo();
+                String estadoFisico = iv.getEstadoFisico();
+                int id_producto = iv.getProductos().getIdProducto();
+
+                if (existencia <= stockMinimo) {
+                    estadoExistencia = "Stock Bajo";
+                } else {
+                    estadoExistencia = "Con Existencia";
+                }
+
+                inman.modificarInventario(idInventario, id_producto, existencia, estadoExistencia, stockMinimo, estadoFisico);
 
                 System.out.println("val ver =" + val);
             }
@@ -297,9 +341,8 @@ public class ActionCompras extends org.apache.struts.action.Action {
             request.setAttribute("ivaPagado", ivaPagado);
 // para calculo total Transaccion   
             Double totalTransaccion = subTotalTransaccionIva + ivaPagado;
-            request.setAttribute("totalTransaccion", totalTransaccion);            
+            request.setAttribute("totalTransaccion", totalTransaccion);
 
-            
 //------Para Colocar la fecha si no hay una registrada
             fechaCompra = formato.format(new Date());
             fb.setFechaCompra(fechaCompra);
@@ -329,6 +372,7 @@ public class ActionCompras extends org.apache.struts.action.Action {
                 fb.setListaCompras(listaCompras);
                 mensaje = (" Registro \"" + idCompra + "\" Eliminado Correctamente ");
                 request.setAttribute("mensaje", mensaje);
+
             }
 
             System.out.println("desde eliminar");
@@ -366,6 +410,27 @@ public class ActionCompras extends org.apache.struts.action.Action {
         }
         //--------------------------------------------------------------
         if (action.equals("x ")) {
+
+// reducir la existencia del inventario            
+            idInventario = inman.consultarInventarioIdProducto(idProducto);
+            Inventario iv = inman.consultarInventarioId(idInventario);
+            double existencia = iv.getExistencia() - coman.consultarComprasId(idCompra).getCantidad();
+            String estadoExistencia = iv.getEstadoExistencia();
+            int stockMinimo = iv.getStockMinimo();
+            String estadoFisico = iv.getEstadoFisico();
+            int id_producto = iv.getProductos().getIdProducto();
+
+            if (existencia > 0 && existencia <= stockMinimo) {
+                estadoExistencia = "Stock Bajo";
+            }
+            if (existencia > stockMinimo) {
+                estadoExistencia = "Con Existencia";
+            } else {
+                estadoExistencia = "Sin Existencia";
+            }
+
+            inman.modificarInventario(idInventario, id_producto, existencia, estadoExistencia, stockMinimo, estadoFisico);
+//--------------
             int val = coman.eliminarCompras(idCompra);
             System.out.println("id " + idCompra);
             idCompra = coman.maxIdCompras();
@@ -417,11 +482,29 @@ public class ActionCompras extends org.apache.struts.action.Action {
                 System.out.println("Entró por nula");
                 Estaticas.nDocumento1 = coman.consultarComprasId(idCompra).getnDocumento();
             }
+// reducir la existencia del inventario            
+            idInventario = inman.consultarInventarioIdProducto(idProducto);
+            Inventario iv = inman.consultarInventarioId(idInventario);
+            double existencia = iv.getExistencia() - coman.consultarComprasId(idCompra).getCantidad();
+            String estadoExistencia = iv.getEstadoExistencia();
+            int stockMinimo = iv.getStockMinimo();
+            String estadoFisico = iv.getEstadoFisico();
+            int id_producto = iv.getProductos().getIdProducto();
+
+            if (existencia > 0 && existencia <= stockMinimo) {
+                estadoExistencia = "Stock Bajo";
+            }
+            if (existencia > stockMinimo) {
+                estadoExistencia = "Con Existencia";
+            } else {
+                estadoExistencia = "Sin Existencia";
+            }
+
+            inman.modificarInventario(idInventario, id_producto, existencia, estadoExistencia, stockMinimo, estadoFisico);
+//--------------
             int val = coman.eliminarCompras(idCompra);
             nDocumento = Estaticas.nDocumento1;
             System.out.println("N doc" + nDocumento);
-
-            
 
             if (coman.consultaNDocumento(nDocumento).isEmpty()) {
                 // PARA LLENAR LA LISTA
@@ -569,5 +652,6 @@ public class ActionCompras extends org.apache.struts.action.Action {
         //request.setAttribute("nAcceso", Login.nAcceso);
         //request.setAttribute("id", Login.id);
         return mapping.findForward(IR);
+
     }
 }

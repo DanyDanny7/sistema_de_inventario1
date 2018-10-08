@@ -220,7 +220,8 @@
                                                     <tr>
                                                          <html:form action="/comprasMantenimiento"> 
                                                             <td><bean:write name="ver" property="productos.nombreProducto"></bean:write>
-                                                                <html:hidden name="ver" property="idCompra"></html:hidden></td>
+                                                                <html:hidden name="ver" property="idCompra"></html:hidden>
+                                                                <html:hidden name="ver" property="productos.idProducto"></html:hidden></td>
                                                             <td><bean:write name="ver" property="cantidad"></bean:write></td>
                                                             <td><bean:write name="ver" property="productos.precioUnitario"></bean:write></td>
                                                             <td><bean:write name="ver" property="totalCompra"></bean:write></td>
