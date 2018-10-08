@@ -94,15 +94,20 @@
 
                 <p id="info" hidden="hidden">${info}</p>
         </div>
+        <div id="error" hidden="hidden">${mensaje}</div>
+        <p id="info" hidden="hidden">${info}</p>
         <script type="text/javascript">
-
-            if ($("#info").text() != "") {
-                window.onload = function () {
-                    toastrs();
-                };
-            }
-            ;
-
+            window.onload = function () {
+                if ($("#error").text() != "") {
+                    error();
+                }
+                if ($("#mensaje").text() != "") {
+                    mensaje();
+                }
+                if ($("#info").text() != "") {
+                    info();
+                }
+            };
             toastr.options = {
                 "debug": false,
                 "onclick": null,
@@ -111,17 +116,20 @@
                 "timeOut": 5000,
                 "extendedTimeOut": 1000
             };
-
             var showToastrs = false;
-
-            function toastrs() {
-
+            function error() {
                 if (!showToastrs) {
-                    toastr.info($("#info").text(), 'Error');
-
-
-                } else {
-                    toastr.error('no se puede!\'t.', 'Otro error crítico');
+                    toastr.error($("#error").text(), 'Error');
+                }
+            }
+            function mensaje() {
+                if (!showToastrs) {
+                    toastr.success($("#mensaje").text(), 'Confirmacion');
+                }
+            }
+            function info() {
+                if (!showToastrs) {
+                    toastr.info($("#info").text(), 'Informacion');
                 }
             }
         </script>

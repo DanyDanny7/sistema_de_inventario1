@@ -132,7 +132,7 @@ public class EmpresaMantenimiento {
             e.printStackTrace();
             System.out.println("Error en consultar todo EmpresaMantenimiento " + e);
         } finally {
-            session.close();
+            //session.close();
         }
         return listaUsuarios;
     }

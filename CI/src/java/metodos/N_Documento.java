@@ -31,9 +31,7 @@ public class N_Documento {
         String ndo2 = nDocs.get(1).substring(0);
         String ndo3 = nDocs.get(2).substring(0);
 
-        System.out.println(ndo);
-        System.out.println(ndo2);
-        System.out.println(ndo3);
+
 
         String nd = "";
         List<Compras> listaCompras = new LinkedList<>();
@@ -55,7 +53,6 @@ public class N_Documento {
             iva = new Iva(lista.get(0).getIva().getIdIva());
             iva.setTotalTransaccion(lista.get(0).getIva().getTotalTransaccion());
             iva.setSubTotalTransaccion(lista.get(0).getIva().getSubTotalTransaccion());
-            iva.setIvaPagado(lista.get(0).getIva().getIvaPagado());
             compras.setIva(iva);
             
             listaCompras.add(compras);

@@ -8,4 +8,6 @@ public class Estaticas {
     public static String nombreEmpresa;
     public static String nombreMoneda;
     public static String simboloMoneda;
+    
+    public static String nDocumento1;
 }
