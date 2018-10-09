@@ -78,8 +78,8 @@
                                             <a class="dropdown-item" href="productosMantenimiento.do?action=irAgregar">Agregar Producto</a>
                                             <a class="dropdown-item" href="productosMantenimiento.do?action=Consultar">Consultar Productos</a>
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="inventarioMantenimiento.do?action=existenciabajaa">Consulta de productos en Stock Bajo</a>
-                                            <a class="dropdown-item" href="inventarioMantenimiento.do?action=existenciacero">Consulta de productos en sin Stock</a>
+                                            <a class="dropdown-item" href="inventarioMantenimiento.do?action=existenciabajaa">Productos en Stock Bajo</a>
+                                            <a class="dropdown-item" href="inventarioMantenimiento.do?action=existenciacero">Productos sin Stock</a>
                                         </div>
                                     </li>
                                     <li class="nav-item dropdown">
@@ -109,15 +109,26 @@
                                             Consultas
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
-                                            <a class="dropdown-item" href="comprasMantenimiento.do?action=Consultar">Compras</a>
+                                            
+                                            
+                                            
+                                            
                                             <a class="dropdown-item" href="contactosMantenimiento.do?action=Consultar">Contactos</a>
+                                            <a class="dropdown-item" href="comprasMantenimiento.do?action=Consultar">Compras</a>
+                                            <a class="dropdown-item" href="facturaMantenimiento.do?action=Consultar">Facturas</a>
                                             <a class="dropdown-item" href="fabricanteMantenimiento.do?action=Consultar">Fabricantes</a>
+                                            <a class="dropdown-item" href="ivaMantenimiento.do?action=Consultar">Iva </a>
                                             <a class="dropdown-item" href="monedaMantenimiento.do?action=Consultar">Monedas</a>
                                             <a class="dropdown-item" href="productosMantenimiento.do?action=Consultar">Productos</a>
-                                            <a class="dropdown-item" href="empresaMantenimiento.do?action=Consultar">Empresa</a>
-                                            <a class="dropdown-item" href="inventarioMantenimiento.do?action=Consultar">Inventario</a>
-                                            <a class="dropdown-item" href="facturaMantenimiento.do?action=consultar">Facturas</a>
-                                            <a class="dropdown-item" href="fabricanteMantenimiento.do?action=Consultar2">FP</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="contactosMantenimiento.do?action=ConsultarTipo&tipoContacto=Cliente">Consultar Clientes</a>
+                                            <a class="dropdown-item" href="contactosMantenimiento.do?action=ConsultarTipo&tipoContacto=Proveedor">Consultar Proveedores</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="fabricanteMantenimiento.do?action=Consultar2">Productos por Fabricante</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="inventarioMantenimiento.do?action=existenciabajaa">Productos en Stock Bajo</a>
+                                            <a class="dropdown-item" href="inventarioMantenimiento.do?action=existenciacero">Productos sin Stock</a>
+                                            
                                         </div>
                                     </li>
                                 </ul>

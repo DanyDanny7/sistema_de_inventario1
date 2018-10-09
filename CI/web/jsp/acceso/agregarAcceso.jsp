@@ -18,7 +18,9 @@
         <script src="js/popper.min.js" type="text/javascript"></script>
         <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
         <script src="js/bootstrap.js" type="text/javascript"></script>
-        
+        <script src="http://codeseven.github.com/toastr/toastr.js"></script>
+        <link href="http://codeseven.github.com/toastr/toastr.css" rel="stylesheet"/>
+        <link href="http://codeseven.github.com/toastr/toastr-responsive.css" rel="stylesheet"/>
     </head>
     <body background="img/fondos/fondo1.jpg">
         <div class="container-fluid">
@@ -190,7 +192,7 @@
                                     <html:text property="contrasena" styleClass="form-control"></html:text><br>
                                     </div>
                                 </div>
-                            <bean:write name="ActionFormAcceso" property="error" filter="false"/>    
+                                
                         </div>
 
                         <br>
@@ -202,7 +204,7 @@
                 </div>
             </div>
         </div> 
-        <div id="error">${error}</div>
+        <div id="error" hidden="hidden">${error}</div>
         <script type="text/javascript">
             if ($("#error").text() != "") {
                 window.onload = function () {

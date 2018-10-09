@@ -15,10 +15,11 @@ import sci.persistencia.Contactos;
 
 public class ActionContactos extends org.apache.struts.action.Action {
 
+    private static final String INDEX = "irIndex";
+    private static final String PORTADA = "irPortada";
     private static final String LISTA = "listaContactos";
     private static final String MODIFICAR = "irModificarContactos";
     private static final String AGREGAR = "irAgregarContactos";
-    private static final String INICIO = "irInicioContactos";
 
     SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -43,78 +44,102 @@ public class ActionContactos extends org.apache.struts.action.Action {
         ContactosMantenimiento contactosMantenimiento = new ContactosMantenimiento();
 
         String IR = null;
-
-        if (formBean == null || action == null) {
-            System.out.println("Error entre formBean o action null");
-            IR = INICIO;
+        System.out.println("el acceso es" +Login.nAcceso);
+        if (Login.id == 0) {
+            String mensaje = "Por Favor Inicie Session";
+            request.setAttribute("mensaje", mensaje);
+            return mapping.findForward(INDEX);
         }
-
 //------------------------------------------------------
         if (action.equals("Agregar")) {
-            String advertencia = "";
-
-            if (nombreContacto == null || nombreContacto.equals("")) {
-                advertencia += "*Nombre del Contacto es requerido    <br> ";
-            }
-            if (direccionContacto == null || direccionContacto.equals("")) {
-                advertencia += "*Direccion del Contacto es requerido    <br> ";
-            }
-            if (telefonoContacto == null || telefonoContacto.equals("")) {
-                advertencia += "* Telefono del Contacto es requerido    <br> ";
-            }
-            if (encargadoContacto == null || encargadoContacto.equals("")) {
-                advertencia += "*Nombre del encargado es requerido   <br> ";
-            }
-            if (telefonoEncargadoContacto == null || telefonoEncargadoContacto.equals("")) {
-                advertencia += "*Telefono del encargado es requerido    <br> ";
-            }
-            if (emailContacto == null || emailContacto.equals("")) {
-                advertencia += "*Email del Contacto es requerido    <br> ";
-            }
-            if (tipoContacto == null || tipoContacto.equals("Seleccionar")) {
-                advertencia += "*Es requerido que seleccione un tipo de Contacto    <br> ";
-            }
-            if (!advertencia.equals("")) {
-                IR = AGREGAR;
-                request.setAttribute("nombre", Login.nombre);
-                request.setAttribute("nAcceso", Login.nAcceso);
-                request.setAttribute("id", Login.id);
-                request.setAttribute("error", advertencia);
-                return mapping.findForward(IR);
-            }
-
-            int validacion = contactosMantenimiento.validar(nombreContacto);
-            if (validacion != 1) {
-                String error = ("El Contacto \"" + nombreContacto + "\" ya esta registrado...");
-                IR = AGREGAR;
-                request.setAttribute("nombre", Login.nombre);
-                request.setAttribute("nAcceso", Login.nAcceso);
-                request.setAttribute("id", Login.id);
+if (Login.nAcceso.equals("Solo Consulta") ) {
+                String error = "No posee Acceso a esta opcion";
                 request.setAttribute("error", error);
-                return mapping.findForward(IR);
-            }
-            fechaRegistroContacto = formato.format(new Date());
-            contactosMantenimiento.guardarContacto(nombreContacto, direccionContacto, tipoContacto, telefonoContacto, emailContacto, encargadoContacto, telefonoEncargadoContacto, fechaRegistroContacto);
-            List<Contactos> listaContacto = contactosMantenimiento.consultarTodosContactos();
-            formBean.setListaContacto(listaContacto);
-            String codigo = "<ul class=\"nav nav-tabs\"><li class=\"nav-item \" ><a class=\"nav-link active\"style=\"background-color: #000;color: white \" href=\"contactosMantenimiento.do?action=Consultar\">todo</a>\n"
-                    + "</li><li class=\"nav-item\"><a class=\"nav-link\" style=\"color: white;\" href=\"contactosMantenimiento.do?action=ConsultarTipo&tipoContacto=Cliente\">\n"
-                    + "Clientes</a></li><li class=\"nav-item\"><a class=\"nav-link\" style=\"color: white;\" href=\"contactosMantenimiento.do?action=ConsultarTipo&tipoContacto=Proveedor\">\n"
-                    + "Proveedores</a></li></ul>";
-            request.setAttribute("codigo", codigo);
-            String mensaje = "El Contacto \"" + nombreContacto + "\" se agregó correctamente";
-            request.setAttribute("mensaje", mensaje);
-            IR = LISTA;
-        }
+                IR = PORTADA;
+            } else {
+           if (Login.nAcceso.equals("Solo Consulta")) {
+                String error = "No posee Acceso a esta opcion";
+                request.setAttribute("error", error);
+                IR = PORTADA;
 
+            } else {
+
+                String advertencia = "";
+
+                if (nombreContacto == null || nombreContacto.equals("")) {
+                    advertencia += "*Nombre del Contacto es requerido    <br> ";
+                }
+                if (direccionContacto == null || direccionContacto.equals("")) {
+                    advertencia += "*Direccion del Contacto es requerido    <br> ";
+                }
+                if (telefonoContacto == null || telefonoContacto.equals("")) {
+                    advertencia += "* Telefono del Contacto es requerido    <br> ";
+                }
+                if (encargadoContacto == null || encargadoContacto.equals("")) {
+                    advertencia += "*Nombre del encargado es requerido   <br> ";
+                }
+                if (telefonoEncargadoContacto == null || telefonoEncargadoContacto.equals("")) {
+                    advertencia += "*Telefono del encargado es requerido    <br> ";
+                }
+                if (emailContacto == null || emailContacto.equals("")) {
+                    advertencia += "*Email del Contacto es requerido    <br> ";
+                }
+                if (tipoContacto == null || tipoContacto.equals("Seleccionar")) {
+                    advertencia += "*Es requerido que seleccione un tipo de Contacto    <br> ";
+                }
+                if (!advertencia.equals("")) {
+                    IR = AGREGAR;
+                    request.setAttribute("nombre", Login.nombre);
+                    request.setAttribute("nAcceso", Login.nAcceso);
+                    request.setAttribute("id", Login.id);
+                    request.setAttribute("img", Login.img);
+                    request.setAttribute("error", advertencia);
+                    return mapping.findForward(IR);
+                }
+
+                int validacion = contactosMantenimiento.validar(nombreContacto);
+                if (validacion != 1) {
+                    String error = ("El Contacto \"" + nombreContacto + "\" ya esta registrado...");
+                    IR = AGREGAR;
+                    request.setAttribute("nombre", Login.nombre);
+                    request.setAttribute("nAcceso", Login.nAcceso);
+                    request.setAttribute("id", Login.id);
+                    request.setAttribute("img", Login.img);
+                    request.setAttribute("error", error);
+                    return mapping.findForward(IR);
+                }
+                fechaRegistroContacto = formato.format(new Date());
+                contactosMantenimiento.guardarContacto(nombreContacto, direccionContacto, tipoContacto, telefonoContacto, emailContacto, encargadoContacto, telefonoEncargadoContacto, fechaRegistroContacto);
+                List<Contactos> listaContacto = contactosMantenimiento.consultarTodosContactos();
+                formBean.setListaContacto(listaContacto);
+                String codigo = "<ul class=\"nav nav-tabs\"><li class=\"nav-item \" ><a class=\"nav-link active\"style=\"background-color: #000;color: white \" href=\"contactosMantenimiento.do?action=Consultar\">todo</a>\n"
+                        + "</li><li class=\"nav-item\"><a class=\"nav-link\" style=\"color: white;\" href=\"contactosMantenimiento.do?action=ConsultarTipo&tipoContacto=Cliente\">\n"
+                        + "Clientes</a></li><li class=\"nav-item\"><a class=\"nav-link\" style=\"color: white;\" href=\"contactosMantenimiento.do?action=ConsultarTipo&tipoContacto=Proveedor\">\n"
+                        + "Proveedores</a></li></ul>";
+                request.setAttribute("codigo", codigo);
+                String mensaje = "El Contacto \"" + nombreContacto + "\" se agregó correctamente";
+                request.setAttribute("mensaje", mensaje);
+                IR = LISTA;
+            }
+        }}
+        
 //---------------------------------------------------------------------        
         if (action.equals("Detalle")) {
+            if (Login.nAcceso.equals("Solo Consulta") || Login.nAcceso.equals("Consulta e Ingresar")) {
+                String error = "No posee Acceso a esta opcion";
+                request.setAttribute("error", error);
+                IR = PORTADA;
+            } else {
             Contactos contactos = (Contactos) contactosMantenimiento.consultarContactosId(idContacto);
 
             if (contactos == null) {
 
                 formBean.setError("<span style='color:red'>Nose puede consultar por IdContacto " + "<br></span>");
 
+                request.setAttribute("nombre", Login.nombre);
+                request.setAttribute("nAcceso", Login.nAcceso);
+                request.setAttribute("id", Login.id);
+                request.setAttribute("img", Login.img);
                 return mapping.findForward(AGREGAR);
             } else {
                 formBean.setIdContacto(contactos.getIdContacto());
@@ -131,8 +156,15 @@ public class ActionContactos extends org.apache.struts.action.Action {
                 IR = MODIFICAR;
             }
         }
+        }
 //--------------------------------------------------------------------        
         if (action.equals("Eliminar")) {
+             if (Login.nAcceso.equals("Solo Consulta") || Login.nAcceso.equals("Consulta e Ingresar")) {
+                String error = "No posee Acceso a esta opcion";
+                request.setAttribute("error", error);
+                IR = PORTADA;
+
+            } else {
             String nombreC = contactosMantenimiento.consultarContactosId(idContacto).getNombreContacto();
             int n = contactosMantenimiento.eliminarContactos(idContacto);
             String mensaje = "";
@@ -154,10 +186,15 @@ public class ActionContactos extends org.apache.struts.action.Action {
             formBean.setListaContacto(listaContacto);
 
             IR = LISTA;
-        }
+        }}
 //------------------------------------------------------------------------------       
         if (action.equals("Modificar")) {
+             if (Login.nAcceso.equals("Solo Consulta") || Login.nAcceso.equals("Consulta e Ingresar")) {
+                String error = "No posee Acceso a esta opcion";
+                request.setAttribute("error", error);
+                IR = PORTADA;
 
+            } else {
             String advertencia = "";
 
             if (nombreContacto == null || nombreContacto.equals("")) {
@@ -186,6 +223,7 @@ public class ActionContactos extends org.apache.struts.action.Action {
                 request.setAttribute("nombre", Login.nombre);
                 request.setAttribute("nAcceso", Login.nAcceso);
                 request.setAttribute("id", Login.id);
+                request.setAttribute("img", Login.img);
                 request.setAttribute("error", advertencia);
                 return mapping.findForward(IR);
             }
@@ -202,7 +240,7 @@ public class ActionContactos extends org.apache.struts.action.Action {
             request.setAttribute("mensaje", mensaje);
             IR = LISTA;
 
-        }
+        }}
 //------------------------------------------------------------------------------
         if (action.equals("Consultar")) {
             List<Contactos> listaContacto = contactosMantenimiento.consultarTodosContactos();
@@ -217,6 +255,7 @@ public class ActionContactos extends org.apache.struts.action.Action {
                 request.setAttribute("nombre", Login.nombre);
                 request.setAttribute("nAcceso", Login.nAcceso);
                 request.setAttribute("id", Login.id);
+                request.setAttribute("img", Login.img);
                 return mapping.findForward(IR);
             } else {
                 formBean.setListaContacto(listaContacto);
@@ -255,11 +294,19 @@ public class ActionContactos extends org.apache.struts.action.Action {
         }
 //--------------------------------------------------------------------------------
         if (action.equals("irAgregar")) {
+             if (Login.nAcceso.equals("Solo Consulta")) {
+                String error = "No posee Acceso a esta opcion";
+                request.setAttribute("error", error);
+                IR = PORTADA;
+
+            } else {
             IR = AGREGAR;
+             }
         }
         request.setAttribute("nombre", Login.nombre);
         request.setAttribute("nAcceso", Login.nAcceso);
         request.setAttribute("id", Login.id);
+        request.setAttribute("img", Login.img);
         return mapping.findForward(IR);
 
     }

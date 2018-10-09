@@ -35,6 +35,7 @@ import sci.persistencia.Iva;
 import sci.persistencia.Productos;
 
 public class ActionCompras extends org.apache.struts.action.Action {
+    private static final String INDEX = "irIndex";
 
     private static final String INICIO = "irInicioCompras";
     private static final String LISTA = "listaCompras";
@@ -69,14 +70,19 @@ public class ActionCompras extends org.apache.struts.action.Action {
         InventarioMantenimiento inman = new InventarioMantenimiento();
         SumarTotalFila sumaTF = new SumarTotalFila();
         String IR = null;
-
-        if (fb == null || action == null) {
-            System.out.println("Error entre formBean o action null");
-            IR = INICIO;
+        if (Login.id == 0) {
+            String mensaje = "Por Favor Inicie Session";
+            request.setAttribute("mensaje", mensaje);
+            return mapping.findForward(INDEX);
         }
 //------------------------------------------------------
         if (action.equals("irAgregar")) {
+            if (Login.nAcceso.equals("Solo Consulta") ) {
+                String error = "No posee Acceso a esta opcion";
+                request.setAttribute("error", error);
+                IR = PORTADA;
 
+            } else {
 //------Para Colocar la fecha si no hay una registrada
             fechaCompra = formato.format(new Date());
             fb.setFechaCompra(fechaCompra);
@@ -95,11 +101,16 @@ public class ActionCompras extends org.apache.struts.action.Action {
 
             IR = AGREGAR;
         }
-
+        }
         System.out.println("El action trae: " + action);
 //------------------------------------------------------
         if (action.equals("Agregar")) {
+if (Login.nAcceso.equals("Solo Consulta") ) {
+                String error = "No posee Acceso a esta opcion";
+                request.setAttribute("error", error);
+                IR = PORTADA;
 
+            } else {
             System.out.println("Entro");
             String advertencia = "";
 
@@ -218,11 +229,16 @@ public class ActionCompras extends org.apache.struts.action.Action {
             request.setAttribute("listaProductos", listaProductos);
 
             IR = AGREGAR;
-        }
+        }}
 //----------------------------------------------------------------------
 //------------------------------------------------------
         if (action.equals("Incluir")) {
+if (Login.nAcceso.equals("Solo Consulta") || Login.nAcceso.equals("Consulta e Ingresar")) {
+                String error = "No posee Acceso a esta opcion";
+                request.setAttribute("error", error);
+                IR = PORTADA;
 
+            } else {
             System.out.println("Entro");
             String advertencia = "";
 
@@ -315,10 +331,15 @@ public class ActionCompras extends org.apache.struts.action.Action {
             request.setAttribute("listaProductos", listaProductos);
 
             IR = MODIFICAR;
-        }
+        }}
 //----------------------------------------------------------------------
         if (action.equals("Detalle")) {
+if (Login.nAcceso.equals("Solo Consulta") || Login.nAcceso.equals("Consulta e Ingresar")) {
+                String error = "No posee Acceso a esta opcion";
+                request.setAttribute("error", error);
+                IR = PORTADA;
 
+            } else {
             List<Compras> li = coman.consultaNDocumento(nDocumento);
 
             fb.setIdCompra(li.get(0).getIdCompra());
@@ -358,10 +379,15 @@ public class ActionCompras extends org.apache.struts.action.Action {
             fb.setListaCompras(li);
 
             IR = MODIFICAR;
-        }
+        }}
         //----------------------------------------------------------------------
         if (action.equals("Eliminar")) {
+if (Login.nAcceso.equals("Solo Consulta") || Login.nAcceso.equals("Consulta e Ingresar")) {
+                String error = "No posee Acceso a esta opcion";
+                request.setAttribute("error", error);
+                IR = PORTADA;
 
+            } else {
             int n = coman.eliminarCompras(idCompra);
             String mensaje = "";
             if (n == 0) {
@@ -377,7 +403,7 @@ public class ActionCompras extends org.apache.struts.action.Action {
 
             System.out.println("desde eliminar");
             IR = LISTA;
-        }
+        }}
         //----------------------------------------------------------------------
         if (action.equals("Consultar")) {
 
@@ -390,6 +416,7 @@ public class ActionCompras extends org.apache.struts.action.Action {
                 request.setAttribute("nombre", Login.nombre);
                 request.setAttribute("nAcceso", Login.nAcceso);
                 request.setAttribute("id", Login.id);
+                request.setAttribute("img", Login.img);
                 return mapping.findForward(IR);
             } else {
                 fb.setListaCompras(listaCompras);
@@ -399,6 +426,12 @@ public class ActionCompras extends org.apache.struts.action.Action {
         }
         //------------------------------------------------------------------------------
         if (action.equals("Modificar")) {
+            if (Login.nAcceso.equals("Solo Consulta") || Login.nAcceso.equals("Consulta e Ingresar")) {
+                String error = "No posee Acceso a esta opcion";
+                request.setAttribute("error", error);
+                IR = PORTADA;
+
+            } else {
             ComprasMantenimiento comprasMantenimiento = new ComprasMantenimiento();
             comprasMantenimiento.ModificarCompras(idCompra, nDocumento, idContacto, idInventario, cantidad, idIva, idProducto, fechaCompra, totalCompra);
             List<Compras> listaCompras = comprasMantenimiento.consultarTodoCompras();
@@ -407,10 +440,15 @@ public class ActionCompras extends org.apache.struts.action.Action {
             String mensaje = ("El registro \"" + nDocumento + "\" se modificó correctamente ");
             request.setAttribute("mensaje", mensaje);
             IR = LISTA;
-        }
+        }}
         //--------------------------------------------------------------
         if (action.equals("x ")) {
+if (Login.nAcceso.equals("Solo Consulta") ) {
+                String error = "No posee Acceso a esta opcion";
+                request.setAttribute("error", error);
+                IR = PORTADA;
 
+            } else {
 // reducir la existencia del inventario            
             idInventario = inman.consultarInventarioIdProducto(idProducto);
             Inventario iv = inman.consultarInventarioId(idInventario);
@@ -471,11 +509,16 @@ public class ActionCompras extends org.apache.struts.action.Action {
             request.setAttribute("listaProductos", listaProductos);
 
             IR = AGREGAR;
-        }
+        }}
 
 //--------------------------------------------------------------------------------        
         if (action.equals(" x")) {
+if (Login.nAcceso.equals("Solo Consulta") || Login.nAcceso.equals("Consulta e Ingresar")) {
+                String error = "No posee Acceso a esta opcion";
+                request.setAttribute("error", error);
+                IR = PORTADA;
 
+            } else {
             System.out.println("Valor de Statica =" + Estaticas.nDocumento1);
 
             if (Estaticas.nDocumento1 == null || Estaticas.nDocumento1.equals("")) {
@@ -556,11 +599,16 @@ public class ActionCompras extends org.apache.struts.action.Action {
                 IR = MODIFICAR;
             }
 
-        }
+        }}
 
 //--------------------------------------------------------------------------------        
         if (action.equals("Guardar")) {
+if (Login.nAcceso.equals("Solo Consulta") ) {
+                String error = "No posee Acceso a esta opcion";
+                request.setAttribute("error", error);
+                IR = PORTADA;
 
+            } else {
             idCompra = coman.maxIdCompras();
             System.out.println("id " + idCompra);
             Compras com = coman.consultarComprasId(idCompra);
@@ -600,9 +648,15 @@ public class ActionCompras extends org.apache.struts.action.Action {
             IR = PORTADA;
         }
 
+            } 
 //--------------------------------------------------------------------------------        
         if (action.equals("Guardar ")) {
+if (Login.nAcceso.equals("Solo Consulta") || Login.nAcceso.equals("Consulta e Ingresar")) {
+                String error = "No posee Acceso a esta opcion";
+                request.setAttribute("error", error);
+                IR = PORTADA;
 
+            } else {
             System.out.println("id " + idCompra);
             Compras com = coman.consultarComprasId(idCompra);
             System.out.println("////-----------------------");
@@ -645,12 +699,13 @@ public class ActionCompras extends org.apache.struts.action.Action {
             fb.setListaCompras(listaCompras);
             System.out.println("Antes de ir a portada");
             IR = LISTA;
-        }
+        }}
 
 //--------------------------------------------------------------------------------        
-        //request.setAttribute("nombre", Login.nombre);
-        //request.setAttribute("nAcceso", Login.nAcceso);
-        //request.setAttribute("id", Login.id);
+        request.setAttribute("nombre", Login.nombre);
+        request.setAttribute("nAcceso", Login.nAcceso);
+        request.setAttribute("id", Login.id);
+        request.setAttribute("img", Login.img);
         return mapping.findForward(IR);
 
     }

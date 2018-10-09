@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import metodos.Login;
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -17,7 +18,8 @@ import sci.mantenimientos.InventarioMantenimiento;
 import sci.persistencia.Inventario;
 
 public class ActionInventario extends org.apache.struts.action.Action {
-
+private static final String INDEX = "irIndex";
+    private static final String PORTADA = "irPortada";
     private static final String CONFIRMACIONI = "confirmacionNuevoInventario";
     private static final String ERRORI = "confirmacionErrorInventario";
    private static final String MODIFICARI="modificarinventario";
@@ -39,9 +41,10 @@ public class ActionInventario extends org.apache.struts.action.Action {
         String estadoFisico = formBean.getEstadoFisico();
         String action = formBean.getAction();
 
-        if (formBean == null || action == null) {
-            System.out.println("Error entre formBean o action null");
-            return mapping.findForward(ERRORI);
+          if (Login.id == 0) {
+            String mensaje = "Por Favor Inicie Session";
+            request.setAttribute("mensaje", mensaje);
+            return mapping.findForward(INDEX);
         }
 //--------------------------------------------------------
       
@@ -91,9 +94,17 @@ public class ActionInventario extends org.apache.struts.action.Action {
 
             if (listainventario == null) {
                 formBean.setError("<spam style='color:red'> la lista viene vacia " + "<br></spam>");
+                        request.setAttribute("nombre", Login.nombre);
+        request.setAttribute("nAcceso", Login.nAcceso);
+        request.setAttribute("id", Login.id);
+        request.setAttribute("img", Login.img);
                 return mapping.findForward(ERRORI);
             } else {
                 formBean.setListainventario(listainventario);
+                        request.setAttribute("nombre", Login.nombre);
+        request.setAttribute("nAcceso", Login.nAcceso);
+        request.setAttribute("id", Login.id);
+        request.setAttribute("img", Login.img);
                 return mapping.findForward(CONFIRMACIONI);
             }
               }

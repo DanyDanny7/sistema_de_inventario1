@@ -92,7 +92,7 @@
                     <div class="col-1"></div>
                 </div>
 
-                <p id="info" hidden="hidden">${info}</p>
+                
         </div>
         <div id="error" hidden="hidden">${mensaje}</div>
         <p id="info" hidden="hidden">${info}</p>

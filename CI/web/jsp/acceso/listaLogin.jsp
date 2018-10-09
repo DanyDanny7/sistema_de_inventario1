@@ -156,6 +156,9 @@
                                     <th>Tipo de Acceso</th>
                                     <th>Fecha de Registro</th>
                                     <th></th>
+                                    <html:form action = "/accesoMantenimiento" >
+                                    <th><html:submit property="action" value="Agregar Nuevo" styleClass="btn btn-secondary font-weight-bold" style="color: white;font-family: Arial"/></th>
+                                    </html:form>
                                 </tr>
                             </thead>
                             <tbody>

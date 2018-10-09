@@ -171,16 +171,16 @@
                         <br>
                         <bean:write name="ActionFormIva" property="mensaje" filter="false"></bean:write>
                         <br>
-                        <table>
+                        <table class="bg-light ">
                             <thead>
                                 <tr class="table-default" style="background-color: #000; color: white">
-                                    <th>Id Iva </th>
-                                    <th>Tasa </th>
-                                    <th>Iva Retenido</th>
-                                    <th>Iva Pagado</th>
-                                    <th>Iva Total</th>
-                                    <th></th>
-                                    <th></th>
+                                    <th style="width:200px">Id Iva </th>
+                                    <th style="width:200px">Tasa </th>
+                                    <th style="width:200px">Iva Retenido</th>
+                                    <th style="width:200px">Iva Pagado</th>
+                                    <th style="width:200px">Iva Total</th>
+                                    <th style="width:200px"></th>
+                                    <th style="width:200px"></th>
                                     </tr>
                                 </thead>
                                 <tbody>

@@ -32,7 +32,7 @@
             <br>
         <html:form action = "/accesoMantenimiento">
             <html:submit property="action" value="Consultar"/><br><br>
-            <html:submit property="action" value="irAgregar"/>
+            <html:submit property="action" value="Agregar Nuevo"/>
         </html:form>
         <br>
         <html:link page="/index.jsp">Index</html:link>

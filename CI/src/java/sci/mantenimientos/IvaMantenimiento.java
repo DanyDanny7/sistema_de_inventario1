@@ -130,7 +130,7 @@ public class IvaMantenimiento {
             e.printStackTrace();
             System.out.println("Error en consultarTodo IvaMantenimiento " + e);
         } finally {
-             session.close();           
+             //session.close();           
         }
         return listaIva;
     }

@@ -168,13 +168,8 @@
                                     <div class="form-group col-4"></div>
                                 <div class="form-group col-4">
                                     <label>Nivel de Acceso : </label><br>
-                                <html:select property="tipoAcceso" styleClass="form-control">
-                                    <html:option value="${tipoAcceso}" ></html:option>
-                                    <html:option value="Solo Consulta"></html:option>
-                                    <html:option value="Consulta e Ingresar"></html:option>
-                                    <html:option value="Administrador"></html:option>
-                                    <html:option value="Super Administrador"></html:option>
-                                </html:select>
+                                    <label class="btn"  style="background-color: #e9ecef;">${tipoAcceso}</label>
+                                
                             </div>
                                     </div> 
                             <br>
@@ -191,13 +186,11 @@
                                 <html:text property="idEmpresa" styleClass="form-control"></html:text>
                                 <br>
                                 </div>
-
-
                             <bean:write name="ActionFormAcceso" property="error" filter="false"/>    
                         </div>
 
                         <br>
-                        <html:submit property="action" value="modificar " styleClass="btn  font-weight-bold" style="background-color: #D8D8D8;;"/>
+                        
 
                     </html:form>
                     <br>

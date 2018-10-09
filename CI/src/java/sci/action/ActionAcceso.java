@@ -20,6 +20,7 @@ import sci.persistencia.Empresa;
 import sci.persistencia.Moneda;
 
 public class ActionAcceso extends org.apache.struts.action.Action {
+    
 
     private static final String INDEX = "irIndex";
     private static final String LISTA = "irListaAcceso";
@@ -54,13 +55,13 @@ public class ActionAcceso extends org.apache.struts.action.Action {
 
         String IR = null;
 
-        if (formBean == null || action == null) {
-            System.out.println("Error fromBean o Action estan null");
-            IR = INICIO;
-        }
-
         //----------------------------------------------------------------------
         if (action.equals("Agregar")) {
+            if (!Login.nAcceso.equals("Super Administrador")) {
+                String error = "No posee Acceso a esta opcion";
+                request.setAttribute("error", error);
+                IR = PORTADA;
+            } else {
             System.out.println("HOLA MUNDO");
             String advertencia = "";
 
@@ -86,15 +87,16 @@ public class ActionAcceso extends org.apache.struts.action.Action {
                 advertencia += "*Es requerido seleccione un Nivel de Acceso <br>";
             }
             if (!advertencia.equals("")) {
-                formBean.setError("<spam style = 'color: red' > Por favor complete los espacios requeridos " + " <br> " + advertencia + "</spam>");
+                String error = ("<spam style = 'color: red' > Por favor complete los espacios requeridos " + " <br> " + advertencia + "</spam>");
                 List<Empresa> listaEmpresa = eman.consultarTodosEmpresa();
                 formBean.setListaEmpresa(listaEmpresa);
                 request.setAttribute("listaEmpresa", listaEmpresa);
                 IR = AGREGAR;
                 request.setAttribute("nombre", Login.nombre);
                 request.setAttribute("nAcceso", Login.nAcceso);
-                request.setAttribute("nAcceso", Login.id);
-                request.setAttribute("error", advertencia);
+                request.setAttribute("id", Login.id);
+                request.setAttribute("img", Login.img);
+                request.setAttribute("error", error);
                 return mapping.findForward(IR);
             }
             int valUsuario = aman.consultarUsuario(usuario);
@@ -107,8 +109,8 @@ public class ActionAcceso extends org.apache.struts.action.Action {
                 IR = AGREGAR;
                 request.setAttribute("nombre", Login.nombre);
                 request.setAttribute("nAcceso", Login.nAcceso);
-                request.setAttribute("nAcceso", Login.id);
-                request.setAttribute("error", error);
+                request.setAttribute("id", Login.id);
+                request.setAttribute("img", Login.img);
                 return mapping.findForward(IR);
             }
             fechaRegistroAcceso = formato.format(new Date());
@@ -122,7 +124,8 @@ public class ActionAcceso extends org.apache.struts.action.Action {
                 IR = AGREGAR;
                 request.setAttribute("nombre", Login.nombre);
                 request.setAttribute("nAcceso", Login.nAcceso);
-                request.setAttribute("nAcceso", Login.id);
+                request.setAttribute("id", Login.id);
+                request.setAttribute("img", Login.img);
                 return mapping.findForward(IR);
             }
             List<Acceso> listaAcceso = aman.consultarTodoAcceso();
@@ -130,8 +133,7 @@ public class ActionAcceso extends org.apache.struts.action.Action {
             String mensaje = ("El registro \"" + nombreAcceso + "\" se Agregó correctamente ");
             request.setAttribute("mensaje", mensaje);
             IR = LISTA;
-        } else {
-        }
+        } }
 //----------------------------------------------------------------------------------        
         if (action.equals("Siguiente")) {
             System.out.println("HOLA TIERRA");
@@ -149,7 +151,7 @@ public class ActionAcceso extends org.apache.struts.action.Action {
             if (usuario == null || usuario.equals("")) {
                 advertencia += "*Es requerido un Usuario <br>";
             }
-            if (contrasena == null || contrasena.equals("")) { 
+            if (contrasena == null || contrasena.equals("")) {
                 advertencia += "*Es requerido una Contraseña <br>";
             }
             if (eMail == null || eMail.equals("")) {
@@ -164,7 +166,8 @@ public class ActionAcceso extends org.apache.struts.action.Action {
 
                 request.setAttribute("nombre", Login.nombre);
                 request.setAttribute("nAcceso", Login.nAcceso);
-                request.setAttribute("nAcceso", Login.id);
+                request.setAttribute("id", Login.id);
+                request.setAttribute("img", Login.img);
                 request.setAttribute("idEmpresa", Estaticas.idEmpresa);
                 request.setAttribute("nombreEmpresa", Estaticas.nombreEmpresa);
                 request.setAttribute("error", advertencia);
@@ -178,7 +181,8 @@ public class ActionAcceso extends org.apache.struts.action.Action {
                 IR = ACCESO2;
                 request.setAttribute("nombre", Login.nombre);
                 request.setAttribute("nAcceso", Login.nAcceso);
-                request.setAttribute("nAcceso", Login.id);
+                request.setAttribute("id", Login.id);
+                request.setAttribute("img", Login.img);
                 request.setAttribute("idEmpresa", Estaticas.idEmpresa);
                 request.setAttribute("nombreEmpresa", Estaticas.nombreEmpresa);
                 request.setAttribute("error", error);
@@ -194,7 +198,8 @@ public class ActionAcceso extends org.apache.struts.action.Action {
                 IR = ACCESO2;
                 request.setAttribute("nombre", Login.nombre);
                 request.setAttribute("nAcceso", Login.nAcceso);
-                request.setAttribute("nAcceso", Login.id);
+                request.setAttribute("id", Login.id);
+                request.setAttribute("img", Login.img);
                 request.setAttribute("idEmpresa", Estaticas.idEmpresa);
                 request.setAttribute("nombreEmpresa", Estaticas.nombreEmpresa);
                 request.setAttribute("error", error);
@@ -206,20 +211,24 @@ public class ActionAcceso extends org.apache.struts.action.Action {
             List<Moneda> listaMoneda = mman.consultarTodosMoneda();
             formBean.setListaMoneda(listaMoneda);
             request.setAttribute("listaMoneda", listaMoneda);
-            System.out.println("listaMoneda "+listaMoneda.toString());
-            
+            System.out.println("listaMoneda " + listaMoneda.toString());
+
             request.setAttribute("idEmpresa", Estaticas.idEmpresa);
             request.setAttribute("nombreEmpresa", Estaticas.nombreEmpresa);
             request.setAttribute("nAcceso", Login.id);
             request.setAttribute("nombre", Login.nombre);
-            
+
             System.out.println("Entra a 5");
 
             IR = CONF;
         }
         //----------------------------------------------------------------------
         if (action.equals("Detalle")) {
-
+            if (!Login.nAcceso.equals("Super Administrador")) {
+                String error = "No posee Acceso a esta opcion";
+                request.setAttribute("error", error);
+                IR = PORTADA;
+            } else {
             Acceso acceso = (Acceso) aman.consultarAccesoId(idAcceso);
 
             formBean.setIdAcceso(acceso.getIdAcceso());
@@ -236,9 +245,14 @@ public class ActionAcceso extends org.apache.struts.action.Action {
             request.setAttribute("listaEmpresa", listaEmpresa);
             IR = MODIFICAR;
 
-        }
+        }}
         //----------------------------------------------------------------------
         if (action.equals("Eliminar")) {
+            if (!Login.nAcceso.equals("Super Administrador")) {
+                String error = "No posee Acceso a esta opcion";
+                request.setAttribute("error", error);
+                IR = PORTADA;
+            } else {
             int n = aman.eliminarAcceso(idAcceso);
             String mensaje = "";
             if (n == 0) {
@@ -253,7 +267,7 @@ public class ActionAcceso extends org.apache.struts.action.Action {
             }
             IR = LISTA;
 
-        }
+        }}
         //----------------------------------------------------------------------
         if (action.equals("Login")) {
 
@@ -282,11 +296,17 @@ public class ActionAcceso extends org.apache.struts.action.Action {
         }
         //-------------------------------------------------------------------------
         if (action.equals("Consultar")) {
+            if (!Login.nAcceso.equals("Super Administrador")) {
+                String error = "No posee Acceso a esta opcion";
+                request.setAttribute("error", error);
+                IR = PORTADA;
+            } else {
+        
             List<Acceso> listaAcceso = aman.consultarTodoAcceso();
             formBean.setListaAcceso(listaAcceso);
             IR = LISTA;
 
-        }
+        }}
         //---------------------------------------------------------------------------
         if (action.equals("Cerrar Session")) {
             Login.id = 0;
@@ -295,11 +315,15 @@ public class ActionAcceso extends org.apache.struts.action.Action {
             Login.user = "";
             Login.img = "";
             IR = INDEX;
-
+            
         }
         //---------------------------------------------------------------------------
         if (action.equalsIgnoreCase("Modificar")) {
-            //if (Login.nAcceso == 1 || Login.nAcceso == 2) {
+            if (!Login.nAcceso.equals("Super Administrador")) {
+                String error = "No posee Acceso a esta opcion";
+                request.setAttribute("error", error);
+                IR = PORTADA;
+            } else {
             String advertencia = "";
 
             if (idEmpresa == null || idEmpresa.equals("") || idEmpresa.equals("Seleccionar")) {
@@ -332,7 +356,8 @@ public class ActionAcceso extends org.apache.struts.action.Action {
                 IR = MODIFICAR;
                 request.setAttribute("nombre", Login.nombre);
                 request.setAttribute("nAcceso", Login.nAcceso);
-                request.setAttribute("nAcceso", Login.id);
+                request.setAttribute("id", Login.id);
+                request.setAttribute("img", Login.img);
                 request.setAttribute("error", advertencia);
                 return mapping.findForward(IR);
             }
@@ -342,14 +367,8 @@ public class ActionAcceso extends org.apache.struts.action.Action {
             String mensaje = ("El registro \"" + nombreAcceso + "\" se modificó correctamente ");
             request.setAttribute("mensaje", mensaje);
             IR = LISTA;
-            //} else {
-            /*   List<Acceso> listaAcceso = aman.consultarTodoAcceso();
-                formBean.setListaAcceso(listaAcceso);
-                formBean.setError("<spam style='color:blue'>No posee acceso para modificar el registro" + " <br></span>");
-
-                IR = LISTA;*/
-            //}
-        }
+            
+        }}
         //----------------------------------------------------------------------------------
         if (action.equalsIgnoreCase("Restaurar")) {
             tipoAcceso = aman.ayudaUsuario(usuario);
@@ -374,7 +393,7 @@ public class ActionAcceso extends org.apache.struts.action.Action {
             IR = AYUDA;
         }
         //--------------------------------------------------------------------------------
-        if (action.equalsIgnoreCase("irAgregar")) {
+        if (action.equalsIgnoreCase("Agregar Nuevo")) {
             List<Empresa> listaEmpresa = eman.consultarTodosEmpresa();
             formBean.setListaEmpresa(listaEmpresa);
             request.setAttribute("listaEmpresa", listaEmpresa);
@@ -410,6 +429,11 @@ public class ActionAcceso extends org.apache.struts.action.Action {
         }
 
         if (action.equalsIgnoreCase("modificar ")) {
+            if (!Login.nAcceso.equals("Super Administrador")) {
+                String error = "No posee Acceso a esta opcion";
+                request.setAttribute("error", error);
+                IR = PORTADA;
+            } else {
             //if (Login.nAcceso == 1 || Login.nAcceso == 2) {
             String advertencia = "";
 
@@ -443,7 +467,8 @@ public class ActionAcceso extends org.apache.struts.action.Action {
                 IR = MODIFICAR;
                 request.setAttribute("nombre", Login.nombre);
                 request.setAttribute("nAcceso", Login.nAcceso);
-                request.setAttribute("nAcceso", Login.id);
+                request.setAttribute("id", Login.id);
+                request.setAttribute("img", Login.img);
                 return mapping.findForward(IR);
             }
             aman.modificarAcceso(idAcceso, idEmpresa, nombreAcceso, apellidoAcceso, usuario, fechaRegistroAcceso, contrasena, eMail, tipoAcceso);
@@ -454,7 +479,7 @@ public class ActionAcceso extends org.apache.struts.action.Action {
             Login.nombre = aman.consultarAccesoId(idAcceso).getNombreAcceso();
             IR = PORTADA;
 
-        }
+        }}
 
 //----------------------------------------------------------------------------------
         request.setAttribute("nombre", Login.nombre);

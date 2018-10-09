@@ -27,7 +27,9 @@ import sci.persistencia.Moneda;
  * @author daniel.bonillausam
  */
 public class ActionConfiguracion extends org.apache.struts.action.Action {
-
+    
+    private static final String INDEX = "irIndex";
+    private static final String PORTADA = "irPortada";
     private static final String INICIO = "inicioConfig";
     private static final String MODIFICAR = "modificarConfig";
     private static final String AGREGAR = "agregarConfig";
@@ -53,7 +55,11 @@ public class ActionConfiguracion extends org.apache.struts.action.Action {
         MonedaMantenimiento mman = new MonedaMantenimiento();
         Configuracion config = new Configuracion();
         String IR = null;
-
+        if (Login.id == 0) {
+            String mensaje = "Por Favor Inicie Session";
+            request.setAttribute("mensaje", mensaje);
+            return mapping.findForward(INDEX);
+        }
 //---------------------------------------------------------------------------
         if (action.equals("Agregar")) {
             //valida campos vacios y nulos && agrega nueva configuracion
@@ -161,6 +167,13 @@ public class ActionConfiguracion extends org.apache.struts.action.Action {
         }
 ///------------------------------------------------
         if (action.equals("consultaId")) {
+            if (!Login.nAcceso.equals("Super Administrador") ) {
+                String error = "No posee Acceso a esta opcion";
+                request.setAttribute("error", error);
+                IR = PORTADA;
+
+            } else {
+
             Configuracion conf = cman.consultarConfiguarionId(1);
             EmpresaMantenimiento eman = new EmpresaMantenimiento();
             String nombreEmpresa = eman.consultarEmpresaId(1).getNombreEmpresa();
@@ -184,11 +197,14 @@ public class ActionConfiguracion extends org.apache.struts.action.Action {
             
             
             IR = MODIFICAR;
-        }
+        }}
         
 ///---------------------------------------------------------
     
-        
+        request.setAttribute("nombre", Login.nombre);
+        request.setAttribute("nAcceso", Login.nAcceso);
+        request.setAttribute("id", Login.id);
+        request.setAttribute("img", Login.img);        
         return mapping.findForward(IR);
     }
 

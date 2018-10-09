@@ -21,7 +21,8 @@ import sci.persistencia.Productos;
  * @author guillermo.bermudes
  */
 public class ActionFabricante extends org.apache.struts.action.Action {
-
+private static final String INDEX = "irIndex";
+    private static final String PORTADA = "irPortada";
     private static final String AGREGAR = "irAgregarFabricantes";
     private static final String INICIO = "irInicioFabricantes";
     private static final String LISTA = "irListaFabricantes";
@@ -43,17 +44,22 @@ public class ActionFabricante extends org.apache.struts.action.Action {
         String fechaRegistroFabricante = formBean.getFechaRegistroFabricante();
         String action = formBean.getAction();
         String IR = null;
-
-        if (formBean == null || action == null) {
-            System.out.println("Error entre formBean o action null");
-            return mapping.findForward(INICIO);
-        }
 //--------------------------------------------------------
         FabricantesMantenimiento fabricantesMantenimiento = new FabricantesMantenimiento();
+         if (Login.id == 0) {
+            String mensaje = "Por Favor Inicie Session";
+            request.setAttribute("mensaje", mensaje);
+            return mapping.findForward(INDEX);
+        }
+
 
 //------------------------------------------------------
         if (action.equals("Agregar")) {
-
+            if (Login.nAcceso.equals("Solo Consulta")) {
+                String error = "No posee Acceso a esta opcion";
+                request.setAttribute("error", error);
+                IR = PORTADA;
+            } else {
             String advertencia = "";
 
             if (nombreFabricante == null || nombreFabricante.equals("")) {
@@ -69,35 +75,41 @@ public class ActionFabricante extends org.apache.struts.action.Action {
                 request.setAttribute("nombre", Login.nombre);
                 request.setAttribute("nAcceso", Login.nAcceso);
                 request.setAttribute("id", Login.id);
+                request.setAttribute("img", Login.img);
                 request.setAttribute("error", advertencia);
                 return mapping.findForward(IR);
             }
-            
+
             int valFab = fabricantesMantenimiento.validarFabricantes(nombreFabricante);
             if (valFab != 1) {
-                String error = ("Ya existe el fabricante\""+nombreFabricante+"\",por favor ingrese otro.");
-                
+                String error = ("Ya existe el fabricante\"" + nombreFabricante + "\",por favor ingrese otro.");
+
                 IR = AGREGAR;
                 request.setAttribute("nombre", Login.nombre);
                 request.setAttribute("nAcceso", Login.nAcceso);
-                request.setAttribute("nAcceso", Login.id);
+                request.setAttribute("id", Login.id);
+                request.setAttribute("img", Login.img);
                 request.setAttribute("error", error);
                 return mapping.findForward(IR);
             }
             fechaRegistroFabricante = formato.format(new Date());
-            
+
             fabricantesMantenimiento.guardarFabricantes(0, nombreFabricante, descripcionFabricante, 0, fechaRegistroFabricante);
             List<Fabricantes> listaFabricantes = fabricantesMantenimiento.consultarTodosFabricantes();
             formBean.setListaFabricante(listaFabricantes);
 
             String mensaje = "El Contacto \"" + nombreFabricante + "\" se agregó correctamente";
             request.setAttribute("mensaje", mensaje);
-            
+
             IR = LISTA;
-        }
+        }}
 //----------------------------------------------------------------------
         if (action.equals("Detalle")) {
-
+if (Login.nAcceso.equals("Solo Consulta") || Login.nAcceso.equals("Consulta e Ingresar")) {
+                String error = "No posee Acceso a esta opcion";
+                request.setAttribute("error", error);
+                IR = PORTADA;
+            } else {
             Fabricantes fabricante = (Fabricantes) fabricantesMantenimiento.consultarFabricantesId(idFabricante);
 
             formBean.setIdFabricante(fabricante.getIdFabricante());
@@ -107,9 +119,14 @@ public class ActionFabricante extends org.apache.struts.action.Action {
             formBean.setFechaRegistroFabricante(fabricante.getFechaRegistroFabricante());
 
             IR = MODIFICAR;
-        }
+        }}
 //----------------------------------------------------------------------
         if (action.equals("Eliminar")) {
+            if (Login.nAcceso.equals("Solo Consulta") || Login.nAcceso.equals("Consulta e Ingresar")) {
+                String error = "No posee Acceso a esta opcion";
+                request.setAttribute("error", error);
+                IR = PORTADA;
+            } else {
             String nombreF = fabricantesMantenimiento.consultarFabricantesId(idFabricante).getNombreFabricante();
             int n = fabricantesMantenimiento.eliminarFabricante(formBean.getIdFabricante());
             if (n == 0) {
@@ -125,17 +142,21 @@ public class ActionFabricante extends org.apache.struts.action.Action {
             List<Fabricantes> listaFabricantes = fabricantesMantenimiento.consultarTodosFabricantes();
             formBean.setListaFabricante(listaFabricantes);
             IR = LISTA;
-        }
+        }}
 //----------------------------------------------------------------------
         if (action.equals("Consultar")) {
             List<Fabricantes> listaFabricantes = fabricantesMantenimiento.consultarTodosFabricantes();
             formBean.setListaFabricante(listaFabricantes);
             IR = LISTA;
-                
+
         }
 //----------------------------------------------------------------------------------
         if (action.equals("Modificar")) {
-            
+if (Login.nAcceso.equals("Solo Consulta") || Login.nAcceso.equals("Consulta e Ingresar")) {
+                String error = "No posee Acceso a esta opcion";
+                request.setAttribute("error", error);
+                IR = PORTADA;
+            } else {
             String advertencia = "";
 
             if (nombreFabricante == null || nombreFabricante.equals("")) {
@@ -150,21 +171,27 @@ public class ActionFabricante extends org.apache.struts.action.Action {
                 request.setAttribute("nombre", Login.nombre);
                 request.setAttribute("nAcceso", Login.nAcceso);
                 request.setAttribute("id", Login.id);
+                request.setAttribute("img", Login.img);
                 request.setAttribute("error", advertencia);
                 return mapping.findForward(IR);
             }
-            
+
             fabricantesMantenimiento.ActualizarFabricantes(idFabricante, nombreFabricante, 0, descripcionFabricante, fechaRegistroFabricante);
             List<Fabricantes> listaFabricantes = fabricantesMantenimiento.consultarTodosFabricantes();
             formBean.setListaFabricante(listaFabricantes);
             String mensaje = "<span style='color:red'>Actualizado Correcto" + "<br></span>";
             request.setAttribute("mensaje", mensaje);
-            IR =LISTA;
-        }
+            IR = LISTA;
+        }}
 //-------------------------------------------------------------------------------
         if (action.equals("irAgregar")) {
+            if (Login.nAcceso.equals("Solo Consulta") ) {
+                String error = "No posee Acceso a esta opcion";
+                request.setAttribute("error", error);
+                IR = PORTADA;
+            } else {
             IR = AGREGAR;
-        }
+        }}
 //-------------------------------------------------------------------------------------           
         if (action.equals("Consultar2")) {
             Extraer e = new Extraer();
@@ -172,11 +199,16 @@ public class ActionFabricante extends org.apache.struts.action.Action {
             List<Fabricantes> listaFabricante = e.consultarTodosFabricantes2();
 
             formBean.setListaFabricante(listaFabricante);
-            IR =LISTA2;
+            IR = LISTA2;
 
         }
 //---------------------------------------------------------------------------------        
         if (action.equals("fproductos")) {
+            if (Login.nAcceso.equals("Solo Consulta") || Login.nAcceso.equals("Consulta e Ingresar")) {
+                String error = "No posee Acceso a esta opcion";
+                request.setAttribute("error", error);
+                IR = PORTADA;
+            } else {
             Extraer e = new Extraer();
             System.out.println(idFabricante);
             List<Productos> listaProductos = e.consultarTodoP(idFabricante);
@@ -187,11 +219,12 @@ public class ActionFabricante extends org.apache.struts.action.Action {
             request.setAttribute("listaFabricante", listaFabricante);
             request.setAttribute("listaProductos", listaProductos);
             IR = LISTA2;
-        }
+        }}
 //-----------------------------------------------------------------------------------        
         request.setAttribute("nombre", Login.nombre);
         request.setAttribute("nAcceso", Login.nAcceso);
         request.setAttribute("id", Login.id);
+        request.setAttribute("img", Login.img);
         return mapping.findForward(IR);
 
     }

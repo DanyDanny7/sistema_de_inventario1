@@ -144,7 +144,7 @@ public class AccesoMantenimiento {
             e.printStackTrace();
             System.out.println("Error en consultarTodo AccesoMantenimiento " + e);
         } finally {
-            session.close();
+           // session.close();
         }
         return listaAcceso;
     }

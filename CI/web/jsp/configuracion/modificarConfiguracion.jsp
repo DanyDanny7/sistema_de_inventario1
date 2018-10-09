@@ -170,7 +170,10 @@
                                     <div>${imgP}</div>
                                     <h1 class="text-center" >${nombreEmpresa}</h1>
                                 </div>
-                                <div class="form-group col-3"></div>
+                                <div class="form-group col-3">
+                                    <a class="btn btn-secondary font-weight-bold" href="accesoMantenimiento.do?action=Agregar Nuevo" style="color: white;font-family: Arial">Agregar Nuevo Registro de Usuario</a><br><br>
+                                    <a class="btn btn-secondary font-weight-bold" href="accesoMantenimiento.do?action=Consultar" style="color: white;font-family: Arial">Consultar Registro de Usuarios</a>
+                                </div>
                             </div>
                                 <div class="row">
                                     

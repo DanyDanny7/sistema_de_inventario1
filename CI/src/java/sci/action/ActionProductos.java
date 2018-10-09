@@ -19,7 +19,8 @@ import sci.persistencia.Inventario;
 import sci.persistencia.Productos;
 
 public class ActionProductos extends org.apache.struts.action.Action {
-
+private static final String INDEX = "irIndex";
+    private static final String PORTADA = "irPortada";
     private static final String LISTA = "listaProducto";
     private static final String AGREGAR = "irProducto";
     private static final String MODIFICAR = "irModificarProducto";
@@ -47,14 +48,20 @@ public class ActionProductos extends org.apache.struts.action.Action {
         Extraer e = new Extraer();
         System.out.println("aqui2");
         String IR = null;
-
-        if (fB == null || action == null) {
-            System.out.println("Error en null action o fB Productos");
-            return mapping.findForward(IRINICIO);
+        
+        if (Login.id == 0) {
+            String mensaje = "Por Favor Inicie Session";
+            request.setAttribute("mensaje", mensaje);
+            return mapping.findForward(INDEX);
         }
 //-------------------------------------------------------------------------------        
 
         if (action.equals("Agregar")) {
+                        if (Login.nAcceso.equals("Solo Consulta") ) {
+                String error = "No posee Acceso a esta opcion";
+                request.setAttribute("error", error);
+                IR = PORTADA;
+            } else {
             String ms = "";
             System.out.println("hola");
             if (idFabricantes <= 0 || idFabricantes == null) {
@@ -82,6 +89,7 @@ public class ActionProductos extends org.apache.struts.action.Action {
                 request.setAttribute("nombre", Login.nombre);
                 request.setAttribute("nAcceso", Login.nAcceso);
                 request.setAttribute("id", Login.id);
+                request.setAttribute("img", Login.img);
                 request.setAttribute("error", ms);
                 return mapping.findForward(IR);
             }
@@ -99,6 +107,7 @@ public class ActionProductos extends org.apache.struts.action.Action {
                 request.setAttribute("nombre", Login.nombre);
                 request.setAttribute("nAcceso", Login.nAcceso);
                 request.setAttribute("id", Login.id);
+                request.setAttribute("img", Login.img);
                 request.setAttribute("error", error);
                 return mapping.findForward(IR);
             }
@@ -122,16 +131,21 @@ public class ActionProductos extends org.apache.struts.action.Action {
             request.setAttribute("nombre", Login.nombre);
             request.setAttribute("nAcceso", Login.nAcceso);
             request.setAttribute("id", Login.id);
+            request.setAttribute("img", Login.img);
             return mapping.findForward(IR);
-        }
+        }}
 //-------------------------------------------------------------------------------
 
         if (action.equals("Detalle")) {
-
+            if (Login.nAcceso.equals("Solo Consulta") || Login.nAcceso.equals("Consulta e Ingresar")) {
+                String error = "No posee Acceso a esta opcion";
+                request.setAttribute("error", error);
+                IR = PORTADA;
+            } else {
             Productos productos = (Productos) pman.consultarProductosId(idProducto);
-            System.out.println("este es el id productos "+ idProducto);
-            int stockMinimo1= e.extraerStock(idProducto);
-            
+            System.out.println("este es el id productos " + idProducto);
+            int stockMinimo1 = e.extraerStock(idProducto);
+
             if (productos == null) {
                 fB.setError("<span style='color:red'>Nose puede consultar por idProducto " + "<br></span>");
                 return mapping.findForward(LISTA);
@@ -143,16 +157,21 @@ public class ActionProductos extends org.apache.struts.action.Action {
                 fB.setDescripcionProducto(productos.getDescripcionProducto());
                 fB.setModelo(productos.getModelo());
                 fB.setStockMinimo(stockMinimo1);
-                  List<Fabricantes> listaFabricantes = fman.consultarTodosFabricantes();
+                List<Fabricantes> listaFabricantes = fman.consultarTodosFabricantes();
                 fB.setListaFabricantes(listaFabricantes);
                 request.setAttribute("listaFabricantes", listaFabricantes);
-                System.out.println("este es 123"+listaFabricantes);
+                System.out.println("este es 123" + listaFabricantes);
                 IR = MODIFICAR;
             }
-        }
+        }}
 //-------------------------------------------------------------------------------
 
         if (action.equals("Eliminar")) {
+                        if (Login.nAcceso.equals("Solo Consulta") || Login.nAcceso.equals("Consulta e Ingresar")) {
+                String error = "No posee Acceso a esta opcion";
+                request.setAttribute("error", error);
+                IR = PORTADA;
+            } else {
             int n = pman.eliminarProductos(idProducto);
             String mensaje = "";
             if (n == 0) {
@@ -168,9 +187,14 @@ public class ActionProductos extends org.apache.struts.action.Action {
 
             }
             IR = LISTA;
-        }
+        }}
 //-------------------------------------------------------------------------------
         if (action.equals("Modificar")) {
+                        if (Login.nAcceso.equals("Solo Consulta") || Login.nAcceso.equals("Consulta e Ingresar")) {
+                String error = "No posee Acceso a esta opcion";
+                request.setAttribute("error", error);
+                IR = PORTADA;
+            } else {
             String ms = "";
             if (idFabricantes <= 0 || idFabricantes == null) {
                 ms += "*Es necesario seleccione un fabricante<br>";
@@ -200,6 +224,7 @@ public class ActionProductos extends org.apache.struts.action.Action {
                 request.setAttribute("nombre", Login.nombre);
                 request.setAttribute("nAcceso", Login.nAcceso);
                 request.setAttribute("id", Login.id);
+                request.setAttribute("img", Login.img);
                 request.setAttribute("error", error);
                 return mapping.findForward(IR);
             }
@@ -222,10 +247,10 @@ public class ActionProductos extends org.apache.struts.action.Action {
             pman.modificarProductos(idProducto, idFabricantes, nombreProducto, precioUnitario, descripcionProducto, modelo);
             List<Productos> listaProductos = pman.consultarTodoProductos();
             fB.setListaProductos(listaProductos);
-            String error = ("El registro se"+nombreProducto+" modificó correctamente" );
+            String error = ("El registro se" + nombreProducto + " modificó correctamente");
             request.setAttribute("mensaje", error);
             IR = LISTA;
-        }
+        }}
 
 //-------------------------------------------------------------------------------
         if (action.equals("Consultar")) {
@@ -236,6 +261,7 @@ public class ActionProductos extends org.apache.struts.action.Action {
                 request.setAttribute("nombre", Login.nombre);
                 request.setAttribute("nAcceso", Login.nAcceso);
                 request.setAttribute("id", Login.id);
+                request.setAttribute("img", Login.img);
                 return mapping.findForward(IR);
             } else {
                 fB.setListaProductos(listaProductos);
@@ -245,16 +271,21 @@ public class ActionProductos extends org.apache.struts.action.Action {
         }
 //-------------------------------------------------------------------------------        
         if (action.equalsIgnoreCase("IrAgregar")) {
-
+            if (Login.nAcceso.equals("Solo Consulta")) {
+                String error = "No posee Acceso a esta opcion";
+                request.setAttribute("error", error);
+                IR = PORTADA;
+            } else {
             List<Fabricantes> listaFabricantes = fman.consultarTodosFabricantes();
             fB.setListaFabricantes(listaFabricantes);
             request.setAttribute("listaFabricantes", listaFabricantes);
             IR = AGREGAR;
-        }
+        }}
 
         request.setAttribute("nombre", Login.nombre);
         request.setAttribute("nAcceso", Login.nAcceso);
         request.setAttribute("id", Login.id);
+        request.setAttribute("img", Login.img);
         return mapping.findForward(IR);
 
     }

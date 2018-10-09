@@ -36,7 +36,7 @@ import sci.persistencia.Productos;
  * @author daniel.bonillausam
  */
 public class ActionFactura extends org.apache.struts.action.Action {
-
+private static final String INDEX = "irIndex";
     private static final String PORTADA = "irPortada";
     private static final String AGREGAR = "irAgregarFactura";
     private static final String MODIFICAR = "irModificarFactura";
@@ -84,9 +84,19 @@ public class ActionFactura extends org.apache.struts.action.Action {
         String mensaje = "";
         String error = "";
         System.out.println("el valor de la accion es: " + action);
-
+        
+        if (Login.id == 0) {
+            mensaje = "Por Favor Inicie Session";
+            request.setAttribute("mensaje", mensaje);
+            return mapping.findForward(INDEX);
+        }
         //-------------------------------------------------------------------------      
         if (action.equals("irAgregar")) {
+                        if (Login.nAcceso.equals("Solo Consulta") ) {
+                error = "No posee Acceso a esta opcion";
+                request.setAttribute("error", error);
+                IR = PORTADA;
+            } else {
 //------Para Colocar el numero rojo de factura
             int num = feman.maxIdFacturaEncabezad() + 1;
             request.setAttribute("num", num);
@@ -108,10 +118,14 @@ public class ActionFactura extends org.apache.struts.action.Action {
             request.setAttribute("listaProductos", listaProductos);
 
             IR = AGREGAR;
-        }
+        }}
         //-------------------------------------------------------------------------      
         if (action.equals("Agregar")) {
-
+            if (Login.nAcceso.equals("Solo Consulta") ) {
+                error = "No posee Acceso a esta opcion";
+                request.setAttribute("error", error);
+                IR = PORTADA;
+            } else {
 //------Para Colocar la fecha si no hay una registrada
             if (fechaFactura.equals("")) {
                 fechaFactura = formato.format(new Date());
@@ -238,9 +252,14 @@ public class ActionFactura extends org.apache.struts.action.Action {
 
             IR = AGREGAR;
 
-        }
+        }}
         //-------------------------------------------------------------------------      
         if (action.equals("Agregar ")) {
+                        if (Login.nAcceso.equals("Solo Consulta") || Login.nAcceso.equals("Consulta e Ingresar")) {
+                error = "No posee Acceso a esta opcion";
+                request.setAttribute("error", error);
+                IR = PORTADA;
+            } else {
             List<FacturaDetalle> listaFactura;
 //------Para Colocar la fecha si no hay una registrada
             if (fechaFactura.equals("")) {
@@ -322,10 +341,14 @@ public class ActionFactura extends org.apache.struts.action.Action {
             request.setAttribute("num", idFacturaEncabezado);
             IR = MODIFICAR;
 
-        }
+        }}
         //-------------------------------------------------------------------------
         if (action.equals("Guardar")) {
-
+            if (Login.nAcceso.equals("Solo Consulta") ) {
+                error = "No posee Acceso a esta opcion";
+                request.setAttribute("error", error);
+                IR = PORTADA;
+            } else {
 // para calcular el Sub Total del pie de la factura 
             idFacturaEncabezado = feman.maxIdFacturaEncabezad();
             subTotalTransaccion = sumaTF.sumarTotalFila(idFacturaEncabezado);
@@ -363,9 +386,14 @@ public class ActionFactura extends org.apache.struts.action.Action {
             iman.modificarIva(idIva, ivaTasa, ivaRetenido, ivaPagado, ivaTotal, subTotalTransaccion, totalTransaccion);
 
             IR = PORTADA;
-        }
+        }}
         //-------------------------------------------------------------------------
         if (action.equals("Guardar ")) {
+                        if (Login.nAcceso.equals("Solo Consulta") || Login.nAcceso.equals("Consulta e Ingresar")) {
+                error = "No posee Acceso a esta opcion";
+                request.setAttribute("error", error);
+                IR = PORTADA;
+            } else {
             subTotalTransaccion = 0.00;
             double ivaRetenido = 0.00;
             totalTransaccion = 0.00;
@@ -406,12 +434,8 @@ public class ActionFactura extends org.apache.struts.action.Action {
             iman.modificarIva(idIva, ivaTasa, ivaRetenido, ivaPagado, ivaTotal, subTotalTransaccion, totalTransaccion);
 
             IR = PORTADA;
-        }
-        //-------------------------------------------------------------------------
-        if (action.equals("Modificar")) {
-
-        }
-        //-------------------------------------------------------------------------      
+        }}
+        //-------------------------------------------------------------------------     
         if (action.equals("Consultar")) {
 
             List<FacturaEncabezado> listaFacturaEncabezado = feman.consultarTodosFacturaEncabezado();
@@ -422,7 +446,11 @@ public class ActionFactura extends org.apache.struts.action.Action {
         }
         //-------------------------------------------------------------------------      
         if (action.equals("Detalle")) {
-            
+                        if (Login.nAcceso.equals("Solo Consulta") || Login.nAcceso.equals("Consulta e Ingresar")) {
+                error = "No posee Acceso a esta opcion";
+                request.setAttribute("error", error);
+                IR = PORTADA;
+            } else {
 //FacturaEncabezado
            FacturaEncabezado fe = feman.consultarFacturaEncabezadoId(idFacturaEncabezado);
             idFacturaEncabezado = fe.getIdFacturaEncabezado();
@@ -467,10 +495,14 @@ public class ActionFactura extends org.apache.struts.action.Action {
             totalTransaccion = subTotalTransaccion + ivaRetenido;
             request.setAttribute("totalTransaccion", totalTransaccion);
             IR = MODIFICAR;
-        }
-        //-------------------------------------------------------------------------      
+        }}        
+//------------------------------------------------------------------------      
         if (action.equals("anular")) {
-
+            if (Login.nAcceso.equals("Solo Consulta") || Login.nAcceso.equals("Consulta e Ingresar")) {
+                error = "No posee Acceso a esta opcion";
+                request.setAttribute("error", error);
+                IR = PORTADA;
+            } else {
             if (0 == feman.consultarFacturaEncabezadoId(idFacturaEncabezado).getTotalTransaccion()) {
                 FacturaEncabezado fe = feman.consultarFacturaEncabezadoId(idFacturaEncabezado);
 
@@ -497,10 +529,14 @@ public class ActionFactura extends org.apache.struts.action.Action {
             request.setAttribute("listaFacturaEncabezado", listaFacturaEncabezado);
 
             IR = LISTA;
-        }
+        }}
         //-------------------------------------------------------------------------      
         if (action.equals("x ")) {
-
+            if (Login.nAcceso.equals("Solo Consulta")) {
+                error = "No posee Acceso a esta opcion";
+                request.setAttribute("error", error);
+                IR = PORTADA;
+            } else {
 // reducir la existencia del inventario            
             Integer idInventario = inman.consultarInventarioIdProducto(fdman.consultarFacturaDetalleId(idFacturaDetalle).getProductos().getIdProducto());
             Inventario iv = inman.consultarInventarioId(idInventario);
@@ -561,9 +597,13 @@ public class ActionFactura extends org.apache.struts.action.Action {
             fb.setListaFacturaDetalle(listaFactura);
             request.setAttribute("listaFactura", listaFactura);
             IR = AGREGAR;
-        }
+        }}
         if (action.equals(" x")) {
-
+            if (Login.nAcceso.equals("Solo Consulta") || Login.nAcceso.equals("Consulta e Ingresar")) {
+                error = "No posee Acceso a esta opcion";
+                request.setAttribute("error", error);
+                IR = PORTADA;
+            } else {
             idFacturaEncabezado = fdman.consultarFacturaDetalleId(idFacturaDetalle).getFacturaEncabezado().getIdFacturaEncabezado();
             fb.setIdFacturaEncabezado(idFacturaEncabezado);
             System.out.println("idFacturaEncabezado ver " + idFacturaEncabezado);
@@ -629,7 +669,7 @@ public class ActionFactura extends org.apache.struts.action.Action {
             fb.setListaFacturaDetalle(listaFactura);
             request.setAttribute("listaFactura", listaFactura);
             IR = MODIFICAR;
-        }
+        }}
         //-------------------------------------------------------------------------      
 
         request.setAttribute("nombre", Login.nombre);

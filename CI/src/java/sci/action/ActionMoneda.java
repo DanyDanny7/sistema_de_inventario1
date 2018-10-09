@@ -22,7 +22,8 @@ import sci.persistencia.Moneda;
  * @author daniel.bonillausam
  */
 public class ActionMoneda extends org.apache.struts.action.Action {
-
+private static final String INDEX = "irIndex";
+    private static final String PORTADA = "irPortada";
     private static final String INICIO = "irInicioMoneda";
     private static final String AGREGAR = "irAgregarMoneda";
     private static final String MODIFICAR = "irModificarMoneda";
@@ -43,19 +44,19 @@ public class ActionMoneda extends org.apache.struts.action.Action {
         MonedaMantenimiento mman = new MonedaMantenimiento();
         String IR = null;
 
-        System.out.println("el action trae valor = " + action);
-        if (formBean == null) {
-            System.out.println("hola mundo 1");
-            System.out.println("Error el formBean null");
-            IR = INICIO;
-        }
-        if (action == null) {
-            System.out.println("hola mundo 2");
-            System.out.println("Error action están null");
-            IR = INICIO;
+        if (Login.id == 0) {
+            String mensaje = "Por Favor Inicie Session";
+            request.setAttribute("mensaje", mensaje);
+            return mapping.findForward(INDEX);
         }
 //-------------------------------------------------------------------
+            if (Login.nAcceso.equals("Solo Consulta") || Login.nAcceso.equals("Consulta e Ingresar")) {
+                String error = "No posee Acceso a esta opcion";
+                request.setAttribute("error", error);
+                IR = PORTADA;
+            } else {
         if (action.equals("Agregar")) {
+            
             System.out.println("antes de validar");
             String advertencia = "";
             if (nombreMoneda == null || nombreMoneda.equals("")) {
@@ -82,7 +83,8 @@ public class ActionMoneda extends org.apache.struts.action.Action {
 
                 request.setAttribute("nombre", Login.nombre);
                 request.setAttribute("nAcceso", Login.nAcceso);
-                request.setAttribute("nAcceso", Login.id);
+                request.setAttribute("id", Login.id);
+                request.setAttribute("img", Login.img);
 
                 IR = AGREGAR;
                 return mapping.findForward(IR);
@@ -104,7 +106,8 @@ public class ActionMoneda extends org.apache.struts.action.Action {
                 request.setAttribute("listaMoneda", listaMoneda);
                 request.setAttribute("nombre", Login.nombre);
                 request.setAttribute("nAcceso", Login.nAcceso);
-                request.setAttribute("nAcceso", Login.id);
+                request.setAttribute("id", Login.id);
+                request.setAttribute("img", Login.img);
 
                 IR = AGREGAR;
                 return mapping.findForward(IR);
@@ -148,7 +151,8 @@ public class ActionMoneda extends org.apache.struts.action.Action {
 
                 request.setAttribute("nombre", Login.nombre);
                 request.setAttribute("nAcceso", Login.nAcceso);
-                request.setAttribute("nAcceso", Login.id);
+                request.setAttribute("id", Login.id);
+                request.setAttribute("img", Login.img);
 
                 IR = AGREGAR;
                 return mapping.findForward(IR);
@@ -170,8 +174,8 @@ public class ActionMoneda extends org.apache.struts.action.Action {
                 request.setAttribute("listaMoneda", listaMoneda);
                 request.setAttribute("nombre", Login.nombre);
                 request.setAttribute("nAcceso", Login.nAcceso);
-                request.setAttribute("nAcceso", Login.id);
-
+                request.setAttribute("id", Login.id);
+                request.setAttribute("img", Login.img);
                 IR = AGREGAR;
                 return mapping.findForward(IR);
             } else {
@@ -182,8 +186,10 @@ public class ActionMoneda extends org.apache.struts.action.Action {
 
                 request.setAttribute("idEmpresa", Estaticas.idEmpresa);
                 request.setAttribute("nombreEmpresa", Estaticas.nombreEmpresa);
-                request.setAttribute("nAcceso", Login.id);
                 request.setAttribute("nombre", Login.nombre);
+                request.setAttribute("nAcceso", Login.nAcceso);
+                request.setAttribute("id", Login.id);
+                request.setAttribute("img", Login.img);
                 request.setAttribute("nombreMoneda", Estaticas.nombreMoneda);
                 request.setAttribute("simboloMoneda", Estaticas.simboloMoneda);
                 IR = CONF;
@@ -226,11 +232,12 @@ public class ActionMoneda extends org.apache.struts.action.Action {
                 advertencia += "*Es requerido una Moneda de Referencia de Cambio <br>";
             }
             if (!advertencia.equals("")) {
-                String error=("<spam style = 'color: red' > Por favor complete los espacios vacios  <br> " + advertencia + "</spam>");
+                String error = ("<spam style = 'color: red' > Por favor complete los espacios vacios  <br> " + advertencia + "</spam>");
 
                 request.setAttribute("nombre", Login.nombre);
                 request.setAttribute("nAcceso", Login.nAcceso);
-                request.setAttribute("nAcceso", Login.id);
+                request.setAttribute("id", Login.id);
+                request.setAttribute("img", Login.img);
                 request.setAttribute("error", error);
 
                 return mapping.findForward(AGREGAR);
@@ -238,7 +245,7 @@ public class ActionMoneda extends org.apache.struts.action.Action {
             mman.modificarMoneda(nombreMoneda, simboloMoneda, codigoMoneda, equivalencia, monedaReferencia);
             List<Moneda> listaMoneda = mman.consultarTodosMoneda();
             formBean.setListaMoneda(listaMoneda);
-            String Mensaje =(" Moneda ( " + nombreMoneda + " ) Modificada Correctamente");
+            String Mensaje = (" Moneda ( " + nombreMoneda + " ) Modificada Correctamente");
             request.setAttribute("mensaje", Mensaje);
             IR = LISTA;
         }
@@ -247,7 +254,7 @@ public class ActionMoneda extends org.apache.struts.action.Action {
             mman.eliminarMoneda(nombreMoneda);
             List<Moneda> listaMoneda = mman.consultarTodosMoneda();
             formBean.setListaMoneda(listaMoneda);
-            String mensaje =("Error al eliminar ( " + nombreMoneda + " ) Moneda Principal");
+            String mensaje = ("Error al eliminar ( " + nombreMoneda + " ) Moneda Principal");
             request.setAttribute("error", mensaje);
             IR = LISTA;
         }
@@ -257,11 +264,12 @@ public class ActionMoneda extends org.apache.struts.action.Action {
             formBean.setListaMoneda(listaMoneda);
             request.setAttribute("listaMoneda", listaMoneda);
             IR = AGREGAR;
-        }
+        }}
 //------------------------------------------------------------------------------------        
         request.setAttribute("nombre", Login.nombre);
         request.setAttribute("nAcceso", Login.nAcceso);
-        request.setAttribute("nAcceso", Login.id);
+        request.setAttribute("id", Login.id);
+        request.setAttribute("img", Login.img);
 
         return mapping.findForward(IR);
     }

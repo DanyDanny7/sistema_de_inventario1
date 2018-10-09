@@ -19,13 +19,13 @@ import sci.mantenimientos.Extraer;
 import sci.persistencia.Empresa;
 
 public class ActionEmpresa extends org.apache.struts.action.Action {
-
+private static final String INDEX = "irIndex";
+    private static final String PORTADA = "irPortada";
     private static final String LISTA = "irListaEmpresa";
     private static final String INICIO = "irInicioEmpresa";
     private static final String AGREGAR = "irAgregarEmpresa";
     private static final String MODIFICAR = "irModificarEmpresa";
     private static final String ACCESO = "irAcceso";
-    private static final String INDEX = "irIndex";
 
     @Override
     public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
@@ -45,12 +45,13 @@ public class ActionEmpresa extends org.apache.struts.action.Action {
         EmpresaMantenimiento eman = new EmpresaMantenimiento();
 
         String IR = null;
-        
-        System.out.println("El Valor de Action es = "+action);
 
-        if (fB == null || action == null) {
-            System.out.println("Error fromBean o Action estan null");
-            IR = INICIO;
+        System.out.println("El Valor de Action es = " + action);
+
+        if (Login.id == 0) {
+            String mensaje = "Por Favor Inicie Session";
+            request.setAttribute("mensaje", mensaje);
+            return mapping.findForward(INDEX);
         }
 
 //-------------------------------------------------------------------------------
@@ -100,7 +101,8 @@ public class ActionEmpresa extends org.apache.struts.action.Action {
                 IR = AGREGAR;
                 request.setAttribute("nombre", Login.nombre);
                 request.setAttribute("nAcceso", Login.nAcceso);
-                request.setAttribute("nAcceso", Login.id);
+                request.setAttribute("id", Login.id);
+                request.setAttribute("img", Login.img);
                 request.setAttribute("error", adver);
                 return mapping.findForward(IR);
             }
@@ -111,7 +113,8 @@ public class ActionEmpresa extends org.apache.struts.action.Action {
                 IR = AGREGAR;
                 request.setAttribute("nombre", Login.nombre);
                 request.setAttribute("nAcceso", Login.nAcceso);
-                request.setAttribute("nAcceso", Login.id);
+                request.setAttribute("id", Login.id);
+                request.setAttribute("img", Login.img);
                 request.setAttribute("error", error);
                 return mapping.findForward(IR);
             }
@@ -193,7 +196,8 @@ public class ActionEmpresa extends org.apache.struts.action.Action {
                 IR = MODIFICAR;
                 request.setAttribute("nombre", Login.nombre);
                 request.setAttribute("nAcceso", Login.nAcceso);
-                request.setAttribute("nAcceso", Login.id);
+                request.setAttribute("id", Login.id);
+                request.setAttribute("img", Login.img);
                 request.setAttribute("error", adver);
                 return mapping.findForward(IR);
             }
@@ -206,9 +210,9 @@ public class ActionEmpresa extends org.apache.struts.action.Action {
         }
 //------------------------------------------------------------------------------------
         if (action.equals("irAgregar")) {
-            
+
             Empresa empresa = eman.consultarEmpresaId(1);
-            
+
             if (null != empresa) {
                 String info = "Configuracion ya realizada por Favor Inicie Session.";
                 request.setAttribute("info", info);
@@ -218,13 +222,13 @@ public class ActionEmpresa extends org.apache.struts.action.Action {
                 request.setAttribute("info", info);
                 IR = AGREGAR;
             }
-            
-            
+
         }
 
         request.setAttribute("nombre", Login.nombre);
         request.setAttribute("nAcceso", Login.nAcceso);
         request.setAttribute("id", Login.id);
+        request.setAttribute("img", Login.img);
         return mapping.findForward(IR);
     }
 }
