@@ -172,7 +172,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 text-center">
-                    <div class="card-header" style="color: white"><h1 class="font-weight-bold">Agregar Configuracion</h1></div>
+                    <div class="card-header" style="color: #000"><h1 class="font-weight-bold">Agregar Configuracion</h1></div>
 
 
                     <html:form action="/configuracionMantenimiento">

@@ -193,8 +193,8 @@ public class ActionAcceso extends org.apache.struts.action.Action {
             fechaRegistroAcceso = formato.format(new Date());
 
             int val = aman.guardarAcceso(idEmpresa, nombreAcceso, apellidoAcceso, usuario, fechaRegistroAcceso, contrasena, eMail, tipoAcceso);
-            Login.id=1;
-            Login.nombre=aman.consultarAccesoId(1).getNombreAcceso();
+            //Login.id=1;
+            //Login.nombre=aman.consultarAccesoId(1).getNombreAcceso();
             if (val != 1) {
                 String error = ("Sugio un error No se Guardó el Registro" + nombreAcceso);
                 IR = ACCESO2;

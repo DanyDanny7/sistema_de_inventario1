@@ -84,7 +84,6 @@ public class ActionConfiguracion extends org.apache.struts.action.Action {
                 request.setAttribute("error", error);
                 IR = AGREGAR;
             }
-            // validacion de existencia
 
 //---------------------------------------------------------------------------        
         byte[] bfile  ; //falta ver como llenar este dato
@@ -112,8 +111,9 @@ public class ActionConfiguracion extends org.apache.struts.action.Action {
                 }
                 
             }*/
-            formBean.setMsj("el archivo \" "+fileName+" \" no pudo guardarse , por favor "
+            String msj =("el archivo \" "+fileName+" \" no pudo guardarse , por favor "
                             + "guarde la imagen en la siguiente direccion: <br><br> \" "+filePath+" \" ");
+            request.setAttribute("msj", msj);
         }
     
 //---------------------------------------------------------------------------
