@@ -87,7 +87,7 @@ public class ActionAcceso extends org.apache.struts.action.Action {
                 advertencia += "*Es requerido seleccione un Nivel de Acceso <br>";
             }
             if (!advertencia.equals("")) {
-                String error = ("<spam style = 'color: red' > Por favor complete los espacios requeridos " + " <br> " + advertencia + "</spam>");
+                String error = ("Por favor complete los espacios requeridos " + " <br> " + advertencia );
                 List<Empresa> listaEmpresa = eman.consultarTodosEmpresa();
                 formBean.setListaEmpresa(listaEmpresa);
                 request.setAttribute("listaEmpresa", listaEmpresa);
@@ -111,6 +111,7 @@ public class ActionAcceso extends org.apache.struts.action.Action {
                 request.setAttribute("nAcceso", Login.nAcceso);
                 request.setAttribute("id", Login.id);
                 request.setAttribute("img", Login.img);
+                request.setAttribute("error", error);
                 return mapping.findForward(IR);
             }
             fechaRegistroAcceso = formato.format(new Date());
@@ -189,7 +190,6 @@ public class ActionAcceso extends org.apache.struts.action.Action {
                 System.out.println("Entra a 3");
                 return mapping.findForward(IR);
             }
-/// en suspenso            
             fechaRegistroAcceso = formato.format(new Date());
 
             int val = aman.guardarAcceso(idEmpresa, nombreAcceso, apellidoAcceso, usuario, fechaRegistroAcceso, contrasena, eMail, tipoAcceso);

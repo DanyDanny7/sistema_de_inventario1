@@ -143,9 +143,17 @@ public class ActionConfiguracion extends org.apache.struts.action.Action {
         }
         if (action.equals("Modificar")) {
             //valida campos vacios y nulos && agrega nueva configuracion
+                
+            cman.consultarConfiguarionId(1);
+            zonaHoraria = cman.consultarConfiguarionId(1).getZonaHoraria();
+            idAcceso = cman.consultarConfiguarionId(1).getAcceso().getIdAcceso();
             
-            cman.modificarConfiguracion(idAcceso, 1, nombreMoneda, iva, zonaHoraria);
+            cman.modificarConfiguracion(1, idAcceso, 1, nombreMoneda, iva, zonaHoraria);
             
+            System.out.println("Acceso: "+idAcceso);
+            System.out.println("Moneda: "+nombreMoneda);
+            System.out.println("Iva: "+iva);
+            System.out.println("Zona: "+zonaHoraria);
             
             
             IR = INICIO;
@@ -184,8 +192,8 @@ public class ActionConfiguracion extends org.apache.struts.action.Action {
             
             
             
-            System.out.println("Nombre "+nombreMoneda);
-            request.setAttribute("nombreEmpresa", nombreEmpresa);
+            System.out.println("Nombre "+conf.getMoneda().getNombreMoneda());
+            request.setAttribute("nombreEmpresa", eman.consultarEmpresaId(1).getNombreEmpresa());
             String nameImgP = conf.getZonaHoraria();
             String imgP = "<img src=\"img/upload/" + nameImgP + "\" width=\"200\" height=\"200\"/>";
             request.setAttribute("imgP", imgP);

@@ -104,6 +104,8 @@ public class ConfiguracionMantenimiento {
     }
 
     public int modificarConfiguracion(
+            
+            int idConfiguracion,
             int idAcceso,
             int idEmpresa,
             //byte[] logo,
@@ -128,6 +130,7 @@ public class ConfiguracionMantenimiento {
         //conf.setLogo(logo);
         Moneda moneda = new Moneda();
         moneda.setNombreMoneda(nombreMoneda);
+        conf.setIdConfiguracion(idConfiguracion);
         conf.setMoneda(moneda);
         conf.setIva(iva);
         conf.setZonaHoraria(zonaHoraria);

@@ -23,7 +23,7 @@
         <link href="http://codeseven.github.com/toastr/toastr-responsive.css" rel="stylesheet"/>
     </head>
     <body background="img/fondos/fondo1.jpg">
-       <div class="container-fluid">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
                     <div> 
@@ -35,7 +35,7 @@
 
                             <div class="collapse navbar-collapse" id="navbarSupportedContent" >
                                 <ul class="navbar-nav mr-auto" >
-                                    
+
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" 
                                            aria-haspopup="true" aria-expanded="false" style = 'color: white'> 
@@ -109,10 +109,10 @@
                                             Consultas
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
-                                            
-                                            
-                                            
-                                            
+
+
+
+
                                             <a class="dropdown-item" href="contactosMantenimiento.do?action=Consultar">Contactos</a>
                                             <a class="dropdown-item" href="comprasMantenimiento.do?action=Consultar">Compras</a>
                                             <a class="dropdown-item" href="facturaMantenimiento.do?action=Consultar">Facturas</a>
@@ -128,7 +128,7 @@
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="inventarioMantenimiento.do?action=existenciabajaa">Productos en Stock Bajo</a>
                                             <a class="dropdown-item" href="inventarioMantenimiento.do?action=existenciacero">Productos sin Stock</a>
-                                            
+
                                         </div>
                                     </li>
                                 </ul>
@@ -180,58 +180,54 @@
                             <div class="row">
                                 <div class="form-group col-6">
                                     <label>Nombre : </label><br>
-                                <html:text property="nombreAcceso" styleClass="form-control"></html:text>
+                                    <html:text property="nombreAcceso" styleClass="form-control"></html:text>
+                                    </div>
+                                    <br>
+                                    <div class="form-group col-6">
+                                        <label>Apellido : </label><br>
+                                    <html:text property="apellidoAcceso" styleClass="form-control"></html:text>
+                                    </div>
+                                    <br>
                                 </div>
-                                <br>
-                                <div class="form-group col-6">
-                                    <label>Apellido : </label><br>
-                                <html:text property="apellidoAcceso" styleClass="form-control"></html:text>
-                                </div>
-                                <br>
-                            </div>
                                 <div class="row">
                                     <div class="form-group col-6">
-                                    <label>Usuario : </label><br>
-                                <html:text property="usuario" styleClass="form-control"></html:text>
-                                </div>
-                                <br>
-                                <div class="form-group col-6">
-                                    <label>E-Mail : </label><br>         
-                                    <input type="email" name="email" class="form-control">
-                                </div>
-                                <br>  
+                                        <label>Usuario : </label><br>
+                                    <html:text property="usuario" styleClass="form-control"></html:text>
+                                    </div>
+                                    <br>
+                                    <div class="form-group col-6">
+                                        <label>E-Mail : </label><br>         
+                                    <html:text  property="eMail" styleClass="form-control"></html:text>
+                                    </div>
+                                    <br>  
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-4"></div>
-                                <div class="form-group col-4">
-                                    <label>Nivel de Acceso : </label><br>
-                                    <label class="btn"  style="background-color: #e9ecef;">${tipoAcceso}</label>
-                                
-                            </div>
-                                    </div> 
+                                    <div class="form-group col-4">
+                                        <label>Nivel de Acceso : </label><br>
+                                        <label class="btn"  style="background-color: #e9ecef;">${tipoAcceso}</label>
+
+                                </div>
+                            </div> 
                             <br>
 
                             <div hidden="hidden">
-                                
+
                                 <label>Id Acceso : </label><br>
                                 <html:text property="idAcceso"></html:text><br><br>
                                     <label>Fecha de Registro : </label><br>
                                 <html:text property="fechaRegistroAcceso"></html:text><br><br>
                                     <label>Contraseña : </label><br>
                                 <html:text property="contrasena"></html:text><br><br>
-                                <label>Id Empresa : </label><br>
+                                    <label>Id Empresa : </label><br>
                                 <html:text property="idEmpresa" styleClass="form-control"></html:text>
-                                <br>
+                                    <br>
                                 </div>
-                            <bean:write name="ActionFormAcceso" property="error" filter="false"/>    
-                        </div>
-
-                        <br>
-                        
-
+                            </div>
+                            <br>
                     </html:form>
                     <br>
-                   
+
                 </div>
             </div>
         </div>
