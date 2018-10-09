@@ -48,11 +48,11 @@ private static final String INDEX = "irIndex";
 
         System.out.println("El Valor de Action es = " + action);
 
-        if (Login.id == 0) {
+       /* if (Login.id == 0) {
             String mensaje = "Por Favor Inicie Session";
             request.setAttribute("mensaje", mensaje);
             return mapping.findForward(INDEX);
-        }
+        }*/
 
 //-------------------------------------------------------------------------------
         /*List<Empresa> listas = eman.consultarTodosEmpresa();
@@ -71,7 +71,7 @@ private static final String INDEX = "irIndex";
             Extraer ex = new Extraer();
             List<Integer> lista = ex.maxIdEmpresa();
             idEmpresa = lista.get(0);
-            idEmpresa = idEmpresa + 1;
+           // idEmpresa = idEmpresa + 1;
 
             String adver = "";
 
@@ -119,7 +119,7 @@ private static final String INDEX = "irIndex";
                 return mapping.findForward(IR);
             }
 
-            Estaticas.idEmpresa = idEmpresa;
+            Estaticas.idEmpresa = 1;
             Estaticas.nombreEmpresa = nombreEmpresa;
 
             request.setAttribute("idEmpresa", Estaticas.idEmpresa);
@@ -211,7 +211,7 @@ private static final String INDEX = "irIndex";
 //------------------------------------------------------------------------------------
         if (action.equals("irAgregar")) {
 
-            Empresa empresa = eman.consultarEmpresaId(1);
+            Empresa empresa = eman.consultarEmpresaId(2);
 
             if (null != empresa) {
                 String info = "Configuracion ya realizada por Favor Inicie Session.";

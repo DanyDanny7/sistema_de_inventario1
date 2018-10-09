@@ -229,7 +229,7 @@
                     <div class="row">
                         <div class="col-1"></div>
                         <div class="col-10">
-
+<bean:write name="ActionFormConfiguracion" property="msj" filter="false"></bean:write>
                         </div>
                         <div class="col-1"></div>
 

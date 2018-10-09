@@ -44,17 +44,9 @@ private static final String INDEX = "irIndex";
         MonedaMantenimiento mman = new MonedaMantenimiento();
         String IR = null;
 
-        if (Login.id == 0) {
-            String mensaje = "Por Favor Inicie Session";
-            request.setAttribute("mensaje", mensaje);
-            return mapping.findForward(INDEX);
-        }
+       
 //-------------------------------------------------------------------
-            if (Login.nAcceso.equals("Solo Consulta") || Login.nAcceso.equals("Consulta e Ingresar")) {
-                String error = "No posee Acceso a esta opcion";
-                request.setAttribute("error", error);
-                IR = PORTADA;
-            } else {
+           
         if (action.equals("Agregar")) {
             
             System.out.println("antes de validar");
@@ -264,7 +256,7 @@ private static final String INDEX = "irIndex";
             formBean.setListaMoneda(listaMoneda);
             request.setAttribute("listaMoneda", listaMoneda);
             IR = AGREGAR;
-        }}
+        }
 //------------------------------------------------------------------------------------        
         request.setAttribute("nombre", Login.nombre);
         request.setAttribute("nAcceso", Login.nAcceso);

@@ -55,13 +55,14 @@ public class ActionConfiguracion extends org.apache.struts.action.Action {
         MonedaMantenimiento mman = new MonedaMantenimiento();
         Configuracion config = new Configuracion();
         String IR = null;
-        if (Login.id == 0) {
+       /* if (Login.id == 0) {
             String mensaje = "Por Favor Inicie Session";
             request.setAttribute("mensaje", mensaje);
             return mapping.findForward(INDEX);
-        }
+        }*/
 //---------------------------------------------------------------------------
         if (action.equals("Agregar")) {
+            
             //valida campos vacios y nulos && agrega nueva configuracion
             String advertencia = "";
             String error = "";
@@ -77,9 +78,7 @@ public class ActionConfiguracion extends org.apache.struts.action.Action {
             if (iva == null || iva.equals("")) {
                 advertencia += "*Tasa de Iva es requerido <br>";
             }
-            if (zonaHoraria == null || zonaHoraria.equals("")) {
-                advertencia += "*Zona Horaria es requerida <br>";
-            }
+
             if (!advertencia.equals("")) {
                 error = ("<spam style = 'color: red' > Por favor complete los espacios vacios " + " <br> " + advertencia + "</spam>");
                 request.setAttribute("error", error);
@@ -113,15 +112,15 @@ public class ActionConfiguracion extends org.apache.struts.action.Action {
                 }
                 
             }*/
-            formBean.setInformacion("el archivo \" "+fileName+" \" no pudo guardarse , por favor "
+            formBean.setMsj("el archivo \" "+fileName+" \" no pudo guardarse , por favor "
                             + "guarde la imagen en la siguiente direccion: <br><br> \" "+filePath+" \" ");
         }
     
 //---------------------------------------------------------------------------
-            String nombreFile = file.getName();
-            int ver = cman.guardarConfiguracion(idAcceso, idEmpresa, nombreMoneda, iva, nombreFile);
+            zonaHoraria = file.getName();
+            int ver = cman.guardarConfiguracion(idAcceso, idEmpresa, nombreMoneda, iva, zonaHoraria);
             System.out.println("Hola 2 " + ver);
-            IR = INICIO;
+            IR = PORTADA;
         }
         if (action.equals("ConsultarEmpresa")) {
             //realiza consulta por id y envia los datos para ser recibidos en el jsp

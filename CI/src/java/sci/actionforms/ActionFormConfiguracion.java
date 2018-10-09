@@ -33,6 +33,7 @@ public class ActionFormConfiguracion extends org.apache.struts.action.ActionForm
     private List<Moneda> listaMoneda;
     private String mensaje;
     private String informacion;
+    private String msj;
 
     public Integer getIdConfiguracion() {
         return idConfiguracion;
@@ -152,6 +153,14 @@ public class ActionFormConfiguracion extends org.apache.struts.action.ActionForm
 
     public void setInformacion(String informacion) {
         this.informacion = informacion;
+    }
+
+    public String getMsj() {
+        return msj;
+    }
+
+    public void setMsj(String msj) {
+        this.msj = msj;
     }
 
     
