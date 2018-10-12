@@ -83,11 +83,11 @@
         <forward name = "irModificarFactura"    path = "/jsp/factura/modificarFactura.jsp"/>
         <forward name = "irListaFactura"        path = "/jsp/factura/listaFactura.jsp"/>    
 <!-- // Inventario --> 
-        <forward name ="confirmacionNuevoInventario"  path = "/jsp/inventario/listaInventario.jsp"/>
+        <forward name ="irListaInventario"              path = "/jsp/inventario/listaInventario.jsp"/>
         <forward name ="confirmacionErrorInventario"  path = "/jsp/inventario/agregarInventario.jsp"/>
         <forward name = "modificarinventario"         path = "/jsp/inventario/ModificarInventario.jsp"/>
-       <forward name = "existenciacero"         path = "/jsp/inventario/consultaproductosinstock.jsp"/>
-       <forward name = "existenciabaja"         path = "/jsp/inventario/existenciabaja.jsp"/>
+       <forward name = "existenciacero"               path = "/jsp/inventario/consultaproductosinstock.jsp"/>
+       <forward name = "existenciabaja"               path = "/jsp/inventario/existenciabaja.jsp"/>
 <!-- // Iva -->
         <forward name = "irInicioIva"           path = "/jsp/iva/inicio.jsp"/>
         <forward name = "irAgregarIva"          path = "/jsp/iva/agregarIva.jsp"/>

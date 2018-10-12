@@ -17,7 +17,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Lista Login</title>
+        <title>Lista Inventario</title>
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
         <script src="js/popper.min.js" type="text/javascript"></script>
@@ -41,7 +41,7 @@
 
                             <div class="collapse navbar-collapse" id="navbarSupportedContent" >
                                 <ul class="navbar-nav mr-auto" >
-                                    
+
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" 
                                            aria-haspopup="true" aria-expanded="false" style = 'color: white'> 
@@ -115,10 +115,10 @@
                                             Consultas
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
-                                            
-                                            
-                                            
-                                            
+
+
+
+
                                             <a class="dropdown-item" href="contactosMantenimiento.do?action=Consultar">Contactos</a>
                                             <a class="dropdown-item" href="comprasMantenimiento.do?action=Consultar">Compras</a>
                                             <a class="dropdown-item" href="facturaMantenimiento.do?action=Consultar">Facturas</a>
@@ -134,7 +134,7 @@
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="inventarioMantenimiento.do?action=existenciabajaa">Productos en Stock Bajo</a>
                                             <a class="dropdown-item" href="inventarioMantenimiento.do?action=existenciacero">Productos sin Stock</a>
-                                            
+
                                         </div>
                                     </li>
                                 </ul>
@@ -176,95 +176,93 @@
                 </div>
             </div>
         </div>
-                                        
-            <div class="container">
-                <div class="row">
-                    <div class="col-12 text-center">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <br>
+                    <div class="card-header primary" style="color: white;"><h1 class="font-weight-bold " >LISTA INVENTARIO</h1></div>
+
+                    <div class="table table-hover">
+
+                        <table class="text-uppercase">
+
+                            <thead class="align-content-center">
+
+                                <tr class="table-default" style="background-color: #000; color: white">
+                                    <th>Id Inventario</th>
+                                    <th>Id Producto</th>
+                                    <th>existencia</th>
+                                    <th>estado de existencia </th>
+                                    <th> stock minimo</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <logic:notEmpty name="ActionFormInventario" property="listainventario">
+                                    <logic:iterate id="ver" name="ActionFormInventario" property="listainventario" >
+                                        <tr style="background-color: #DCDCDC;">
+                                            <html:form action = "/inventarioMantenimiento">
+                                                <th scope="row"><bean:write name="ver" property="idInventario"/>
+                                                    <div hidden="hidden"> <html:text name="ver" property="idInventario"/></div> </th>
+                                                <td><bean:write name="ver" property="productos.nombreProducto"/></td>
+                                                <td><bean:write name="ver" property="existencia"/></td>
+                                                <td><bean:write name="ver" property="estadoExistencia"/></td>
+                                                <td><bean:write name="ver" property="stockMinimo"/></td>
+
+                                                <td><html:submit property="action" value="Eliminar" styleClass="btn  font-weight-bold" style="background-color: #696969; color: white"/></td>
+                                                <td><html:submit property="action" value="Detalle" styleClass="btn  font-weight-bold" style="background-color: #696969; color: white"/></td>
+                                            </html:form>
+                                        </tr>
+                                    </logic:iterate>
+                                </logic:notEmpty>
+                            </tbody>
+                        </table>
                         <br>
-                        <div class="card-header primary" style="color: white;"><h1 class="font-weight-bold " >LISTA INVENTARIO</h1></div>
-
-                        <div class="table table-hover">
-                            <table class="bg-light col-12 ">
-                                <thead class="align-content-center">
-
-                                    <tr class="table-default" style="background-color: #000; color: white">
-                                        <th>Id Inventario</th>
-                                        <th>Id Producto</th>
-                                        <th>existencia</th>
-                                        <th>estado de existencia </th>
-                                        <th> stock minimo</th>
-                                        <th> estado fisico</th>
-                                        <th></th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <logic:notEmpty name="ActionFormInventario" property="listai">
-                                        <logic:iterate id="ver" name="ActionFormInventario" property="listai" >
-                                            <tr style="background-color: #DCDCDC;">
-                                                <html:form action = "/inventarioMantenimiento">
-                                                    <th scope="row"><bean:write name="ver" property="idInventario"/>
-                                                        <div hidden="hidden"> <html:text name="ver" property="idInventario"/></div> </th>
-                                                    <td><bean:write name="ver" property="productos.nombreProducto"/></td>
-                                                    <td><bean:write name="ver" property="existencia"/></td>
-                                                    <td><bean:write name="ver" property="estadoExistencia"/></td>
-                                                    <td><bean:write name="ver" property="stockMinimo"/></td>
-                                                    <td><bean:write name="ver" property="estadoFisico"/></td>
-
-                                                    <td><html:submit property="action" value="Eliminar" styleClass="btn  font-weight-bold" style="background-color: #696969; color: white"/></td>
-                                                    <td><html:submit property="action" value="Detalle" styleClass="btn  font-weight-bold" style="background-color: #696969; color: white"/></td>
-
-
-                                                </html:form>
-                                            </tr>
-                                        </logic:iterate>
-                                    </logic:notEmpty>
-                                </tbody>
-                            </table>
-                            <br>
-                        </div>
                     </div>
                 </div>
             </div>
-            <div id="error" hidden="hidden">${error}</div>
-            <div id="mensaje" hidden="hidden">${mensaje}</div>
-            <div id="info" style="color:white">${info}</div>
-            <script type="text/javascript">
-                window.onload = function () {
-                    if ($("#error").text() != "") {
-                        error();
-                    }
-                    if ($("#mensaje").text() != "") {
-                        mensaje();
-                    }
-                    if ($("#info").text() != "") {
-                        info();
-                    }
-                };
-                toastr.options = {
-                    "debug": false,
-                    "onclick": null,
-                    "fadeIn": 300,
-                    "fadeOut": 100,
-                    "timeOut": 5000,
-                    "extendedTimeOut": 1000
-                };
-                var showToastrs = false;
-                function error() {
-                    if (!showToastrs) {
-                        toastr.error($("#error").text(), 'Error');
-                    }
+        </div>
+        <div id="error" hidden="hidden">${error}</div>
+        <div id="mensaje" hidden="hidden">${mensaje}</div>
+        <div id="info" style="color:white">${info}</div>
+        <script type="text/javascript">
+            window.onload = function () {
+                if ($("#error").text() != "") {
+                    error();
                 }
-                function mensaje() {
-                    if (!showToastrs) {
-                        toastr.success($("#mensaje").text(), 'Confirmacion');
-                    }
+                if ($("#mensaje").text() != "") {
+                    mensaje();
                 }
-                function info() {
-                    if (!showToastrs) {
-                        toastr.info($("#info").text(), 'Informacion');
-                    }
+                if ($("#info").text() != "") {
+                    info();
                 }
-            </script>
+            };
+            toastr.options = {
+                "debug": false,
+                "onclick": null,
+                "fadeIn": 300,
+                "fadeOut": 100,
+                "timeOut": 5000,
+                "extendedTimeOut": 1000
+            };
+            var showToastrs = false;
+            function error() {
+                if (!showToastrs) {
+                    toastr.error($("#error").text(), 'Error');
+                }
+            }
+            function mensaje() {
+                if (!showToastrs) {
+                    toastr.success($("#mensaje").text(), 'Confirmacion');
+                }
+            }
+            function info() {
+                if (!showToastrs) {
+                    toastr.info($("#info").text(), 'Informacion');
+                }
+            }
+        </script>
     </body>
 </html>

@@ -117,6 +117,7 @@
                                             <a class="dropdown-item" href="comprasMantenimiento.do?action=Consultar">Compras</a>
                                             <a class="dropdown-item" href="facturaMantenimiento.do?action=Consultar">Facturas</a>
                                             <a class="dropdown-item" href="fabricanteMantenimiento.do?action=Consultar">Fabricantes</a>
+                                            <a class="dropdown-item" href="inventarioMantenimiento.do?action=Consultar">Inventario</a>
                                             <a class="dropdown-item" href="ivaMantenimiento.do?action=Consultar">Iva </a>
                                             <a class="dropdown-item" href="monedaMantenimiento.do?action=Consultar">Monedas</a>
                                             <a class="dropdown-item" href="productosMantenimiento.do?action=Consultar">Productos</a>

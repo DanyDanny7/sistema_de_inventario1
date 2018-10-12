@@ -13,7 +13,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-     
+
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Mantenimiento de Inventario</title>
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
@@ -25,8 +25,8 @@
         <link href="http://codeseven.github.com/toastr/toastr-responsive.css" rel="stylesheet"/>
     </head>
     <body background="img/fondos/fondo1.jpg">
-    
-      <div class="container-fluid">
+
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
                     <div> 
@@ -38,7 +38,7 @@
 
                             <div class="collapse navbar-collapse" id="navbarSupportedContent" >
                                 <ul class="navbar-nav mr-auto" >
-                                    
+
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" 
                                            aria-haspopup="true" aria-expanded="false" style = 'color: white'> 
@@ -112,10 +112,10 @@
                                             Consultas
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
-                                            
-                                            
-                                            
-                                            
+
+
+
+
                                             <a class="dropdown-item" href="contactosMantenimiento.do?action=Consultar">Contactos</a>
                                             <a class="dropdown-item" href="comprasMantenimiento.do?action=Consultar">Compras</a>
                                             <a class="dropdown-item" href="facturaMantenimiento.do?action=Consultar">Facturas</a>
@@ -131,7 +131,7 @@
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="inventarioMantenimiento.do?action=existenciabajaa">Productos en Stock Bajo</a>
                                             <a class="dropdown-item" href="inventarioMantenimiento.do?action=existenciacero">Productos sin Stock</a>
-                                            
+
                                         </div>
                                     </li>
                                 </ul>
@@ -173,82 +173,81 @@
                 </div>
             </div>
         </div>
-                                        
+
         <html:form action="/inventarioMantenimiento">
-            
+
             <table border="0">
-                
+
                 <tbody>
-                  <tr>
-                        
-                 <td>id inventario </td>
-                 <td><html:text property="idInventario" size="20" ></html:text>   
-                 
-                 <td> 
-                        
-                </tr>
                     <tr>
-                        
-                 <td>id producto </td>
-                 <td><html:text property="idProducto" size="20" ></html:text>   
-                 
-                 <td> 
-                        
-                </tr>
-                    <tr>
-                        <td>existencias</td>
-                        <td><html:text property="existencia" size="20" ></html:text> 
-                    </tr>
-                    <tr>
-                        <td>estado de existencias</td>
-                        <td><html:text property="estadoExistencia" size="50" ></html:text> 
-                    </tr>
-                     <tr>
-                        <td>stock minimo</td>
-                        <td><html:text property="stockMinimo" size="50" ></html:text> 
-                    </tr>
-                      <tr>
-                        <td>estado Fisico</td>
-                        <td><html:text property="estadoFisico" size="50" ></html:text> 
-                    </tr>
-                    <tr>
-                       
-                    <tr colspan="2">
-                    <bean:write name="ActionFormInventario" property="error" filter="false"/>
-                    </tr>
-                </tbody>  
-            </table>
-             
-                    <html:submit property="action" value="Agregar"/>
-                   
-                    <html:submit property="action" value="Consultar"/>
-               
+
+                        <td>id inventario </td>
+                        <td><html:text property="idInventario" size="20" ></html:text>   
+
+                            <td> 
+
+                        </tr>
+                        <tr>
+
+                            <td>id producto </td>
+                            <td><html:text property="idProducto" size="20" ></html:text>   
+
+                            <td> 
+
+                        </tr>
+                        <tr>
+                            <td>existencias</td>
+                            <td><html:text property="existencia" size="20" ></html:text> 
+                        </tr>
+                        <tr>
+                            <td>estado de existencias</td>
+                            <td><html:text property="estadoExistencia" size="50" ></html:text> 
+                        </tr>
+                        <tr>
+                            <td>stock minimo</td>
+                            <td><html:text property="stockMinimo" size="50" ></html:text> 
+                        </tr>
+                        <tr>
+                            <td>estado Fisico</td>
+                            <td><html:text property="estadoFisico" size="50" ></html:text> 
+                        </tr>
+                        <tr>
+
+                        <tr colspan="2">
+                        </tr>
+                    </tbody>  
+                </table>
+
+            <html:submit property="action" value="Agregar"/>
+
+            <html:submit property="action" value="Consultar"/>
+
         </html:form>
         <div id="error">${error}</div>
-    <script type="text/javascript">
-        if ($("#error").text() != "") {
-            window.onload = function () {
-                toastrs();
-            };
-        }
-        ;
-        toastr.options = {
-            "debug": false,
-            "positionClass": "toast-bottom-right",
-            "onclick": null,
-            "fadeIn": 300,
-            "fadeOut": 100,
-            "timeOut": 5000,
-            "extendedTimeOut": 1000
-        };
-        var showToastrs = false;
-        function toastrs() {
-            if (!showToastrs) {
-                toastr.error($("#error").text(), 'Error');
-            } else {
-                toastr.error('no se puede!\'t.', 'Otro error crítico');
+        <script type="text/javascript">
+            if ($("#error").text() != "") {
+                window.onload = function () {
+                    toastrs();
+                };
             }
-        }
-    </script>
+            ;
+            toastr.options = {
+                "debug": false,
+                "positionClass": "toast-bottom-right",
+                "onclick": null,
+                "fadeIn": 300,
+                "fadeOut": 100,
+                "timeOut": 5000,
+                "extendedTimeOut": 1000
+            };
+            var showToastrs = false;
+            function toastrs() {
+                if (!showToastrs) {
+                    toastr.error($("#error").text(), 'Error');
+                } else {
+                    toastr.error('no se puede!\'t.', 'Otro error crítico');
+                }
+            }
+        </script>
     </body>
 </html>

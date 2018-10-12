@@ -43,7 +43,7 @@ public class InventarioMantenimiento {
         } catch (Exception e) {
             if (session.getTransaction().isActive()) {
                 session.getTransaction().rollback();
-                flag = 1;
+                flag = 0;
                 System.out.println("Errro en Guardado InventarioMantenimiento " + e);
             }
         } finally {
@@ -68,7 +68,7 @@ public class InventarioMantenimiento {
         } catch (Exception e) {
             if (session.getTransaction().isActive()) {
                 session.getTransaction().rollback();
-                flag = 1;
+                flag = 0;
             }
             System.out.println("Error en eliminar InventarioMantenimiento " + e);
         } finally {
@@ -110,7 +110,7 @@ public class InventarioMantenimiento {
         } catch (Exception e) {
             if (session.getTransaction().isActive()) {
                 session.getTransaction().rollback();
-                flag = 1;
+                flag = 0;
                 System.out.println("Error en modificadr InventarioMantenimiento " + e);
             }
         } finally {
@@ -219,8 +219,8 @@ public class InventarioMantenimiento {
     public static void main(String[] args) {
         InventarioMantenimiento i = new InventarioMantenimiento();
         
-        int idProducto = 4;
-        i.consultarInventarioIdProducto(idProducto);
+       List<Inventario> lista = i.consultarTodoInventario();
+        System.out.println("La lista: "+lista.toString());
         
     }
 

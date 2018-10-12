@@ -18,14 +18,14 @@ import sci.mantenimientos.InventarioMantenimiento;
 import sci.persistencia.Inventario;
 
 public class ActionInventario extends org.apache.struts.action.Action {
-private static final String INDEX = "irIndex";
-    private static final String PORTADA = "irPortada";
-    private static final String CONFIRMACIONI = "confirmacionNuevoInventario";
-    private static final String ERRORI = "confirmacionErrorInventario";
-   private static final String MODIFICARI="modificarinventario";
-   private static final String CONFIRMACIONII= "existenciacero";
-   private static final String CONFIRMACIONIII= "existenciabaja";
 
+    private static final String INDEX = "irIndex";
+    private static final String PORTADA = "irPortada";
+    private static final String LISTA = "irListaInventario";
+    private static final String ERRORI = "confirmacionErrorInventario";
+    private static final String MODIFICARI = "modificarinventario";
+    private static final String CONFIRMACIONII = "existenciacero";
+    private static final String CONFIRMACIONIII = "existenciabaja";
 
     @Override
     public ActionForward execute(ActionMapping mapping, ActionForm form,
@@ -40,20 +40,22 @@ private static final String INDEX = "irIndex";
         Integer stockMinimo = formBean.getStockMinimo();
         String estadoFisico = formBean.getEstadoFisico();
         String action = formBean.getAction();
+        String IR = null;
 
-          if (Login.id == 0) {
+        System.out.println("El action esta trayendo: " + action);
+
+        if (Login.id == 0) {
             String mensaje = "Por Favor Inicie Session";
             request.setAttribute("mensaje", mensaje);
             return mapping.findForward(INDEX);
         }
 //--------------------------------------------------------
-      
+
 //------------------------------------------------------
         if (action.equals("Agregar")) {
             String advertencia = "";
 
-           
-            if (idProducto== null) {
+            if (idProducto == null) {
                 advertencia += "*ID Productos es requerido<br>";
             }
             if (existencia == null || existencia.equals("")) {
@@ -68,120 +70,122 @@ private static final String INDEX = "irIndex";
             if (estadoFisico == null || estadoFisico.equals("")) {
                 advertencia += "*estado fisico es requerida<br>";
             }
-            
+
             if (!advertencia.equals("")) {
                 formBean.setError("<span style='color:red'>Por favor complete los espacios vacios" + "<br>" + advertencia + "</span>");
                 return mapping.findForward(ERRORI);
             }
-          InventarioMantenimiento inventarioMantenimiento = new InventarioMantenimiento();
-          
-          //inventarioMantenimiento.guardarInventario(0, idProducto, existencia, estadoExistencia, stockMinimo, estadoFisico);
-         List<Inventario> listai= inventarioMantenimiento.consultarTodoInventario();
-            formBean.setListainventario(listai); 
-            
-            String mensaje="<span style='color:red'>agregado correcto"+"<br></span>";
-            request.setAttribute("mensaje",mensaje);
-         
-            return mapping.findForward(CONFIRMACIONI);
-        
-             }
-            
-//-------------------------------------------------------------------------------            
-            if (action.equals("Consultar")) {
             InventarioMantenimiento inventarioMantenimiento = new InventarioMantenimiento();
-            //Acceso acceso = new Acceso();
+
+            List<Inventario> listai = inventarioMantenimiento.consultarTodoInventario();
+            formBean.setListainventario(listai);
+
+            String mensaje = "<span style='color:red'>agregado correcto" + "<br></span>";
+            request.setAttribute("mensaje", mensaje);
+
+            IR = LISTA;
+
+        }
+
+//-------------------------------------------------------------------------------            
+        if (action.equals("Consultar")) {
+            InventarioMantenimiento inventarioMantenimiento = new InventarioMantenimiento();
             List<Inventario> listainventario = inventarioMantenimiento.consultarTodoInventario();
+            System.out.println("ES" + listainventario.toString());
 
             if (listainventario == null) {
-                formBean.setError("<spam style='color:red'> la lista viene vacia " + "<br></spam>");
-                        request.setAttribute("nombre", Login.nombre);
-        request.setAttribute("nAcceso", Login.nAcceso);
-        request.setAttribute("id", Login.id);
-        request.setAttribute("img", Login.img);
-                return mapping.findForward(ERRORI);
+                String error = ("la lista viene vacia " + listainventario);
+                IR = LISTA;
+                request.setAttribute("nombre", Login.nombre);
+                request.setAttribute("nAcceso", Login.nAcceso);
+                request.setAttribute("id", Login.id);
+                request.setAttribute("img", Login.img);
+                request.setAttribute("error", error);
+                return mapping.findForward(IR);
             } else {
                 formBean.setListainventario(listainventario);
-                        request.setAttribute("nombre", Login.nombre);
-        request.setAttribute("nAcceso", Login.nAcceso);
-        request.setAttribute("id", Login.id);
-        request.setAttribute("img", Login.img);
-                return mapping.findForward(CONFIRMACIONI);
+                request.setAttribute("nombre", Login.nombre);
+                request.setAttribute("nAcceso", Login.nAcceso);
+                request.setAttribute("id", Login.id);
+                request.setAttribute("img", Login.img);
+                System.out.println("La lista es correcta"+listainventario.toString());
+                
+                IR = LISTA;
             }
-              }
- //-------------------------------------------------------------------------------      
-             if (action.equals("Eliminar")) {
+        }
+        //-------------------------------------------------------------------------------      
+        if (action.equals("Eliminar")) {
             InventarioMantenimiento inventarioMantenimiento = new InventarioMantenimiento();
             inventarioMantenimiento.eliminarInventario(formBean.getIdInventario());
             List<Inventario> listai = inventarioMantenimiento.consultarTodoInventario();
-           
+
             formBean.setListainventario(listai);
-            
-            String mensaje="<span style='color:red'>eliminado correcto"+"<br></span>";
-            request.setAttribute("mensaje",mensaje);
-         
+
+            String mensaje = "<span style='color:red'>eliminado correcto" + "<br></span>";
+            request.setAttribute("mensaje", mensaje);
+
             System.out.println("desde eliminar");
-            return mapping.findForward(CONFIRMACIONI);
-         }
-             
+            IR = LISTA;
+        }
+
 //-------------------------------------------------------------------------------             
-              if (action.equals("Detalle")) {
+        if (action.equals("Detalle")) {
             InventarioMantenimiento inventarioMantenimiento = new InventarioMantenimiento();
 
             Inventario inventario = (Inventario) inventarioMantenimiento.consultarInventarioId(idInventario);
-           
-                formBean.setIdInventario(inventario.getIdInventario());
-               formBean.setIdProducto(inventario.getProductos().getIdProducto());
-                //formBean.setExistencia(inventario.getExistencia());
-                formBean.setEstadoExistencia(inventario.getEstadoExistencia());
-                formBean.setStockMinimo(inventario.getStockMinimo());
-                 formBean.setEstadoFisico(inventario.getEstadoFisico());
-                return mapping.findForward(MODIFICARI);
-            }
+
+            formBean.setIdInventario(inventario.getIdInventario());
+            formBean.setIdProducto(inventario.getProductos().getIdProducto());
+            //formBean.setExistencia(inventario.getExistencia());
+            formBean.setEstadoExistencia(inventario.getEstadoExistencia());
+            formBean.setStockMinimo(inventario.getStockMinimo());
+            formBean.setEstadoFisico(inventario.getEstadoFisico());
+            return mapping.findForward(MODIFICARI);
+        }
 //-------------------------------------------------------------------------------              
-              if (action.equals("Modificar")) {
-               InventarioMantenimiento inventarioMantenimiento = new InventarioMantenimiento();
-               String mensaje = "<span style='color:red'>Actualizado Correcto" + "<br></span>";
+        if (action.equals("Modificar")) {
+            InventarioMantenimiento inventarioMantenimiento = new InventarioMantenimiento();
+            String mensaje = "<span style='color:red'>Actualizado Correcto" + "<br></span>";
             request.setAttribute("mensaje", mensaje);
-           
-           //inventarioMantenimiento.modificarInventario(idInventario,idProducto, existencia, estadoExistencia, stockMinimo, estadoFisico);
+
             List<Inventario> listai = inventarioMantenimiento.consultarTodoInventario();
             formBean.setListainventario(listai);
-           return mapping.findForward(CONFIRMACIONI);
-           }
-              if (action.equals("existenciacero")) {
+            IR = LISTA;
+        }
+        if (action.equals("existenciacero")) {
             InventarioMantenimiento inventarioMantenimiento = new InventarioMantenimiento();
             //Acceso acceso = new Acceso();
             List<Inventario> listainventario = inventarioMantenimiento.consultarExistenciacero();
-                   System.out.println("lista "+listainventario);
+            System.out.println("lista " + listainventario);
             if (listainventario == null) {
                 formBean.setError("<spam style='color:red'> la lista viene vacia " + "<br></spam>");
                 return mapping.findForward(ERRORI);
             } else {
                 System.out.println("lista llena");
                 formBean.setListainventario(listainventario);
-                
+
                 request.setAttribute("listainventario", listainventario);
                 return mapping.findForward(CONFIRMACIONII);
             }
-              }
-                  if (action.equals("existenciabajaa")) {
+        }
+        if (action.equals("existenciabajaa")) {
             InventarioMantenimiento inventarioMantenimiento = new InventarioMantenimiento();
             //Acceso acceso = new Acceso();
             List<Inventario> listainventario = inventarioMantenimiento.existenciabaja();
-                   System.out.println("lista "+listainventario);
+            System.out.println("lista " + listainventario);
             if (listainventario == null) {
                 formBean.setError("<spam style='color:red'> la lista viene vacia " + "<br></spam>");
                 return mapping.findForward(ERRORI);
             } else {
                 System.out.println("lista llena");
                 formBean.setListainventario(listainventario);
-                
+
                 request.setAttribute("listainventario", listainventario);
                 return mapping.findForward(CONFIRMACIONIII);
             }
-              }
+        }
 //---------------------------------------------------------------------        
-    /*     if (action.equals("ConsultarId")) {
+        /*     if (action.equals("ConsultarId")) {
             AccesoMantenimiento accesoMantenimiento = new AccesoMantenimiento();
             Acceso acceso = (Acceso) accesoMantenimiento.consultarAccesoId(idAcceso);
 
@@ -247,10 +251,13 @@ private static final String INDEX = "irIndex";
                 return mapping.findForward(ERRORLOGIN);
             }
         }
-*/
-      return null;
+         */
+        request.setAttribute("nombre", Login.nombre);
+        request.setAttribute("nAcceso", Login.nAcceso);
+        request.setAttribute("id", Login.id);
+        request.setAttribute("img", Login.img);
+        return mapping.findForward(IR);
 
     }
-  
 
 }
